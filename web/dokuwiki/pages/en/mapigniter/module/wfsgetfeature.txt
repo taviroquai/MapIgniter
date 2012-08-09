@@ -1,0 +1,13 @@
+
+==== Feature Popup ====
+
+Allows the user to click on the map to identify a feature. Information will come on a popup window.
+Tecnically, it uses OpenLayers WFSGetFeature control. It requests MapServer using WFS protocol.
+This module works by layer.
+One can configure an URL callback to display HTML, once a feature has been returned from MapServer.
+
+**Class:** openlayers/mapwfsgetfeature_lblock
+
+**Table:** layer
+
+{{:mapigniter:module:wfsgetfeature.png?nolink|}}

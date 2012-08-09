@@ -1,0 +1,8 @@
+
+==== Idiom Switcher ====
+
+Allows the user to switch interface idiom.
+
+**Class:** crm/lang_lblock
+
+{{:mapigniter:module:idiomswitcher.png?nolink|}}

@@ -1,0 +1,10 @@
+
+==== Layer Switcher ====
+
+It allows the user to activate/deactivate layers on the configured map.
+
+**Class:** openlayers/layerswitcher_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:layerswitcher.png?nolink|}}

@@ -1,0 +1,9 @@
+
+==== Reportar Problemas ====
+
+Permite ao visitante reportar problemas relacionados com os locais publicados na plataforma.
+É uma funcionalidade básica de um CRM (Customer Relationship Management)
+
+**Class:** crm/tickets_lblock
+
+{{:mapigniter:module:tickets.png?nolink|}}

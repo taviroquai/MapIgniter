@@ -1,0 +1,77 @@
+
+=== Estrutura de ficheiros ===
+
+MapIgniter é uma aplicação que é executada pelo CodeIgniter. CodeIgniter é uma framework baseada na arquitectura MVC: Model, View e Controller.
+
+A estrutura descrita a seguir poderá ser alterada no lançamento de novas versões.
+
+== Pastas de raiz ==
+
+  * application - pasta da aplicação
+  * web - pasta acessível pelo browser
+
+== Pasta application ==
+
+Os items a negrito são os mais importantes para o início do desenvolvimento
+
+  * cache - localização de ficheiros estáticos
+  * **config** - ficheiros de configuração
+  * **controllers** - classes de controlo
+  * core - classes definidas pelo utilizador que estendem classes CodeIgniter
+  * errors - vistas de erros definidas pelo utilizador
+  * helpers - funções do utilizador
+  * hooks - plugins do utilizador
+  * language - ficheiros de internacionalização
+  * libraries - classes arbitrárias definidas
+  * logs - ficheiros de logs
+  * **models** - classes de objetos de domínio
+  * third_party - bibliotecas de terceiros
+  * **views** - ficheiros PHP (vistas)
+
+== Pasta web ==
+
+//TODO: por organizar//
+
+== Pastas em application/controllers ==
+
+Devido à complexidade e dimensão das organizações, recomenda-se a criação de pastas por grupos de utilizadores. Desta forma reflecte-se os diferentes comportamento dos grupos de utilizadores na aplicação.
+
+  * Pasta admin - controladores do grupo admin
+  * Pasta user - controladores do grupo user (podem estender outros controladores em outras pastas)
+  * auth.php - controlador de autenticação simples
+  * mapserver.php - controlador de funcionalidades do MapServer
+  * openlayers.php - controlador de funcionalidades do OpenLayers
+  * postgis.php - controlador de funcionalidades do Postgis
+  * proxy.php - controlador proxy (Nota: pode ser movido para fora do MapIgniter para melhor performance
+  * publicmap.php - controlador da página inicial (Homepage)
+  * rating.php - controlador do sistema de avaliação
+  * tickets.php - controlador do sistema de tickets
+
+
+== Pastas em application/models ==
+
+  * Pasta account - classes relacionadas com a conta de utilizador
+  * Pasta admin - classes relacionadas com o grupo admin
+  * Pasta crm - classes relacionadas com o utilizador cliente/público
+  * Pasta database - classes relacionadas a gestão de bases de dados
+  * Pasta layout - classes relacionadas com os objectos de layout
+  * Pasta mapserver - classes relacionadas com as funções de MapServer
+  * Pasta openlayers - classes relacionadas com as funções de OpenLayers
+  * Pasta rating - classes relacionadas com a avaliação de conteúdos
+  * layer_model.php - classe de domínio da layer
+  * map_model.php - classe de domínio do mapa
+  * urlproxy_model - classe de URL proxy
+
+== Pastas em application/views ==
+
+  * Pasta admin - vistas de conteúdo para o utilizador administrador
+  * Pasta auth - vistas de autenticação simples
+  * Pasta crm - vistas para o utilizador cliente/público
+  * Pasta layout - vistas de conteúdos de layout
+  * Pasta openlayers - vistas de conteúdos OpenLayers
+  * Pasta postgis - vistas de conteúdo Postgis
+  * Pasta user - vistas de conteúdo para o utilizador geo
+  * 404.php - vista para apresentação de erro HTTP 404
+  * messages.php - vista para apresentação de mensagens de erros/informação
+  * rate.php - vista para apresentação do bloco de avaliação de conteúdo
+

@@ -1,0 +1,10 @@
+
+==== Mapa OpenLayers ====
+
+Permite adicionar, a um slot de layout, um mapa OpenLayers.
+
+**Class:** openlayers/modmap_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:openlayersmap.png?nolink|}}

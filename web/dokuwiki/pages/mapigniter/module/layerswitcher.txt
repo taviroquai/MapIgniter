@@ -1,0 +1,10 @@
+
+==== Seleção de Temas ====
+
+Permite ao utilizador ativar e desativar temas no mapa.
+
+**Class:** openlayers/layerswitcher_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:layerswitcher.png?nolink|}}

@@ -1,0 +1,152 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+
+html, body, #slot1 {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.map_title, .map_description {
+    display: none;
+}
+
+#slot-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 20000;
+    overflow: hidden;
+}
+
+#slot-content {
+    position: absolute;
+    top: 110px;
+    left: 50px;
+    min-width: 380px;
+    max-width: 380px;
+    max-height: 80%;
+    overflow: auto;
+    z-index: 20001;
+    background-color: white;
+    padding: 0;
+    
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 4px solid #d17c0d;
+}
+
+.content-padding {
+    padding: 0 10px 10px 10px;
+}
+
+.content-padding>h2 {
+    margin-top: 0;
+}
+
+#slot2 {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    z-index: 20000;
+    background-color: black;
+    color: white;
+    padding: 0;
+    overflow: hidden;
+}
+
+#slot2 .lblock {
+    display: block;
+    float: right;
+    margin-right: 20px;
+}
+
+#slot2 .lblock h2 {
+    display: none;
+}
+
+#slot3 {
+    position: absolute;
+    top: 110px;
+    right: 50px;
+    width: 240px;
+    max-height: 80%;
+    overflow: auto;
+    z-index: 20001;
+    background-color: white;
+    
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 4px solid #d17c0d;
+}
+
+#slot4 {
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+    right: 100px;
+    overflow: hidden;
+    z-index: 20000;
+    background-color: #f0f0f0;
+    
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 4px solid #d17c0d;
+}
+
+#slot5 {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    z-index: 20000;
+    background-color: black;
+    color: white;
+    padding: 0;
+    overflow: hidden;
+}
+
+#slot5 .lblock h2 {
+    display: none;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background: #444444 url('../images/header_bg_yellow.png') top left repeat-x;
+}
+
+
+a, a:visited {
+    color: #cd8000;
+}
+
+a:hover {
+    color: #d17c0d;
+}
+
+h1, h2 {
+    color: #d17c0d;
+}

@@ -1,0 +1,49 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+
+.miwindow {
+    -moz-box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+}
+
+.miwindow .miwindow_mouse_handler {
+    background-color: #d17c0d; 
+    color: white; 
+    min-height: 20px; 
+    width: 100%; 
+    overflow: hidden; 
+    cursor: pointer;
+}
+
+.miwindow .miwindow_mouse_handler .miwindow_options {
+    display: block;
+    float: right;
+    background-color: #d17c0d;
+    color: white;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+.miwindow .miwindow_mouse_handler .miwindow_title {
+    display: block;
+    float: left;
+    padding-left: 10px;
+}
+
+.miwindow .miwindow_clear_float {
+    clear: both;
+}

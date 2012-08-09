@@ -1,0 +1,3 @@
+<?
+
+$lang['title'] = "Layers";

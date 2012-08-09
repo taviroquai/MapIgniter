@@ -1,0 +1,14 @@
+
+==== Modules ====
+
+  * [[en:mapigniter:module:simpleauth|Simple Authentication]]
+  * [[en:mapigniter:module:tickets|Tickets]]
+  * [[en:mapigniter:module:layerswitcher|Layer Switcher]]
+  * [[en:mapigniter:module:idiomswitcher|Idiom Switcher]]
+  * [[en:mapigniter:module:featuresearch|Search]]
+  * [[en:mapigniter:module:menu|Menu]]
+  * [[en:mapigniter:module:wfsgetfeature|Feature Popup (WFS)]]
+  * [[en:mapigniter:module:ckeditor|CKEditor textareas]]
+  * [[en:mapigniter:module:rating|Rating]]
+  * [[en:mapigniter:module:openlayersmap|OpenLayers Map]]
+

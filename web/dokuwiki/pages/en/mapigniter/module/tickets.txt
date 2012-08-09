@@ -1,0 +1,10 @@
+
+==== Tickets ====
+
+It allows the user to report issues related with geographic (or non-geographic) information.
+It is a basic CRM (Customer Relationship Management) feature.
+
+**Class:** crm/tickets_lblock
+
+{{:mapigniter:module:tickets.png?nolink|}}
+

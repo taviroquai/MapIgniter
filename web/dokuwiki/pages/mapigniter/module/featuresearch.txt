@@ -1,0 +1,11 @@
+
+==== Pesquisa de Locais ====
+
+Permite ao utilizador pesquisar locais através de palavras-chaves (similar à pesquisa do Google).
+Apenas pesquisa dados em temas Postgis.
+
+**Class:** openlayers/featuresearch_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:featuresearch.png?nolink|}}

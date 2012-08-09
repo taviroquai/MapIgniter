@@ -1,0 +1,12 @@
+
+{{:milogo_131x70.png|}}
+
+==== MapIgniter ====
+
+**MapIgniter** é um software na categoria websig que permite a publicação e visualização de informação geográfica num browser de internet.
+
+A gestão de conteúdos é realizada num ambiente gráfico, tal como em outros CMS (gestores de conteúdos), criando um novo conceito de software: //GeoCMS colaborativo//.
+
+Este software não pretende concorrer com software SIG para desktop, nem com software CAD. Todo o trabalho rigoroso de tratamento e analise de informação geográfica deve ser efectuado em software desktop; por exemplo: [[http://www.qgis.org/|QuantumGIS]].
+
+**MapIgniter** é constituido essencialmente por 3 grandes ferramentas para desenvolvimento de informação geográfica: [[http://postgis.refractions.net|Postgis]], [[http://mapserver.org|MapServer]] e [[http://openlayers.org|OpenLayers]]. [[http://codeigniter.com|CodeIgniter]] é a plataforma PHP que suporta toda a interação entre estas ferramentas.

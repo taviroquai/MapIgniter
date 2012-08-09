@@ -1,0 +1,8 @@
+
+==== Content Rating ====
+
+Allows the user to rate content quality, from 1 to 5 stars.
+
+**Class:** rating/rating_lblock
+
+{{:mapigniter:module:rating.png?nolink|}}

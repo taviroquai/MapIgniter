@@ -1,0 +1,8 @@
+
+==== Simple Authentication ====
+
+Allows the user to authenticate and starts a session if successful.
+
+**Class:** account/modauth_lblock
+
+{{:mapigniter:module:simpleauth.png?nolink|}}

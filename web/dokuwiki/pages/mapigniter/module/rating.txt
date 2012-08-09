@@ -1,0 +1,8 @@
+
+==== Avaliação de Conteúdos ====
+
+Permite ao utilizador avaliar, de 1 a 5 estrelas, a qualidade do conteúdo.
+
+**Class:** rating/rating_lblock
+
+{{:mapigniter:module:rating.png?nolink|}}

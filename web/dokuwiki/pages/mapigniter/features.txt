@@ -1,0 +1,44 @@
+
+==== Versão 1.0 ====
+
+As funcionalidades de MapIgniter são as seguintes, organizadas por grupo do utilizador:
+
+=== Público ===
+
+  * Visualizar mapas e outras informações no browser
+  * Visualizar detalhes de locais e outros conteúdos media publicados
+  * Avaliar conteúdos: locais, temas e mapas
+  * Reportar problemas (issues)
+  * Acompanhar desenvolvimento de problemas reportados
+  * Imprimir mapas <del>(TODO)</del>
+
+
+=== Utilizador autenticado (Grupo geo) ===
+
+  * Criar locais: desenhar a geometria (ponto, linha ou área), inserir informações, fotografias, videos e outros conteúdos (Postgis GUI)
+  * Criar temas: categorizar informação geográfica (MapServer GUI)
+  * Criar mapas: organizar temas em mapas (MapServer GUI / OpenLayers GUI)
+  * Acompanhar problemas reportados e resolver tarefas
+  * <del>Usar o Assistente para facilitar a criação de objectos (TODO)</del>
+  * <del>Autenticação LDAP (TODO)</del>
+  * <del>Autenticação OAuth (TODO)</del>
+
+
+=== Administrador (Grupo admin) ===
+
+  * Gerir layouts
+  * Gerir modulos de layout
+  * Gerir utilizadores
+  * Gerir grupos de utilizadores
+  * Gerir permissões
+  * Gerir tickets; acompanhar problemas reportados e reencaminhar tickets
+  * Publicar layouts, modulos e mapas
+  * <del>Visualizar informação estatísticas sobre toda a actividade dos visitantes e utilizadores (TODO)</del>
+  * <del>Sincronizar dados com outras instalações MapIgniter (TODO)</del>
+
+
+=== Todos os grupos de utilizadores ===
+
+  * Acesso às funcionalidades conforme as permissões definidas pelo grupo Administrador
+
+** Nota: o rigor da informação é da responsabilidade de todos os intervenientes que fazem revisão à informação e não se exclui a analise e tratamento com recurso a software desktop mais adequado; por exemplo [[http://www.qgis.org/|QuantumGIS]].**

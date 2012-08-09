@@ -1,0 +1,14 @@
+
+==== Módulos ====
+
+  * [[mapigniter:module:simpleauth|Autenticação Simples]]
+  * [[mapigniter:module:tickets|Reportar Problemas]]
+  * [[mapigniter:module:layerswitcher|Seleção de Temas]]
+  * [[mapigniter:module:idiomswitcher|Seleção de Idioma]]
+  * [[mapigniter:module:featuresearch|Pesquisa de Locais]]
+  * [[mapigniter:module:menu|Menu]]
+  * [[mapigniter:module:wfsgetfeature|Popup do local (WFS)]]
+  * [[mapigniter:module:ckeditor|Editor de texto CKEditor]]
+  * [[mapigniter:module:rating|Avaliação de Conteúdos]]
+  * [[mapigniter:module:openlayersmap|Mapa OpenLayers]]
+

@@ -1,0 +1,39 @@
+
+==== Modules Administration ====
+
+The modules administration is done in the MapIgniter administration.
+
+   - Log in with an admin account
+   - Menu System
+   - Sub Modules
+
+You should see the list of registered modules.
+
+=== Register a module ===
+
+   * Fill in the form
+   * Name: enter the name of the module, can contain spaces and other symbols
+   * Class: path to the class of the block, for example, models/auth/modauth_lblock (it is not necessary to specify the extension. php)
+   * Table data: name of the data table that contains the configuration items (optional)
+
+=== Configure the block layout ===
+
+The configuration of the layout block is held in MapIgniter administration.
+
+   - Log on with an admin account
+   - Menu System
+   - Submenu Layouts
+   - Click Configure on the layout where you want to configure the module
+   - Click Configure in the slot layout where you want to configure the module
+
+=== Create a new layout block ===
+
+   * Fill in the form //Add a block to the slot//
+   * Name: Choose a name to distinguish the block (it will be used to distinguish blocks of the same module)
+   * Module: Choose the module to use
+   * Click Save
+   * If the data table indicated in the register of the module, you can choose which instance;
+   * The item instance to provide the view of the module, the item will fill the variable ** $item **.
+   * Additional configuration: you can still go to view specific configuration of this block, providing (**$config**) in JSON format.
+   * Object JSON configuration is available for being viewed as the variable **$config**. Example: $config->name.
+

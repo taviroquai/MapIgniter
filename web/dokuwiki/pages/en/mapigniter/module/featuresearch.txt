@@ -1,0 +1,11 @@
+
+==== Feature Search ====
+
+Allows the user to search for geographic places using keywords (similar to Google Search).
+Only on postgis layers.
+
+**Class:** openlayers/featuresearch_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:featuresearch.png?nolink|}}

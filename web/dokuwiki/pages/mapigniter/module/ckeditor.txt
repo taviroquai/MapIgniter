@@ -1,0 +1,8 @@
+
+==== Editor de Texto CKEditor ====
+
+Permite transformar as caixas de texto (textarea) num Rich Text Editor.
+
+**Class:** layout/ckeditor_lblock
+
+{{:mapigniter:module:ckeditor.png?nolink|}}

@@ -1,0 +1,11 @@
+
+==== Menu ====
+
+It allows to display a menu; a list of links.
+One can change the menu style using Cascading Style Sheets (CSS).
+
+**Class:** admin/modmenu_lblock
+
+**Table:** modmenu
+
+{{:mapigniter:module:menu.png?nolink|}}

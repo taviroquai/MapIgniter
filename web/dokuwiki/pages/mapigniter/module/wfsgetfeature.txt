@@ -1,0 +1,11 @@
+
+==== Popup do Local ====
+
+Permite ao utilizador clicar no mapa e obter informação do local num popup.
+A busca do local é feita por layer.
+
+**Class:** openlayers/mapwfsgetfeature_lblock
+
+**Table:** layer
+
+{{:mapigniter:module:wfsgetfeature.png?nolink|}}

@@ -1,0 +1,22 @@
+
+==== Requerimentos do Sistema ====
+
+  * [[https://wiki.ubuntu.com/UbuntuGIS|UbuntuGIS]] / [[http://wiki.debian.org/DebianGis|DebianGIS]]
+  * [[http://mapserver.org|MapServer]]
+  * [[http://httpd.apache.org|Apache Web Server]]
+  * [[http://postgis.refractions.net|PostgreSQL + Postgis]]
+  * [[http://www.php.net|PHP]]
+  * [[http://www.qgis.org|QuantumGIS]] (opcional, software desktop recomendado)
+  * [[http://codeigniter.com|CodeIgniter]]
+
+=== Tecnologias utilizadas ===
+
+Para além das tecnologias referidas nos requerimentos do sistema, as seguintes são incluídas no MapIgniter:
+
+  * [[http://www.redbeanphp.com|RedbeanPHP]] (Licença dual (BSD and GPLv2). Termos em http://redbeanphp.com/extra/license)
+  * [[http://www.getskeleton.com|Skeleton CSS]] (Licença MIT. Termos em http://www.getskeleton.com/#licenseandlog)
+  * [[http://openlayers.org|OpenLayers]] (Licença BSD modificada. Termos em http://svn.openlayers.org/trunk/openlayers/license.txt)
+  * [[http://jquery.com|jQuery]] (Licença dual (MIT ou GPL). Termos em http://jquery.org/license/)
+
+
+O código fonte deste software - MapIgniter - está sob os termos de uma de duas licenças: [[http://www.gnu.org/licenses/gpl.txt|GPL]] e [[http://www.apache.org/licenses/LICENSE-2.0.html|Apache v2]]

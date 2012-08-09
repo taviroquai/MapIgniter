@@ -1,0 +1,132 @@
+==== Instalar MapIgniter ====
+
+=== Cenário Máquina Virtual ===
+
+Parte das instruções descritas neste cenário podem ser utilizadas para outros cenários como por exemplo instalar num computador pessoal com Ubuntu.
+
+== Parte 1: Instalar o sistema operativo (opcional) ==
+
+1. Descarregar **Ubuntu Server** a partir de http://www.ubuntu.com/download/server
+
+2. Criar máquina virtual no VirtualBox (defina pelo menos 1Gb de RAM) e associar a imagem descarregada na drive optica
+
+3. Activar PAE na configuração em System => Processor da máquina virtual
+
+4. Iniciar a máquina e instalar Ubuntu Server. Neste cenário selecionaram-se os pacotes LAMP, OpenSSH e PostgreSQL. O utilizador criado é **miadmin** e password **miadmin**.
+
+5. Ao terminar a instalação, reiniciar a máquina virtual
+
+6. Entre com o login
+
+== Parte 2: Instalar e configurar software necessário (opcional) ==
+
+7. Para instalar **MapServer** e **Postgis** execute os seguintes comandos:
+<code>
+sudo apt-get update
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:gwibber-daily/ppa
+sudo apt-get update
+sudo apt-get install cgi-mapserver
+sudo apt-get install postgresql-9.1-postgis
+sudo apt-get install php5-pgsql
+sudo apt-get install php5-curl
+sudo apt-get install php5-gd
+</code>
+
+8. Para definir a palavra-passe //postgres// do utilizador postgres execute:
+<code>
+sudo -u postgres psql template1
+\password postgres
+\q
+</code>
+
+== Parte 3: Instalar MapIgniter ==
+
+9. para criar a base de dados **mapigniter** (para a aplicação) execute os seguinte comandos:
+<code>
+sudo su postgres
+createdb -E UTF8 -U postgres mapigniter
+createlang -d mapigniter plpgsql
+psql -U postgres -d mapigniter -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+psql -U postgres -d mapigniter -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+psql -U postgres -d mapigniter -c"select postgis_lib_version();"
+exit
+</code>
+
+10. Repita o passo 9 para criar a base de dados **mapigniterdata** para os dados do utilizador
+
+11. Active **mod_rewrite** do apache
+<code>
+sudo a2enmod rewrite
+sudo service apache2 restart
+</code>
+Certifique-se de que na configuração do ficheiro /etc/apache2/sites-available/default permite sobrescrever **AllowOverride**:
+<code>
+...
+AllowOverride All
+...
+</code>
+
+O MapIgniter é uma aplicação que corre em cima do CodeIgniter. Primeiro instale o CodeIgniter.
+
+12. Para instalar **CodeIgniter** execute os seguintes comandos:
+<code>
+cd ~
+wget -O codeigniter.zip http://codeigniter.com/download.php 
+sudo apt-get install unzip
+unzip codeigniter.zip
+mv CodeIgniter_2.1.2 mapigniter
+rm codeigniter.zip
+</code>
+
+13. Para instalar **MapIgniter** execute (verifique antes qual o nome exacto do ficheiro, neste caso **a versão é 1.0.279**):
+<code>
+cd ~
+wget marcoafonso.pt/mapigniter/mapigniter-1.0.279.tar.gz
+tar -zxvf mapigniter-1.0.279.tar.gz
+rm mapigniter-1.0.279.tar.gz
+</code>
+
+14. A pasta **application** deve ser movida para o respectivo local:
+<code>
+rm -R mapigniter/application
+mv mapigniter-1.0.279/application mapigniter
+</code>
+
+15. A pasta **web** deve ser movida para /var/www, bem como o **index.dist.php** e **htaccess.dist**:
+<code>
+sudo mv mapigniter-1.0.279/web /var/www
+sudo mv mapigniter-1.0.279/index.dist.php /var/www
+sudo mv mapigniter-1.0.279/htaccess.dist /var/www/.htaccess
+sudo mv /var/www/index.html /var/www/_index.html
+</code>
+
+16. Para configurar o **MapIgniter** comece por copiar os ficheiros de distribuição. Contem configuração para esta instalação.
+<code>
+cd ~
+sudo mv /var/www/index.dist.php /var/www/index.php
+mv mapigniter/application/config/config.dist.php mapigniter/application/config/config.php
+mv mapigniter/application/config/database.dist.php mapigniter/application/config/database.php
+</code>
+
+17. Crie as **pastas de dados** e dê permissões de escrita ao user www-data:
+<code>
+cd ~
+mv mapigniter-1.0.279/data.dist mapigniter/data
+sudo chown -R www-data mapigniter/data
+sudo mkdir /var/www/web/data
+sudo mkdir /var/www/web/data/tmp
+sudo chown -R www-data /var/www/web/data
+</code>
+
+18. Veja qual o IP da máquina virtual e abra no browser http://ip-maquina-virtual
+Se tudo estiver correto deverá aparecer o MapIgniter - Requerimentos do sistema.
+
+19. Se não houver problemas, clique em Reinstalar.
+Se a instalação correr bem, clique para ir para a página inicial.
+
+20. Para entrar na área de administração, clique em **Entrar** e introduza o nome do utilizador **admin** e password **admin**
+
+Por favor, reporte todos os problemas encontrados para mafonso333 [at] gmail.com
+
+TODO: criar uma lista de suporte do projecto.

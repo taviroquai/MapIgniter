@@ -1,0 +1,29 @@
+
+==== Module Development====
+
+A Module development should respect the MVC arquitecture.
+
+For more information refer to the user [[http://codeigniter.com/user_guide/|CodeIgniter]].
+
+Note: **a module** does not necessarily have to print HTML. You can only specify files for CSS and/or Javascript.
+
+=== Simple Authentication module Example ===
+
+== Controllers ==
+
+   * controllers/auth.php
+
+== Models ==
+
+   * models/account/account_model.php - simple authentication class (may consult with other models, eg database_model)
+   * models/account/modauth_lblock.php - layout block class, which indicates the links and scripts to be loaded in the view layout
+
+== Views ==
+
+   * views/auth/auth.php - login form, user session information
+   * views/auth/menu.php - contains links to authentication options
+
+== Files to the browser ==
+
+   * web/auth/auth.css - the stylesheet file block authentication (must be indicated in modauth_lblock.php)
+

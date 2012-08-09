@@ -1,0 +1,97 @@
+
+==== Quadro Comparativo ====
+				
+ESRI ArcGIS GeoPortal	http://www.esriportugal.pt/solucoes/sig-empresarial/arcgis-for-server-extensoes/geoportal/
+		
+OpenGeo Suite	http://opengeo.org/products/suite/
+
+Geomajas	http://www.geomajas.org/overview/about-geomajas
+
+
+^ Característica											^ MapIgniter	^ ArcGIS GeoPortal	^ OpenGeo Suite	^ Geomajas	|
+| Preço													|		|			|		|		|
+| Visualizar mapas e outras informações no browser							| sim		| sim			| sim		| sim		|
+| Visualizar detalhes de locais e outros conteúdos media publicados					| sim		| sim			| sim		| sim		|
+| Avaliar conteúdos: locais, temas e mapas								| sim		|			|		|		|
+| Reportar problemas (issues) e visualizar o seu desenvolvimento					| sim		|			|		|		|
+| Imprimir Mapas											| sim (TODO)	| sim			| sim		| sim		|
+| Criar locais e personanlizar atributos e inserir conteúdo: geometria, texto, fotografias e videos	| sim		| sim			| sim		| sim		|
+| Criar temas: catalogar informação geográfica em temas (MapServer GUI)					| sim		| sim			|		|		|
+| Criar mapas: organizar temas em mapas (MapServer GUI / OpenLayers GUI)				| sim		| sim (ArcSDE)		| sim(GeoServer)| sim (?)	|
+| Acompanhar problemas reportados e resolver tarefas							| sim		|			|		|		|
+| Usar o Assistente para facilitar a criação de objectos						| sim (TODO)	|			|		|		|
+| Gerir layouts: permite registar diferentes layouts/templates e oferecer diferentes aplicações web	| sim		|			|		|		|
+| Gerir módulos de layout										| sim		|			|		|		|
+| Gerir utilizadores											| sim		| sim			| sim		|		|
+| Sistema de segurança por utilizador/grupo								| sim		| sim			| sim		| sim		|
+| Gerir problemas reportados (Tickets)									| sim		|			|		|		|
+|													|		|			|		|		|
+| Gestão de Base de dados Geográfica									| sim		|			|		|		|
+| Replicação de Bases de dados										|		|			|		|		|
+| Web Services												|		| sim (apenas aos dados)|		|		|
+| Web Services OGC											| sim		| (por confirmar)	| sim		| sim		|
+| REST API												|		| sim			| sim		| 		|
+| Portal Web												| sim		| sim 			|		|		|
+| Catalogo de dados											| sim		| sim 			|		|		|
+| Administração do Portal Web										| sim		| sim 			| sim (progr.)	| sim (progr.)	|
+| Avaliação de novos registos geográficos								| sim		| sim 			|		|		|
+| Controlo de acesso aos metadados e recursos								| sim		| sim 			|		|		|
+| Integração com outras portais web									| sim		| sim 			|		|		|
+| Publicação de dados											| sim		| sim 			|		|		|
+| Upload de informação (metadados)									| sim		| sim 			|		|		|
+| Pesquisa de dados											| 		| sim 			| sim (modulo)	| sim (modulo)	|
+| Pesquisa avançada de dados										|		| sim 			|		|		|
+| Previsualização de dados geográficos									| sim		| sim 			|		|		|
+| Cliente simplificado de Acesso aos Web Services 							|		| sim (GeoPortal)	|		|		|
+| Arquitectura Modular; Integração parcial/completa com outras plataformas				|		|			| sim		|		|
+| Quadro Resumo de todos os componentes									|		|			| sim		|		|
+| Documentação e exemplos completos sobre todos os componentes						|		|			| sim		|		|
+| Aplicação Web para composição do mapa e opções de publicação						| sim		| sim			|		|		|
+| Aplicação Web para estilizar os mapas									| sim		|			| sim		|		|
+| Aplicação Web para edição de dados geográficos							| sim (simples)	|			| sim		|		|
+| Postgis												| sim		|			| sim		|		|
+| Simple features for SQL (SFSQL)									| 		|			| sim		| sim		|
+| Comprovada confiabilidade e integridade transacional							| 		|			| sim		| sim		|
+| Representação espacial de Pontos, linhas e Poligonos							| sim		|			| sim		|		|
+| Criação, união, conversão e outras operações entre geometrias						| sim		|			| sim		|		|
+| Ferramentas de medida de dados à escala do globo							| sim		| 			| sim		|		|
+| Linha de comandos e ferramentas de analise geográfica							| sim		|			| sim		|		|
+| Aplicação baseada em Java Enterprise									|		|			| sim		| sim		|
+| Suporte para dados ArcSDE, Oracle Spatial, DB2, SQL Server, shapefile, GeoTIFF, MrSID, JPEG2000	| sim (OL)	|			| sim		|		|
+| Formatos de output: GML, shapefile, KML, GeoJSON, PNG, JPEG, TIFF, SVG, PDF, GeoRSS e KML		| sim (TODO)	|			| sim		| sim		|
+| Interface Web de administração intuitiva								| sim		| sim			| sim		| sim		|
+| Estilos de mapa SLD											| sim (TODO)	|			| sim		|		|
+| Sistema de segurança por utilizador/grupo								| sim		| 			| sim		|		|	
+| 													|		|			|		|		|
+| Sistema de cache											| sim (TODO)	|			| sim		|		|	
+| GeoWebCache												|		|			| sim		|		|
+| Serviços OGC WMTS, WMS-C e TMS									| sim		|			|		|		|	
+| Output compativel com Google Maps, Bing Maps e Yahoo Maps						| sim		|			| sim		|		|	
+| Gestão de cotas de espaço em disco da cache								| 		|			| sim		|		|
+| Aceita pedidos WMS por tempo, elevação, estilos e filtros						|		|			| sim		|		|
+| 													|		|			|		|		|
+| OpenLayers												| sim		|			| sim		| sim		|
+| Sobreposição de multiplas camadas numa unica aplicação						| sim		|			| sim		|		|
+| Visualização de quadriculas de imagens WMS, WMTS, TMS, WMS-C, WMTS, Google Maps, Bing Maps, etc...	| sim		|			| sim		|		|
+| Renderização e estilo de dados vectoriais styling com suporte para KML, GeoJSON, WKT, GML, WFS, GeoRSS| sim		|			| sim		|		|
+| Edição de dados geográficos no browser incluindo snapping (WFS, WFS-T)				| sim (WFS)	|			| sim		|		|
+| Integração com outras bibliotecas javascript JQuery, Ext, Dojo, MooTools				| sim		|			| sim		|		|
+| Reprojeção do mapa											| sim		|			| sim		|		|
+| Agrupamento de features e paginação									| sim		|			| sim		|		|	
+|													|		|			|		|		|
+| GeoExt												|		|			| sim		| 		|
+| ExtJS incluído (criação de aplicações RIA)								|		|			| sim		|		|
+| Interação com o utilizador sem necessidade de Flash ou Silverlight					| sim		|			|		|		|
+| Componentes modulares e extensiveis									| sim		|			| sim		|		|
+| Grande variedades de Widgets Genéricos (tabelas, gráficos, árvores, layouts, barras de ferramentas)	| 		|			| sim		|		|
+| Controlos de impressão para PDF									| sim (TODO)	|			| sim		|		|
+| Seleção de camadas personalizaveis									| sim		|			| sim		|		|
+| 													|		|			|		|		|
+| Arquitectura servidor-cliente integrada								| sim		|			|		| sim		|
+| Edição de dados geográficos e atributos								| sim		|			| 		| sim		|
+| Definição de atributos personalizáveis								| sim		|			| 		| sim		|
+| Capacidades avançadas de SQL (CQL)									|		|			|		| sim		|
+| Sistema de segurança incorporado									| sim		|			|		| sim		|
+| Sistema de plugins extensivel	sim									| sim		|			|		| sim		|
+| Multiplas tecnologias de front-end									| sim		|			|		| sim		|
+| Suporte cross-browser (sem necessidade para plugins de browser)					| sim		|			|		| sim		|

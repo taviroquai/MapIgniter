@@ -1,0 +1,39 @@
+
+==== Administração de Módulos ====
+
+A administração de módulos é realizada na administração MapIgniter.
+
+  - Inicie sessão com uma conta de utilizador do grupo admin
+  - Menu Sistema
+  - Submenu Modulos
+
+Deverá aparecer a lista de módulos registados.
+
+=== Registe um modulo ===
+
+  * Preencha o formulário
+  * Nome: indique o nome do módulo; pode conter espaços e outros simbolos
+  * Classe: caminho para a classe do bloco; por exemplo, models/auth/modauth_lblock (não é necessário indicar a extensão .php)
+  * Tabela de dados: nome da tabela de dados que contém os items de configuração (opcional)
+
+=== Configurar o Módulo no Layout ===
+
+A configuração do módulos é realizada na administração MapIgniter.
+
+  - Inicie sessão com uma conta de utilizador do grupo admin
+  - Menu Sistema
+  - Submenu Layouts
+  - Clique em configurar no layout onde deseja configurar o modulo
+  - Clique em configurar no slot de layout onde deseja configurar o módulo
+
+=== Criar um novo bloco de layout ===
+
+  * Preencha o formulário //Adicionar um bloco ao slot//
+  * Nome: escolha um nome para distinguir o bloco
+  * Modulo: escolha o modulo a utilizar
+  * Clique em Salvar
+  * Se indicou a tabela de dados no registo do modulo, pode escolher qual a instancia;
+  * A instancia o item a fornecer à vista do modulo; o item irá preencher a variável **$item** na vista.
+  * Configuração adicional: é ainda possível passar à vista configurações específicas deste bloco; forneça a configuração ($config) no formato JSON.
+  * O objecto de configuração JSON estará disponíveis para a vista como sendo a variável **$config**. Exemplo: $config->name.
+

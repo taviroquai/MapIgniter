@@ -1,0 +1,36 @@
+
+{{:milogo_131x70.png|}}
+
+==== MapIgniter ====
+
+|<100% -						       														>|
+| 	<fs 150%>Consulte a [[mapigniter:install|instalação]] antes de [[http://marcoafonso.pt/mapigniter/mapigniter-1.0.279.tar.gz|descarregar MapIgniter v1.0]]</fs>	|
+
+**[[start|MapIgniter]]** é um software na categoria web mapping que permite a publicação e visualização de informação geográfica num browser de internet.
+
+A gestão de conteúdos é realizada num ambiente gráfico, tal como em outros CMS (gestores de conteúdos), criando um novo conceito de software: //GeoCMS colaborativo//.
+
+Este software não pretende concorrer com software SIG para desktop, nem com software CAD. Todo o trabalho rigoroso de tratamento e analise de informação geográfica deve ser efectuado em software desktop; por exemplo: [[http://www.qgis.org/|QuantumGIS]].
+
+**MapIgniter** funciona com base em 3 grandes ferramentas de Software Aberto usadas em desenvolvimento de informação geográfica: [[http://postgis.refractions.net|Postgis]], [[http://mapserver.org|MapServer]] e [[http://openlayers.org|OpenLayers]]. [[http://codeigniter.com|CodeIgniter]] é a plataforma PHP que suporta toda a interação entre estas ferramentas.
+
+=== Screenshot ===
+{{ :mapigniter_ss.png?direct&400 |}}
+
+=== Demo Video ===
+{{ http://www.youtube.com/v/FF_yHfV4ukI?.swf?420×315 }}
+
+=== Como Criar Tema Postgis ===
+{{ http://www.youtube.com/v/qtbbBi_U5eo?.swf?420×315 }}
+
+[[mapigniter:features|Funcionalidades]]
+
+[[mapigniter:comparison|Quadro Comparativo]]
+
+[[mapigniter:requerimentos|Requerimentos do Sistema]]
+
+[[mapigniter:install|Instalação]]
+
+[[mapigniter:modules|Módulos]]
+
+[[mapigniter:dev|Desenvolvimento]]

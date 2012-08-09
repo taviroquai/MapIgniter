@@ -1,0 +1,11 @@
+
+==== Menu ====
+
+Permite criar menus simples; listas de hiperligações.
+O estilo do menú - o mesmo se aplica a outros módulos - poderá ser alterado numa folha de estilos (CSS)
+
+**Class:** admin/modmenu_lblock
+
+**Table:** modmenu
+
+{{:mapigniter:module:menu.png?nolink|}}

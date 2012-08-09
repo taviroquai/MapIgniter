@@ -1,0 +1,35 @@
+
+==== Desenvolvimento de Módulos ====
+
+O desenvolvimento de um módulo deve respeitar a arquitectura MVC:
+
+  * Nos controladores **não pode existir SQL**; deve-se usar o modelo database_model para o efeito;
+  * Nos controladores **não pode existir HTML**; deve-se usar as vistas para o efeito;
+  * Nos modelos **não podem existir redirecionamentos**; deve-se usar os controladores para o efeito;
+  * Nos modelos **não pode existir HTML**; deve-se usar as vistas para o efeito;
+  * As vistas devem ser reutilizaveis: **não pode existir chamadas a funções externas** à vista, excepto chamadas a função //base_url()//; deve-se tentar usar apenas variáveis;
+  * Nas vistas **não pode existir SQL**; apenas PHP e HTML (ou outro formato);
+
+Para mais informações consulte o manual do utilizador [[http://codeigniter.com/user_guide/|CodeIgniter]].
+
+**Nota:** o modulo não tem necessariamente que imprimir HTML. Pode apenas indicar ficheiros de CSS e/ou Javascript.
+
+=== Exemplo do módulo de Autenticação Simples ===
+
+== Controladores ==
+
+  * controllers/auth.php - classe de controlo da interação com o utilizador
+
+== Modelos ==
+
+  * models/account/account_model.php - classe de autenticação simples (pode consultar outros modelos, por exemplo: database_model)
+  * models/account/modauth_lblock.php - classe de bloco de layout; indica quais os links e scripts a serem carregados na view de layout
+
+== Vistas ==
+
+  * views/auth/auth.php - formulário para inicio de sessão; informação da sessão do utilizador
+  * views/auth/menu.php - contém links para opções de autenticação
+
+== Ficheiros para o browser ==
+
+  * web/auth/auth.css - ficheiro da folha de estilos do bloco de autenticação (deve ser indicado em modauth_lblock.php)

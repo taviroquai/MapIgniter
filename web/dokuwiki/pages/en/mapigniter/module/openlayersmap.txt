@@ -1,0 +1,10 @@
+
+==== OpenLayers Map ====
+
+Displays a map on a layout slot.
+
+**Class:** openlayers/modmap_lblock
+
+**Table:** olmap
+
+{{:mapigniter:module:openlayersmap.png?nolink|}}

@@ -1,0 +1,45 @@
+
+==== Version 1.0 ====
+
+MapIgniter features are below, organized by role:
+
+=== Public ===
+
+  * Visualize maps and other non-geographic information
+  * Visualize places (geographic features) details as other media content associated
+  * Rate places, layers and maps
+  * Report geographic or non-geographic issues (simple CRM feature)
+  * Follow the development of issues reported
+  * Simple Search
+  * Print Maps <del>(TODO)</del>
+
+
+=== Authenticated user (geo role) ===
+
+  * Create places: simple draw tool (point, line and area), enter place information, photos, videos and other content
+  * Catalogue geographic information and create layers
+  * Create maps: organizing layers in maps using a GUI MapServer and OpenLayers GUI
+  * Track issues and resolve issues tasks
+  * <del>Use the wizard to facilitate the creation of objects (TODO)</del>
+  * <del>LDAP Authentication (TODO)</del>
+  * <del>OAuth Autenticação (TODO)</del>
+
+
+=== Administrator (admin role) ===
+
+  * Manage layouts
+  * Manage modules
+  * Manage users
+  * Manage roles
+  * Manage permissions
+  * Manage issues tickets; track reported problems and forward tickets
+  * Publish layouts, modules e maps
+  * <del>Create statistics reports from users and public activity (TODO)</del>
+  * <del>Synchronize data with other MapIgniter instances (TODO)</del>
+
+
+=== All roles ===
+
+  * Access to features can be managed by the Administrator role
+
+** Note: The accuracy of the information is the responsibility of all stakeholders to review the information which does not exclude the analysis and treatment using the most appropriate desktop software, for example [[http://www.qgis.org/|QuantumGIS]].**

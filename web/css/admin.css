@@ -1,0 +1,32 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+.header {
+    width: 100%;
+    height: 70px;
+    background: #034fcf url('../images/header_bg_black.png') top left repeat-x;
+}
+
+a, a:visited {
+    color: #cd8000;
+}
+
+a:hover {
+    color: #d17c0d;
+}
+
+h1, h2 {
+    color: black;
+}

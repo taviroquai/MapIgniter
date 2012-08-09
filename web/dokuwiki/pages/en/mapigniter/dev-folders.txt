@@ -1,0 +1,73 @@
+
+=== MapIgniter Application Directories ===
+
+MapIgniter is an application that is run by CodeIgniter. CodeIgniter is a framework based on MVC architecture: Model, View and Controller.
+
+== Root folders ==
+
+  * application
+  * web - accessible by the browser
+
+== Application folder ==
+
+Items in bold are the most important for the early development
+Please read [[http://codeigniter.com/user_guide/|CodeIgniter documentation]] about this folders.
+
+  * cache
+  * **config**
+  * **controllers**
+  * core
+  * errors
+  * helpers
+  * hooks
+  * language
+  * libraries
+  * logs
+  * **models**
+  * third_party
+  * **views**
+
+== Web folder ==
+
+//TODO: to organize//
+
+== Folders in application/controllers ==
+
+  * Pasta admin - admin role controllers
+  * Pasta user - geo role controllers (can extend other controllers in other folders)
+  * auth.php - simple authentication controller
+  * mapserver.php - MapServer controller
+  * openlayers.php - OpenLayers controller
+  * postgis.php - Postgis controller
+  * proxy.php - proxy controller (Note: it can be moved to outside for better performance)
+  * publicmap.php - Homepage controller
+  * rating.php - Rating controller
+  * tickets.php - Tickets controller
+
+
+== Folders in application/models ==
+
+  * account folder - user domain model (DM) classes
+  * admin folder - admin classes
+  * crm folder - public/client classes
+  * database folder - database classes
+  * layout folder - layout classes
+  * mapserver folder - MapServer classes
+  * openlayers folder - OpenLayers classes
+  * rating folder - rating classes
+  * layer_model.php - layer class
+  * map_model.php - map class
+  * urlproxy_model - URL proxy class
+
+== Folders in application/views ==
+
+  * admin folder - admin role views
+  * auth folder - simple auth views
+  * crm folder - public/cliente views
+  * layout folder - layout views
+  * openlayers folder - OpenLayers views
+  * postgis - Postgis views
+  * user folder - geo role views
+  * 404.php - HTTP 404 view
+  * messages.php - error/information messages view
+  * rate.php - rating view

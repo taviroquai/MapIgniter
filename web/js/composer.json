@@ -1,0 +1,55 @@
+{
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "ckeditor",
+				"version": "3.6.4",
+				"dist": {
+					"url": "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.4/ckeditor_3.6.4.tar.gz",
+					"type": "tar"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "fancybox",
+				"version": "2.0.6",
+				"dist": {
+					"url": "https://github.com/fancyapps/fancyBox/zipball/v2.0.6",
+					"type": "zip"
+				}
+			}
+		},
+                {
+			"type": "package",
+			"package": {
+				"name": "jqueryui",
+				"version": "1.8.22",
+				"dist": {
+					"url": "http://jqueryui.com/download/jquery-ui-1.8.22.custom.zip",
+					"type": "zip"
+				}
+			}
+		},
+                {
+			"type": "package",
+			"package": {
+				"name": "ol",
+				"version": "2.12",
+				"dist": {
+					"url": "http://openlayers.org/download/OpenLayers-2.12.tar.gz",
+					"type": "tar"
+				}
+			}
+		}
+                
+	],
+	"require": {
+		"ckeditor": "3.6.4",
+		"fancybox": "2.0.6",
+                "jqueryui": "1.8.22",
+                "ol": "2.12"
+	}
+}

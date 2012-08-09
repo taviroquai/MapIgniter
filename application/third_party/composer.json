@@ -1,0 +1,30 @@
+{
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "rb",
+				"version": "3.2.3",
+				"dist": {
+					"url": "http://www.redbeanphp.com/downloadredbean.php",
+					"type": "tar"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "jpgraph",
+				"version": "3.5",
+				"dist": {
+					"url": "http://jpgraph.net/download/download.php?p=5",
+					"type": "tar"
+				}
+			}
+		}
+	],
+	"require": {
+		"rb": "3.2.3",
+		"jpgraph": "3.5"
+	}
+}

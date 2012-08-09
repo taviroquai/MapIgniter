@@ -1,0 +1,62 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+
+.dataexplorer {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+.dataexplorer a {
+    text-decoration: none;
+}
+
+.dataexplorer th {
+    padding: 3px;
+}
+
+.dataexplorer a img {
+    vertical-align: middle;
+    margin-bottom: 4px;
+}
+
+.dataexplorer th {
+    background-color: #333;
+    color: #fff;
+}
+
+.dataexplorer .dxsize {
+    width: 60px;
+}
+
+.dataexplorer .dxtype {
+    width: 160px;
+}
+
+.dataexplorer .dxowner {
+    width: 60px;
+}
+
+col.dxname {text-align: left;} 
+col.dxsize {background: #fefefe; text-align: center;} 
+col.dxtype {background: #fefefe; text-align: center;}
+col.dxowner {background: #fefefe; text-align: center;}
+
+.dataexplorer tr>th, .dataexplorer tr>td {text-align: left;} 
+.dataexplorer th+th, .dataexplorer td+td {text-align: center;} 
+.dataexplorer th+th+th, .dataexplorer td+td+td {text-align: center;} 
+.dataexplorer th+th+th+th, .dataexplorer td+td+td+td {text-align: center;} 

@@ -1,0 +1,8 @@
+
+==== Autenticação Simples ====
+
+Permite ao visitante iniciar uma sessão na plataforma.
+
+**Class:** account/modauth_lblock
+
+{{:mapigniter:module:simpleauth.png?nolink|}}

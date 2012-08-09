@@ -1,0 +1,8 @@
+
+==== Seleção de Idioma ====
+
+Permite ao utilizador selecionar o idioma da interface.
+
+**Class:** crm/lang_lblock
+
+{{:mapigniter:module:idiomswitcher.png?nolink|}}

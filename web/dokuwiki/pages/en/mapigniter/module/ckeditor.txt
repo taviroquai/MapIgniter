@@ -1,0 +1,8 @@
+
+==== CKEditor textareas ====
+
+Transforms all textareas, that are using //wysiwyg class//, to a Rich Text Editor (RTE).
+
+**Class:** layout/ckeditor_lblock
+
+{{:mapigniter:module:ckeditor.png?nolink|}}
