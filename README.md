@@ -1,4 +1,4 @@
 MapIgniter
 ==========
 
-MapIgniter is a GeoCMS based on Mapserver, PostGIS, OpenLayers and CodeIgniter.
+MapIgniter is a GeoCMS based on MapServer, PostGIS, OpenLayers and CodeIgniter.
