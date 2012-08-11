@@ -65,6 +65,7 @@ class Rating_model extends CI_Model {
     
     public function loadAll($items, $entity, $account, $ip) {
         $rates = array();
+        if (empty($items)) return $rates;
         foreach ($items as $itemid) {
             $rate = array();
             $rate['bean'] = $this->load($entity, $itemid);

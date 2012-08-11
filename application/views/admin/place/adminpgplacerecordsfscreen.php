@@ -87,9 +87,9 @@ $total = count($items);
         if (empty($items)) : ?>
             <p>It is not possible to view the map. There are no layers on this map.</p>
         <? else :
-          $links[] = base_url()."web/js/ol/theme/default/style.css";
+          $links[] = base_url()."web/js/vendor/ol/theme/default/style.css";
           $links[] = base_url()."web/openlayers/mapblock.css";
-          $scripts[] = base_url()."web/js/ol/OpenLayers-dev.js";
+          $scripts[] = base_url()."web/js/vendor/ol/OpenLayers.js";
           $scripts[] = base_url()."web/js/WebSig.js";
           $scripts[] = base_url()."web/openlayers/wfseditfeature.js";
         ?>

@@ -23,7 +23,7 @@ var WebSig = {VERSION: 10070};
  * Define Constants
  */
 OpenLayers.ProxyHost = base_url+"proxy?url=";
-OpenLayers.ImgPath = base_url+"web/js/ol/img/";
+OpenLayers.ImgPath = base_url+"web/js/vendor/ol/img/";
 
 /**
  * Define classes

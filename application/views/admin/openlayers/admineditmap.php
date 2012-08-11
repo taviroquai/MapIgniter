@@ -41,7 +41,7 @@
 <p><strong>Available layers</strong></p>
 <?
 $action = base_url().$ctrlpath.'/addlayer/'.$olmap->id;
-$action_btn = 'Adicionar Selecionados';
+$action_btn = 'Add selected';
 $this->load->view('admin/openlayers/adminlayerlist', array('items' => $ollayers, 'action_btn' => $action_btn, 'action' => $action));
 
 $items = $olmap->sharedOllayer;
@@ -51,7 +51,7 @@ if (empty($items)) : ?>
 <p><strong>Layers on this map</strong></p>
 <?
     $action = base_url().$ctrlpath.'/dellayer/'.$olmap->id;
-    $action_btn = 'Remover Selecionados';
+    $action_btn = 'Remove selected';
     $this->load->view('admin/openlayers/adminlayerlist', array('items' => $items, 'action_btn' => $action_btn, 'action' => $action)); ?>
 <? endif; ?>
 </li>
@@ -61,9 +61,9 @@ if (empty($items)) : ?>
       if (empty($items)) : ?>
       <p>It is not possible to preview. There are no layers on the map.</p>
       <? else : 
-          $links[] = base_url()."web/js/ol/theme/default/style.css";
+          $links[] = base_url()."web/js/vendor/ol/theme/default/style.css";
           $links[] = base_url()."web/openlayers/mapblock.css";
-          $scripts[] = base_url()."web/js/ol/OpenLayers-dev.js";
+          $scripts[] = base_url()."web/js/vendor/ol/OpenLayers.js";
           $scripts[] = base_url()."web/js/WebSig.js";
       ?>
       <div id="mapcontainer" style="width: 100%; height: 580px;">

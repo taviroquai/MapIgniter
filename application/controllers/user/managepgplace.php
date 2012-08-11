@@ -120,6 +120,7 @@ class Managepgplace extends Adminpgplace {
         if (!empty($this->pgplacectrl)) $data['pgplacectrl'] = $this->pgplacectrl;
         
         // Load items rating
+        $ratingitems = array();
         foreach ($items as $item)
         $ratingitems[] = $pglayer->layer->alias.'.'.$item['gid'];
         $data['rating'] = 
