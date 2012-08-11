@@ -4,7 +4,7 @@
 ==== MapIgniter ====
 
 |<100% -						       														>|
-| 	<fs 150%>Consulte a [[mapigniter:install|instalação]] antes de [[http://marcoafonso.pt/mapigniter/mapigniter-1.0.279.tar.gz|descarregar MapIgniter v1.0]]</fs>	|
+| 	<fs 150%>[[https://github.com/taviroquai/MapIgniter|Descarregar e instalar]] a partir do GitHub</fs>	|
 
 **[[start|MapIgniter]]** é um software na categoria web mapping que permite a publicação e visualização de informação geográfica num browser de internet.
 
@@ -28,8 +28,6 @@ Este software não pretende concorrer com software SIG para desktop, nem com sof
 [[mapigniter:comparison|Quadro Comparativo]]
 
 [[mapigniter:requerimentos|Requerimentos do Sistema]]
-
-[[mapigniter:install|Instalação]]
 
 [[mapigniter:modules|Módulos]]
 

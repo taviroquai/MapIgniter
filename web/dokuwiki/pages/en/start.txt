@@ -5,7 +5,7 @@
 ==== MapIgniter ====
 
 |<100% -						       														>|
-| 	<fs 150%>Look at [[en:mapigniter:install|install]] before [[http://marcoafonso.pt/mapigniter/mapigniter-1.0.279.tar.gz|download MapIgniter v1.0]]</fs>		|
+| 	<fs 150%>[[https://github.com/taviroquai/MapIgniter|Download and Install]] from GitHub</fs>		|
 
 **[[start|MapIgniter]]** is a web mapping application that allows publishing and visualization of geographic information in an internet browser.
 
@@ -29,8 +29,6 @@ This software does not replace desktop GIS software. All thorough treatment and 
 [[en:mapigniter:comparison|Comparison Table]]
 
 [[en:mapigniter:requerimentos|System Requirements]]
-
-[[en:mapigniter:install|Install]]
 
 [[en:mapigniter:modules|Modules]]
 
