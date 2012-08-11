@@ -85,13 +85,23 @@ class Layer_model extends CI_Model {
     
     public function delete($ids) {
         // Clean dependencies
+        $this->load->model('database/postgis_model');
         $this->load->model('mapserver/mapserver_model');
         $this->load->model('openlayers/openlayers_model');
         foreach($ids as $id) {
             $layer = $this->load($id);
+            
+            // delete Postgis layers
+            $pglayers = $layer->ownPglayer;
+            foreach ($pglayers as $pglayer) $pglayers_ids[] = $pglayer->id;
+            if (!empty($pglayers_ids)) $this->postgis_model->deleteLayer($pglayers_ids);
+            
+            // delete MapServer layers
             $mslayers = $layer->ownMslayer;
             foreach ($mslayers as $mslayer) $mslayers_ids[] = $mslayer->id;
             if (!empty($mslayers_ids)) $this->mapserver_model->deleteLayer($mslayers_ids);
+            
+            // delete OpenLayers layers
             $ollayers = $layer->ownOllayer;
             foreach ($ollayers as $ollayer) $ollayers_ids[] = $ollayer->id;
             if (!empty($ollayers_ids)) $this->openlayers_model->deleteLayer($ollayers_ids);

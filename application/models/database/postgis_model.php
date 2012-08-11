@@ -64,14 +64,13 @@ class Postgis_model extends CI_Model {
     }
     
     public function deleteLayer($ids) {
-        // Clean dependencies
-        
+        // select dependent tables (should it really remove tables?)
         foreach($ids as $id) {
             $pglayer = $this->loadLayer($id);
             $tables[] = $pglayer->pgplacetype;
         }
         $this->deleteTables($tables);
-        // Delete mapserver layer
+        // Delete postgis layer
         $this->database_model->delete('pglayer', $ids);
     }
     
