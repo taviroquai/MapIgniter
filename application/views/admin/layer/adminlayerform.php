@@ -37,7 +37,7 @@
     <? endif; ?>
     
     <label>Description</label>
-    <textarea name="description"><?=$layer->description?></textarea>
+    <textarea name="description" class="wysiwyg"><?=$layer->description?></textarea>
 
     <button type="submit">Save</button>
 </form>
