@@ -32,7 +32,7 @@
             <span>Create from Postgis layer (<?=$pglayer->pgplacetype?> table)</span>
         </label>
     </fieldset>
-    <? else : ?>
+    <? elseif (!empty($pglayers)) : ?>
     <? $pglayer = reset($pglayers); ?>
     <fieldset>
         <legend>Created from Postgis layer (<?=$pglayer->pgplacetype?> table)</legend>
