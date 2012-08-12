@@ -50,7 +50,7 @@ $mslabel = reset($labels); ?>
 <p>
     <span><?=$mslabel->description?></span>
     <a href="<?=base_url().$mslabelctrlpath?>/edit/<?=$mslabel->id?>">Configure</a>
-    <a href="<?=base_url().$ctrlpath?>dellabel/<?=$msclass->id?>">Remove</a>
+    <a href="<?=base_url().$ctrlpath?>/dellabel/<?=$msclass->id?>">Remove</a>
 </p>
 <? endif; ?>
 
