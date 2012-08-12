@@ -77,20 +77,20 @@ $action = base_url().$ctrlpath;
                     <? endif; ?>
                 <? endif; ?>
                 
-                <!-- Check CKEditor call -->
-                <? if (!empty($CKEditor)) : ?>
-                <? if ($security == 'public') : ?>
-                <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=base_url().'web/data/'.$dir.$list[$index]['name']?>')">
-                <? else: ?>
-                <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=$dir.$list[$index]['name']?>')">
-                <? endif; ?>
-                    <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
-                </a>
-                <? elseif (!empty($return)) : ?>
+                <? if (!empty($return)) : ?>
                 <? if ($security == 'public') : ?>
                 <a href="javascript: devolver('<?=base_url().'web/data/'.$dir.$list[$index]['name']?>', '<?=$return?>')">
                 <? else: ?>
                 <a href="javascript: devolver('<?=$dir.$list[$index]['name']?>', '<?=$return?>')">
+                <? endif; ?>
+                    <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
+                </a>
+                <!-- Check CKEditor call -->
+                <? elseif (!empty($CKEditor)) : ?>
+                <? if ($security == 'public') : ?>
+                <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=base_url().'web/data/'.$dir.$list[$index]['name']?>')">
+                <? else: ?>
+                <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=$dir.$list[$index]['name']?>')">
                 <? endif; ?>
                     <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
                 </a>

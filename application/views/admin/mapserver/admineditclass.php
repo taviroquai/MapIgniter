@@ -64,7 +64,6 @@ Click <a href="<?=base_url().$msstylectrlpath?>/edit/<?=$msclass->id?>">here</a>
         <select name="msstyle_id">
             <? foreach ($msstyles as $item) {?>
             <option value="<?=$item->id?>"><?=substr($item->description, 0, 40)?></option>
-            </li>
             <? } ?>
         </select>
         <button type="submit">Add</button>

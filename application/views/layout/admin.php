@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/base.css">
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/skeleton.css">
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/layout.css">
-    <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
     
     <!-- General CSS -->
     <link rel="stylesheet" href="<?=base_url()?>web/css/general.css">

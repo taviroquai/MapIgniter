@@ -75,7 +75,7 @@
             <input type="text" name="connection" value="<?=$mslayer->connection?>" />
 
             <label>Data&nbsp;
-                <a class="linkexplorer" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=mslayerdata"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=mslayerdata"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
             </label>
             <input id="mslayerdata" type="text" name="data" value="<?=$mslayer->data?>" />
 
@@ -160,7 +160,7 @@
             <? endif; ?>
 
             <label>Template&nbsp;
-                <a class="linkexplorer" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
             </label>
             <input type="text" name="template" value="<?=$mslayer->template?>" />
         </div>

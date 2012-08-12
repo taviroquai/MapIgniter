@@ -54,7 +54,7 @@
             <input type="text" name="text" value="<?=$msclass->text?>" />
         
             <label>Symbol&nbsp;
-                <a class="linkexplorer" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msclasssymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msclasssymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
             </label>
             <input id="msclasssymbol" type="text" name="symbol" value="<?=$msclass->symbol?>" />
 

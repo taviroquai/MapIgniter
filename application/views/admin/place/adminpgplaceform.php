@@ -48,7 +48,7 @@
         if (in_array($field, $sysfields)) continue;
         ?>
         <label><?=$field?>
-            <a class="linkexplorer" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=pgplace_<?=$field?>"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>        
+            <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=pgplace_<?=$field?>"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>        
         </label>
         <? if ($table->attributes[$field] == 'text') : ?>
         <textarea id="pgplace_<?=$field?>" class="wysiwyg" name="<?=$field?>" style="width: 98%" rows="6"><?=$record[$field]?></textarea>

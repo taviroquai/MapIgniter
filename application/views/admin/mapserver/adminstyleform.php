@@ -23,7 +23,7 @@
         <legend>Appearance</legend>
         <div class="accordion">
             <label>Symbol&nbsp;
-                <a class="linkexplorer" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
             </label>
             <input id="msstylesymbol"type="text" name="symbol" value="<?=$msstyle->symbol?>" />
             

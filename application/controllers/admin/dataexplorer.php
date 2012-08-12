@@ -43,12 +43,13 @@ class Dataexplorer extends MY_Controller {
         // Check for a return element, save on session (bad?)
         if ($this->input->get('return')) {
             $this->session->set_userdata('return', $this->input->get('return'));
+            $this->session->unset_userdata('CKEditor');
         }
-        
         // Check for a CKEditor parameters
-        if ($this->input->get('CKEditor')) {
+        elseif ($this->input->get('CKEditor')) {
             $this->session->set_userdata('CKEditor', $this->input->get('CKEditor'));
             $this->session->set_userdata('CKEditorFuncNum', $this->input->get('CKEditorFuncNum'));
+            $this->session->unset_userdata('return');
         }
         
         // Set public base directory
@@ -77,10 +78,10 @@ class Dataexplorer extends MY_Controller {
             $data['security'] = $security;
             $data['base'] = $this->dataexplorer_model->getBase($security);
             $data['list'] = $list;
+            $data['selected'] = $this->session->userdata('data_selected');
             $data['return'] = $this->session->userdata('return');
             $data['CKEditor'] = $this->session->userdata('CKEditor');
             $data['CKEditorFuncNum'] = $this->session->userdata('CKEditorFuncNum');
-            $data['selected'] = $this->session->userdata('data_selected');
             
             /*
              * Consider several calls to this controller and choose view
@@ -161,10 +162,10 @@ class Dataexplorer extends MY_Controller {
             $data['security'] = $security;
             $data['base'] = $this->dataexplorer_model->getBase($security);
             $data['list'] = $list;
+            $data['selected'] = $this->session->userdata('data_selected');
             $data['return'] = $this->session->userdata('return');
             $data['CKEditor'] = $this->session->userdata('CKEditor');
             $data['CKEditorFuncNum'] = $this->session->userdata('CKEditorFuncNum');
-            $data['selected'] = $this->session->userdata('data_selected');
             
             /*
              * Consider several calls to this controller and choose view
