@@ -299,6 +299,11 @@ class Database_model extends CI_Model {
         $searchblock->owner = $account_admin;
         R::store($searchblock);
         
+        // Register Google Maps Api module
+        $modgmapsapi = $this->layout_model->createModule('Load Google Maps API', 'openlayers/modgmapsapiv3_lblock');
+        $modgmapsapi->owner = $account_admin;
+        R::store($modgmapsapi);
+        
         // Create layout
         $layout_public = $this->layout_model->create('public', 'layout/publicfullscreen');
         $layout_public->owner = $account_admin;
