@@ -17,7 +17,7 @@
 // ------------------------------------------------------------------------
 
 ?>
-# Map file created from WebSig
+# Map file created by MapIgniter
 
 MAP
     NAME "<?=$mapfile->map->alias?>"
@@ -130,6 +130,7 @@ MAP
           '<?=$metadata->msmetadata->name?>' '<?=$metadata->value?>'
           <? } ?>
         END
+        # PROCESSING "LABEL_NO_CLIP=1"
 
         <? foreach ($mslayer->ownMsclass as $msclass) { ?>
 
