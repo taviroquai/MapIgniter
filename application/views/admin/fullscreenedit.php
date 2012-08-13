@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/base.css">
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/skeleton.css">
     <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/layout.css">
-    <link rel="stylesheet" href="<?=base_url()?>web/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
     
     <!-- General CSS -->
     <link rel="stylesheet" href="<?=base_url()?>web/css/general.css">
@@ -89,8 +89,8 @@
     <link rel="stylesheet" href="<?=$_href?>" />
     <? } ?>
     
-    <script type="text/javascript" src="<?=base_url()?>web/js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>web/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/jquery.form.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/skeleton/tabs.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/sgbeal-colorpicker.jquery.js"></script>
