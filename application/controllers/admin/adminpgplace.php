@@ -287,23 +287,25 @@ class Adminpgplace extends MY_Controller {
             $record = $this->postgis_model->saveGeometry($table, $record, $post['wkt'], $proj, $post['format']);
             $info[] = 'Place was saved';
             
+            // Load main content
+            $data = array(
+                'msgs' => array('errors' => $errors, 'info' => $info),
+                'ctrlpath' => $this->ctrlpath,
+                'record' => $record);
             
         }
         catch (Exception $e) {
             $errors[] = $e->getMessage();
+            $data = array(
+                'msgs' => array('errors' => $errors, 'info' => $info)
+                );
         }
         
-        // Load main content
-        $data = array(
-            'msgs' => array('errors' => $errors, 'info' => $info),
-            'ctrlpath' => $this->ctrlpath,
-            'record' => $record);
-        
         // Render
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json');
-        echo json_encode($data, TRUE);
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($data, TRUE));
     }
     
     /**
@@ -330,17 +332,20 @@ class Adminpgplace extends MY_Controller {
 
             // Load main content
             $data = array(
+                'success' => true,
                 'ctrlpath' => $this->ctrlpath,
                 'record' => $record);
         }
         catch (Exception $e) {
-            $content = "<p>{$e->getMessage()}</p>";
+            $data = array(
+                'success' => false,
+                'message' => $e->getMessage());
         }
         
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: text/json');
-        echo json_encode($data, TRUE);
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->output->set_content_type('text/json');
+        $this->output->set_output(json_encode($data, TRUE));
     }
     
     /**
