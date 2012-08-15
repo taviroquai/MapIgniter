@@ -10,3 +10,4 @@
 /web/js/composer.lock
 /application/config/config.php
 /application/config/database.php
+/application/cache/
