@@ -44,7 +44,7 @@
     <body>
 
         <div id="slot-header" class="header">
-            <img src="<?=base_url()?>web/images/milogo_white_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
+            <img src="<?=base_url()?>web/images/milogo_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
         </div>
 
         <? if (!empty($content)) : ?>

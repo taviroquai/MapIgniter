@@ -105,7 +105,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="<?=base_url()?>web/data/mapigniter/milogo_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
+        <img src="<?=base_url()?>web/images/milogo_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
     </div>
     <div id="editwrapper">
         <div id="content"><?=$content?></div>
