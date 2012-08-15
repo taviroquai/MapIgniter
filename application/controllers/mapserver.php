@@ -46,19 +46,61 @@ class Mapserver extends CI_Controller {
             $newmap = $this->config->item('private_data_path').'mapfile/'.$alias.'.map&';
             $url = $url . 'map='.$newmap.$_SERVER['QUERY_STRING'];
         }
-
-        // Teste Postgis + sld
-        //if (strstr($url, 'postgis')) $url .= '&'.'SLD=http://localhost/websig1/index.php/testes/sld';
         
-        // Make Mapserver CGI request
+        // Get post, if exists
         $post = file_get_contents("php://input");
+        
+        // Work with CodeIgniter cache
+        // TODO: somebody needs to work on this!
+        
+        // CodeIgniter cache does not seems to work in this situation
+        // http://codeigniter.com/user_guide/general/caching.html
+        // $this->output->cache(1);
+        // Moving to a custom cache system...
+
+        // Set up cache
+        $this->load->driver('cache', array('adapter' => 'apc'));
+        $cached = $this->cache->get(sha1($url));
+
+        // Getting headers sent by the client.
+        $headers = apache_request_headers();
+
+        // Checking if the client is validating his cache and if it is current.
+        if (!empty($cached)) {
+            if (isset($headers['If-Modified-Since']) && (strtotime($headers['If-Modified-Since']) >= time())) {
+                // Client's cache IS current, so we just respond '304 Not Modified'.
+                header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()+300).' GMT', true, 304);
+                header("MICache: skipped");
+            }
+            else {
+                header('Cache-Control: max-age=300');
+                $tsstring = gmdate('D, d M Y H:i:s', strtotime('+5 minutes')).' GMT';
+                header("Last-Modified: $tsstring");
+                header("Expires: ".$tsstring);
+                header("MICache: cached");
+                header('Content-Type: '.$cached['headers']['content_type']);
+                echo $cached['content'];
+            }
+            exit();
+        }
+        
+        // Image not cached or cache outdated, we respond '200 OK' and output the image.
+        // Make MapServer CGI request
         $response = $this->urlproxy_model->request($url, $post);
+        // Cache headers
+        $this->output->set_header('Cache-Control: max-age=300');
+        $tsstring = gmdate('D, d M Y H:i:s', strtotime('+5 minutes')).' GMT';
+        $this->output->set_header("Last-Modified: $tsstring");
+        $this->output->set_header("Expires: ".$tsstring);
+        $this->output->set_header("MICache: original");
+        $this->output->set_content_type($response['headers']['content_type']);
 
-        // Set response headers
-        header("Content-Type: ".$response['headers']['content_type']);
-
+        // Save into cache for 5 minutes
+        if (strstr($response['headers']['content_type'], 'image'))
+                $this->cache->save(sha1($url), $response, 300);
+        
         // Dump response content
-        echo $response['content'];
+        $this->output->set_output($response['content']);
 
     }
     

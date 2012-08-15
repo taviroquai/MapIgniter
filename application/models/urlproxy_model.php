@@ -29,7 +29,7 @@ class Urlproxy_model extends CI_Model {
      * @return array
      */
     public function request($url, $post = array()) {
-        
+
         // Log network
         $logfile = fopen($this->config->item('private_data_path')."curl.log", 'w') or die("can't open log file");
         
@@ -45,6 +45,7 @@ class Urlproxy_model extends CI_Model {
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($session, CURLOPT_VERBOSE, true);
         curl_setopt($session, CURLOPT_STDERR, $logfile); // logs curl messages
+        curl_setopt($session, CURLOPT_FILETIME, true);
 
         // Make the call
         $content = curl_exec($session);
