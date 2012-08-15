@@ -91,7 +91,7 @@ wfsgetfeature.prototype.preparePopup = function(e) {
 
 wfsgetfeature.prototype.popup = function(feature, html) {
     var centroid = feature.geometry.getCentroid();
-    var popup = new OpenLayers.Popup("chicken",
+    var popup = new OpenLayers.Popup("popup_"+feature.attributes.gid,
                new OpenLayers.LonLat(centroid.x, centroid.y),
                null,
                html,
@@ -99,6 +99,7 @@ wfsgetfeature.prototype.popup = function(feature, html) {
     popup.minSize = new OpenLayers.Size(380,200);
     popup.panMapIfOutOfView = true;
     this.mapblock.map.addPopup(popup);
+    jQuery("#popup_"+feature.attributes.gid).css('z-index', 6000);
     popup.updateSize();
 }
 
@@ -116,12 +117,12 @@ var popupfeature = function (feature, wfsgetfeature) {
         popup.panMapIfOutOfView = true;
         popup.autoSize = true;
         wfsgetfeature.mapblock.map.addPopup(popup);
+        jQuery("#popup_"+feature.attributes.gid).css('z-index', 6000);
         
         // Load HTML from URL
         jQuery("#popup_"+feature.attributes.gid+'_contentDiv').load(wfsgetfeature.htmlurl+'/'+feature.attributes.gid+'/'+wfsgetfeature.layeralias, null, function(response) {
             popup.updateSize();
             popup.panIntoView();
-            jQuery(this).css('overflow', 'auto');
         });
         
     }

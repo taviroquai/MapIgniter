@@ -79,7 +79,7 @@
         
         <? if (!empty($_slot['slot4'])) : ?>
         <div id="slot4">
-            <div class="content-padding"><?=$_slot['slot4']?></div>
+            <?=$_slot['slot4']?>
         </div>
         <? endif; ?>
         
