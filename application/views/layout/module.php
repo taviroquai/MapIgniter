@@ -69,7 +69,9 @@
     </div>
     <div class="container">
         <div class="sixteen columns">
-            <h1 style="margin-top: 20px"><?=empty($pagetitle) ? 'MapIgniter' : $pagetitle?></h1>
+            <? if (!empty($pagetitle)) : ?>
+            <h1 style="margin-top: 20px"><?=$pagetitle?></h1>
+            <? endif; ?>
         </div>
         <div class="eight columns">
             <?=$_slot['slot1']?>
