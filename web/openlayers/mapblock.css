@@ -31,7 +31,7 @@
     z-index: 21000;
 }
 
-.olControlAttribution {
+.olControlAttribution, .olLayerGoogleCopyright {
     bottom: auto !important;
     top: 90px !important;
     right: 60px !important;
