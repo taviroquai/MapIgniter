@@ -23,7 +23,7 @@ h6 { font-size: 14px; line-height: 16px; }
 
 h1, h2 {
     text-shadow: 1px 1px 1px #787878;
-    filter: dropshadow(color=#787878, offx=1, offy=1);
+    /* filter: dropshadow(color=#787878, offx=1, offy=1); */
     margin-top: 20px;
 }
 

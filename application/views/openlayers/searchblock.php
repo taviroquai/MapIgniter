@@ -22,6 +22,7 @@
             <input name="q" type="text" style="width: 165px; float: left" />
             <button type="submit" style="float: left; padding: 7px 10px 2px 10px; margin-top: 0"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="search" /></button>
         </form>
+        <div style="clear: both"></div>
     </div>
     <script>
         var block_<?=$_instance?> = new featuresearch('<?=$_instance?>', '#slot-content');
