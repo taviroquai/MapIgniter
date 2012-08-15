@@ -26,6 +26,8 @@ class Postgis extends MY_Controller {
         $this->load->model('database/postgis_model');
         $this->load->model('layer_model');
         $this->load->model('rating/rating_model');
+        
+        $this->getfeatureview = 'postgis/showpgplace';
     }
     
     public function index()
@@ -67,19 +69,13 @@ class Postgis extends MY_Controller {
             $data['rating'] = 
             $this->rating_model->loadAll($ratingitems, 'pgplace', $this->account, $this->input->ip_address());
             
-            switch($table->name) {
-                case 'localmundo':
-                    $content = $this->load->view('postgis/localmundo/showpgplace', $data, TRUE);
-                    break;
-                case 'castelos':
-                    $content = $this->load->view('postgis/castelos/showpgplace', $data, TRUE);
-                    break;
-                default:
-                    $content = $this->load->view('postgis/showpgplace', $data, TRUE);
-            }
+            // Load default view
+            // To create custom get feature views, please extend this controller
+            // and create a custom view (change getfeatureview)
+            $content = $this->load->view($this->getfeatureview, $data, TRUE);
             
             if (!empty($record['title'])) $data['pagetitle'] = $record['title'];
-            if (!empty($record['description'])) $data['pagedescription'] = $record['description'];
+            if (!empty($record['description'])) $data['pagedescription'] = strip_tags ($record['description']);
             
         }
         catch (Exception $e) {
@@ -94,8 +90,8 @@ class Postgis extends MY_Controller {
     /**
      * Action getfeaturejson
      * Loas a postgis record and outputs
-     * @param string $tablename
-     * @param string $id 
+     * @param string $pglayer_id Postgis layer ID
+     * @param string $id Feature ID
      */
     public function getfeaturejson($pglayer_id, $id)
     {   
@@ -122,10 +118,10 @@ class Postgis extends MY_Controller {
             $content = "<p>{$e->getMessage()}</p>";
         }
         
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: text/json');
-        echo json_encode($data, TRUE);
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->output->set_content_type('text/json');
+        $this->output->set_output(json_encode($data, TRUE));
     }
     
 }
