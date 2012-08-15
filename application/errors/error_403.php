@@ -44,7 +44,7 @@
     <div class="header">
         <div class="container">
             <div class="sixteen columns">
-                <img src="<?=base_url()?>web/data/mapigniter/milogo_white_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
+                <img src="<?=base_url()?>web/images/milogo_white_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
             </div>
         </div>
     </div>
