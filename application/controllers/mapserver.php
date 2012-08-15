@@ -57,10 +57,10 @@ class Mapserver extends CI_Controller {
         // http://codeigniter.com/user_guide/general/caching.html
         // $this->output->cache(1);
         // Moving to a custom cache system...
-
+        
         // Set up cache
-        $this->load->driver('cache', array('adapter' => 'apc'));
-        $cached = $this->cache->get(sha1($url));
+        $this->load->driver('cache');
+        $cached = $this->cache->apc->get(sha1($url));
 
         // Getting headers sent by the client.
         $headers = apache_request_headers();
@@ -83,6 +83,7 @@ class Mapserver extends CI_Controller {
             }
             exit();
         }
+
         
         // Image not cached or cache outdated, we respond '200 OK' and output the image.
         // Make MapServer CGI request
@@ -97,11 +98,9 @@ class Mapserver extends CI_Controller {
 
         // Save into cache for 5 minutes
         if (strstr($response['headers']['content_type'], 'image'))
-                $this->cache->save(sha1($url), $response, 300);
-        
+                $this->cache->apc->save(sha1($url), $response, 300);
+
         // Dump response content
         $this->output->set_output($response['content']);
-
     }
-    
 }

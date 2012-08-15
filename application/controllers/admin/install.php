@@ -72,6 +72,11 @@ class Install extends CI_Controller {
             if (!extension_loaded('gd')) throw new Exception('php5-gd extension was not detected.');
             $info[] = "php5-gd is loaded";
             
+            // Check php-apc
+            $info[] = "Detecting php-apc with extension_loaded()";
+            if (!extension_loaded('apc')) throw new Exception('php-apc extension was not detected.');
+            $info[] = "php-apc is loaded";
+            
             // Check if private data folder is writeable
             $private_data_path = $this->config->item('private_data_path');
             $info[] = "Checking private data folder: $private_data_path ...";
