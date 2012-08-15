@@ -16,7 +16,7 @@ This software does not replace desktop GIS software. All thorough treatment and 
 **MapIgniter** requires 3 great tools in Open Source GIS software: [[http://postgis.refractions.net|Postgis]], [[http://mapserver.org|MapServer]] and [[http://openlayers.org|OpenLayers]]. [[http://codeigniter.com|CodeIgniter]] is the PHP Framework that interacts between these tools.
 
 === Screenshot ===
-{{ :mapigniter_ss.png?direct&400 |}}
+{{ :mapigniter_ss_15082012.png?direct&400 |}}
 
 === Demo Video ===
 {{ http://www.youtube.com/v/FF_yHfV4ukI?.swf?420×315 }}

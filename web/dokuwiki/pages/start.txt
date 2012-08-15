@@ -15,7 +15,7 @@ Este software não pretende concorrer com software SIG para desktop, nem com sof
 **MapIgniter** funciona com base em 3 grandes ferramentas de Software Aberto usadas em desenvolvimento de informação geográfica: [[http://postgis.refractions.net|Postgis]], [[http://mapserver.org|MapServer]] e [[http://openlayers.org|OpenLayers]]. [[http://codeigniter.com|CodeIgniter]] é a plataforma PHP que suporta toda a interação entre estas ferramentas.
 
 === Screenshot ===
-{{ :mapigniter_ss.png?direct&400 |}}
+{{ :mapigniter_ss_15082012.png?direct&400 |}}
 
 === Demo Video ===
 {{ http://www.youtube.com/v/FF_yHfV4ukI?.swf?420×315 }}
