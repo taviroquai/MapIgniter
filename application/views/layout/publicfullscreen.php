@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="<?=base_url()?>web/css/miwindow.css">
         
         <!-- Third party CSS -->
-        <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/jqueryui/css/smoothness/jquery-ui-1.8.22.custom.css">
+        <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/jqueryui/css/smoothness/jquery-ui-1.8.23.custom.css">
         
         <!-- Modules CSS -->
         <? foreach ($_slot['_links'] as $_href) { ?>
@@ -28,7 +28,7 @@
         <![endif]-->
         <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.7.2.min.js"></script>
         <script src="<?=base_url()?>web/js/jquery.form.js"></script>
-        <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-ui-1.8.22.custom.min.js"></script>
+        <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-ui-1.8.23.custom.min.js"></script>
         <script src="<?=base_url()?>web/fullscreen/fullscreen.js"></script>
         
         <script type="text/javascript">
