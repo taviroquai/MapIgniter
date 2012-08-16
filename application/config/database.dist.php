@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'postgres';
+$db['default']['username'] = 'mapigniter';
 $db['default']['password'] = 'postgres';
 $db['default']['database'] = 'mapigniter';
 $db['default']['dbdriver'] = 'postgre';
@@ -66,7 +66,7 @@ $db['default']['stricton'] = FALSE;
 
 
 $db['userdata']['hostname'] = 'localhost';
-$db['userdata']['username'] = 'postgres';
+$db['userdata']['username'] = 'mapigniter';
 $db['userdata']['password'] = 'postgres';
 $db['userdata']['database'] = 'mapigniterdata';
 $db['userdata']['dbdriver'] = 'postgre';

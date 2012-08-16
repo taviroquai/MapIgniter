@@ -73,7 +73,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = '/home/miadmin/mapigniter/system';
+	$system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -89,7 +89,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = '/home/miadmin/mapigniter/application';
+	$application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------

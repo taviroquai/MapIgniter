@@ -17,7 +17,7 @@
 /**
  * Creating WebSig Namespace
  */
-var WebSig = {VERSION: 10070};
+var WebSig = {VERSION: 10000};
 
 /**
  * Define Constants
