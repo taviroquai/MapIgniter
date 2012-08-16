@@ -26,9 +26,9 @@
 			"type": "package",
 			"package": {
 				"name": "jqueryui",
-				"version": "1.8.22",
+				"version": "1.8.23",
 				"dist": {
-					"url": "http://jqueryui.com/download/jquery-ui-1.8.22.custom.zip",
+					"url": "http://jqueryui.com/download/jquery-ui-1.8.23.custom.zip",
 					"type": "zip"
 				}
 			}
