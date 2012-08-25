@@ -37,14 +37,17 @@ class Managemap extends Adminmap {
      */
     public function index()
     {
-        // Filter by account group
-        $account = $this->account_model->load($this->session->userdata('username'));
-        
-        // Load main content
-        $items = $this->map_model->loadAllByAccount($account);
+        // Load Postgis model
+        $this->load->model('database/postgis_model');
+
+        // Load main content Filter by account group
+        $items = $this->map_model->loadAllByAccount($this->account);
         $data = array(
             'items' => $items,
             'map' => $this->map_model->create(),
+            'tables' => $this->postgis_model->loadAllTables(),
+            'srid_list' => $this->postgis_model->loadAllSRID(),
+            'geom_types' => $this->postgis_model->loadAllGeomTypes(),
             'ctrlpath' => $this->ctrlpath,
             'action' => '/save/new');
         

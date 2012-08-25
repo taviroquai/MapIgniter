@@ -40,7 +40,7 @@ class Adminmap extends MY_Controller {
      * Display a list of maps
      */
     public function index()
-    {
+    {   
         // Load main content
         $items = $this->map_model->loadAll();
         $data = array(
@@ -84,7 +84,7 @@ class Adminmap extends MY_Controller {
     {   
         $errors = array();
         $info = array();
-        
+
         try {
             // load post data
             $post = $this->input->post(NULL, TRUE);
@@ -92,8 +92,7 @@ class Adminmap extends MY_Controller {
             // Create new map
             if ($id === 'new') {
                 $map = $this->map_model->create();
-                $account = $this->account_model->load($this->session->userdata('username'));
-                $map->owner = $account;
+                $map->owner = $this->account;
                 
                 // Especific new item validation
                 $exists = $this->map_model->loadByAlias($post['alias']);
@@ -116,6 +115,11 @@ class Adminmap extends MY_Controller {
             $this->map_model->save($map);
             $id = $map->id;
             $info[] = 'The map was saved';
+            
+            // Create automatically all objects if 'auto' is checked
+            if (!empty($post['auto'])) {
+                $pglayer = $this->map_model->createAuto($map, $post, $errors, $info);
+            }
         }
         catch(Exception $e) {
             $errors[] = $e->getMessage();
@@ -130,6 +134,7 @@ class Adminmap extends MY_Controller {
             'msmapctrlpath' => $this->msmapctrlpath,
             'olmapctrlpath' => $this->olmapctrlpath,
             'action' => '/save/'.$bean->id);
+        if (!empty($pglayer)) $data['pglayer'] = $pglayer;
         $content = $this->load->view('admin/map/admineditmap', $data, TRUE);
 
         // Render

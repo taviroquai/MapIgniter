@@ -24,6 +24,11 @@
 <? $this->load->view('admin/map/adminmapform'); ?>
 <? endif; ?>
 
+<? if (!empty($pglayer)) : ?>
+<h3>Postgis Layer</h3>
+<a href="<?=base_url()?>user/managefullscreenpgplace/listitems/<?=$pglayer->id?>">Start Editing Places now!</a>
+<? endif; ?>
+
 <h3>MapServer</h3>
 <?
 $msmaps = $map->ownMsmapfile;

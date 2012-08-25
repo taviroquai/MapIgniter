@@ -19,7 +19,7 @@
 <h2>My Maps</h2>
 <a class="novo" href="#">Create a new map</a>
 <div class="accordion">
-    <? $this->load->view('admin/map/adminmapform'); ?>
+    <? $this->load->view('user/map/ownermapform'); ?>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
