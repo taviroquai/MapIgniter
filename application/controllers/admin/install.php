@@ -117,7 +117,7 @@ class Install extends CI_Controller {
         }
         $data = array(
             'msgs' => array('errors' => $errors, 'info' => $info),
-            'installdb' => empty($installdb)
+            'installdb' => !empty($installdb)
         );
         $content = $this->load->view($view, $data, TRUE);
         $this->load->view('layout/default', array('content' => $content));
