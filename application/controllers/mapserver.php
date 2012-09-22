@@ -62,12 +62,9 @@ class Mapserver extends CI_Controller {
         $this->load->driver('cache');
         $cached = $this->cache->apc->get(sha1($url));
 
-        // Getting headers sent by the client.
-        $headers = apache_request_headers();
-
         // Checking if the client is validating his cache and if it is current.
         if (!empty($cached)) {
-            if (isset($headers['If-Modified-Since']) && (strtotime($headers['If-Modified-Since']) >= time())) {
+            if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= time())) {
                 // Client's cache IS current, so we just respond '304 Not Modified'.
                 header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()+300).' GMT', true, 304);
                 header("MICache: skipped");
