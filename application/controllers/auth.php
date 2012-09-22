@@ -31,6 +31,7 @@ class Auth extends MY_Controller {
         
         // Load account model
         $this->load->model('account/account_model');
+        $this->load->model('account/gaccount_model');
         
         // Load language
         $this->lang->load('auth', $this->session->userdata('lang'));
@@ -59,6 +60,7 @@ class Auth extends MY_Controller {
         }
 
         // output
+        $data['gauth_url'] = $this->gaccount_model->login_url();
         $content = $this->load->view('auth/auth', $data, TRUE);
         $ldata['pagetitle'] = $this->lang->line('title');
         $this->render($content);

@@ -35,6 +35,12 @@
     <input type="password" id="auth_password" name="password" value="<?=$form['password']?>" />
     <button type="submit">Login</button>
 </form>
+<p>
+    <a href="<?=$gauth_url?>">
+        <span>Login with </span>
+        <img style="vertical-align: middle" src="<?=base_url()?>web/images/icons/google_logo.png" alt="Google Logo" title="Login with Google Account" />
+    </a>
+</p>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('form .msgs').animate({opacity:0},200,"linear",function(){
