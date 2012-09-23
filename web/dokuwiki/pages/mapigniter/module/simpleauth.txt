@@ -1,5 +1,5 @@
 
-==== Autenticação Simples ====
+==== Autenticação Simples + Google Oauth2 ====
 
 Permite ao visitante iniciar uma sessão na plataforma.
 

@@ -1,5 +1,5 @@
 
-==== Simple Authentication ====
+==== Simple Authentication + Google Oauth2 ====
 
 Allows the user to authenticate and starts a session if successful.
 

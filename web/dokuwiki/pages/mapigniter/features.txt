@@ -10,7 +10,7 @@ As funcionalidades de MapIgniter são as seguintes, organizadas por grupo do uti
   * Avaliar conteúdos: locais, temas e mapas
   * Reportar problemas (issues)
   * Acompanhar desenvolvimento de problemas reportados
-  * Imprimir mapas <del>(TODO)</del>
+  * Pesquisa simples
 
 
 === Utilizador autenticado (Grupo geo) ===
@@ -19,9 +19,12 @@ As funcionalidades de MapIgniter são as seguintes, organizadas por grupo do uti
   * Criar temas: categorizar informação geográfica (MapServer GUI)
   * Criar mapas: organizar temas em mapas (MapServer GUI / OpenLayers GUI)
   * Acompanhar problemas reportados e resolver tarefas
-  * <del>Usar o Assistente para facilitar a criação de objectos (TODO)</del>
+  * Imprimir mapas
+  * Criar mapa c/ opção "auto" - Cria automaticamente todos os objectos necessários ao mapa
+  * Autenticação básica
+  * Autenticação Google OAuth2
   * <del>Autenticação LDAP (TODO)</del>
-  * <del>Autenticação OAuth (TODO)</del>
+  
 
 
 === Administrador (Grupo admin) ===
@@ -33,7 +36,7 @@ As funcionalidades de MapIgniter são as seguintes, organizadas por grupo do uti
   * Gerir permissões
   * Gerir tickets; acompanhar problemas reportados e reencaminhar tickets
   * Publicar layouts, modulos e mapas
-  * <del>Visualizar informação estatísticas sobre toda a actividade dos visitantes e utilizadores (TODO)</del>
+  * Quadro geral (simples) sobre informação estatísticas sobre atividade dos visitantes e utilizadores
   * <del>Sincronizar dados com outras instalações MapIgniter (TODO)</del>
 
 
@@ -41,4 +44,3 @@ As funcionalidades de MapIgniter são as seguintes, organizadas por grupo do uti
 
   * Acesso às funcionalidades conforme as permissões definidas pelo grupo Administrador
 
-** Nota: o rigor da informação é da responsabilidade de todos os intervenientes que fazem revisão à informação e não se exclui a analise e tratamento com recurso a software desktop mais adequado; por exemplo [[http://www.qgis.org/|QuantumGIS]].**
