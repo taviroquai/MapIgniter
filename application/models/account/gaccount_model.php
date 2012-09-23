@@ -74,7 +74,8 @@ class Gaccount_model extends Account_model {
         }
         
         $googleaccount->name = str_replace(' ', '', $googleaccount->name);
-        $account = $this->load($googleaccount->name);
+        $account = $this->database_model->findOne('account', ' email = ? ', 
+                array($googleaccount->email));
         if (empty($account)) {
             $email = $googleaccount->email;
             $username = $googleaccount->name;
