@@ -89,7 +89,7 @@
     <link rel="stylesheet" href="<?=$_href?>" />
     <? } ?>
     
-    <script type="text/javascript" src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/jquery.form.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/skeleton/tabs.js"></script>

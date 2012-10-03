@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="<?=$_href?>" />
     <? } ?>
     
-    <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.7.2.min.js"></script>
+    <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.0.min.js"></script>
     <script src="<?=base_url()?>web/js/skeleton/tabs.js"></script>
     <script type="text/javascript">
         $.noConflict();

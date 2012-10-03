@@ -4,7 +4,7 @@
 			"type": "package",
 			"package": {
 				"name": "rb",
-				"version": "3.2.3",
+				"version": "3.3",
 				"dist": {
 					"url": "http://www.redbeanphp.com/downloadredbean.php",
 					"type": "tar"
@@ -24,7 +24,7 @@
 		}
 	],
 	"require": {
-		"rb": "3.2.3",
+		"rb": "3.3",
 		"jpgraph": "3.5"
 	}
 }
