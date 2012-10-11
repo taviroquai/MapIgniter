@@ -693,7 +693,7 @@ class Database_model extends CI_Model {
         $olbinglayer->owner = $account_admin;
         $this->openlayers_model->save($olbinglayer);
         // Create WMS Mapserver Layer defined above
-        $opts = "{\n\"isBaseLayer\": false\n}";
+        $opts = "{\n\"isBaseLayer\": false,\n\"gutter\": 15\n}";
         $vendoropts = "{\n\"layers\":\"".$layer->alias."\",\n\"transparent\": true,\n\"projection\":\"EPSG:20790\"\n}";
         $url = $map->alias;
         $olwmslayer = $this->openlayers_model->createLayer($layer, $ollayertype[3], $url, $opts, $vendoropts);
