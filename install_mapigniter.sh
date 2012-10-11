@@ -25,6 +25,7 @@ PG_USER="mapigniter"
 MAPIGNITER_VERSION="master"
 PG_VERSION="9.1"
 POSTGIS_VERSION="1.5"
+CI_VERSION="2.1.3"
 APACHE_CONFIG="/etc/apache2/sites-available"
 
 echo "==============================================================="
@@ -109,9 +110,9 @@ rm mapigniter.zip
 echo "Downloading CodeIgniter..."
 wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
 unzip codeigniter.zip
-cp -R CodeIgniter_2.1.2/system "$INSTALL_FOLDER/mapigniter"
+cp -R "CodeIgniter_$CI_VERSION/system" "$INSTALL_FOLDER/mapigniter"
 rm codeigniter.zip
-rm -rf CodeIgniter_2.1.2
+rm -rf "CodeIgniter_$CI_VERSION"
 
 echo "Installing MapIgniter..."
 mv "$INSTALL_FOLDER/mapigniter/index.dist.php" "$INSTALL_FOLDER/mapigniter/index.php"

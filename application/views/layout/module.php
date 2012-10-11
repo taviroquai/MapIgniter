@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="<?=$_href?>" />
     <? } ?>
     
-    <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.0.min.js"></script>
+    <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.2.js"></script>
     <script src="<?=base_url()?>web/js/skeleton/tabs.js"></script>
     <script src="<?=base_url()?>web/js/jquery.form.js"></script>
     <script type="text/javascript">

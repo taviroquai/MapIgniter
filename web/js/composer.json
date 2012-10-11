@@ -26,9 +26,9 @@
 			"type": "package",
 			"package": {
 				"name": "jqueryui",
-				"version": "1.8.24",
+				"version": "1.9.0",
 				"dist": {
-					"url": "http://jqueryui.com/download/jquery-ui-1.8.24.custom.zip",
+					"url": "http://jqueryui.com/resources/download/jquery-ui-1.9.0.custom.zip",
 					"type": "zip"
 				}
 			}
@@ -49,7 +49,7 @@
 	"require": {
 		"ckeditor": "3.6.4",
 		"fancybox": "2.0.6",
-                "jqueryui": "1.8.24",
+                "jqueryui": "1.9.0",
                 "ol": "2.12"
 	}
 }
