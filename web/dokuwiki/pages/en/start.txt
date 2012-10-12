@@ -5,7 +5,8 @@
 ==== MapIgniter ====
 
 |<100% -						       														>|
-| 	<fs 150%>[[http://mapigniter.com/mapigniter.zip|Download version 1.0]] and run install.sh</fs>	|
+| 	<fs 150%>[[http://mapigniter.com/mapigniter.zip|Download version 1.0]]</fs>	|
+| 	**Installation** \\ Extract to /var/www/ \\ cd /var/www/mapigniter	\\ sudo ./install.sh \\ Open in browser http://localhost/mapigniter	|
 | 	[[https://github.com/taviroquai/MapIgniter|MapIgniter on GitHub]]	|
 
 **[[start|MapIgniter]]** is a web mapping application that allows publishing and visualization of geographic information in an internet browser.
