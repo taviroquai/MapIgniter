@@ -4,7 +4,8 @@
 ==== MapIgniter ====
 
 |<100% -						       														>|
-| 	<fs 150%>[[https://github.com/taviroquai/MapIgniter|Descarregar e instalar]] a partir do GitHub</fs>	|
+| 	<fs 150%>[[http://mapigniter.com/mapigniter.zip|Download versão 1.0]] e execute install.sh</fs>	|
+| 	[[https://github.com/taviroquai/MapIgniter|MapIgniter no GitHub]]	|
 
 **[[start|MapIgniter]]** é um software na categoria web mapping que permite a publicação e visualização de informação geográfica num browser de internet.
 

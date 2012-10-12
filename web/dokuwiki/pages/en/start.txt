@@ -5,7 +5,8 @@
 ==== MapIgniter ====
 
 |<100% -						       														>|
-| 	<fs 150%>[[https://github.com/taviroquai/MapIgniter|Download and Install]] from GitHub</fs>		|
+| 	<fs 150%>[[http://mapigniter.com/mapigniter.zip|Download version 1.0]] and run install.sh</fs>	|
+| 	[[https://github.com/taviroquai/MapIgniter|MapIgniter on GitHub]]	|
 
 **[[start|MapIgniter]]** is a web mapping application that allows publishing and visualization of geographic information in an internet browser.
 
