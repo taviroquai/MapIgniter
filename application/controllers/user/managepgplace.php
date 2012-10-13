@@ -141,7 +141,7 @@ class Managepgplace extends Adminpgplace {
     {   
         $errors = array();
         $info = array();
-        $post = $this->input->post(NULL, TRUE);
+        $post = $this->input->post(NULL);
         
         $sysfields = $this->postgis_model->getExcludeFields();
         
