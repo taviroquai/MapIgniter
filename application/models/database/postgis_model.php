@@ -449,7 +449,7 @@ class Postgis_model extends CI_Model {
         //$sql = "UPDATE public.{$table->name} SET $attr_str WHERE gid = ?";
         $sql = "
             UPDATE public.{$table->name} 
-            SET the_geom = ST_GeomFromText('$geom', $proj) 
+            SET the_geom = ST_Transform(ST_GeomFromText('$geom', $proj), {$table->srid}) 
             WHERE gid = ?";
         $this->database_model->exec($sql, $values);
 
@@ -605,6 +605,116 @@ class Postgis_model extends CI_Model {
         return $table;
     }
     
-}
+    public function getTableExtent($tablename) {
+        
+        // Select user database
+        $this->database_model->selectDatabase('userdata');
+        
+        $return = array('extent' => null, 'error' => null);
+        
+        $sql = "SELECT ST_extent(the_geom) from $tablename";
+        $result = R::getRow($sql);
+        if (!empty($result)) {
+            if (empty($result['st_extent'])) $return['error'] = 'Could not get table EXTENT. Is the table empty?';
+            else {
+                $pattern = "/BOX\((.+) (.+),(.+) (.+)\)/i";
+                @preg_match_all($pattern, $result['st_extent'], $matches);
+                if (!empty($matches)) {
+                    $return['extent'] = round($matches[1][0], 3).' '.round($matches[2][0], 3).' '.round($matches[3][0], 3).' '.round($matches[4][0], 3);
+                }
+                else $return['error'] = 'Could not get table EXTENT';
+            }
+        }
+        else $return['error'] = 'Could not get table EXTENT';
+        
+        // Select user database
+        $this->database_model->selectDatabase('default');
+        
+        // Return table extent
+        return $return;
+    }
+    
+    public function importZip($zipfile, $tablename, $srid, $logfile = 'import.log') {
 
+        $result = array(
+            'ok' => false,
+            'msgs' => 
+                array('info' => array(), 'errors' => array()));
+        
+        $za = new ZipArchive();
+        $za->open($zipfile);
+
+        // Check for at least 3 files
+        if ($za->numFiles < 3) throw new Exception('At least 3 files are needed.');
+
+        // Find shapefile
+        $shapefile_name = false;
+        for ($i=0; $i<$za->numFiles;$i++) {
+            $uploaded_file = $za->statIndex($i);
+            if (end(explode('.', $uploaded_file['name'])) == 'shp') {
+                $shapefile_name = $uploaded_file['name'];
+            } 
+        }
+
+        // Extract if shapefile was found
+        if (empty($shapefile_name)) throw new Exception('The shapefile (.shp) was not found.');
+
+        $extract_path = $this->config->item('private_data_path');
+        $extract_path .= $tablename.'/';
+        $za->extractTo($extract_path);
+
+        // Find shapefile
+        /*
+        $this->load->helper('directory');
+        $uploaded_files = directory_map($extract_path);
+        foreach ($uploaded_files as $item) {
+            if (is_array($item)) continue;
+            if (end(explode('.', $item)) == 'shp') {
+                $shapefile_name = $item;
+                break;
+            }
+        }
+        */
+
+        // Import to postgis
+        if (!empty($shapefile_name)) {
+            $dbconfig = $this->database_model->getConfig('userdata');
+            $dbname = $dbconfig['database'];
+            $shapefile_name = $extract_path.$shapefile_name;
+            chdir($extract_path);
+            $cmd = "shp2pgsql -d -I -s $srid $shapefile_name $tablename > $tablename.sql";
+            $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>';
+            $result1 = exec($cmd, $shp2pgsql_output);
+            $cmd = "psql -d $dbname -f $tablename.sql";
+            $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>...';
+            $result2 = exec($cmd, $psql_output);
+            $result['msgs']['info'][] = 'Last line <em>'.end($psql_output).'</em>';
+            $save_path = $this->config->item('public_data_path').$logfile;
+            $logdata = implode("\n", $shp2pgsql_output);
+            $logdata .= implode("\n", $psql_output);
+            file_put_contents($save_path, $logdata);
+            $result['logfile'] = $logfile;
+            if (end($psql_output) == 'COMMIT') $result['ok'] = true;
+        }
+
+        // Clean directory
+        $this->_rrmdir($extract_path);
+
+        // Close ZIP file
+        $za->close();
+
+        // return import result
+        return $result;
+    }
+    
+    private function _rrmdir($dir) {
+        foreach(glob($dir . '/*') as $file) {
+            if(is_dir($file))
+                $this->_rrmdir($file);
+            else
+                unlink($file);
+        }
+        rmdir($dir);
+    }
+}
 ?>

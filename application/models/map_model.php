@@ -145,6 +145,10 @@ class Map_model extends CI_Model {
         else {
             $table = $this->postgis_model->loadTable($post['pgplacetype']);
         }
+        
+        // Get table extent
+        $table_extent = $this->postgis_model->getTableExtent($post['pgplacetype']);
+
         $pglayer->srid = $table->srid;
         $pglayer->pgplacetype = $table->name;
         $this->postgis_model->saveLayer($pglayer);
@@ -159,15 +163,18 @@ class Map_model extends CI_Model {
         $post['connection'] = "host={$dbconfig['hostname']} user={$dbconfig['username']} password={$dbconfig['password']} dbname={$dbconfig['database']}";
         $post['data'] = "the_geom FROM {$post['pgplacetype']} USING UNIQUE gid USING srid={$table->srid}";
         $post['projection'] = "init=epsg:{$table->srid}";
-        switch ($table->srid) {
-            case 4326: $post['extent'] = '-180 -90 180 90'; break;
+        
+        switch ($post['srid']) {
             case 900913:
             case 3857: $post['extent'] = '-20037508.34 -20037508.34 20037508.34 20037508.34'; break;
+            default: $post['extent'] = '-180 -90 180 90';
         }
+        $map_extent = $post['extent'];
+        $post['extent'] = empty($table_extent['error']) ? $table_extent['extent'] : $post['extent'];
         $post['status'] = 'on';
         $post['dump'] = 'true';
         $addmetadata[] = array('metadata' => $this->mapserver_model->loadMetadata(6), 'value' => 'all');
-        $addmetadata[] = array('metadata' => $this->mapserver_model->loadMetadata(8), 'value' => 'EPSG:'.$table->srid);
+        $addmetadata[] = array('metadata' => $this->mapserver_model->loadMetadata(8), 'value' => 'EPSG:'.$post['srid']);
         $addclass[] = array('name' => 'myclass');
         
         // Save MapServer layer
@@ -231,8 +238,8 @@ class Map_model extends CI_Model {
         $this->mapserver_model->addMapfileMetadata($msmap, $msmetadata, '*');
         $msmap->owner = $account;
         $msmap->msunits = $msunits;
-        $msmap->projection = $mslayer->projection;
-        $msmap->extent = $mslayer->extent;
+        $msmap->projection = "init=epsg:{$post['srid']}";;
+        $msmap->extent = $map_extent;
         $this->database_model->save($msmap);
         $info[] = 'The map on mapserver was created';
         
@@ -275,7 +282,7 @@ class Map_model extends CI_Model {
         $ollayertype = $this->openlayers_model->loadLayerType($ollayertype_id);
         
         // Create OpenLayers layer
-        $opts = "{\n\"isBaseLayer\": false\n}";
+        $opts = "{\n\"isBaseLayer\": false,\n\"gutter\": 15\n}";
         $vendoropts = "{\n\"layers\":\"".$layer->alias."\",\n\"transparent\": true,\n\"projection\":\"EPSG:{$pglayer->srid}\"\n}";
         $url = $map->alias;
         $ollayer = $this->openlayers_model->createLayer($layer, $ollayertype, $url, $opts, $vendoropts);
@@ -285,7 +292,7 @@ class Map_model extends CI_Model {
         
         // Create OpenLayers map
         $olmap = $this->openlayers_model->createMap($map);
-        $olmap->projection = 'EPSG:'.$pglayer->srid;
+        $olmap->projection = 'EPSG:'.$post['srid'];
         $olmap->owner = $account;
         $this->database_model->save($olmap);
         $info[] = 'The OpenLayers map was created';

@@ -740,6 +740,7 @@ class Database_model extends CI_Model {
         $menuitems[] = $this->modmenu_model->addItem("Places", 'admin/adminpgplace', 1, $menu1, 9);
         $menuitems[] = $this->modmenu_model->addItem("MapServer Options", 'admin/adminmapserver', 1, $menu1, 10);
         $menuitems[] = $this->modmenu_model->addItem("OpenLayers Options", 'admin/adminopenlayers', 1, $menu1, 11);
+        $menuitems[] = $this->modmenu_model->addItem("Import", 'admin/import', 1, $menu1, 12);
         foreach ($menuitems as &$item) $item->owner = $account_admin;
         R::storeAll($menuitems);
         
@@ -757,6 +758,7 @@ class Database_model extends CI_Model {
         $menu2items[] = $this->modmenu_model->addItem('My Layers', 'user/managelayer', 1, $menu2, 3);
         $menu2items[] = $this->modmenu_model->addItem('My Places', 'user/managepgplace', 1, $menu2, 4);
         $menu2items[] = $this->modmenu_model->addItem('My Tickets', 'user/manageticket', 1, $menu2, 5);
+        $menu2items[] = $this->modmenu_model->addItem("Import", 'user/userimport', 1, $menu2, 6);
         foreach ($menu2items as &$item) $item->owner = $account_admin;
         R::storeAll($menu2items);
         
