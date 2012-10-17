@@ -78,8 +78,8 @@ $total = count($items);
                             case 'ST_Polygon':
                                 echo '<img src="'.base_url().'/web/images/icons/polygon.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
                                 break;
-                            case 'ST_MultiLinestring':
-                            case 'ST_Linestring':
+                            case 'ST_MultiLineString':
+                            case 'ST_LineString':
                                 echo '<img src="'.base_url().'/web/images/icons/linestring.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
                                 break;
                             case 'ST_Point':
