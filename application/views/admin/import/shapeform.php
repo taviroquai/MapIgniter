@@ -39,12 +39,8 @@
     <? } ?>    
     </select>
     
-    <? if (!empty($upload_error)) : ?>
-        <p class="error"><?=$upload_error?></p>
-    <? endif; ?>
-    <? if (!empty($upload_data)) : ?>
-        <p class="error"><?=$upload_data['file_name']?></p>
-    <? endif; ?>
+    <label>shp2pgsql options (optional)</label>
+    <input type="text" name="options" value="-d -I -S" />
 
     <label>Choose shapefile (zip)</label>
     <span><small>Note: a .zip file including the files .dbf, .prj, .shp and .shx</small></span><br />

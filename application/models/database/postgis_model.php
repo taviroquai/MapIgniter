@@ -634,7 +634,7 @@ class Postgis_model extends CI_Model {
         return $return;
     }
     
-    public function importZip($zipfile, $tablename, $srid, $logfile = 'import.log') {
+    public function importZip($zipfile, $tablename, $srid, $options, $logfile = 'import.log') {
 
         $result = array(
             'ok' => false,
@@ -663,26 +663,13 @@ class Postgis_model extends CI_Model {
         $extract_path .= $tablename.'/';
         $za->extractTo($extract_path);
 
-        // Find shapefile
-        /*
-        $this->load->helper('directory');
-        $uploaded_files = directory_map($extract_path);
-        foreach ($uploaded_files as $item) {
-            if (is_array($item)) continue;
-            if (end(explode('.', $item)) == 'shp') {
-                $shapefile_name = $item;
-                break;
-            }
-        }
-        */
-
         // Import to postgis
         if (!empty($shapefile_name)) {
             $dbconfig = $this->database_model->getConfig('userdata');
             $dbname = $dbconfig['database'];
             $shapefile_name = $extract_path.$shapefile_name;
             chdir($extract_path);
-            $cmd = "shp2pgsql -d -I -s $srid $shapefile_name $tablename > $tablename.sql";
+            $cmd = "shp2pgsql $options -s $srid $shapefile_name $tablename > $tablename.sql";
             $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>';
             $result1 = exec($cmd, $shp2pgsql_output);
             $cmd = "psql -d $dbname -f $tablename.sql";
