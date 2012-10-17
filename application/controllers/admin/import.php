@@ -70,7 +70,7 @@ class Import extends MY_Controller {
                 try {
                     
                     // Set tablename: new or existing will overwrite
-                    $tablename = $post['new_pgplacetype'] == 'new_pgplacetype' ? 
+                    $tablename = $post['pgplacetype'] == 'new_pgplacetype' ? 
                         $post['new_pgplacetype'] : $post['pgplacetype'];
 
                     // Get postgis import results
@@ -78,7 +78,8 @@ class Import extends MY_Controller {
                         $this->postgis_model->importZip(
                             $zipfile, 
                             $tablename, 
-                            $post['srid']);
+                            $post['srid'],
+                            $post['options']);
                     
                     // Show import results
                     $content = $this->load->view('admin/import/result', $import_results, TRUE);
