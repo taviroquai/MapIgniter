@@ -154,6 +154,10 @@ class Database_model extends CI_Model {
         return R::batch($type, $ids);
     }
     
+    public function exportAll($beans, $parents) {
+        return R::exportAll($beans, $parents);
+    }
+    
     public function exec($sql, $values = array()) {
         return R::exec($sql, $values);
     }
