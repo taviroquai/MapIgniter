@@ -69,9 +69,11 @@ class Postgis_model extends CI_Model {
             $pglayer = $this->loadLayer($id);
             $tables[] = $pglayer->pgplacetype;
         }
-        $this->deleteTables($tables);
-        // Delete postgis layer
+        $result['tables'] = $this->deleteTables($tables);
+        // Delete postgis layers
         $this->database_model->delete('pglayer', $ids);
+        
+        return $result;
     }
     
     public function createTable($name = 'newtable', $srid = 4326, $type = 'POINT', 
@@ -167,19 +169,28 @@ class Postgis_model extends CI_Model {
         // Select user database
         $this->database_model->selectDatabase('userdata');
 
+        $results = array();
+        
         foreach ($selected as $tablename) {
-            
-            $sql = "SELECT DropGeometryColumn ('public', '$tablename', 'the_geom')";
-            $result = $this->database_model->exec($sql);
-            if ($result) {
-                $sql = "DROP TABLE public.".$tablename;
+            $results[$tablename] = '';
+            try {
+                $sql = "SELECT DropGeometryColumn ('public', '$tablename', 'the_geom')";
                 $result = $this->database_model->exec($sql);
+                if ($result) {
+                    $sql = "DROP TABLE public.".$tablename;
+                    $result = $this->database_model->exec($sql);
+                    $results[$tablename] = 'OK';
+                }
             }
-
+            catch (Exception $e) {
+                $results[$tablename] = $e->getMessage();
+            }
         }
 
         // Select application database
         $this->database_model->selectDatabase();
+        
+        return $results;
     }
     
     public function loadAllTables() {
