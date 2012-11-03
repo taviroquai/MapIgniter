@@ -17,6 +17,9 @@
 // ------------------------------------------------------------------------
 
 $total = count($items);
+
+// Extract SRID for geometry transformations
+$srid = str_replace('EPSG:', '', $olmap->projection);
 ?>
 <h2>Edit - <?=$table->name?></h2>
 <p><a href="<?=base_url().$pgplacectrl?>/listitems/<?=$pglayer->id?>">
@@ -53,7 +56,7 @@ $total = count($items);
             </tr>
             <? foreach ($items as $item) { ?>
             <tr>
-                <td><a href="javascript: editfeaturecontrol.loadFeature('<?=$item['gid']?>');">
+                <td><a href="javascript: editfeaturecontrol.loadFeature('<?=$item['gid']?>','<?=$srid?>');">
                         <img src="<?=base_url()?>/web/images/icons/png/24x24/pencil.png" alt="Modificar" title="Modificar" />
                     </a></td>
                 <? foreach ($item as $k => $v) {

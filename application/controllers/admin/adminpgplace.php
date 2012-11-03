@@ -314,7 +314,7 @@ class Adminpgplace extends MY_Controller {
      * @param string $tablename
      * @param string $id 
      */
-    public function ajaxloadplace($pglayer_id, $id)
+    public function ajaxloadplace($pglayer_id, $id, $srs = null)
     {   
         try {
             // Load postgis layer
@@ -325,7 +325,12 @@ class Adminpgplace extends MY_Controller {
             $table = $this->postgis_model->loadTable($tablename);
             if (!$table) throw new Exception('Postgis table not found!');
             
-            $record = $this->postgis_model->loadRecords($table, ' gid = ? ', array($id), 1);
+            // Prepare geometry transformations
+            if (!empty($srs)) $srid = str_replace('EPSG:', '', $srs);
+            else $srid = $table->srid;
+            
+            // Load records
+            $record = $this->postgis_model->loadRecords($table, ' gid = ? ', array($id), 1, $srid);
             if (empty($record)) throw new Exception('Place not found!');
             $record = reset($record);
             unset($record['the_geom']);

@@ -264,15 +264,18 @@ class Postgis_model extends CI_Model {
         return $table;
     }
     
-    public function loadRecords($table, $where = ' true ', $values = array(), $limit = 20) {
+    public function loadRecords($table, $where = ' true ', $values = array(), $limit = 20, $geom_srid = null) {
         // Select user database
         $this->database_model->selectDatabase('userdata');
+        
+        // Considere geometry transformations
+        if (empty($geom_srid)) $geom_srid = $table->srid;
         
         // Load Records
         $sql = "
             SELECT *, 
                 ST_GeometryType(the_geom) as geomtype,
-                ST_AsText(the_geom) as wkt
+                ST_AsText(ST_Transform(the_geom, $geom_srid)) as wkt
             FROM public.{$table->name} 
             WHERE $where 
             LIMIT $limit OFFSET 0";

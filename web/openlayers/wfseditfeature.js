@@ -110,7 +110,7 @@ wfseditfeature.prototype.toggleCreate = function () {
     }
 }
 
-wfseditfeature.prototype.loadFeature = function(id) {
+wfseditfeature.prototype.loadFeature = function(id, srid) {
 
     // set private variables
     var postgeomformat = new OpenLayers.Format.WKT();
@@ -118,7 +118,7 @@ wfseditfeature.prototype.loadFeature = function(id) {
     
     me.resetMap();
     
-    jQuery.getJSON(base_url+ctrlpath+'/ajaxloadplace/'+this.pglayerid+'/'+id,
+    jQuery.getJSON(base_url+ctrlpath+'/ajaxloadplace/'+this.pglayerid+'/'+id+'/'+srid,
         null, function(response) {
             var feature = postgeomformat.read(response.record.wkt);
             feature.attributes = response.record;
