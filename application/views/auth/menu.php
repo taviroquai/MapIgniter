@@ -20,6 +20,7 @@
 <?php if (!empty($account)) : ?>
 <p>
     <span><?=sprintf($this->lang->line('auth.account.info'), $account['username'])?></span>
+    <a href="<?=base_url()?>user/user"><?=$this->lang->line('auth.menu.userlink')?></a>
     <a href="<?=base_url()?>auth/logout"><?=$this->lang->line('auth.menu.logout')?></a>
 </p>
 
