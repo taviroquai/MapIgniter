@@ -23,6 +23,7 @@ class Adminpermissions extends MY_Controller {
     public function __construct() {
         parent::__construct();
         
+        $this->layout = 'admin';
         $this->load->model('account/uriresource_model');
         $this->load->model('account/group_model');
     }
