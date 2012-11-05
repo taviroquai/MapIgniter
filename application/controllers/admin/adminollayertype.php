@@ -23,6 +23,7 @@ class Adminollayertype extends MY_Controller {
     public function __construct() {
         parent::__construct();
         
+        $this->layout = 'admin';
         $this->load->model('openlayers/openlayers_model');
     }
     
