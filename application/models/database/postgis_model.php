@@ -96,10 +96,14 @@ class Postgis_model extends CI_Model {
     {
         $record = array();
         $record['gid'] = null;
-        $record['last_update'] = date('Y-m-d');
-        $record['owner'] = '';
         foreach ($table->attributes as $field => $type) {
             $record[$field] = null;
+        }
+        if (in_array('last_update', array_keys($table->attributes))) {
+            $record['last_update'] = date('Y-m-d');
+        }
+        if (in_array('owner', array_keys($table->attributes))) {
+            $record['owner'] = '';
         }
         return $record;
     }
@@ -254,7 +258,6 @@ class Postgis_model extends CI_Model {
         $result_fields = $this->database_model->getAll($sql);
         $table->attributes = array();
         foreach ($result_fields as $item) {
-            if (in_array($item['column_name'], $this->exclude_field)) continue;
             $table->attributes[$item['column_name']] = $item['data_type'];
         }
 
@@ -332,6 +335,7 @@ class Postgis_model extends CI_Model {
         // prepare fields
         $where = array();
         foreach ($table->attributes as $k => $v) {
+            if (in_array($k, $this->exclude_field)) continue;
             if (strstr($v, 'character') || strstr($v, 'text')) {
                 foreach ($terms as $term) {
                     $fields[] = $k;
