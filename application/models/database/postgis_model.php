@@ -240,7 +240,7 @@ class Postgis_model extends CI_Model {
         $result_srid = $this->database_model->getRow($sql);
         $table->srid = $result_srid['find_srid'];
         $sql = "
-            SELECT oid, type as geomtype 
+            SELECT type as geomtype 
             FROM geometry_columns 
             WHERE 
                 f_table_schema = 'public' 
@@ -248,7 +248,6 @@ class Postgis_model extends CI_Model {
             LIMIT 1";
         $result_type = $this->database_model->getRow($sql);
         $table->type = $result_type['geomtype'];
-        $table->oid = $result_type['oid'];
         
         // Get table Columns
         $sql = "
