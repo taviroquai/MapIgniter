@@ -24,7 +24,6 @@ INSTALL_FOLDER="/var/www"
 PG_USER="mapigniter"
 MAPIGNITER_VERSION="master"
 PG_VERSION="9.1"
-POSTGIS_VERSION="1.5"
 CI_VERSION="2.1.3"
 APACHE_CONFIG="/etc/apache2/sites-available"
 
@@ -79,19 +78,11 @@ rm -f installer
 
 echo "Creating mapigniter postgres user with password 'postgres'..."
 sudo -u postgres createuser --superuser $PG_USER
-rm /tmp/build_mapigniter.sql
-echo "alter role \"$PG_USER\" with password 'postgres'" > /tmp/build_mapigniter.sql
-sudo -u postgres psql -f /tmp/build_mapigniter.sql
+echo "alter role \"$PG_USER\" with password 'postgres'" | sudo -u postgres psql
 
 echo "Installing MapIgniter databases..."
-sudo -u postgres createdb -U postgres -E UTF8 mapigniter
-sudo -u postgres createlang -d mapigniter plpgsql
-sudo -u postgres psql --quiet -U postgres -d mapigniter -f "/usr/share/postgresql/$PG_VERSION/contrib/postgis-$POSTGIS_VERSION/postgis.sql"
-sudo -u postgres psql --quiet -U postgres -d mapigniter -f "/usr/share/postgresql/$PG_VERSION/contrib/postgis-$POSTGIS_VERSION/spatial_ref_sys.sql"
-sudo -u postgres createdb -U postgres -E UTF8 mapigniterdata
-sudo -u postgres createlang -d mapigniterdata plpgsql
-sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "/usr/share/postgresql/$PG_VERSION/contrib/postgis-$POSTGIS_VERSION/postgis.sql"
-sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "/usr/share/postgresql/$PG_VERSION/contrib/postgis-$POSTGIS_VERSION/spatial_ref_sys.sql"
+sudo su postgres -c 'createdb -T template_postgis mapigniter'
+sudo su postgres -c 'createdb -T template_postgis mapigniterdata'
 
 echo "Activating Apache2 mod_rewrite..."
 a2enmod rewrite
