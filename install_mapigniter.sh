@@ -81,8 +81,23 @@ sudo -u postgres createuser --superuser $PG_USER
 echo "alter role \"$PG_USER\" with password 'postgres'" | sudo -u postgres psql
 
 echo "Installing MapIgniter databases..."
-sudo su postgres -c 'createdb -T template_postgis mapigniter'
-sudo su postgres -c 'createdb -T template_postgis mapigniterdata'
+sudo -u postgres createdb -U postgres -E UTF8 mapigniter
+sudo -u postgres createlang -d mapigniter plpgsql
+sudo -u postgres createdb -U postgres -E UTF8 mapigniterdata
+sudo -u postgres createlang -d mapigniterdata plpgsql
+
+echo "Adding PostGIS extension..."
+# check for POSTGIS 2.0
+DIRECTORY="/usr/share/postgresql/$PG_VERSION/contrib/postgis-2.0"
+if [ ! -d "$DIRECTORY" ]; then
+    DIRECTORY="/usr/share/postgresql/$PG_VERSION/contrib/postgis-1.5"
+fi
+
+echo "PostGIS found at $DIRECTORY"
+sudo -u postgres psql --quiet -U postgres -d mapigniter -f "$DIRECTORY/postgis.sql"
+sudo -u postgres psql --quiet -U postgres -d mapigniter -f "$DIRECTORY/spatial_ref_sys.sql"
+sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "$DIRECTORY/postgis.sql"
+sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "$DIRECTORY/spatial_ref_sys.sql"
 
 echo "Activating Apache2 mod_rewrite..."
 a2enmod rewrite
