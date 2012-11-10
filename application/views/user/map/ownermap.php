@@ -50,7 +50,7 @@
                 <? else : reset ($items); ?>
                 <ul id="maplist">
                 <? foreach ($items as $item) { 
-                    $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?mode=map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS='.$item->layer->alias;
+                    $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?mode=map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS='.$item->layer->alias.'&no-cache='.rand(1,9999);
                     ?>
                     <li><a href="<?=$img_link?>">
                             <img src="<?=$img_link?>" style="width:200px" alt="<?=$item->layer->title?>" title="<?=$item->layer->title?>"/>

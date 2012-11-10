@@ -115,7 +115,7 @@ Click <a href="<?=base_url().$mslegendctrlpath?>/edit/new/<?=$msmapfile->id?>">h
       <? else :
       reset ($items);
       foreach ($items as $item) { 
-          $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&LAYER='.$item->layer->alias.'&FORMAT=image/png';
+          $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&LAYER='.$item->layer->alias.'&FORMAT=image/png&no-cache='.rand(1, 9999);
       ?>
       <p>
           Layer legend <?=$item->layer->title?><br />
@@ -137,7 +137,7 @@ Click <a href="<?=base_url().$mslegendctrlpath?>/edit/new/<?=$msmapfile->id?>">h
       <? else :
       reset ($items);
       foreach ($items as $item) { 
-          $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?mode=map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS='.$item->layer->alias;
+          $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?mode=map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS='.$item->layer->alias.'&no-cache='.rand(1, 9999);
       ?>
       <p>
           Layer <?=$item->layer->title?><br />
