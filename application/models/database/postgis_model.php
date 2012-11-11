@@ -637,6 +637,14 @@ class Postgis_model extends CI_Model {
                 $pattern = "/BOX\((.+) (.+),(.+) (.+)\)/i";
                 @preg_match_all($pattern, $result['st_extent'], $matches);
                 if (!empty($matches)) {
+                    
+                    // Correct extent for MapServer when minx == maxx
+                    if ($matches[1][0] == $matches[3][0]) {
+                        $matches[1][0] = round($matches[1][0], 3) - 0.01;
+                        $matches[2][0] = round($matches[2][0], 3) - 0.01;
+                        $matches[3][0] = round($matches[3][0], 3) + 0.01;
+                        $matches[4][0] = round($matches[4][0], 3) + 0.01;
+                    }
                     $return['extent'] = round($matches[1][0], 3).' '.round($matches[2][0], 3).' '.round($matches[3][0], 3).' '.round($matches[4][0], 3);
                 }
                 else $return['error'] = 'Could not get table EXTENT';
