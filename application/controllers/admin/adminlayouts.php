@@ -60,8 +60,14 @@ class Adminlayouts extends MY_Controller {
             // Create a slot
             $slot = $this->layout_model->createSlot();
             
+            // Load all blocks
+            $modules = $this->layout_model->loadModuleAll();
+            
             // Load main content
-            $data = array('layout' => $layout, 'slot' => $slot);
+            $data = array(
+                'layout'    => $layout, 
+                'slot'      => $slot,
+                'modules'   => $modules);
             $content = $this->load->view('admin/layouts/admineditlayout', $data, TRUE);
         }
         catch (Exception $e) {
@@ -75,20 +81,21 @@ class Adminlayouts extends MY_Controller {
     /**
      * Action editslot
      * Opens a form for layout slot edition
-     * @param string $id 
+     * @param integer $layout_id
+     * @param integer $id 
      */
-    public function editslot($id)
+    public function editslot($layout_id, $id)
     {   
         try {
+            // Load layout
+            $layout = $this->layout_model->loadById($layout_id);
+            
             // Load layout slot
             $slot = $this->layout_model->loadSlot($id);
             if (!$slot) throw new Exception('Layout slot not found!');
             
-            // Load all blocks
-            $modules = $this->layout_model->loadModuleAll();
-            
             // Load main content
-            $data = array('slot' => $slot, 'modules' => $modules);
+            $data = array('layout' => $layout, 'slot' => $slot);
             $content = $this->load->view('admin/layouts/admineditslot', $data, TRUE);
         }
         catch (Exception $e) {
@@ -103,11 +110,15 @@ class Adminlayouts extends MY_Controller {
     /**
      * Action editblock
      * Opens a form for block edition
-     * @param string $id 
+     * @param integer $layout_id
+     * @param integer $id 
      */
-    public function editblock($id)
+    public function editblock($layout_id, $id)
     {   
         try {
+            // Load layout
+            $layout = $this->layout_model->loadById($layout_id);
+            
             // Load layout slot
             $block = $this->layout_model->loadBlock($id);
             if (!$block) throw new Exception('Layout slot not found!');
@@ -120,7 +131,10 @@ class Adminlayouts extends MY_Controller {
             }
             
             // Load main content
-            $data = array('block' => $block, 'module_items' => $module_items);
+            $data = array(
+                'layout'    => $layout,
+                'block'     => $block, 
+                'module_items' => $module_items);
             $content = $this->load->view('admin/layouts/admineditblock', $data, TRUE);
         }
         catch (Exception $e) {
@@ -173,11 +187,15 @@ class Adminlayouts extends MY_Controller {
     /**
      * Action saveslot
      * Saves the new data of the layout slot
+     * @param integer $layout_id
      * @param string $id 
      */
-    public function saveslot($id)
+    public function saveslot($layout_id, $id)
     {   
         try {
+            // Load layout
+            $layout = $this->layout_model->loadById($layout_id);
+            
             // Load post data
             $name = $this->input->post('name');
 
@@ -193,7 +211,7 @@ class Adminlayouts extends MY_Controller {
             }
             // Load existing menuitem
             else {
-                $slot = $this->layout_model->loadSlotById($id);
+                $slot = $this->layout_model->loadSlot($id);
                 if (!$slot) throw new Exception('Layout slot not found!');
             }
             
@@ -207,12 +225,20 @@ class Adminlayouts extends MY_Controller {
             //
         }
         if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminlayouts/editslot/'.$slot->id);
+            redirect(base_url().'admin/adminlayouts/editslot/'.$layout->id.'/'.$slot->id);
     }
     
-    public function saveblock($id)
+    /**
+     * Save block
+     * @param integer $layout_id
+     * @param integer $id 
+     */
+    public function saveblock($layout_id, $id)
     {   
         try {
+            // Load layout
+            $layout = $this->layout_model->loadById($layout_id);
+            
             // Load post data
             $name = $this->input->post('name');
             $config = $this->input->post('config');
@@ -251,7 +277,7 @@ class Adminlayouts extends MY_Controller {
             echo "<p>{$e->getMessage()}</p>";
         }
         if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminlayouts/editblock/'.$lblock->id);
+            redirect(base_url().'admin/adminlayouts/editblock/'.$layout->id.'/'.$lblock->id);
     }
     
     /**
@@ -276,7 +302,7 @@ class Adminlayouts extends MY_Controller {
         $selected = $this->input->post('selected');
         $this->layout_model->deleteSlot($selected);
         if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminlayouts/edit/'.$layout_id);
+            redirect(base_url().'admin/adminlayouts/edit/'.$layout_id.'#editslots');
     }
     
     /**
@@ -285,11 +311,11 @@ class Adminlayouts extends MY_Controller {
      */
     public function deleteblock()
     {
-        $slot_id = $this->input->post('slot_id');
+        $layout_id = $this->input->post('layout_id');
         $selected = $this->input->post('selected');
         $this->layout_model->deleteLblock($selected);
         if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminlayouts/editslot/'.$slot_id);
+            redirect(base_url().'admin/adminlayouts/edit/'.$layout_id.'#editblocks');
     }
     
     /**

@@ -15,7 +15,7 @@
  */
 
 // ------------------------------------------------------------------------
-?><form method="post" action="<?=base_url()?>admin/adminlayouts/editslot/<?=empty($slot->id) ? 'new' : $slot->id?>/<?=$layout->id?>">
+?><form method="post" action="<?=base_url()?>admin/adminlayouts/saveslot/<?=$layout->id?>/<?=empty($slot->id) ? 'new' : $slot->id?>/<?=$layout->id?>">
     <label>System name (must match the name in template)</label>
     <input type="text" name="name" value="<?=$slot->name?>" />
     <? if (empty($slot->layout)): ?>

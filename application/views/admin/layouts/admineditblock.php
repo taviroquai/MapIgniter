@@ -20,7 +20,7 @@
 <? if (empty($block)) : ?>
 <p>The block does not exists!</p>
 <? else : ?>
-    <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$block->id?>">
+    <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/<?=$block->id?>">
         <label>Name</label>
         <input type="text" name="name" value="<?=$block->name?>" />
         <label>Module</label>
@@ -41,3 +41,4 @@
         <button type="submit">Save</button>
     </form>
 <? endif; ?>
+<a href="<?=base_url()?>admin/adminlayouts/edit/<?=$layout->id?>#editblocks">Back to layout</a>

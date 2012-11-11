@@ -15,7 +15,7 @@
  */
 
 // ------------------------------------------------------------------------
-?><form method="post" action="<?=base_url()?>admin/adminlayouts/editblock/<?=empty($block->id) ? 'new' : $block->id?>/<?=$slot->id?>">
+?><form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/<?=empty($block->id) ? 'new' : $block->id?>/<?=$slot->id?>">
     <label>Name</label>
     <input type="text" name="name" value="<?=$block->name?>" />
     <label>Module</label>
