@@ -22,12 +22,12 @@
 <p>There are no styles!</p>
 <? else : ?>
 <h3>List of styles</h3>
-<form method="post" action="<?=base_url()?>admin/adminmsstyle/delete">
+<form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
         <? foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
-            <a href="<?=base_url()?>admin/adminmsstyle/edit/<?=$item->id?>">Configure</a>
+            <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->description?></span>
         </li>
         <? } ?>

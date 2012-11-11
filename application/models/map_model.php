@@ -110,7 +110,8 @@ class Map_model extends CI_Model {
             
         $post['mslayerconntype_id'] = 5; // MapServer layer WMS connection type
         $mslabel_id = 1; // MapServer default label
-        $msstyle_id = 1; // MapServer default style
+        $msstyle_point_id = 1; // MapServer default point style
+        $msstyle_area_id = 2; // MapServer default area style
         $msunits_id = 5; // MapServer default units
         $ollayertype_id = 4; // OpenLayers default layer type (WMS Internal)
         $olbaselayer_id = 1; // OpenLayers default map base layer (OSM)
@@ -199,7 +200,12 @@ class Map_model extends CI_Model {
         $mslabel = $this->mapserver_model->loadLabel($mslabel_id);
         
         // Load default style
-        $msstyle = $this->mapserver_model->loadStyle($msstyle_id);
+        if ($table->type == 'POINT' || $table->type == 'MULTIPOINT') {
+            $msstyle = $this->mapserver_model->loadStyle($msstyle_point_id);
+        }
+        else {
+            $msstyle = $this->mapserver_model->loadStyle($msstyle_area_id);
+        }
         
         // Add metadata items to MapServer layer
         if (!empty($addmetadata)) {

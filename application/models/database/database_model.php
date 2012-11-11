@@ -617,16 +617,22 @@ class Database_model extends CI_Model {
         $msclass->owner = $account_admin;
         $this->mapserver_model->save($msclass);
         
-        // Create Style
-        $msstyle = $this->mapserver_model->createStyle('Simple Icon');
-        $msstyle->symbol = './mapfile/symbols/google-marker-small.png';
-        $msstyle->size = 30;
-        $msstyle->color = '0 255 0';
-        $msstyle->owner = $account_admin;
-        $this->mapserver_model->save($msstyle);
+        // Create Default Point Style 
+        $msstyle1 = $this->mapserver_model->createStyle('Simple Icon');
+        $msstyle1->symbol = './mapfile/symbols/google-marker-small.png';
+        $msstyle1->size = 30;
+        $msstyle1->color = '0 255 0';
+        $msstyle1->owner = $account_admin;
+        $this->mapserver_model->save($msstyle1);
         
         // Add Style to Class
-        $this->mapserver_model->addClassStyle($msclass, $msstyle);
+        $this->mapserver_model->addClassStyle($msclass, $msstyle1);
+        
+        // Create Default Area Style
+        $msstyle2 = $this->mapserver_model->createStyle('Simple Area');
+        $msstyle2->symbol = '';
+        $msstyle2->owner = $account_admin;
+        $this->mapserver_model->save($msstyle2);
         
         // Create Label
         $mslabel = $this->mapserver_model->createLabel('Simple Label');
@@ -758,11 +764,13 @@ class Database_model extends CI_Model {
         
         // Add user menu items
         $menu2items[] = $this->modmenu_model->addItem('Home', 'user/user', 1, $menu2, 1);
-        $menu2items[] = $this->modmenu_model->addItem('My Maps', 'user/managemap', 1, $menu2, 2);
-        $menu2items[] = $this->modmenu_model->addItem('My Layers', 'user/managelayer', 1, $menu2, 3);
-        $menu2items[] = $this->modmenu_model->addItem('My Places', 'user/managepgplace', 1, $menu2, 4);
-        $menu2items[] = $this->modmenu_model->addItem('My Tickets', 'user/manageticket', 1, $menu2, 5);
-        $menu2items[] = $this->modmenu_model->addItem("Import", 'user/userimport', 1, $menu2, 6);
+        $menu2items[] = $this->modmenu_model->addItem('Frontpage', '', 1, $menu2, 2);
+        $menu2items[] = $this->modmenu_model->addItem('My Maps', 'user/managemap', 1, $menu2, 3);
+        $menu2items[] = $this->modmenu_model->addItem('My Layers', 'user/managelayer', 1, $menu2, 4);
+        $menu2items[] = $this->modmenu_model->addItem('My Places', 'user/managepgplace', 1, $menu2, 5);
+        $menu2items[] = $this->modmenu_model->addItem('My Styles', 'user/managemsstyle', 1, $menu2, 6);
+        $menu2items[] = $this->modmenu_model->addItem('My Tickets', 'user/manageticket', 1, $menu2, 7);
+        $menu2items[] = $this->modmenu_model->addItem("Import", 'user/userimport', 1, $menu2, 8);
         foreach ($menu2items as &$item) $item->owner = $account_admin;
         R::storeAll($menu2items);
         
