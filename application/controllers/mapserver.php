@@ -60,7 +60,8 @@ class Mapserver extends CI_Controller {
         
         // Set up cache
         $this->load->driver('cache');
-        $cached = $this->cache->apc->get(sha1($url));
+        $cache_key = 'ms_'.sha1($url);
+        $cached = $this->cache->apc->get($cache_key);
 
         // Checking if the client is validating his cache and if it is current.
         if (!empty($cached)) {
@@ -95,7 +96,7 @@ class Mapserver extends CI_Controller {
 
         // Save into cache for 5 minutes
         if (strstr($response['headers']['content_type'], 'image'))
-                $this->cache->apc->save(sha1($url), $response, 300);
+                $this->cache->apc->save($cache_key, $response, 300);
 
         // Dump response content
         $this->output->set_output($response['content']);
