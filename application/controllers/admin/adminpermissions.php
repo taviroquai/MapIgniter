@@ -282,9 +282,9 @@ class Adminpermissions extends MY_Controller {
     {   
         $group_id = $this->input->post('group_id');
         $selected = $this->input->post('selected');
-        $this->menu_model->deletePermission($selected);
+        $this->group_model->deletePermission($selected);
         if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminpermissions/edit/'.$group_id);
+            redirect(base_url().'admin/adminpermissions/editgroup/'.$group_id);
     }
     
 }
