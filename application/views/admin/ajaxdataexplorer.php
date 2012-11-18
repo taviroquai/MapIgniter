@@ -47,7 +47,10 @@ $action = base_url().$ctrlpath;
     <? if (!empty($dir)) : ?>
     <tr>
         <td colspan="4">
-            <a href="<?=$action?>?list=<?=$back?>"><img src="<?=base_url()?>web/images/icons/png/24x24/arrow-alt-left.png" alt="subir" title="Subir um nível" /><span>..</span></a>
+            <a href="<?=$action?>?list=<?=$back?>">
+                <img src="<?=base_url()?>web/images/icons/png/24x24/arrow-alt-left.png" alt="subir" title="Subir um nível" />
+                <span><?=$dir?></span>
+            </a>
         </td>
     </tr>
     <? endif; ?>
@@ -61,18 +64,18 @@ $action = base_url().$ctrlpath;
                 <? if (filetype($base.$dir.$list[$index]['name']) == 'dir') : ?>
                 <a href="<?=$action?>?list=<?=$dir.$list[$index]['name']?>/&back=<?=$dir?>">
                     <img src="<?=base_url()?>web/images/icons/png/16x16/documents.png" alt="enter" title="Enter" />
-                    <span><?=$dir.$list[$index]['name']?></span>
+                    <span><?=$list[$index]['name']?>/</span>
                 </a>
                 <? else :?>
                 <? if ($security == 'public') : ?>
                     <a href="<?=base_url().'web/data/'.$dir.$list[$index]['name']?>">
                         <img src="<?=base_url()?>web/images/icons/png/16x16/document.png" alt="download" title="Download" />
-                        <span><?=$dir.$list[$index]['name']?></span>
+                        <span><?=$list[$index]['name']?></span>
                     </a>
                     <? else : ?>
                     <a href="<?=$action?>/dl?dir=<?=$dir?>&file=<?=$list[$index]['name']?>">
                         <img src="<?=base_url()?>web/images/icons/png/16x16/document.png" alt="download" title="Download" />
-                        <span><?=$dir.$list[$index]['name']?></span>
+                        <span><?=$list[$index]['name']?></span>
                     </a>
                     <? endif; ?>
                 <? endif; ?>
@@ -100,10 +103,20 @@ $action = base_url().$ctrlpath;
             <td><? switch(filetype($base.$dir.$list[$index]['name'])) {
                     case 'file':
                         $mime = exec("file -i -b ".$base.$dir.$list[$index]['name']);
-                        //echo stripos($mime, ';');
-                        echo substr($mime, 0, stripos($mime, ';')); break;
-                    default: echo 'Directory';
-                }?></td>
+                        $type_info = substr($mime, 0, stripos($mime, ';'));
+                        if (strstr($type_info, 'image')) {
+                            if ($security == 'public') {
+                                $type_info = '<a class="preview" href="'.base_url().'web/data/'.$dir.$list[$index]['name'].'">'.$type_info.'</a>';
+                            }
+                            else {
+                                $type_info = '<a class="preview" href="'.$action.'/dl?dir='.$dir.'&file='.$list[$index]['name'].'">'.$type_info.'</a>';
+                            }
+                        }
+                        break;
+                    default: $type_info = 'Directory';
+                }?>
+                <?=$type_info?>
+            </td>
             <td><?=filesize($base.$dir.$list[$index]['name'])?></td>
             <td><? $sys = $list[$index]['sys'] ?>
                 <?=!empty($sys) ? $sys->fetchAs('account')->owner->username : ''?>
@@ -240,4 +253,33 @@ function returnCKEditor(func, url) {
     window.opener.CKEDITOR.tools.callFunction(func, url);
     window.close();
 }
+jQuery(document).ready(function($){
+    /* CONFIG */
+    xOffset = 10;
+    yOffset = 30;
+
+    // these 2 variable determine popup's distance from the cursor
+    // you might want to adjust to get the right result
+
+    /* END CONFIG */
+    $("a.preview").hover(function(e){
+        this.t = this.title;
+        this.title = "";	
+        var c = (this.t != "") ? "<br/>" + this.t : "";
+        $("body").append("<p id='explorer_preview'><img src='"+ this.href +"' alt='Image preview' />"+ c +"</p>");
+        $("#explorer_preview")
+                .css("top",(e.pageY - xOffset) + "px")
+                .css("left",(e.pageX + yOffset) + "px")
+                .fadeIn("fast");						
+    },
+    function(){
+        this.title = this.t;	
+        $("#explorer_preview").remove();
+    });	
+    $("a.preview").mousemove(function(e){
+        $("#explorer_preview")
+            .css("top",(e.pageY - xOffset) + "px")
+            .css("left",(e.pageX + yOffset) + "px");
+    });
+});
 </script>

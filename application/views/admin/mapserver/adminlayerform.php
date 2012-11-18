@@ -75,7 +75,7 @@
             <input type="text" name="connection" value="<?=$mslayer->connection?>" />
 
             <label>Data&nbsp;
-                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=mslayerdata"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=mslayerdata"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input id="mslayerdata" type="text" name="data" value="<?=$mslayer->data?>" />
 
@@ -160,7 +160,7 @@
             <? endif; ?>
 
             <label>Template&nbsp;
-                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input type="text" name="template" value="<?=$mslayer->template?>" />
         </div>
@@ -176,7 +176,7 @@
 	});
         $("a.linkexplorer").fancybox({
             'height': 600,
-            'autoDimensions': false,
+            'autoSize': false,
             'width': 800
         });
     });

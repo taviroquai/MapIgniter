@@ -48,7 +48,7 @@
         if (in_array($field, $sysfields)) continue;
         ?>
         <label><?=$field?>
-            <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=pgplace_<?=$field?>"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>        
+            <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=pgplace_<?=$field?>"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>        
         </label>
         <? if ($table->attributes[$field] == 'text') : ?>
         <textarea id="pgplace_<?=$field?>" class="wysiwyg" name="<?=$field?>" style="width: 98%" rows="6"><?=$record[$field]?></textarea>
@@ -60,10 +60,13 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function() {
+        //$("a.linkexplorer").fancybox();
+        
         $("a.linkexplorer").fancybox({
             'height': 600,
-            'autoDimensions': false,
+            'autoSize': false,
             'width': 800
         });
+        
     });
 </script>

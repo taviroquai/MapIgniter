@@ -54,7 +54,7 @@
             <input type="text" name="text" value="<?=$msclass->text?>" />
         
             <label>Symbol&nbsp;
-                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msclasssymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msclasssymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input id="msclasssymbol" type="text" name="symbol" value="<?=$msclass->symbol?>" />
 
@@ -91,7 +91,7 @@
 	});
         $("a.linkexplorer").fancybox({
             'height': 600,
-            'autoDimensions': false,
+            'autoSize': false,
             'width': 800
         });
     });

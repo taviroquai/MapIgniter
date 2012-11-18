@@ -62,12 +62,12 @@
         <legend>Appearance</legend>
         <div class="accordion">
             <label>Fontset file&nbsp;
-                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msmapfontset"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msmapfontset"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input id="msmapfontset" type="text" name="fontset" value="<?=$msmapfile->fontset?>" />
             
             <label>Symbolset file&nbsp;
-                <a class="linkexplorer fancybox.ajax" title="Explorador" href="<?=base_url().$dataexplorerctrlpath?>?return=msmapsymbolset"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorador" /></a>
+                <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msmapsymbolset"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input id="msmapsymbolset" type="text" name="symbolset" value="<?=$msmapfile->symbolset?>" />
 
@@ -94,7 +94,7 @@
 	});
         $("a.linkexplorer").fancybox({
             'height': 600,
-            'autoDimensions': false,
+            'autoSize': false,
             'width': 800
         });
     });

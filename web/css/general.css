@@ -286,3 +286,13 @@ col.placeowner {background: #fefefe; text-align: center;}
 .placelist th+th, .placelist td+td {text-align: center;} 
 .placelist th+th+th, .placelist td+td+td {text-align: center;} 
 .placelist th+th+th+th, .placelist td+td+td+td {text-align: center;} 
+
+#explorer_preview {
+    position: absolute;
+    border: 1px solid #ccc;
+    background: #333;
+    padding: 5px;
+    display: none;
+    color: #fff;
+    z-index: 20000;
+}
