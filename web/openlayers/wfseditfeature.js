@@ -174,6 +174,18 @@ wfseditfeature.prototype.editPlacePopup = function(feature, form, create) {
             return false;
         });
     });
+
+    // Attach open file explorer event
+    jQuery("#pgplaceform a.linkexplorer").click(function(e){
+        e.preventDefault();
+        var me = this;
+        jQuery.fancybox.open(
+            [{href: me.href, type: 'ajax'}], {
+            'height': 600,
+            'autoSize': false,
+            'width': 800
+        });
+    });
 }
 
 wfseditfeature.prototype.saveGeometry = function(feature, refresh) {
