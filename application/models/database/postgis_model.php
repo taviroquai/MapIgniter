@@ -64,16 +64,9 @@ class Postgis_model extends CI_Model {
     }
     
     public function deleteLayer($ids) {
-        // select dependent tables (should it really remove tables?)
-        foreach($ids as $id) {
-            $pglayer = $this->loadLayer($id);
-            $tables[] = $pglayer->pgplacetype;
-        }
-        $result['tables'] = $this->deleteTables($tables);
+        // should never delete Postgis tables (other software may be using it)
         // Delete postgis layers
         $this->database_model->delete('pglayer', $ids);
-        
-        return $result;
     }
     
     public function createTable($name = 'newtable', $srid = 4326, $type = 'POINT', 
