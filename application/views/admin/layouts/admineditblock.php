@@ -15,6 +15,16 @@
  */
 
 // ------------------------------------------------------------------------
+// Dirty way to get block slot.
+$slots = $layout->ownLslot;
+foreach ($slots as $item) {
+    $blocks = $item->sharedLblock;
+    if (!empty($blocks)) :
+        foreach ($blocks as $tblock) {
+            if ($tblock->id == $block->id) $slot_id = $item->id;
+        }
+    endif;
+}
 ?>
 <h2>Configure layout block</h2>
 <? if (empty($block)) : ?>
@@ -23,6 +33,12 @@
     <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/<?=$block->id?>">
         <label>Name</label>
         <input type="text" name="name" value="<?=$block->name?>" />
+        <label>Slot</label>
+        <select name="slot_id">
+            <? foreach ($slots as $item) { ?>
+            <option value="<?=$item->id?>"<?=$item->id == $slot_id ? 'selected="selected"' : ''?>><?=$item->name?></option>
+            <? } ?>
+        </select>
         <label>Module</label>
         <p><?=$block->module->name?></p>
         <? if ($module_items) : ?>
@@ -37,6 +53,7 @@
         <? endif ?>
         <label>Adicional configuration (json)</label>
         <textarea name="config" rows="6" cols="80"><?=$block->config?></textarea>
+        <input type="hidden" name="old_slot_id" value="<?=$slot_id?>" />
         <input type="hidden" name="module_id" value="<?=$block->module->id?>" />
         <button type="submit">Save</button>
     </form>

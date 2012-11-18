@@ -24,6 +24,8 @@ class Adminlayouts extends MY_Controller {
     public function __construct() {
         parent::__construct();
         
+        // Set layout
+        $this->layout = 'admin';
         $this->load->model('layout/layout_model');
     }
     
@@ -244,10 +246,17 @@ class Adminlayouts extends MY_Controller {
             $config = $this->input->post('config');
             $module_id = $this->input->post('module_id');
             $module_item = $this->input->post('module_item');
+            $slot_id = $this->input->post('slot_id');
+            $old_slot_id = $this->input->post('old_slot_id');
+            
+            // Check for slot change, create new block if true
+            if (!empty($old_slot_id) && $old_slot_id != $slot_id) {
+                $this->layout_model->deleteLblock(array($id));
+                $id = 'new';
+            }
             
             // Create layout block
             if ($id === 'new') {
-                $slot_id = $this->input->post('slot_id');
                 $slot = $this->layout_model->loadSlot($slot_id);
                 if (!$slot) throw new Exception('Slot not found!');
                 $module = $this->layout_model->loadModule($module_id);
@@ -316,20 +325,6 @@ class Adminlayouts extends MY_Controller {
         $this->layout_model->deleteLblock($selected);
         if (!$this->input->is_ajax_request())
             redirect(base_url().'admin/adminlayouts/edit/'.$layout_id.'#editblocks');
-    }
-    
-    /**
-     * Loads the layout and renders out
-     * @param string $content
-     * @return null
-     */
-    protected function render($content) {
-        if ($this->input->is_ajax_request()) {
-            echo $content;
-            return;
-        }
-        // Load layout and render
-        $this->loadLayout('admin', $content);
     }
     
 }
