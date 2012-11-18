@@ -179,7 +179,7 @@ class Adminpglayer extends MY_Controller {
     public function delete()
     {
         $selected = $this->input->post('selected');
-        if (!empty($selected)) $this->postgis_model->deleteLayers($selected);
+        if (!empty($selected)) $this->postgis_model->deleteLayer($selected);
         if (!$this->input->is_ajax_request())
             redirect(base_url().$this->ctrlpath);
     }
