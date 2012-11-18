@@ -120,7 +120,7 @@ class MY_Controller extends CI_Controller {
         
         $slots_config = $this->layout_model->getSlots($config);
         foreach($slots_config as $slot) {
-            $blocks = $this->layout_model->getBlocks($slot);
+            $blocks = $this->layout_model->getPublishedBlocks($slot);
             $slots[$slot->name] = '';
             if (!empty($blocks)) {
                 foreach($blocks as $block) {

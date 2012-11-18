@@ -33,6 +33,21 @@ foreach ($slots as $item) {
     <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/<?=$block->id?>">
         <label>Name</label>
         <input type="text" name="name" value="<?=$block->name?>" />
+        <label>Publish</label>
+        <? if (!in_array($block->publish, array(0, 1))) $block->publish = 0; ?>
+        <label for="publish_opt1">
+            <input type="radio" name="publish" id="publish_opt1"
+                <? if ($block->publish == 1) :?>checked="checked"<? endif; ?> value="1" />
+            <span>Yes</span>
+        </label>
+        <label for="publish_opt2">
+            <input type="radio" name="publish" id="publish_opt2" 
+                <? if ($block->publish == 0) :?>checked="checked"<? endif; ?> value="0" />
+            <span>No</span>
+        </label>
+        <label>Publish Order</label>
+        <? if (empty($block->publish)) $block->publish_order = 1; ?>
+        <input type="text" name="publish_order" value="<?=$block->publish_order?>" />
         <label>Slot</label>
         <select name="slot_id">
             <? foreach ($slots as $item) { ?>

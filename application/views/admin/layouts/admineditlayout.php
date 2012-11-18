@@ -96,21 +96,40 @@ $slots = $layout->ownLslot;
         <? $total_blocks = 0 ?>
         <? if (!empty($slots)) : ?>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/deleteblock">
-            <ul>
+            <table class="blocklist">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Module</th>
+                    <th>Slot</th>
+                    <th>Order</th>
+                    <th>Publish</th>
+                </tr>
             <? foreach ($slots as $slot) {
             $blocks = $slot->sharedLblock;
             $total_blocks += count($blocks);
             if (!empty($blocks)) : ?>
                 <? foreach ($blocks as $block) { ?>
-                <li>
-                    <input type="checkbox" name="selected[]" value="<?=$block->id?>" />
-                    <a href="<?=base_url()?>admin/adminlayouts/editblock/<?=$layout->id?>/<?=$block->id?>">Configure</a>
-                    <span><?=$block->name?> (<?=$block->module->name?>)</span>
-                </li>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selected[]" value="<?=$block->id?>" />
+                    </td>
+                    <td><a href="<?=base_url()?>admin/adminlayouts/editblock/<?=$layout->id?>/<?=$block->id?>"><?=$block->name?></a></td>
+                    <td><?=$block->module->name?></td>
+                    <td><?=$slot->name?></td>
+                    <td><?=$block->publish_order?></td>
+                    <td>
+                        <? if ($block->publish) : ?>
+                        <img src="<?=base_url()?>web/images/icons/png/16x16/check.png" title="published" alt="published" />
+                        <? else: ?>
+                        <img src="<?=base_url()?>web/images/icons/png/16x16/no.png" title="not published" alt="not published" />
+                        <? endif; ?>
+                    </td>
+                </tr>
                 <? } ?>
             <? endif;
             } ?>
-            </ul>
+            </table>
             <input type="hidden" name="layout_id" value="<?=$layout->id?>" />
             <? if (!empty($total_blocks)) : ?>
             <button type="submit">Remove selected</button>

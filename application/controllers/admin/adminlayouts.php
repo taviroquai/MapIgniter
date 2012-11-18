@@ -248,6 +248,8 @@ class Adminlayouts extends MY_Controller {
             $module_item = $this->input->post('module_item');
             $slot_id = $this->input->post('slot_id');
             $old_slot_id = $this->input->post('old_slot_id');
+            $publish = $this->input->post('publish');
+            $publish_order = $this->input->post('publish_order');
             
             // Check for slot change, create new block if true
             if (!empty($old_slot_id) && $old_slot_id != $slot_id) {
@@ -261,7 +263,8 @@ class Adminlayouts extends MY_Controller {
                 if (!$slot) throw new Exception('Slot not found!');
                 $module = $this->layout_model->loadModule($module_id);
                 if (!$module) throw new Exception('Module not found!');
-                $lblock = $this->layout_model->createBlock($name, $module, $config);
+                $lblock = $this->layout_model->createBlock($name, $module, 1, $config);
+                $lblock->publish = 0;
                 $account = $this->account_model->load($this->session->userdata('username'));
                 $lblock->owner = $account;
                 $this->layout_model->slotAddBlock($slot, $lblock);
@@ -279,6 +282,8 @@ class Adminlayouts extends MY_Controller {
                 $lblock->module = $module;
                 $lblock->config = $config;
                 $lblock->item = $module_item;
+                $lblock->publish = (int) $publish;
+                $lblock->publish_order = (int) $publish_order;
                 $this->layout_model->save($lblock);
             }
         }

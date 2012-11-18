@@ -94,12 +94,14 @@ class Layout_model extends CI_Model {
         return $bean;
     }
     
-    public function createBlock($name, $module, $config = '[]', $item = null) {
+    public function createBlock($name, $module, $order = 1, $config = '[]', $item = null) {
         $bean = $this->database_model->create('lblock');
         $bean->name = $name;
         $bean->module = $module;
         $bean->item = $item;
         $bean->config = $config;
+        $bean->publish = 1;
+        $bean->publish_order = $order;
         return $bean;
     }
     
@@ -117,6 +119,17 @@ class Layout_model extends CI_Model {
         return $slot->sharedLblock;
     }
     
+    public function getPublishedBlocks($slot) {
+        $blocks = array();
+        $items = $this->database_model->find('lblock_lslot', ' lslot_id = ?', array($slot->id));
+        foreach ($items as $item) {
+            $tblock = $this->database_model->load('lblock', $item->lblock_id);
+            if ($tblock->publish) $blocks[] = $tblock;
+        }
+        usort($blocks, array($this, 'orderBlocks'));
+        return $blocks;
+    }
+    
     public function delete($ids) {
         $this->database_model->delete('layout', $ids);
     }
@@ -131,6 +144,10 @@ class Layout_model extends CI_Model {
     
     public function deleteLblock($ids) {
         $this->database_model->delete('lblock', $ids);
+    }
+    
+    private function orderBlocks($a, $b) {
+        return ($a->publish_order > $b->publish_order);
     }
     
 }

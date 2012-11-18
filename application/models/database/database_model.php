@@ -341,29 +341,29 @@ class Database_model extends CI_Model {
         R::storeAll(array($mslot1, $mslot2, $mslot3));
         
         // Create layout blocks
-        $lblock2 = $this->layout_model->createBlock('authblock', $authblock);
+        $lblock2 = $this->layout_model->createBlock('authblock', $authblock, 1);
         $lblock2->owner = $account_admin;
         R::storeAll(array($lblock2));
         
         // Create tickets layout block
-        $lblock3 = $this->layout_model->createBlock('tickets', $ticketsblock);
+        $lblock3 = $this->layout_model->createBlock('tickets', $ticketsblock, 2);
         $lblock3->owner = $account_admin;
         R::storeAll(array($lblock3));
         
         // Create layerswitcher layout block
-        $lblock4 = $this->layout_model->createBlock('layerswitcher1', $layerswitcherblock, '', 1);
+        $lblock4 = $this->layout_model->createBlock('layerswitcher1', $layerswitcherblock, 3, '', 1);
         $lblock4->owner = $account_admin;
         R::storeAll(array($lblock4));
         
         // Create layout blocks
-        $footerblock = $this->layout_model->createBlock('footerblock', $footermod);
+        $footerblock = $this->layout_model->createBlock('footerblock', $footermod, 1);
         $footerblock->owner = $account_admin;
-        $creditsblock = $this->layout_model->createBlock('creditsblock', $creditsmod);
+        $creditsblock = $this->layout_model->createBlock('creditsblock', $creditsmod, 2);
         $creditsblock->owner = $account_admin;
         R::storeAll(array($footerblock, $creditsblock));
         
         // Create language blocks
-        $lblock5 = $this->layout_model->createBlock('langblock', $langblock);
+        $lblock5 = $this->layout_model->createBlock('langblock', $langblock, 3);
         $lblock5->owner = $account_admin;
         R::storeAll(array($lblock5));
         
@@ -393,7 +393,7 @@ class Database_model extends CI_Model {
         R::storeAll(array($rslot1, $rslot2, $rslot3, $rslot4, $rslot5));
         
         // Create layout blocks
-        $rlblock2 = $this->layout_model->createBlock('userauthblock', $authblock);
+        $rlblock2 = $this->layout_model->createBlock('userauthblock', $authblock, 1);
         $rlblock2->owner = $account_admin;
         R::storeAll(array($rlblock2));
         
@@ -430,7 +430,7 @@ class Database_model extends CI_Model {
         R::store($ratingmod1);
         
         // Create rating blocks
-        $ratingblock = $this->layout_model->createBlock('ratingblock', $ratingmod1);
+        $ratingblock = $this->layout_model->createBlock('ratingblock', $ratingmod1, 2);
         $ratingblock->owner = $account_admin;
         R::storeAll(array($ratingblock));
         
@@ -456,9 +456,9 @@ class Database_model extends CI_Model {
         R::storeAll(array($aslot1, $aslot2, $aslot3, $aslot4, $aslot5));
         
         // Create layout blocks
-        $alblock1 = $this->layout_model->createBlock('menu1', $menublock1, '', $menu1->id);
+        $alblock1 = $this->layout_model->createBlock('menu1', $menublock1, 1, '', $menu1->id);
         $alblock1->owner = $account_admin;
-        $alblock2 = $this->layout_model->createBlock('adminauthblock', $authblock);
+        $alblock2 = $this->layout_model->createBlock('adminauthblock', $authblock, 2);
         $alblock2->owner = $account_admin;
         R::storeAll(array($alblock1, $alblock2));
         
@@ -467,7 +467,7 @@ class Database_model extends CI_Model {
         $this->layout_model->slotAddBlock($aslot1, $alblock2);
         
         // Create CKEditor Admin block
-        $alblock3 = $this->layout_model->createBlock('ckeditorblock', $ckeditor1);
+        $alblock3 = $this->layout_model->createBlock('ckeditorblock', $ckeditor1, 1);
         $alblock3->owner = $account_admin;
         R::storeAll(array($alblock3));
         
@@ -475,7 +475,7 @@ class Database_model extends CI_Model {
         $this->layout_model->slotAddBlock($aslot1, $alblock3);
         
         // Create CKEditor User block
-        $rlblock3 = $this->layout_model->createBlock('ckeditorblock', $ckeditor1);
+        $rlblock3 = $this->layout_model->createBlock('ckeditorblock', $ckeditor1, 1);
         $rlblock3->owner = $account_admin;
         R::storeAll(array($rlblock3));
         
@@ -568,7 +568,7 @@ class Database_model extends CI_Model {
 "popupfunction":"popupfeature",
 "htmlurl":null
 }';
-        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature1, $wfsgetfeaturelblockconfig, $layer->id);
+        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature1, 1, $wfsgetfeaturelblockconfig, $layer->id);
         $wfsgetfeaturelblock->owner = $account_admin;
         R::storeAll(array($wfsgetfeaturelblock));
         
@@ -717,7 +717,7 @@ class Database_model extends CI_Model {
         $this->openlayers_model->save($olmap);
         
         // Create feature search block
-        $lblock6 = $this->layout_model->createBlock('searchblock', $searchblock, '[]', $olmap->id);
+        $lblock6 = $this->layout_model->createBlock('searchblock', $searchblock, 1, '[]', $olmap->id);
         $lblock6->owner = $account_admin;
         R::storeAll(array($lblock6));
         
@@ -734,7 +734,7 @@ class Database_model extends CI_Model {
 "center":[-7.545,38.58],
 "zoom":8
 }';
-        $lblock5 = $this->layout_model->createBlock('publicmap1', $olmapblock, $olmapblockconfig, $olmap->id);
+        $lblock5 = $this->layout_model->createBlock('publicmap1', $olmapblock, 1, $olmapblockconfig, $olmap->id);
         $lblock5->owner = $account_admin;
         R::storeAll(array($lblock5));
         
@@ -775,7 +775,7 @@ class Database_model extends CI_Model {
         R::storeAll($menu2items);
         
         // Create user menu block
-        $rlblock3 = $this->layout_model->createBlock('usermenu1', $menublock1, '', $menu2->id);
+        $rlblock3 = $this->layout_model->createBlock('usermenu1', $menublock1, 1, '', $menu2->id);
         $rlblock3->owner = $account_admin;
         R::storeAll(array($rlblock3));
         

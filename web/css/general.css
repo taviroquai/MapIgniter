@@ -219,6 +219,30 @@ textarea {
     text-align: left;
 }
 
+.blocklist {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 80%;
+}
+
+.blocklist tr, .blocklist td {
+    height: 21px;
+    overflow: hidden;
+}
+
+.blocklist th {
+    background-color: #333;
+    color: #fff;
+    padding: 3px;
+    text-align: left;
+}
+
+.blocklist td {
+    text-align: left;
+}
+
 .placelist {
     width: 100%;
     border: 1px solid #eee;
