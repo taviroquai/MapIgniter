@@ -96,7 +96,7 @@ wfsgetfeature.prototype.popup = function(feature, html) {
     var centroid = feature.geometry.getCentroid();
     var popup = new OpenLayers.Popup("olpopup_"+feature.attributes.gid,
                new OpenLayers.LonLat(centroid.x, centroid.y),
-               new OpenLayers.Size(740,400),
+               new OpenLayers.Size(680,400),
                html,
                true);
     popup.panMapIfOutOfView = true;
@@ -115,11 +115,10 @@ var popupfeature = function (feature, wfsgetfeature) {
             var centroid = feature.geometry.getCentroid();
             var popup = new OpenLayers.Popup("olpopup_"+feature.attributes.gid,
                        new OpenLayers.LonLat(centroid.x, centroid.y),
-                       new OpenLayers.Size(740,400),
+                       new OpenLayers.Size(680,400),
                        '<p>Loading...</p>',
                        true);
             popup.panMapIfOutOfView = true;
-
             wfsgetfeature.mapblock.map.addPopup(popup);
             jQuery("#olpopup_"+feature.attributes.gid).css('z-index', 6000);
             jQuery("#olpopup_"+feature.attributes.gid+'_contentDiv').html(response);
