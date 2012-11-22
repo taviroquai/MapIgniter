@@ -69,12 +69,19 @@ class Adminmsstyle extends MY_Controller {
             $bean = $this->mapserver_model->loadStyle($id);
             if (!$bean) throw new Exception('MapServer style not found!');
             
+            // Load data explorer model
+            $this->load->model('admin/dataexplorer_model');
+            if ($this->dataexplorer_model->fileExists($bean->symbol)) {
+                $preview = base_url().'user/userdataexplorer/dl?dir=./&file='.$bean->symbol;
+            }
+            
             // Load main content
             $data = array(
                 'ctrlpath' => $this->ctrlpath,
                 'dataexplorerctrlpath' => $this->dataexplorerctrlpath,
                 'msstyle' => $bean,
                 'action' => '/save/'.$bean->id);
+            if (!empty($preview)) $data['sym_preview'] = $preview;
             $content = $this->load->view('admin/mapserver/admineditstyle', $data, TRUE);
         }
         catch (Exception $e) {
@@ -152,6 +159,12 @@ class Adminmsstyle extends MY_Controller {
             $errors[] = $e->getMessage();
         }
         
+        // Load data explorer model
+        $this->load->model('admin/dataexplorer_model');
+        if ($this->dataexplorer_model->fileExists($msstyle->symbol)) {
+            $preview = base_url().'user/userdataexplorer/dl?dir=./&file='.$msstyle->symbol;
+        }
+        
         // Load main content
         $data = array(
             'msgs' => array('errors' => $errors, 'info' => $info),
@@ -159,6 +172,7 @@ class Adminmsstyle extends MY_Controller {
             'dataexplorerctrlpath' => $this->dataexplorerctrlpath,
             'msstyle' => $msstyle,
             'action' => '/save/'.$msstyle->id);
+        if (!empty($preview)) $data['sym_preview'] = $preview;
         $content = $this->load->view('admin/mapserver/admineditstyle', $data, TRUE);
         $this->render($content);
     }
