@@ -96,19 +96,22 @@ $slots = $layout->ownLslot;
         <? $total_blocks = 0 ?>
         <? if (!empty($slots)) : ?>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/deleteblock">
-            <table class="blocklist">
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Module</th>
-                    <th>Slot</th>
-                    <th>Order</th>
-                    <th>Publish</th>
-                </tr>
             <? foreach ($slots as $slot) {
             $blocks = $slot->sharedLblock;
             $total_blocks += count($blocks);
             if (!empty($blocks)) : ?>
+            <br /><span><?=$slot->name?></span>
+            <table class="blocklist">
+                <thead>
+                    <tr>
+                        <th style="width: 20px"></th>
+                        <th>Name</th>
+                        <th style="width: 200px">Module</th>
+                        <th style="width: 40px">Order</th>
+                        <th style="width: 40px">Publish</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <? foreach ($blocks as $block) { ?>
                 <tr>
                     <td>
@@ -116,7 +119,6 @@ $slots = $layout->ownLslot;
                     </td>
                     <td><a href="<?=base_url()?>admin/adminlayouts/editblock/<?=$layout->id?>/<?=$block->id?>"><?=$block->name?></a></td>
                     <td><?=$block->module->name?></td>
-                    <td><?=$slot->name?></td>
                     <td><?=$block->publish_order?></td>
                     <td>
                         <? if ($block->publish) : ?>
@@ -127,9 +129,10 @@ $slots = $layout->ownLslot;
                     </td>
                 </tr>
                 <? } ?>
+                </tbody>
+                </table>
             <? endif;
             } ?>
-            </table>
             <input type="hidden" name="layout_id" value="<?=$layout->id?>" />
             <? if (!empty($total_blocks)) : ?>
             <button type="submit">Remove selected</button>
