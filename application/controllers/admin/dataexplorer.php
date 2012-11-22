@@ -67,6 +67,7 @@ class Dataexplorer extends MY_Controller {
         $list = $this->input->get('list');
         if (empty($list)) $list = './';
         $dir = $list;
+        $security = $this->findSecurity($list, $security);
         
         // Get directory list
         try {
@@ -80,6 +81,7 @@ class Dataexplorer extends MY_Controller {
             $data['list'] = $list;
             $data['selected'] = $this->session->userdata('data_selected');
             $data['return'] = $this->session->userdata('return');
+            $data['replace'] = $this->input->get('replace');
             $data['CKEditor'] = $this->session->userdata('CKEditor');
             $data['CKEditorFuncNum'] = $this->session->userdata('CKEditorFuncNum');
             
@@ -154,6 +156,7 @@ class Dataexplorer extends MY_Controller {
             $list = $this->input->get('list');
             if (empty($list)) $list = './';
             $dir = $list;
+            $security = $this->findSecurity($list, $security);
             
             $list = $this->dataexplorer_model->listdir($list, $security);
             $data['ctrlpath'] = $this->ctrlpath;
@@ -164,6 +167,7 @@ class Dataexplorer extends MY_Controller {
             $data['list'] = $list;
             $data['selected'] = $this->session->userdata('data_selected');
             $data['return'] = $this->session->userdata('return');
+            $data['replace'] = $this->input->get('replace');
             $data['CKEditor'] = $this->session->userdata('CKEditor');
             $data['CKEditorFuncNum'] = $this->session->userdata('CKEditorFuncNum');
             
@@ -263,6 +267,19 @@ class Dataexplorer extends MY_Controller {
         else $selected = array();
         $this->session->set_userdata('data_selected', $selected);
         return $selected;
+    }
+    
+    private function findSecurity($list, $security) {
+        $dir = $list;
+        if (!$this->dataexplorer_model->dirExists($dir, $security)) {
+            if ($security === 'private') $tsecurity = 'public';
+            else $tsecurity = 'private';
+            if ($this->dataexplorer_model->dirExists($dir, $tsecurity)) {
+                $security = $tsecurity;
+            }
+            $this->session->set_userdata('data_security', $security);
+        }
+        return $security;
     }
     
 }

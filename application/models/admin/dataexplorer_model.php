@@ -57,6 +57,20 @@ class Dataexplorer_model extends CI_Model {
 
     }
     
+    public function dirExists($dir, $security = 'private')
+    {
+        $dir = $this->getBase($security).$dir;
+        $check = @opendir($dir);
+        return (boolean) $check;
+    }
+    
+    public function fileExists($filepath, $security = 'private')
+    {
+        $filepath = $this->getBase($security).$filepath;
+        if (file_exists($filepath)) return $filepath;
+        return false;
+    }
+    
     public function getCurrent() {
         return $this->current;
     }

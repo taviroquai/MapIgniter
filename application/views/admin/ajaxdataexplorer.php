@@ -82,9 +82,9 @@ $action = base_url().$ctrlpath;
                 
                 <? if (!empty($return)) : ?>
                 <? if ($security == 'public') : ?>
-                <a href="javascript: devolver('<?=base_url().'web/data/'.$dir.$list[$index]['name']?>', '<?=$return?>')">
+                <a href="javascript: devolver('<?=base_url().'web/data/'.$dir.$list[$index]['name']?>', '<?=$return?>', '<?=$replace?>')">
                 <? else: ?>
-                <a href="javascript: devolver('<?=$dir.$list[$index]['name']?>', '<?=$return?>')">
+                <a href="javascript: devolver('<?=$dir.$list[$index]['name']?>', '<?=$return?>', '<?=$replace?>')">
                 <? endif; ?>
                     <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
                 </a>
@@ -245,8 +245,9 @@ jQuery('#ajaxdataexplorer a').each(function() {
         }
     }
 });
-function devolver(item, elem) {
-    jQuery('#'+elem).val(jQuery('#'+elem).val()+item);
+function devolver(item, elem, replace) {
+    if (replace !== '') jQuery('#'+elem).val(item);
+    else jQuery('#'+elem).val(jQuery('#'+elem).val()+item);
     jQuery.fancybox.close();
 }
 function returnCKEditor(func, url) {
