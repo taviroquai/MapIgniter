@@ -27,7 +27,7 @@
             </label>
             <input id="msstylesymbol"type="text" name="symbol" value="<?=$msstyle->symbol?>" />
             <? if (!empty($sym_preview)) : ?>
-            <img src="<?=$sym_preview?>" alt="Symbol Preview" />
+            <img src="<?=$sym_preview?>" style="width: <?=$msstyle->size?>px" alt="Symbol Preview" />
             <? endif; ?>
             
             <label>Pattern</label>
