@@ -142,7 +142,7 @@ Click <a href="<?=base_url().$mslegendctrlpath?>/edit/new/<?=$msmapfile->id?>">h
       <p>
           Layer <?=$item->layer->title?><br />
           <a href="<?=$img_link?>">
-            <img src="<?=$img_link?>" />
+            <img src="<?=$img_link?>"  style="border: 6px solid #e0e0e0;" />
           </a>
       </p>
       <? }
