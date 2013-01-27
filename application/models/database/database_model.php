@@ -309,7 +309,7 @@ class Database_model extends CI_Model {
         R::store($modgmapsapi);
         
         // Create layout
-        $layout_public = $this->layout_model->create('public', 'layout/publicfullscreen');
+        $layout_public = $this->layout_model->create('public', 'layout/publicfullscreen2');
         $layout_public->owner = $account_admin;
         R::store($layout_public);
         
@@ -411,11 +411,17 @@ class Database_model extends CI_Model {
         $menublock1->owner = $account_admin;
         R::store($menublock1);
         
-        // Register WFS get feature module
+        // Register WFS get feature popup module
         $previewimg = 'web/images/module/wfsgetfeature.png';
-        $wfsgetfeature1 = $this->layout_model->createModule('WFSGetFeature', 'openlayers/mapwfsgetfeature_lblock', 'layer', $previewimg);
+        $wfsgetfeature1 = $this->layout_model->createModule('WFSGetFeature Popup', 'openlayers/mapwfsgetfeaturepopup_lblock', 'layer', $previewimg);
         $wfsgetfeature1->owner = $account_admin;
         R::store($wfsgetfeature1);
+        
+        // Register WFS get feature module
+        $previewimg = 'web/images/module/wfsgetfeature.png';
+        $wfsgetfeature2 = $this->layout_model->createModule('WFSGetFeature', 'openlayers/mapwfsgetfeaturecontent_lblock', 'layer', $previewimg);
+        $wfsgetfeature2->owner = $account_admin;
+        R::store($wfsgetfeature2);
         
         // Register CKEditor module
         $previewimg = 'web/images/module/ckeditor.png';
@@ -568,7 +574,7 @@ class Database_model extends CI_Model {
 "popupfunction":"popupfeature",
 "htmlurl":null
 }';
-        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature1, 1, $wfsgetfeaturelblockconfig, $layer->id);
+        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature2, 1, $wfsgetfeaturelblockconfig, $layer->id);
         $wfsgetfeaturelblock->owner = $account_admin;
         R::storeAll(array($wfsgetfeaturelblock));
         
@@ -617,16 +623,24 @@ class Database_model extends CI_Model {
         $msclass->owner = $account_admin;
         $this->mapserver_model->save($msclass);
         
-        // Create Default Point Style 
-        $msstyle1 = $this->mapserver_model->createStyle('Simple Icon');
-        $msstyle1->symbol = './mapfile/symbols/google-marker-small.png';
-        $msstyle1->size = 30;
+        // Create MapIcons Point Style 
+        $msstyle1 = $this->mapserver_model->createStyle('Simple Map Icon');
+        $msstyle1->symbol = './mapfile/symbols/mapiconscollection-tourism/bigcity.png';
+        $msstyle1->size = 32;
         $msstyle1->color = '0 255 0';
         $msstyle1->owner = $account_admin;
         $this->mapserver_model->save($msstyle1);
         
         // Add Style to Class
         $this->mapserver_model->addClassStyle($msclass, $msstyle1);
+        
+        // Create Default Point Style 
+        $msstyle3 = $this->mapserver_model->createStyle('Simple Icon');
+        $msstyle3->symbol = './mapfile/symbols/google-marker-small.png';
+        $msstyle3->size = 30;
+        $msstyle3->color = '0 255 0';
+        $msstyle3->owner = $account_admin;
+        $this->mapserver_model->save($msstyle3);
         
         // Create Default Area Style
         $msstyle2 = $this->mapserver_model->createStyle('Simple Area');
@@ -731,7 +745,7 @@ class Database_model extends CI_Model {
         $olmapblockconfig =
 '{
 "run":["layerswitcher1","wfsgetfeature1","searchblock"],
-"center":[-7.545,38.58],
+"center":[-8.5,38.58],
 "zoom":8
 }';
         $lblock5 = $this->layout_model->createBlock('publicmap1', $olmapblock, 1, $olmapblockconfig, $olmap->id);

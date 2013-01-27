@@ -14,14 +14,14 @@
 
 /* ------------------------------------------------------------------------ */
 
-var wfsgetfeature = function(instance, layeralias, popupfunction, htmlurl) {
+var wfsgetfeaturepopup = function(instance, layeralias, popupfunction, htmlurl) {
     this.name = instance;
     this.layeralias = layeralias;
     this.popupfunction = popupfunction;
     this.htmlurl = htmlurl;
 };
 
-wfsgetfeature.prototype.config = function (mapblock) {
+wfsgetfeaturepopup.prototype.config = function (mapblock) {
 
     // Set public vars
     this.mapblock = mapblock;
@@ -81,7 +81,7 @@ wfsgetfeature.prototype.config = function (mapblock) {
     mapblock.controls.wfscontrol.activate();
 }
 
-wfsgetfeature.prototype.preparePopup = function(e) {
+wfsgetfeaturepopup.prototype.preparePopup = function(e) {
     
     // remove all popups
     jQuery(".olPopup").remove();
@@ -92,7 +92,7 @@ wfsgetfeature.prototype.preparePopup = function(e) {
     fn(e.feature, this);
 }
 
-wfsgetfeature.prototype.popup = function(feature, html) {
+wfsgetfeaturepopup.prototype.popup = function(feature, html) {
     var centroid = feature.geometry.getCentroid();
     var popup = new OpenLayers.Popup("olpopup_"+feature.attributes.gid,
                new OpenLayers.LonLat(centroid.x, centroid.y),

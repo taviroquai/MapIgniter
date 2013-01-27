@@ -1,0 +1,176 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+
+html, body, #slot1 {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.map_title, .map_description {
+    display: none;
+}
+
+#slot-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 5000;
+    overflow: hidden;
+}
+
+#column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 90px;
+    width: 380px;
+    min-height: 100%;
+    overflow: auto;
+    z-index: 1000;
+    background-color: white;
+    
+    border: 4px solid #d17c0d;
+}
+
+#slot-content {
+    
+}
+
+.content-padding {
+    padding: 0 10px 10px 10px;
+}
+
+.content-padding>h2 {
+    margin-top: 0;
+}
+
+#slot2 {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    z-index: 5000;
+    background-color: black;
+    color: white;
+    padding: 0;
+    overflow: hidden;
+}
+
+#slot2 .lblock {
+    display: block;
+    float: right;
+    margin-right: 20px;
+}
+
+#slot2 .lblock h2 {
+    display: none;
+}
+
+#slot3 {
+
+}
+
+#slot4 {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 5001;
+    text-align: center;
+}
+
+#slot5 {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 19px;
+    z-index: 1001;
+    background-color: black;
+    color: white;
+    padding: 0;
+    overflow: hidden;
+}
+
+#slot5 .lblock h2 {
+    display: none;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background: #444444 url('../images/header_bg_yellow.png') top left repeat-x;
+}
+
+
+a, a:visited {
+    color: #cd8000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #d17c0d;
+}
+
+h1, h2 {
+    color: #d17c0d;
+}
+
+div.olControlZoom {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.4);
+    border-radius: 4px 4px 4px 4px;
+    left: 400px !important;
+    padding: 2px;
+    position: absolute;
+    top: 110px !important;
+}
+div.olControlZoom a {
+    background: none repeat scroll 0 0 rgba(0, 60, 136, 0.5);
+    color: white;
+    display: block;
+    font-family: 'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    height: 22px;
+    line-height: 19px;
+    margin: 1px;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    width: 22px;
+}
+div.olControlZoom a:hover {
+    background: none repeat scroll 0 0 rgba(0, 60, 136, 0.698);
+}
+div.olControlZoom a:hover {
+    background: none repeat scroll 0 0 rgba(0, 60, 136, 0.5);
+}
+a.olControlZoomIn {
+    border-radius: 4px 4px 0 0;
+}
+a.olControlZoomOut {
+    border-radius: 0 0 4px 4px;
+}
+
+.olControlLayerSwitcher label {
+    display: inline;
+    font-size: 10px;
+}

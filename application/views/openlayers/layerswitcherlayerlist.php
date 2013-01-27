@@ -19,7 +19,7 @@
 <li id="layer_<?=$item->layer->alias?>">
     <input type="checkbox" value="<?=$item->id?>" data-layeralias="<?=$item->layer->alias?>" />
     <span class="milayer"><?=$item->layer->title?></span>
-    <? $this->load->view('rate', array('rate' => $rating[$item->layer->id])); ?>
+    <div style="float: left;"><? $this->load->view('rate', array('rate' => $rating[$item->layer->id])); ?></div>
     <div>
         <? if ($item->ollayertype_id == 4) : ?>
         <img src="<?=base_url().'mapserver/map/'.$item->url?>?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&LAYER=<?=$item->layer->alias?>&FORMAT=image/png" />

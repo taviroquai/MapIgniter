@@ -35,18 +35,19 @@
                         switch($item['geomtype']) {
                             case 'ST_MultiPolygon':
                             case 'ST_Polygon':
-                                echo '<img src="'.base_url().'/web/images/icons/polygon.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
+                                $item['img_src'] = base_url('/web/images/icons/polygon.png');
                                 break;
                             case 'ST_MultiLinestring':
                             case 'ST_Linestring':
-                                echo '<img src="'.base_url().'/web/images/icons/linestring.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
+                                $item['img_src'] = base_url('/web/images/icons/linestring.png');
                                 break;
                             case 'ST_Point':
-                                echo '<img src="'.base_url().'/web/images/icons/point.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
+                                $item['img_src'] = base_url('/web/images/icons/point.png');
                                 break;
-                            default: echo '<img src="'.base_url().'/web/images/icons/geom.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
+                            default: 
+                                $item['img_src'] = base_url('/web/images/icons/geom.png');
                         }
-                    ?></span>
+                    ?><img style="vertical-align: middle" src="<?=$item['img_src']?>" alt="<?=$item['geomtype']?>" /></span>
                 </h3>
                 <p><?=empty($item['description']) ? '' : substr(strip_tags($item['description']), 0, 110).'...'?></p>
             </li>

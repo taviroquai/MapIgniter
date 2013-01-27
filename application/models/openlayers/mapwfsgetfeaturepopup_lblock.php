@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * MapIgniter
  *
@@ -15,6 +16,20 @@
  */
 
 // ------------------------------------------------------------------------
-?><script>
-    var block_<?=$_instance?> = new wfsgetfeature('<?=$_instance?>', '<?=$item->alias?>', '<?=empty($config['popupfunction']) ? '' : $config['popupfunction']?>', '<?=empty($config['htmlurl']) ? '' : $config['htmlurl']?>');
-</script>
+
+require_once APPPATH.'models/layout/lblock_model.php';
+
+class Mapwfsgetfeaturepopup_lblock extends Lblock_model {
+    
+    public function __construct() {
+        parent::__construct();
+        
+        $this->view = 'openlayers/wfsgetfeaturepopupblock';
+        
+        $this->scripts = array(
+            base_url()."web/openlayers/wfsgetfeaturepopup.js"
+        );
+    }
+}
+
+?>

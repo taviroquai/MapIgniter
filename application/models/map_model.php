@@ -317,6 +317,8 @@ class Map_model extends CI_Model {
         $this->map_model->addMapLayer($map, $osm);
         $this->map_model->addMapLayer($map, $layer);
         
+        $info = array('All map objects were created!');
+        
         return $pglayer;
     }
 }
