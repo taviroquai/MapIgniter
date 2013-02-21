@@ -176,6 +176,16 @@ class Database_model extends CI_Model {
         return false;
     }
     
+    public function createPDO($dsn, $user, $pass, $silent = false) {
+        $pdo = new PDO($dsn, $user, $pass);
+        if ($silent) $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+        return $pdo;
+    }
+    
+    public function pdoExec($pdo, $sql) {
+        return $pdo->exec($sql);
+    }
+    
     public function isOnGroup($account, $entity, $id) {
         $result = false;
         $groups = $account->sharedGroup;
