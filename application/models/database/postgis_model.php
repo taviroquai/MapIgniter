@@ -685,21 +685,39 @@ class Postgis_model extends CI_Model {
         if (!empty($shapefile_name)) {
             $dbconfig = $this->database_model->getConfig('userdata');
             $dbname = $dbconfig['database'];
+            $dbhost = $dbconfig['hostname'];
+            $dbuser = $dbconfig['username'];
+            $dbpass = $dbconfig['password'];
             $shapefile_name = $extract_path.$shapefile_name;
             chdir($extract_path);
             $cmd = "shp2pgsql $options -s $srid $shapefile_name $tablename > $tablename.sql";
             $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>';
             $result1 = exec($cmd, $shp2pgsql_output);
-            $cmd = "psql -d $dbname -f $tablename.sql";
-            $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>...';
-            $result2 = exec($cmd, $psql_output);
-            $result['msgs']['info'][] = 'Last line <em>'.end($psql_output).'</em>';
+            
+            $sql_output = array();
+            $new_sql = file_get_contents($tablename.'.sql');
+            $sql_output[] = $new_sql;
             $save_path = $this->config->item('public_data_path').$logfile;
             $logdata = implode("\n", $shp2pgsql_output);
-            $logdata .= implode("\n", $psql_output);
+            $logdata .= implode("\n", $sql_output);
             file_put_contents($save_path, $logdata);
             $result['logfile'] = $logfile;
-            if (end($psql_output) == 'COMMIT') $result['ok'] = true;
+            
+            // New strategy to run multiple SQL using PDO
+            // This may need more work...
+            $import_sql = explode("BEGIN;\n", $new_sql);
+            $remove_sql = $import_sql[0];
+            $create_sql = "BEGIN;\n".$import_sql[1];
+            $pdo = $this->database_model->createPDO("pgsql:dbname=$dbname;host=$dbhost", $dbuser, $dbpass);
+            try {
+                $this->database_model->pdoExec($pdo, $remove_sql);
+            } catch (PDOException $e) {
+                $sql_output[] = $e->getMessage();
+            }
+            $this->database_model->pdoExec($pdo, $create_sql);
+
+            // We got here, so everything sould be ok
+            $result['ok'] = true;
         }
 
         // Clean directory
