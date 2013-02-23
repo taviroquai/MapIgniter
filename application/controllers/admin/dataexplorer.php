@@ -147,7 +147,7 @@ class Dataexplorer extends MY_Controller {
         try {
             $account = $this->account_model->load($this->session->userdata('username'));
             $data = $this->dataexplorer_model->uploadfile($base, $dir, $overwrite, $security, $account);
-            
+                        
             // Get upper directory
             $back = $this->input->get('back');
             if (empty($back)) $back = './';

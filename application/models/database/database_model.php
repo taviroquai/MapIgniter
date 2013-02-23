@@ -811,11 +811,23 @@ class Database_model extends CI_Model {
         $fullscreenedit_public->owner = $account_admin;
         R::store($fullscreenedit_public);
         
-        
-        
         // Assign blocks to public layout
         $this->layout_model->slotAddBlock($pslot3, $lblock6);
         $this->layout_model->slotAddBlock($pslot3, $lblock4);
+        
+        // Register public controllers
+        $ctl = $this->create('controller');
+        $ctl->path = 'publicmap';
+        $ctl->layout = $layout_public;
+        $this->save($ctl);
+        $ctl = $this->create('controller');
+        $ctl->path = 'auth';
+        $ctl->layout = $layout_mod;
+        $this->save($ctl);
+        $ctl = $this->create('controller');
+        $ctl->path = 'tickets';
+        $ctl->layout = $layout_mod;
+        $this->save($ctl);
         
         // Set Application version (should be last instruction)
         $this->database_model->setVersion($this->config->item('_version'));

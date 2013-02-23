@@ -26,9 +26,6 @@ class Auth extends MY_Controller {
         // Load language
         $this->lang->load('auth', $this->session->userdata('lang'));
         
-        // Set default view
-        $this->layout = 'module';
-        
         // Load account model
         $this->load->model('account/account_model');
         $this->load->model('account/gaccount_model');

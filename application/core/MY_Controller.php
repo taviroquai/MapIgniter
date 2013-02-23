@@ -38,6 +38,13 @@ class MY_Controller extends CI_Controller {
         if (empty($lang)) $this->session->set_userdata('lang', 'english');
         
         $this->layout = 'public';
+        $path = $this->router->fetch_class();
+        $this->load->model('database/database_model');
+        $result = $this->database_model->find('controller', 'path = ?', array($path));
+        if (!empty($result)) {
+            $ctl = reset($result);
+            if (!empty($ctl->layout->name)) $this->layout = $ctl->layout->name;
+        }
         
         $this->load->model('account/account_model');
         $this->load->model('account/group_model');

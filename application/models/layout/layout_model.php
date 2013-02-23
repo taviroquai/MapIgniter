@@ -56,11 +56,12 @@ class Layout_model extends CI_Model {
         return $this->database_model->load('lblock', $id);
     }
     
-    public function create($name = 'new_layout', $view = '')
+    public function create($name = 'new_layout', $view = '', $content = '<p>Content</p>')
     {
         $bean = $this->database_model->create('layout');
         $bean->name = $name;
         $bean->view = $view;
+        $bean->content = $content;
         return $bean;
     }
     

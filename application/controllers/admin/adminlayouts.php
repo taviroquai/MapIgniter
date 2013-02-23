@@ -159,6 +159,7 @@ class Adminlayouts extends MY_Controller {
             // load post data
             $name = $this->input->post('name');
             $view = $this->input->post('view');
+            $content = $this->input->post('content');
             
             // Create new layout
             if ($id === 'new') {
@@ -176,6 +177,7 @@ class Adminlayouts extends MY_Controller {
             if (!empty($name) && !empty($view)) {
                 $layout->name = $name;
                 $layout->view = $view;
+                $layout->content = $content;
                 $this->layout_model->save($layout);    
             }
         }

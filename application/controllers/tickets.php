@@ -24,8 +24,6 @@ class Tickets extends MY_Controller {
     public function __construct() {
         parent::__construct();
         
-        $this->layout = 'module';
-        
         // Load ticket model
         $this->load->model('crm/ticket_model');
         

@@ -16,30 +16,28 @@
 
 // ------------------------------------------------------------------------
 ?>
-<h2>Layouts</h2>
-<form method="post" action="<?=base_url()?>admin/adminlayouts/save/new">
+<h2>Controllers</h2>
+<form method="post" action="<?=base_url()?>admin/admincontrollers/save/new">
     <fieldset>
-        <legend>New</legend>
-        <label>System name</label>
-        <input type="text" name="name" value="" /><br />
-        <label>PHP View</label>
+        <legend>Register New</legend>
+        <label>Path</label>
+        <input type="text" name="path" value="" /><br />
+        <label>Layout</label>
         <input type="text" name="view" value="" /><br />
-        <label>Content</label>
-        <textarea name="content" class="wysiwyg"><?=empty($layout->content) ? '' : $layout->content?></textarea>
         <button type="submit">Save</button>
     </fieldset>
 </form>
 <? if (empty($items)) : ?>
-<p>There are no layouts</p>
+<p>There are no registered controllers</p>
 <? else : ?>
-<h3>List of layouts</h3>
-<form method="post" action="<?=base_url()?>admin/adminlayouts/delete">
+<h3>List of controllers</h3>
+<form method="post" action="<?=base_url()?>admin/admincontrollers/delete">
     <ul>
         <? foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
-            <a href="<?=base_url()?>admin/adminlayouts/edit/<?=$item->id?>">Configure</a>
-            <span><?=$item->name?></span>
+            <a href="<?=base_url()?>admin/admincontrollers/edit/<?=$item->id?>">Configure</a>
+            <span><?=$item->path?></span>
         </li>
         <? } ?>
     </ul>

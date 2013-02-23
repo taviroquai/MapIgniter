@@ -22,14 +22,17 @@ class Publicmap extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        
-        $this->layout = 'public';
     }
     
     public function index()
     {
-        // Set data
-        $content = $this->load->view('news', NULL, TRUE);
+        // Set content
+        $content = $this->load->view('news', NULL, true);
+        $result = $this->database_model->find('controller', 'path = ?', array('publicmap'));
+        if (!empty($result)) {
+            $ctl = reset($result);
+            if (!empty($ctl->layout->content)) $content = $ctl->layout->content;
+        }
         
         // Load layout
         $this->render($content);

@@ -20,6 +20,7 @@
     <li><a href="<?=base_url()?>admin/adminmenus">Menus</a></li>
     <li><a href="<?=base_url()?>admin/adminmodules">Modulos</a></li>
     <li><a href="<?=base_url()?>admin/adminlayouts">Layouts</a></li>
+    <li><a href="<?=base_url()?>admin/admincontrollers">Controllers</a></li>
     <li><a href="<?=base_url()?>admin/adminaccounts">User accounts</a></li>
     <li><a href="<?=base_url()?>admin/adminpermissions">Roles and Permissions</a></li>
     <li><a href="<?=base_url()?>admin/admincache">Cache</a></li>

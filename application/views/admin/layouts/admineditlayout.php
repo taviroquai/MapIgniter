@@ -38,6 +38,8 @@ $slots = $layout->ownLslot;
             <input type="text" name="name" value="<?=$layout->name?>" />
             <label>PHP View</label>
             <input type="text" name="view" value="<?=$layout->view?>" />
+            <label>Content</label>
+            <textarea name="content" class="wysiwyg"><?=empty($layout->content) ? '' : $layout->content?></textarea>
             <button type="submit">Save</button>
         </form>
         <? endif; ?>
