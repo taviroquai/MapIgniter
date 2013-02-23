@@ -16,11 +16,12 @@
 
 // ------------------------------------------------------------------------
 ?><div class="lblock">
+    <h2><?=$this->lang->line('search.page.title')?></h2>
     <div id="<?=$_instance?>">
         <form action="<?=base_url()?>openlayers/search/<?=$item->id?>" method="GET">
             <input name="_instance" type="hidden" value="<?=$_instance?>" />
-            <input name="q" type="text" style="width: 300px; float: left" />
-            <button type="submit" style="float: left; padding: 7px 10px 6px 10px; margin-bottom: 10px"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="search" /></button>
+            <input name="q" type="text" style="width: 280px; float: left" />
+            <button type="submit" style="float: left; padding: 4px 10px 4px 10px; margin-bottom: 10px"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="search" /></button>
         </form>
         <div style="clear: both"></div>
     </div>

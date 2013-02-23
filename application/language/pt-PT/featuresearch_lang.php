@@ -1,3 +1,3 @@
 <?
 
-$lang['title'] = "Procurar";
+$lang['search.page.title'] = "Procurar";
