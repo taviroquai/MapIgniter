@@ -245,8 +245,8 @@ jQuery('#ajaxdataexplorer a').each(function() {
         }
     }
 });
-function devolver(item, elem, replace) {
-    if (replace !== '') jQuery('#'+elem).val(item);
+function devolver(item, elem, append) {
+    if (append == '') jQuery('#'+elem).val(item);
     else jQuery('#'+elem).val(jQuery('#'+elem).val()+item);
     jQuery.fancybox.close();
 }
