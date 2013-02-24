@@ -60,6 +60,7 @@
         
         <? if (!empty($_slot['slot2'])) : ?>
         <div id="slot2">
+            <div class="home"><a href="<?=base_url()?>" title="Home">Home</a></div>
             <?=$_slot['slot2']?>
         </div>
         <? endif; ?>

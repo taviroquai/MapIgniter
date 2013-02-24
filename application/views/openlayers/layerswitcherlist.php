@@ -20,6 +20,7 @@
         <? foreach ($root['categories'] as $item) { ?>
         <li class="micategory">
             <span class="milayercategorylabel"><?=$item['category']->title?></span>
+            <div class="milayer_description"><?=$item['category']->description?></div>
             <ul class="accordion">
             <? if (!empty($item['layers'])) $this->load->view('openlayers/layerswitcherlayerlist', array('layers' => $item['layers'])); ?>
             </ul>
@@ -30,9 +31,12 @@
 </ul>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-    $('div.milayerswitcher .accordion').hide();
-    $('div.milayerswitcher .milayercategorylabel').click(function() {
-        $(this).parent().find('ul.accordion').slideToggle("slow");
+    $('.milayerswitcher .accordion').hide();
+    $('.milayerswitcher .milayercategorylabel').click(function() {
+        $(this).parent().find('.accordion').slideToggle("slow");
+    });
+    $('.milayerswitcher .milayer').on('click', function() {
+        $(this).parent().find('.accordion').slideToggle("slow");
     });
 });
 </script>
