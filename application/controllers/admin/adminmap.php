@@ -22,6 +22,7 @@ class Adminmap extends MY_Controller {
 
     protected $msmapctrlpath;
     protected $olmapctrlpath;
+    protected $gemapctrlpath;
     
     public function __construct() {
         parent::__construct();
@@ -30,6 +31,7 @@ class Adminmap extends MY_Controller {
         $this->ctrlpath = 'admin/'.$this->router->fetch_class();
         $this->msmapctrlpath = 'admin/adminmsmap';
         $this->olmapctrlpath = 'admin/adminolmap';
+        $this->gemapctrlpath = 'admin/admingemap';
         
         $this->load->model('map_model');
         $this->load->model('rating/rating_model');
@@ -68,6 +70,7 @@ class Adminmap extends MY_Controller {
             'ctrlpath' => $this->ctrlpath,
             'msmapctrlpath' => $this->msmapctrlpath,
             'olmapctrlpath' => $this->olmapctrlpath,
+            'gemapctrlpath' => $this->gemapctrlpath,
             'action' => '/save/'.$bean->id);
         $content = $this->load->view('admin/map/admineditmap', $data, TRUE);
         
@@ -133,6 +136,7 @@ class Adminmap extends MY_Controller {
             'ctrlpath' => $this->ctrlpath,
             'msmapctrlpath' => $this->msmapctrlpath,
             'olmapctrlpath' => $this->olmapctrlpath,
+            'gemapctrlpath' => $this->gemapctrlpath,
             'action' => '/save/'.$bean->id);
         if (!empty($pglayer)) $data['pglayer'] = $pglayer;
         $content = $this->load->view('admin/map/admineditmap', $data, TRUE);

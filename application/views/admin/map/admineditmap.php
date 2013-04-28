@@ -56,3 +56,17 @@ $item = reset($olmaps);
 <a href="<?=base_url().$olmapctrlpath?>/edit/<?=$item->id?>">Configure</a>
 <a href="<?=base_url().$ctrlpath?>/delolmap/<?=$item->id?>">Remove</a>
 <? endif; ?>
+
+<h3>Google Earth</h3>
+<?
+$gemaps = $map->ownGemap;
+if (empty($gemaps)) : ?>
+<p>This map does not exists on Google Earth.
+    <a href="<?=base_url().$gemapctrlpath?>/edit/new/<?=$map->id?>">Create map on Google Earth</a>.
+</p>
+<? else : 
+$item = reset($gemaps);
+?>
+<a href="<?=base_url().$gemapctrlpath?>/edit/<?=$item->id?>">Configure</a>
+<a href="<?=base_url().$ctrlpath?>/delgemap/<?=$item->id?>">Remove</a>
+<? endif; ?>

@@ -23,6 +23,7 @@ class Adminlayer extends MY_Controller {
     protected $pglayerctrlpath;
     protected $mslayerctrlpath;
     protected $ollayerctrlpath;
+    protected $gelayerctrlpath;
     
     /**
      * Constructor
@@ -38,6 +39,7 @@ class Adminlayer extends MY_Controller {
         $this->pglayerctrlpath = 'admin/adminpglayer';
         $this->mslayerctrlpath = 'admin/adminmslayer';
         $this->ollayerctrlpath = 'admin/adminollayer';
+        $this->gelayerctrlpath = 'admin/admingelayer';
     }
     
     /**
@@ -91,6 +93,7 @@ class Adminlayer extends MY_Controller {
                 'pglayerctrlpath' => $this->pglayerctrlpath,
                 'mslayerctrlpath' => $this->mslayerctrlpath,
                 'ollayerctrlpath' => $this->ollayerctrlpath,
+                'gelayerctrlpath' => $this->gelayerctrlpath,
                 'action' => '/save/'.$bean->id);
             $content = $this->load->view('admin/layer/admineditlayer', $data, TRUE);
             
@@ -156,6 +159,7 @@ class Adminlayer extends MY_Controller {
             'pglayerctrlpath' => $this->pglayerctrlpath,
             'mslayerctrlpath' => $this->mslayerctrlpath,
             'ollayerctrlpath' => $this->ollayerctrlpath,
+            'gelayerctrlpath' => $this->gelayerctrlpath,
             'action' => '/save/'.$layer->id);
         $content = $this->load->view('admin/layer/admineditlayer', $data, TRUE);
         $this->render($content);
@@ -211,6 +215,20 @@ class Adminlayer extends MY_Controller {
         $ollayer = $this->openlayers_model->loadLayer($ollayer_id);
         $layer_id = $ollayer->layer->id;
         $this->openlayers_model->deleteLayer(array($ollayer_id));
+        if (!$this->input->is_ajax_request())
+            redirect(base_url().$this->ctrlpath.'/edit/'.$layer_id);
+    }
+    
+    /**
+     * Action delete Google earth layer
+     * Remove associated layer
+     */
+    public function delgelayer($gelayer_id)
+    {
+        $this->load->model('googleearth/googleearth_model');
+        $gelayer = $this->googleearth_model->loadLayer($gelayer_id);
+        $layer_id = $gelayer->layer->id;
+        $this->googleearth_model->deleteLayer(array($gelayer_id));
         if (!$this->input->is_ajax_request())
             redirect(base_url().$this->ctrlpath.'/edit/'.$layer_id);
     }

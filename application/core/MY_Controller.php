@@ -27,6 +27,9 @@ class MY_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
+        // Load MapIgniter Configuration
+        $this->load->config('mapigniter');
+        
         /**
          * RedBeanPHP is loaded here, which leave other controller to do not
          * extend CI_Controller if they don't need access to database and check

@@ -29,7 +29,7 @@
     <? if (empty($map->id)) : ?>
     <label>
         <input type="checkbox" name="auto" value="1" checked="checked" />
-        <span>Auto (creates all Postgis, MapServer and OpenLayers default items)</span>
+        <span>Auto (creates all Postgis, MapServer, OpenLayers and Google Earth default items)</span>
     </label>
     
     <label>Postgis table</label>

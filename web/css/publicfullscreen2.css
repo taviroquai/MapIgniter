@@ -61,6 +61,13 @@ html, body, #slot1 {
     margin-top: 0;
 }
 
+#slot1 {
+    position: relative !important;
+    top: 0;
+    left: 0;
+    z-index: 0 !important;
+}
+
 #slot2 {
     position: absolute;
     top: 70px;
@@ -85,7 +92,7 @@ html, body, #slot1 {
 }
 
 #slot3 {
-
+    
 }
 
 #slot4 {

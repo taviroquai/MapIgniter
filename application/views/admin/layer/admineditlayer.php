@@ -60,4 +60,16 @@ $item = reset($ollayers);
 ?>
 <a href="<?=base_url().$ollayerctrlpath?>/edit/<?=$item->id?>">Configure</a>
 <a href="<?=base_url().$ctrlpath?>/delollayer/<?=$item->id?>">Remove</a>
-<? endif;
+<? endif; ?>
+
+<h3>Google Earth</h3>
+<?
+$gelayers = $layer->ownGelayer;
+if (empty($gelayers)) : ?>
+<p><a href="<?=base_url().$gelayerctrlpath?>/edit/new/<?=$layer->id?>">Create layer on Google Earth</a></p>
+<? else : 
+$item = reset($gelayers);
+?>
+<a href="<?=base_url().$gelayerctrlpath?>/edit/<?=$item->id?>">Configure</a>
+<a href="<?=base_url().$ctrlpath?>/delgelayer/<?=$item->id?>">Remove</a>
+<? endif; ?>

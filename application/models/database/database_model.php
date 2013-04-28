@@ -217,6 +217,7 @@ class Database_model extends CI_Model {
         $this->load->model('map_model');
         $this->load->model('layer_model');
         $this->load->model('mapserver/mapserver_model');
+        $this->load->model('googleearth/googleearth_model');
         $this->load->model('openlayers/openlayers_model');
         $this->load->model('admin/dataexplorer_model');
         
@@ -317,6 +318,12 @@ class Database_model extends CI_Model {
         $modgmapsapi = $this->layout_model->createModule('Load Google Maps API', 'openlayers/modgmapsapiv3_lblock');
         $modgmapsapi->owner = $account_admin;
         R::store($modgmapsapi);
+        
+        // Register gefeaturesearch block
+        $previewimg = 'web/images/module/gefeaturesearch.png';
+        $gesearchblock = $this->layout_model->createModule('Google Earth Search', 'googleearth/gefeaturesearch_lblock', 'gemap', $previewimg);
+        $gesearchblock->owner = $account_admin;
+        R::store($gesearchblock);
         
         // Create layout
         $layout_public = $this->layout_model->create('public', 'layout/publicfullscreen2');
@@ -774,7 +781,8 @@ class Database_model extends CI_Model {
         $menuitems[] = $this->modmenu_model->addItem("Places", 'admin/adminpgplace', 1, $menu1, 9);
         $menuitems[] = $this->modmenu_model->addItem("MapServer Options", 'admin/adminmapserver', 1, $menu1, 10);
         $menuitems[] = $this->modmenu_model->addItem("OpenLayers Options", 'admin/adminopenlayers', 1, $menu1, 11);
-        $menuitems[] = $this->modmenu_model->addItem("Import", 'admin/import', 1, $menu1, 12);
+        $menuitems[] = $this->modmenu_model->addItem("Google Earth Options", 'admin/admingoogleearth', 1, $menu1, 12);
+        $menuitems[] = $this->modmenu_model->addItem("Import", 'admin/import', 1, $menu1, 13);
         foreach ($menuitems as &$item) $item->owner = $account_admin;
         R::storeAll($menuitems);
         
@@ -828,6 +836,17 @@ class Database_model extends CI_Model {
         $ctl->path = 'tickets';
         $ctl->layout = $layout_mod;
         $this->save($ctl);
+        
+        // Register Google Earth map moduke
+        $previewimg = 'web/images/module/openlayersmap.png';
+        $gemapmod = $this->layout_model->createModule('Google Earth Map', 'googleearth/modgemap_lblock', 'gemap', $previewimg);
+        $gemapmod->owner = $account_admin;
+        R::store($gemapmod);
+        
+        // Create Google Earth Layer Type
+        $gelayertype[] = $this->googleearth_model->createLayerType('KML');
+        foreach ($gelayertype as &$item) $item->owner = $account_admin;
+        R::storeAll($gelayertype);
         
         // Set Application version (should be last instruction)
         $this->database_model->setVersion($this->config->item('_version'));

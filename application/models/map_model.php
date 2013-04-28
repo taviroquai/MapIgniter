@@ -100,6 +100,7 @@ class Map_model extends CI_Model {
         $this->load->model('layer_model');
         $this->load->model('mapserver/mapserver_model');
         $this->load->model('openlayers/openlayers_model');
+        $this->load->model('googleearth/googleearth_model');
         
         // Setup default values
         switch($post['type']) {   
@@ -115,6 +116,7 @@ class Map_model extends CI_Model {
         $msunits_id = 5; // MapServer default units
         $ollayertype_id = 4; // OpenLayers default layer type (WMS Internal)
         $olbaselayer_id = 1; // OpenLayers default map base layer (OSM)
+        $gelayertype_id = 1; // Google Earth default layer type (KML)
         $account = $map->fetchAs('account')->owner;
         
         // Create a layer
@@ -316,6 +318,25 @@ class Map_model extends CI_Model {
         $osm = $this->layer_model->loadByAlias('osm1');
         $this->map_model->addMapLayer($map, $osm);
         $this->map_model->addMapLayer($map, $layer);
+        
+        // Load Google Earth default layer type
+        $gelayertype = $this->googleearth_model->loadLayerType($gelayertype_id);
+
+        // Create Google Earth layer
+        $gelayer = $this->googleearth_model->createLayer($layer, $gelayertype);
+        $gelayer->owner = $account;
+        $this->database_model->save($gelayer);
+        $info[] = 'The Google Earth layer was created';
+        
+        // Create Google Earth map
+        $gemap = $this->googleearth_model->createMap($map);
+        $gemap->owner = $account;
+        $this->database_model->save($gemap);
+        $info[] = 'The Google Earth map was created';
+        
+        // Add layers to Google Earth map
+        $this->googleearth_model->addMapLayer($gemap, $gelayer);
+        $info[] = "The {$layer->alias} layer was added to Google Earth map";
         
         $info = array('All map objects were created!');
         

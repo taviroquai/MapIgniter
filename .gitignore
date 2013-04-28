@@ -11,3 +11,5 @@
 /application/config/config.php
 /application/config/database.php
 /application/cache/
+/application/config/googleearth.php
+/application/config/mapigniter.php

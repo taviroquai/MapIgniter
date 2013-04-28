@@ -147,10 +147,11 @@ class Postgis_model extends CI_Model {
             
         }
         else {
-            $sql = "
-            UPDATE geometry_columns 
-            SET srid = {$table->srid}, type = '{$table->type}'
-            WHERE f_table_schema = 'public' and f_table_name = '{$table->name}'";
+            // Drop Geometry Column
+            $sql = "SELECT DropGeometryColumn ('public', '{$table->name}', 'the_geom')";
+            $result = $this->database_model->exec($sql);
+            // Add Geometry Column
+            $sql = "SELECT AddGeometryColumn ('public', '{$table->name}', 'the_geom', {$table->srid}, '{$table->type}', 2)";
             $result = $this->database_model->exec($sql);
         }
         
@@ -343,6 +344,8 @@ class Postgis_model extends CI_Model {
         // Load records
         $sql = "
             SELECT *, 
+                ST_X(ST_Transform(the_geom, 4326)) as lat,
+                ST_Y(ST_Transform(the_geom, 4326)) as lon,
                 ST_GeometryType(the_geom) as geomtype,
                 ST_AsText(the_geom) as wkt,
                 ts_rank_cd($vector, $query, 32) AS rank
@@ -650,6 +653,25 @@ class Postgis_model extends CI_Model {
         
         // Return table extent
         return $return;
+    }
+    
+    public function getTableKML($table) {
+        
+        // Select user database
+        $this->database_model->selectDatabase('userdata');
+        
+        // Check if table exists
+        $sql = "
+            SELECT *, 
+                ST_X(ST_Centroid(ST_Transform(the_geom, 4326))) as x,
+                ST_Y(ST_Centroid(ST_Transform(the_geom, 4326))) as y,
+                ST_AsKML(the_geom) as kml 
+            FROM public.{$table->name}";
+        $results = $this->database_model->getAll($sql);
+
+        // Select application database
+        $this->database_model->selectDatabase();
+        return $results;
     }
     
     public function importZip($zipfile, $tablename, $srid, $options, $logfile = 'import.log') {
