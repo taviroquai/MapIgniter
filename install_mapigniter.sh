@@ -56,6 +56,9 @@ echo "Adding UbuntuGIS repo..."
 add-apt-repository -y ppa:ubuntugis/ppa
 apt-get update
 
+echo "Installing apache web server..."
+apt-get install -y apache2
+
 echo "Installing cgi-mapserver..."
 apt-get install -y cgi-mapserver
 

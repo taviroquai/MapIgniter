@@ -56,6 +56,9 @@ echo "Adding UbuntuGIS repo..."
 add-apt-repository -y ppa:ubuntugis/ppa
 apt-get update
 
+echo "Installing apache web server..."
+apt-get install -y apache2
+
 echo "Installing cgi-mapserver..."
 apt-get install -y cgi-mapserver
 
@@ -63,7 +66,7 @@ echo "Installing postgres and postgis..."
 apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
 
 echo "Installing php5, pgsql, curl and gd..."
-apt-get install -y php5-pgsql php5-curl php5-gd
+apt-get install -y php5-cli php5-pgsql php5-curl php5-gd
 
 echo "Installing unzip..."
 apt-get install -y unzip
