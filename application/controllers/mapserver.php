@@ -62,46 +62,40 @@ class Mapserver extends CI_Controller {
         // Moving to a custom cache system...
         
         // Set up cache
-        $this->load->driver('cache');
-        $cache_key = 'ms_'.sha1($url);
-        $cached = $this->cache->apc->get($cache_key);
-
-        // Checking if the client is validating his cache and if it is current.
-        if (!empty($cached)) {
-            if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= time())) {
-                // Client's cache IS current, so we just respond '304 Not Modified'.
-                header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()+300).' GMT', true, 304);
-                header("MICache: skipped");
-            }
-            else {
-                header('Cache-Control: max-age=300');
-                $tsstring = gmdate('D, d M Y H:i:s', strtotime('+5 minutes')).' GMT';
-                header("Last-Modified: $tsstring");
-                header("Expires: ".$tsstring);
-                header("MICache: cached");
-                header('Content-Type: '.$cached['headers']['content_type']);
-                echo $cached['content'];
-            }
-            exit();
+        $use_cache = $this->config->item('cache_on');
+        $is_image = $this->input->get('FORMAT');
+        $this->load->model('cache/filecache_model', 'filecache');
+        
+        // set default time to expire cached items
+        $expired = $this->filecache->getExpireTime();
+        
+        // Only use cache for image requests
+        if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {
+            $format = end(explode('/', $is_image));
+            // clean expired cached images
+            $this->filecache->prob_clear();
+            $this->filecache->outputItem($url, $format);
         }
-
         
         // Image not cached or cache outdated, we respond '200 OK' and output the image.
         // Make MapServer CGI request
         $response = $this->urlproxy_model->request($url, $post);
-        // Cache headers
-        $this->output->set_header('Cache-Control: max-age=300');
-        $tsstring = gmdate('D, d M Y H:i:s', strtotime('+5 minutes')).' GMT';
+        // Cache headers for 5 minutes
+        $this->output->set_header('Cache-Control: max-age='.$expired);
+        $tsstring = gmdate('D, d M Y H:i:s', strtotime('+'.($expired/60).' minutes')).' GMT';
         $this->output->set_header("Last-Modified: $tsstring");
         $this->output->set_header("Expires: ".$tsstring);
         $this->output->set_header("MICache: original");
-        $this->output->set_content_type($response['headers']['content_type']);
-
-        // Save into cache for 5 minutes
-        if (strstr($response['headers']['content_type'], 'image'))
-                $this->cache->apc->save($cache_key, $response, 300);
+        $format = end(explode('/', $is_image));
+        $this->output->set_content_type('image/'.$format);
+        
+        // Save into cache; only for images
+        if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {
+            $this->filecache->saveItem($url, $response['content'], $format);
+        }
 
         // Dump response content
         $this->output->set_output($response['content']);
     }
+    
 }

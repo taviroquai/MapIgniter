@@ -29,21 +29,27 @@ class Admincache extends MY_Controller {
     public function index()
     {
         // Get cache information
-        $data['info'] = apc_cache_info('user');
+        $info = array('total_files' => 0, 'bytes' => 0);
+        $this->load->model('cache/filecache_model', 'filecache');
+        $info['total_files'] = $this->filecache->getTotalItems();
+        $info['total_size'] = $this->filecache->formatSize($this->filecache->getSize());
+        $data['info'] = $info;
         
         // Load main content
-        $content = $this->load->view('admin/cache/info', $data, TRUE);
+        $content = $this->load->view('admin/cache/filecache', $data, TRUE);
         
         // Render content
         $this->render($content);
 
     }
     
-    public function clear()
-    {
-        // Clear APC cache
-        apc_clear_cache('user');
+    public function clear() {
+        // Clear cache
+        $this->load->model('cache/filecache_model', 'filecache');
+        $this->filecache->clear();
         redirect(base_url().'admin/admincache');
     }
+    
+    
 
 }

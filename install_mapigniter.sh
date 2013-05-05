@@ -8,7 +8,7 @@
 # About:
 # =====
 # This script will install postgres, postgis, cgi-mapserver, php5,
-# php5, php5-curl, php5-psql, php5-gd, php5-apc and composer
+# php5, php5-curl, php5-psql, php5-gd and composer
 #
 # Running:
 # =======
@@ -62,8 +62,8 @@ apt-get install -y cgi-mapserver
 echo "Installing postgres and postgis..."
 apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
 
-echo "Installing php5, pgsql, curl, gd and apc..."
-apt-get install -y php5-pgsql php5-curl php5-gd php-apc
+echo "Installing php5, pgsql, curl and gd..."
+apt-get install -y php5-pgsql php5-curl php5-gd
 
 echo "Installing unzip..."
 apt-get install -y unzip
