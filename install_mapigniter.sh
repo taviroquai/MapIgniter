@@ -66,7 +66,7 @@ echo "Installing postgres and postgis..."
 apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
 
 echo "Installing php5, pgsql, curl and gd..."
-apt-get install -y php5-cli php5-pgsql php5-curl php5-gd
+apt-get install -y php5-cli php5-pgsql php5-curl php5-gd libapache2-mod-php5
 
 echo "Installing unzip..."
 apt-get install -y unzip
