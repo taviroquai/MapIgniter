@@ -25,7 +25,7 @@ class Openlayers_model extends CI_Model {
     public function __construct() {
         parent::__construct();
         
-        $this->tempdir = '/var/www/websig1/web/data/tmp'; 
+        $this->tempdir = $this->config->item('public_data_path').'tmp';
         $this->tempurl = base_url().'web/data/tmp';
         
         $this->load->model('database_model');

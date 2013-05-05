@@ -6,13 +6,13 @@ MAP
     MAXSIZE 2600
     SIZE 400 400
     UNITS meters
-    CONFIG "MS_ERRORFILE" "/var/www/websig1/data/mapserver.log"
+    CONFIG "MS_ERRORFILE" "/var/www/mapigniter/data/mapserver.log"
     DEBUG off
     
     
     EXTENT -20037508.34 -20037508.34 20037508.34 20037508.34
-    FONTSET '/var/www/websig1/data/mapfile/fonts/fonts.list'
-    SYMBOLSET '/var/www/websig1/data/mapfile/symbols/symbols.txt'
+    FONTSET '/var/www/mapigniter/data/mapfile/fonts/fonts.list'
+    SYMBOLSET '/var/www/mapigniter/data/mapfile/symbols/symbols.txt'
     PROJECTION
                 'init=epsg:900913'
         END
@@ -35,7 +35,7 @@ MAP
         POSITION lr
         POSTLABELCACHE false
         STATUS on
-        TEMPLATE '/var/www/websig1/data/mapfile/template/shape_legend_body.html'
+        TEMPLATE '/var/www/mapigniter/data/mapfile/template/shape_legend_body.html'
 
             
     END
@@ -73,7 +73,7 @@ MAP
         STATUS on
         TYPE point
                         
-        DATA "/var/www/websig1/data/mapfile/shapefile/map1.shp"
+        DATA "/var/www/mapigniter/data/mapfile/shapefile/map1.shp"
         EXTENT -13207.017577 49518.222243 452964.525460 291327.263653
         PROJECTION
                             'proj=tmerc'
@@ -92,7 +92,7 @@ MAP
         LABELITEM "concelho"
         DUMP true
         OPACITY 100
-        TEMPLATE "/var/www/websig1/data/mapfile/template/shape_feature_body.html"
+        TEMPLATE "/var/www/mapigniter/data/mapfile/template/shape_feature_body.html"
         METADATA
                     'gml_include_items' 'all'
                     'ows_srs' 'EPSG:900913'
@@ -123,7 +123,7 @@ MAP
                 OUTLINECOLOR 210 210 210
                 PATTERN 1 0 END
                 SIZE 30
-                SYMBOL '/var/www/websig1/data/mapfile/symbols/google-marker-small.png'                
+                SYMBOL '/var/www/mapigniter/data/mapfile/symbols/google-marker-small.png'                
                 WIDTH 1
             END  
 
