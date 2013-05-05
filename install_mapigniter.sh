@@ -63,7 +63,7 @@ echo "Installing postgres and postgis..."
 apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
 
 echo "Installing php5, pgsql, curl and gd..."
-apt-get install -y php5-pgsql php5-curl php5-gd
+apt-get install -y php5-cli php5-pgsql php5-curl php5-gd
 
 echo "Installing unzip..."
 apt-get install -y unzip
@@ -107,7 +107,7 @@ echo "Restarting Apache2..."
 service apache2 restart
 
 echo "Downloading MapIgniter..."
-apt-get install git
+apt-get install -y git
 mkdir "$INSTALL_FOLDER/mapigniter"
 git clone http://github.com/taviroquai/MapIgniter "$INSTALL_FOLDER/mapigniter"
 
