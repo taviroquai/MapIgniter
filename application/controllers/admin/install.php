@@ -23,6 +23,7 @@ class Install extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
+        $this->load->config('mapigniter');
         $this->load->model('database/database_model');
     }
     
@@ -50,7 +51,7 @@ class Install extends CI_Controller {
                 throw new Exception('MapServer is not responding at url: '.$this->config->item('mapserver_cgi'));
             
             // Check PostgreSQL
-            $cmd = 'psql --version';
+            $cmd = $this->config->item('psql_path').' --version';
             $info[] = "Detecting PostgreSQL with: $cmd";
             exec($cmd, $pgoutput);
             $info[] = implode('<br />', $pgoutput);
@@ -71,11 +72,6 @@ class Install extends CI_Controller {
             $info[] = "Detecting php5-gd with extension_loaded()";
             if (!extension_loaded('gd')) throw new Exception('php5-gd extension was not detected.');
             $info[] = "php5-gd is loaded";
-            
-            // Check php-apc
-            $info[] = "Detecting php-apc with extension_loaded()";
-            if (!extension_loaded('apc')) throw new Exception('php-apc extension was not detected.');
-            $info[] = "php-apc is loaded";
             
             // Check if private data folder is writeable
             $private_data_path = $this->config->item('private_data_path');

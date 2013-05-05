@@ -37,6 +37,16 @@ $config['mapserver_path'] = '/usr/lib/cgi-bin/mapserv';
 $config['mapserver_cgi'] = 'http://localhost/cgi-bin/mapserv?';
 
 /*
+ * Full path to psql executable
+ */
+$config['psql_path'] = '/usr/bin/psql';
+
+/*
+ * Full path to shp2pgsql executable
+ */
+$config['shp2pgsql_path'] = '/usr/bin/shp2pgsql';
+
+/*
  * Public Ticket module
  * Email origin used by ticket module
  */

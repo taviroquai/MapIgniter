@@ -107,11 +107,9 @@ echo "Restarting Apache2..."
 service apache2 restart
 
 echo "Downloading MapIgniter..."
-wget -O mapigniter.zip --progress=dot:mega https://github.com/taviroquai/MapIgniter/zipball/master
-unzip mapigniter.zip
-rm -rf "$INSTALL_FOLDER/mapigniter"
-mv taviroquai-MapIgniter-* "$INSTALL_FOLDER/mapigniter"
-rm mapigniter.zip
+apt-get install git
+mkdir "$INSTALL_FOLDER/mapigniter"
+git clone http://github.com/taviroquai/MapIgniter "$INSTALL_FOLDER/mapigniter"
 
 echo "Downloading CodeIgniter..."
 wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
@@ -125,6 +123,7 @@ mv "$INSTALL_FOLDER/mapigniter/index.dist.php" "$INSTALL_FOLDER/mapigniter/index
 mv "$INSTALL_FOLDER/mapigniter/htaccess.dist" "$INSTALL_FOLDER/mapigniter/.htaccess"
 mv "$INSTALL_FOLDER/mapigniter/application/config/config.dist.php" "$INSTALL_FOLDER/mapigniter/application/config/config.php"
 mv "$INSTALL_FOLDER/mapigniter/application/config/database.dist.php" "$INSTALL_FOLDER/mapigniter/application/config/database.php"
+mv "$INSTALL_FOLDER/mapigniter/application/config/mapigniter.dist.php" "$INSTALL_FOLDER/mapigniter/application/config/mapigniter.php"
 mv "$INSTALL_FOLDER/mapigniter/data.dist" "$INSTALL_FOLDER/mapigniter/data"
 chown -R www-data "$INSTALL_FOLDER/mapigniter/data"
 mkdir "$INSTALL_FOLDER/mapigniter/web/data"
