@@ -40,7 +40,7 @@
     </select>
     
     <label>shp2pgsql options (optional)</label>
-    <input type="text" name="options" value="-d -I -S" />
+    <input type="text" name="options" value="-d -I -S -g the_geom" />
 
     <label>Choose shapefile (zip)</label>
     <span><small>Note: a .zip file including the files .dbf, .prj, .shp and .shx</small></span><br />
