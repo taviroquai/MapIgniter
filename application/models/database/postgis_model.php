@@ -712,7 +712,7 @@ class Postgis_model extends CI_Model {
             $dbpass = $dbconfig['password'];
             $shapefile_name = $extract_path.$shapefile_name;
             chdir($extract_path);
-            $cmd = "shp2pgsql $options -s $srid $shapefile_name $tablename > $tablename.sql";
+            $cmd = $this->config->item('shp2pgsql_path')." $options -s $srid $shapefile_name $tablename > $tablename.sql";
             $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>';
             $result1 = exec($cmd, $shp2pgsql_output);
             
