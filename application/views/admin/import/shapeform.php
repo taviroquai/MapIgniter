@@ -33,6 +33,7 @@
     </select>
     
     <label>SRID</label>
+    <p style="background-color: red; color: white;">WARNING: WRONG SRID (ALSO IN SHAPEFILE) MAY RESULT IN BROKEN LAYER</p>
     <select name="srid">
     <? foreach ($srid_list as $item) { ?>
         <option value="<?=$item['srid']?>" <?=$item['srid'] == '3857' ? 'selected="selected"': ''?>><?=$item['auth_name'].':'.$item['srid']?></option>
