@@ -8,4 +8,4 @@ The content management is done in a graphical interface, like any other CMS (Con
 Look at install notes in the wiki:
 https://github.com/taviroquai/MapIgniter/wiki
 
-More information on this wiki http://mapigniter.com/wiki/en:start
+More information on this wiki http://mapigniter.com/wiki/
