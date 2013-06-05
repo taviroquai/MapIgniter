@@ -23,6 +23,7 @@ TMP="/tmp/build_mapigniter"
 INSTALL_FOLDER="/var/www"
 PG_USER="mapigniter"
 MAPIGNITER_VERSION="master"
+MAPSERVER_VERSION="6.0.1-2ubuntu1"
 PG_VERSION="9.1"
 CI_VERSION="2.1.3"
 APACHE_CONFIG="/etc/apache2/sites-available"
@@ -60,7 +61,7 @@ echo "Installing apache web server..."
 apt-get install -y apache2
 
 echo "Installing cgi-mapserver..."
-apt-get install -y cgi-mapserver
+apt-get install -y "cgi-mapserver=$MAPSERVER_VERSION"
 
 echo "Installing postgres and postgis..."
 apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
