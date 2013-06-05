@@ -22,7 +22,7 @@
 TMP="/tmp/build_mapigniter"
 INSTALL_FOLDER="/var/www"
 PG_USER="mapigniter"
-MAPIGNITER_VERSION="master"
+MAPIGNITER_VERSION="mapigniter_mapserver60"
 MAPSERVER_VERSION="6.0.1-2ubuntu1"
 PG_VERSION="9.1"
 CI_VERSION="2.1.3"
@@ -113,7 +113,7 @@ service apache2 restart
 echo "Downloading MapIgniter..."
 apt-get install -y git
 mkdir "$INSTALL_FOLDER/mapigniter"
-git clone http://github.com/taviroquai/MapIgniter "$INSTALL_FOLDER/mapigniter"
+git clone -b "$MAPIGNITER_VERSION" http://github.com/taviroquai/MapIgniter "$INSTALL_FOLDER/mapigniter"
 
 echo "Downloading CodeIgniter..."
 wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php

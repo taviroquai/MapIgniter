@@ -22,7 +22,7 @@
 TMP="/tmp/build_mapigniter"
 INSTALL_FOLDER="/var/www"
 PG_USER="mapigniter"
-MAPIGNITER_VERSION="master"
+MAPIGNITER_VERSION="mapigniter_mapserver60"
 MAPSERVER_VERSION="6.0.1-2ubuntu1"
 PG_VERSION="9.1"
 CI_VERSION="2.1.3"
