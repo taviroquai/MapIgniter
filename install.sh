@@ -7,8 +7,7 @@
 # 
 # About:
 # =====
-# This script will install postgres, postgis, cgi-mapserver, php5,
-# php5, php5-curl, php5-psql, php5-gd
+# This script will install mapigniter dependencies and configure default files
 #
 # Running:
 # =======
@@ -19,13 +18,7 @@
 # Install script for MapIgniter
 # =============================================================================
 
-TMP="/tmp/build_mapigniter"
-INSTALL_FOLDER="/var/www"
-PG_USER="mapigniter"
-MAPIGNITER_VERSION="master"
-PG_VERSION="9.1"
 CI_VERSION="2.1.3"
-APACHE_CONFIG="/etc/apache2/sites-available"
 
 echo "==============================================================="
 echo "Installing MapIgniter (install.sh)"
@@ -47,71 +40,52 @@ fi
 echo "Starting..."
 apt-get update
 
-echo "Check for python-software-properties..."
-if [ ! -x "`dpkg -l \* | grep python-software-properties`" ] ; then
-   apt-get -y install python-software-properties
+if [ -f /usr/bin/unzip ];
+then
+    echo "Unzip was found. Skipping install unzip..."
+else
+    echo "Installing unzip..."
+    apt-get install -y unzip
 fi
 
-echo "Adding UbuntuGIS repo..."
-add-apt-repository -y ppa:ubuntugis/ppa
-apt-get update
-
-echo "Installing apache web server..."
-apt-get install -y apache2
-
-echo "Installing cgi-mapserver..."
-apt-get install -y cgi-mapserver
-
-echo "Installing postgres and postgis..."
-apt-get install -y "postgresql-$PG_VERSION-postgis" postgis
-
-echo "Installing php5, pgsql, curl and gd..."
-apt-get install -y php5-cli php5-pgsql php5-curl php5-gd libapache2-mod-php5
-
-echo "Installing unzip..."
-apt-get install -y unzip
-
-echo "Downloading php composer..."
-wget --progress=dot:mega http://getcomposer.org/installer
-
-echo "Installing php composer..."
-php installer
-mv composer.phar /usr/local/bin/composer
-rm -f installer
-
-echo "Creating mapigniter postgres user with password 'postgres'..."
-sudo -u postgres createuser --superuser $PG_USER
-echo "alter role \"$PG_USER\" with password 'postgres'" | sudo -u postgres psql
-
-echo "Installing MapIgniter databases..."
-sudo -u postgres createdb -U postgres -E UTF8 mapigniter
-sudo -u postgres createlang -d mapigniter plpgsql
-sudo -u postgres createdb -U postgres -E UTF8 mapigniterdata
-sudo -u postgres createlang -d mapigniterdata plpgsql
-
-echo "Adding PostGIS extension..."
-# check for POSTGIS 2.0
-DIRECTORY="/usr/share/postgresql/$PG_VERSION/contrib/postgis-2.0"
-if [ ! -d "$DIRECTORY" ]; then
-    DIRECTORY="/usr/share/postgresql/$PG_VERSION/contrib/postgis-1.5"
+if [ -f /usr/local/bin/composer ];
+then
+    echo "Composer was found. Skipping install composer..."
+else
+    echo "Downloading php composer..."
+    wget --progress=dot:mega http://getcomposer.org/installer
+    echo "Installing php composer..."
+    php installer
+    mv composer.phar /usr/local/bin/composer
+    rm -f installer
 fi
 
-echo "PostGIS found at $DIRECTORY"
-sudo -u postgres psql --quiet -U postgres -d mapigniter -f "$DIRECTORY/postgis.sql"
-sudo -u postgres psql --quiet -U postgres -d mapigniter -f "$DIRECTORY/spatial_ref_sys.sql"
-sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "$DIRECTORY/postgis.sql"
-sudo -u postgres psql --quiet -U postgres -d mapigniterdata -f "$DIRECTORY/spatial_ref_sys.sql"
-
-echo "Activating Apache2 mod_rewrite..."
-a2enmod rewrite
-sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/sites-available/default
-
-echo "Restarting Apache2..."
-service apache2 restart
+if [ -f system ];
+then
+    echo "CodeIgniter system was found. Skipping install CodeIgniter..."
+else
+    echo "Downloading CodeIgniter..."
+    wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
+    unzip codeigniter.zip
+    cp -R "CodeIgniter_$CI_VERSION/system" .
+    rm codeigniter.zip
+    rm -rf "CodeIgniter_$CI_VERSION"
+fi
 
 echo "Installing MapIgniter..."
-chown -R www-data "$INSTALL_FOLDER/mapigniter/data"
-chown -R www-data "$INSTALL_FOLDER/mapigniter/web/data"
+mv index.dist.php index.php
+mv htaccess.dist .htaccess
+mv application/config/config.dist.php application/config/config.php
+mv data.dist data
+mkdir data/cache
+chown -R www-data data
+mkdir web/data
+mkdir web/data/tmp
+chown -R www-data web/data
+cd application/third_party
+composer install
+cd ../../web/js
+composer install
 
 echo "Done!"
 

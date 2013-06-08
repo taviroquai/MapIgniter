@@ -29,19 +29,20 @@ class Mapserver extends CI_Controller {
         
         // Load MapIgniter Configuration
         $this->load->config('mapigniter');
-        
+        // Load URL proxy
+        $this->load->model('urlproxy_model');
     }
     
     public function index()
     {
-
+        $url = $this->config->item('mapserver_cgi');
+        $response = $this->urlproxy_model->request($url, array(), false);
+        // Dump response content
+        $this->output->set_output($response['content']);
     }
     
     public function map($alias)
     {
-        
-        // Load Url Proxy
-        $this->load->model('urlproxy_model');
         
         // Translate URL
         $url = $this->config->item('mapserver_cgi');
@@ -87,7 +88,7 @@ class Mapserver extends CI_Controller {
         $this->output->set_header("Expires: ".$tsstring);
         $this->output->set_header("MICache: original");
         $format = end(explode('/', $is_image));
-        $this->output->set_content_type('image/'.$format);
+        //$this->output->set_content_type('image/'.$format);
         
         // Save into cache; only for images
         if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {

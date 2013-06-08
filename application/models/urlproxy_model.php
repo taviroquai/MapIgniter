@@ -28,10 +28,10 @@ class Urlproxy_model extends CI_Model {
      * @param string $url
      * @return array
      */
-    public function request($url, $post = array()) {
+    public function request($url, $post = array(), $log = true) {
 
         // Log network
-        $logfile = fopen($this->config->item('private_data_path')."curl.log", 'w') or die("can't open log file");
+        if ($log) $logfile = fopen($this->config->item('private_data_path')."curl.log", 'w') or die("can't open log file");
         
         //Start the Curl session
         $session = curl_init($url);
@@ -44,7 +44,7 @@ class Urlproxy_model extends CI_Model {
         curl_setopt($session, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($session, CURLOPT_VERBOSE, true);
-        curl_setopt($session, CURLOPT_STDERR, $logfile); // logs curl messages
+        if ($log) curl_setopt($session, CURLOPT_STDERR, $logfile); // logs curl messages
         curl_setopt($session, CURLOPT_FILETIME, true);
 
         // Make the call
@@ -54,13 +54,13 @@ class Urlproxy_model extends CI_Model {
         $headers = curl_getinfo($session);
         
         // log anything
-        fwrite($logfile, json_encode($headers));
+        if ($log) fwrite($logfile, json_encode($headers));
 
         // finish curl
         curl_close($session);
         
         // finish log
-        fclose($logfile);  // close logfile
+        if ($log) fclose($logfile);  // close logfile
         
         return array('headers' => $headers, 'content' => $content);
     }

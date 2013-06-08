@@ -27,6 +27,12 @@ class MY_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         
+        // check for configuration
+        $filename = APPPATH.'/config/mapigniter.php';
+        if (!file_exists($filename)) redirect(base_url('install'));
+        $filename = APPPATH.'/config/database.php';
+        if (!file_exists($filename)) redirect(base_url('install'));
+        
         // Load MapIgniter Configuration
         $this->load->config('mapigniter');
         

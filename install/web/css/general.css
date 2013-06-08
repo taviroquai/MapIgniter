@@ -1,0 +1,305 @@
+/**
+ * MapIgniter
+ *
+ * An open source GeoCMS application
+ *
+ * @package		MapIgniter
+ * @author		Marco Afonso
+ * @copyright	Copyright (c) 2012, Marco Afonso
+ * @license		dual license, one of two: Apache v2 or GPL
+ * @link		http://marcoafonso.com/miwiki/doku.php
+ * @since		Version 1.0
+ * @filesource
+ */
+
+/* ------------------------------------------------------------------------ */
+
+h1 { font-size: 26px; line-height: 30px; margin-bottom: 10px;}
+h2 { font-size: 20px; line-height: 20px; margin-bottom: 8px; }
+h3 { font-size: 16px; line-height: 18px; margin-bottom: 6px; }
+h4 { font-size: 14px; line-height: 16px; margin-bottom: 4px; }
+h5 { font-size: 14px; line-height: 16px; }
+h6 { font-size: 14px; line-height: 16px; }
+
+h1, h2 {
+    text-shadow: 1px 1px 1px #787878;
+    /* filter: dropshadow(color=#787878, offx=1, offy=1); */
+    margin-top: 20px;
+}
+
+.milayerswitcher {
+    
+}
+
+.milayerswitcher li {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    border-top: 4px solid gray;
+}
+
+.milayercategorylabel {
+    cursor: pointer;
+}
+
+.milayerswitcher .micategory>span {
+    line-height: 2em;
+    padding-bottom: 10px;
+}
+
+.milayerswitcher .micategory ul {
+    padding-top: 6px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.milayerswitcher li ul li {
+    margin-bottom: 10px;
+    border: 0;
+}
+
+.milayerswitcher .micategory span.title {
+    display:block;
+    padding:10px 10px 10px 20px;
+}
+
+.milayerswitcher .micategory ul {
+
+}
+
+.milayerswitcher .milayer {
+    cursor: pointer;
+}
+
+#slot2 .home {
+    float: left;
+    margin-left: 20px;
+}
+
+.rateme {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 16px;
+    background-color: gray;
+    overflow: hidden;
+    background: gray url('../images/icons/png/16x16/rate_bg.png') no-repeat -80px 0px;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.rateme img {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.rateme img:hover {
+    cursor: pointer;
+}
+
+.ratemsg {
+    width: 80px;
+    text-align: center;
+    display: none;
+    float:left;
+}
+
+.hidden {
+    display: none;
+}
+
+input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    margin-bottom: 10px;
+}
+
+#editbutton {
+    margin: 0 auto;
+    width: 290px; 
+    height: 90px; 
+    padding-top: 20px; 
+    text-align: center;
+    background: #fff url("../images/icons/edit_button.jpg") top left no-repeat;
+    cursor: pointer;
+}
+
+#editbutton span {
+    font-size: 1.5em;
+    color: #999;
+    font-weight: bold;
+}
+
+#editbutton.checked {
+    height: 68px; 
+    padding-top: 42px; 
+    background: #fff url("../images/icons/edit_button_checked.jpg") top left no-repeat;
+}
+
+#editbutton.checked span {
+    color: #0f0;
+}
+
+
+.msgs {
+    max-width: 100%;
+    text-align: center;
+}
+.msgs .error {
+    color: white;
+    background-color: #ff9400;
+}
+
+.msgs .info {
+    color: white;
+    background-color: #024fcf;
+}
+
+fieldset {
+    margin-bottom: 5px;
+}
+form legend { 
+    cursor: pointer;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    background-color: #ff9400;
+    padding: 0 0 0 5px;
+}
+form .accordion {
+    margin-left: 20px;
+}
+
+form label+p img {
+    vertical-align: middle; 
+}
+
+textarea {
+    width: 100%;
+}
+
+.ColorBlotch {
+    cursor: pointer;
+}
+
+.ticketlog {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 80%;
+}
+
+.ticketlog tr, .ticketlog td {
+    height: 21px;
+    overflow: hidden;
+}
+
+.ticketlog th {
+    background-color: #333;
+    color: #fff;
+    padding: 3px;
+    text-align: left;
+}
+
+.ticketlog td {
+    text-align: left;
+}
+
+.cacheinfo {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 80%;
+}
+
+.cacheinfo tr, .cacheinfo td {
+    height: 21px;
+    overflow: hidden;
+}
+
+.cacheinfo th {
+    background-color: #333;
+    color: #fff;
+    padding: 3px;
+    text-align: left;
+}
+
+.cacheinfo td {
+    text-align: left;
+}
+
+.blocklist {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 80%;
+}
+
+.blocklist tr, .blocklist td {
+    height: 21px;
+    overflow: hidden;
+}
+
+.blocklist th {
+    background-color: #333;
+    color: #fff;
+    padding: 3px;
+    text-align: left;
+}
+
+.blocklist td {
+    text-align: left;
+}
+
+.placelist {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 80%;
+}
+
+.placelist tr, .placelist td {
+    height: 21px;
+    overflow: hidden;
+}
+
+.placelist a {
+    text-decoration: none;
+}
+
+.placelist th {
+    padding: 3px;
+}
+
+.placelist a img {
+    vertical-align: middle;
+}
+
+.placelist th {
+    background-color: #333;
+    color: #fff;
+}
+
+.placelist div.rh {
+    height: 21px; overflow: hidden;
+}
+
+col.placegid {text-align: left;} 
+col.placetitle {background: #fefefe; text-align: center;} 
+col.placedate {background: #fefefe; text-align: center;}
+col.placeowner {background: #fefefe; text-align: center;}
+
+.placelist tr>th, .placelist tr>td {text-align: left;} 
+.placelist th+th, .placelist td+td {text-align: center;} 
+.placelist th+th+th, .placelist td+td+td {text-align: center;} 
+.placelist th+th+th+th, .placelist td+td+td+td {text-align: center;} 
+
+#explorer_preview {
+    position: absolute;
+    border: 1px solid #ccc;
+    background: #333;
+    padding: 5px;
+    display: none;
+    color: #fff;
+    z-index: 20000;
+}
