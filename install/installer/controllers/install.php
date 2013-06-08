@@ -152,10 +152,10 @@ class Install extends CI_Controller {
             
             // Check if mod_rewrite is active for application folder
             $info[] = 'Checking if mod_rewrite is enabled for application folder...';
-            // Use mapserver controller to test
-            $test_url = str_replace('/install/..', '/mapserver/', $this->app_url);
-            $expected_result = 'No query information to decode. QUERY_STRING is set, but empty.'; 
-            $result = trim(file_get_contents($test_url));
+            // Use test controller to test
+            $test_url = str_replace('/install/..', '/test', $this->app_url);
+            $expected_result = 'test'; 
+            $result = trim(@file_get_contents($test_url));
             if ($result !== $expected_result) {
                 throw new Exception('Apache mod_rewrite is not working for application folder. Please change Apache configuration.');
             }
