@@ -109,6 +109,7 @@
             <? if ($install) : ?>
                 <p><strong>MapIgniter was installed successfully</strong></p>
                 <p>Administrator login: admin<br />Password: admin</p>
+		<p>IMPORTANT: delete this directory now</p>
                 <p>Click <a href="<?=base_url('../')?>">here</a> to go to the homepage.</p>
             <? else: ?>
                 <p><strong>No errors found</strong></p>
