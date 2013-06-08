@@ -76,7 +76,7 @@ echo "Installing MapIgniter..."
 cp index.dist.php index.php
 cp htaccess.dist .htaccess
 cp application/config/config.dist.php application/config/config.php
-cp data.dist data
+cp -R data.dist data
 chown -R www-data application/config
 mkdir data/cache
 chown -R www-data data
