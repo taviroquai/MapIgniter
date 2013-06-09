@@ -91,6 +91,15 @@ class Adminmap extends MY_Controller {
         try {
             // load post data
             $post = $this->input->post(NULL, TRUE);
+            
+            // General validation
+            if (empty($post['title'])) throw new Exception('Invalid title!');
+            if (empty($post['alias']) || strlen($post['alias']) < 3)
+                throw new Exception('System name has to have at least 3 characters!');
+            $this->load->model('database/postgis_model');
+            if (!$this->postgis_model->validateUserTableName($post['alias'])) {
+                throw new Exception('System name is reserved! Please enter another.');
+            }
 
             // Create new map
             if ($id === 'new') {
@@ -106,11 +115,6 @@ class Adminmap extends MY_Controller {
                 $map = $this->map_model->load($id);
                 if (!$map) throw new Exception('Map not found!');
             }
-
-            // General validation
-            if (empty($post['title'])) throw new Exception('Invalid title!');
-            if (empty($post['alias']) || strlen($post['alias']) < 3)
-                throw new Exception('System name has to have at leas 3 characters!');
             
             // Save
             $fields = array('title', 'description', 'alias');

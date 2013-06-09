@@ -115,6 +115,11 @@ class Adminpglayer extends MY_Controller {
             // load post data
             $post = $this->input->post(NULL, TRUE);
             
+            $this->load->model('database/postgis_model');
+            if (!$this->postgis_model->validateUserTableName($post['new_pgplacetype'])) {
+                throw new Exception('System name is reserved! Please enter another.');
+            }
+            
             // Create new postgis layer
             if ($id === 'new') {
                 $layer = $this->layer_model->load($post['layer_id']);

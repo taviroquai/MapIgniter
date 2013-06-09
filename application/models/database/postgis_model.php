@@ -28,6 +28,8 @@ class Postgis_model extends CI_Model {
         $this->load->model('database/database_model');
         $this->exclude_table[] = 'spatial_ref_sys';
         $this->exclude_table[] = 'geometry_columns';
+        $this->exclude_table[] = 'topology';
+        $this->exclude_table[] = 'layer';
         $this->exclude_field[] = 'gid';
         $this->exclude_field[] = 'last_update';
         $this->exclude_field[] = 'owner';
@@ -672,6 +674,10 @@ class Postgis_model extends CI_Model {
         // Select application database
         $this->database_model->selectDatabase();
         return $results;
+    }
+    
+    public function validateUserTableName($name) {
+        return !in_array($name, $this->exclude_table);
     }
     
     public function importZip($zipfile, $tablename, $srid, $options, $logfile = 'import.log') {
