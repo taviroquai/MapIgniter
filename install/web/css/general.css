@@ -303,3 +303,21 @@ col.placeowner {background: #fefefe; text-align: center;}
     color: #fff;
     z-index: 20000;
 }
+
+#requirements {
+    font-size: 90% !important;
+}
+
+#requirements .ok {
+    background-color: green;
+    color: white;
+}
+
+#requirements .failed {
+    background-color: red;
+    color: white;
+}
+
+.hide {
+    display: none !important;
+}

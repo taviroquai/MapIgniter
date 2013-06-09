@@ -34,6 +34,7 @@ class Install extends CI_Controller {
     {
         $errors = array();
         $info = array();
+        $config_ok = false;
         $post = $this->input->post();
         $install = $this->input->post('install');
         $this->load->config('mapigniter');
@@ -74,115 +75,117 @@ class Install extends CI_Controller {
             
             // Check MapServer
             $cmd = $post['mapserver_path'].' -v ';
-            $info[] = "Detecting MapServer with: $cmd";
+            $info['mapserver_path'] = "Detecting MapServer with: $cmd";
             exec($cmd, $msoutput);
             //$info[] = implode('<br />', $msoutput);
             $regex = preg_match('/MapServer version \d+\.\d+/i', implode(" ", $msoutput), $matches);
-            if (!$regex) throw new Exception('MapServer was not detected.');
+            if (!$regex) $errors['mapserver_path'] = 'MapServer was not detected.';
             
             // Check if can be called by configured url
-            $info[] = "Detecting MapServer at url: ".$post['mapserver_cgi'];
+            $info['mapserver_cgi'] = "Detecting MapServer at url: ".$post['mapserver_cgi'];
             $mapserver_cgi = trim(file_get_contents($post['mapserver_cgi']));
             //$info[] = $mapserver_cgi;
-            if ($mapserver_cgi !== 'No query information to decode. QUERY_STRING is set, but empty.')
-                throw new Exception('MapServer is not responding at url: '.$post['mapserver_cgi']);
+            if ($mapserver_cgi !== 'No query information to decode. QUERY_STRING is set, but empty.') {
+                $errors['mapserver_cgi'] = 'MapServer is not responding at url: '.$post['mapserver_cgi'];
+            }
             
             // Check PostgreSQL
             $cmd = $post['psql_path'].' --version';
-            $info[] = "Detecting PostgreSQL with: $cmd";
+            $info['postgresql'] = "Detecting PostgreSQL with: $cmd";
             exec($cmd, $pgoutput);
             //$info[] = implode('<br />', $pgoutput);
             $regex = preg_match('/psql \(PostgreSQL\) \d+\.\d+\.\d+/i', implode(" ", $pgoutput), $matches);
-            if (!$regex) throw new Exception('PostgreSQL was not detected.');
+            if (!$regex) $errors['postgresql'] = 'PostgreSQL was not detected.';
             
             // Check shp2pgsql tool
             $cmd = $post['shp2pgsql_path'];
-            $info[] = "Detecting shp2pgsql with: $cmd";
+            $info['shp2pgsql_path'] = "Detecting shp2pgsql with: $cmd";
             exec($cmd, $shp2pgoutput);
             //$info[] = htmlentities(implode('<br />', $shp2pgoutput));
             $regex = preg_match('/RELEASE\: \d+\.\d+/i', implode(" ", $shp2pgoutput), $matches);
-            if (!$regex) throw new Exception('shp2pgsql was not detected.');
+            if (!$regex) $errors['shp2pgsql_path'] = 'shp2pgsql was not detected.';
             
             // Check php5-psql
-            $info[] = "Detecting php5-pgsql with extension_loaded()";
-            if (!extension_loaded('pgsql')) throw new Exception('php5-pgsql extension was not detected.');
-            $info[] = "php5-pgsql is loaded";
+            $info['php5_pgsql'] = "Detecting php5-pgsql with extension_loaded()";
+            if (!extension_loaded('pgsql')) $errors['php5_pgsql'] = 'php5-pgsql extension was not detected.';
             
             // Check php5-curl
-            $info[] = "Detecting php5-curl with extension_loaded()";
-            if (!extension_loaded('curl')) throw new Exception('php5-curl extension was not detected.');
-            $info[] = "php5-curl is loaded";
+            $info['php5_curl'] = "Detecting php5-curl with extension_loaded()";
+            if (!extension_loaded('curl')) $errors['php5_curl'] = 'php5-curl extension was not detected.';
             
             // Check php5-gd
-            $info[] = "Detecting php5-gd with extension_loaded()";
-            if (!extension_loaded('gd')) throw new Exception('php5-gd extension was not detected.');
-            $info[] = "php5-gd is loaded";
+            $info['php5_gd'] = "Detecting php5-gd with extension_loaded()";
+            if (!extension_loaded('gd')) $errors['php5_gd'] = 'php5-gd extension was not detected.';
             
             // Check if private data folder is writeable
             $private_data_path = $post['private_data_path'];
-            $info[] = "Checking private data folder: $private_data_path ...";
+            $info['private_data_path'] = "Checking private data folder: $private_data_path ...";
             $private_folder = is_writable($private_data_path);
             if (!$private_folder) {
-                $info[] = 'The private data folder cannot be written by user www-data.';
-                throw new Exception ('The private data folder ('.$private_data_path.') cannot be written.');
+                $errors['private_data_path'] = 'The private data folder ('.$private_data_path.') cannot be written.';
             }
             
             // Check if public data folder is writeable
             $data_path = $post['public_data_path'];
-            $info[] = "Checking public data folder: $data_path ...";
+            $info['public_data_path'] = "Checking public data folder: $data_path ...";
             $writeable = is_writable($data_path);
             if (!$writeable) {
-                $info[] = 'The public data folder cannot be written by user www-data.';
-                throw new Exception ('The public data folder ('.$data_path.') cannot be written.');
+                $errors['public_data_path'] = 'The public data folder ('.$data_path.') cannot be written.';
             }
             
             // Check if configuration directory is writeable
-            $info[] = 'Checking for configuration directory...';
+            $info['config_path'] = 'Checking for configuration directory...';
             $dir = dirname($this->app_path.'/config/mapigniter.php');
             if (!is_writable($dir)) {
-                throw new Exception('Cannot create configuration files at '.$dir);
+                $errors['config_path'] = 'Cannot create configuration files at '.$dir;
             }
             
             // check apache rewrite module
-            $info[] = 'Checking for apache rewrite module with apache_get_modules() function...';
+            $info['apache_mod_rewrite'] = 'Checking for apache rewrite module with apache_get_modules()';
             $apache_modules = apache_get_modules();
             if (!in_array('mod_rewrite', $apache_modules)) {
-                throw new Exception('Apache module rewrite was not detected');
+                $errors['apache_mod_rewrite'] = 'Apache module rewrite was not detected';
             }
             
             // Check if mod_rewrite is active for application folder
-            $info[] = 'Checking if mod_rewrite is enabled for application folder...';
+            $info['htaccess_override'] = 'Checking if mod_rewrite is enabled for application folder...';
             // Use test controller to test
             $test_url = str_replace('/install/..', '/test', $this->app_url);
             $expected_result = 'test'; 
             $result = trim(@file_get_contents($test_url));
             if ($result !== $expected_result) {
-                throw new Exception('Apache mod_rewrite is not working for application folder. Please change Apache configuration.');
+                $errors['htaccess_override'] = 'Apache mod_rewrite is not working for application folder. Please change Apache configuration.';
             }
             
             // Check database
-            $info[] = 'Checking database...';
+            $info['db_default_connect'] = 'Checking application database...';
             $this->load->model('database_model');
             // Setup DB connections
             R::addDatabase('default', "pgsql:host={$post['db_default_hostname']};dbname={$post['db_default_database']}", $post['db_default_username'], $post['db_default_password']);
             R::selectDatabase('default');
-            $tables = $this->database_model->checkSchema();
-            if (empty($tables)) $info[] = 'Application database exists.';
-            else $info[] = 'Application database has '.count($tables).' tables.';
+            try {
+                $tables = $this->database_model->checkSchema();
+            } catch (Exception $e) {
+                $errors['db_default_connect'] = $e->getMessage();
+            }
             
             // Setup DB connection
+            $info['db_userdata_connect'] = 'Checking user data database...';
             R::addDatabase('userdata', "pgsql:host={$post['db_userdata_hostname']};dbname={$post['db_userdata_database']}", $post['db_userdata_username'], $post['db_userdata_password']);
             R::selectDatabase('userdata');
-            $tables = $this->database_model->checkSchema();
-            if (empty($tables)) $info[] = 'User data database does exists.';
-            else $info[] = 'User data has '.count($tables).' tables.';
+            try {
+                $tables = $this->database_model->checkSchema();
+            } catch (Exception $e) {
+                $errors['db_userdata_connect'] = $e->getMessage();
+            }
             
             // Check postgis on data database
-            $info[] = 'Checking postgis functions...';
+            $info['db_userdata_postgis'] = 'Checking postgis on user data database...';
+            R::selectDatabase('userdata');
             try {
                 $result = R::getRow('SELECT postgis_full_version()');
             } catch (Exception $e) {
-                throw new Exception('Postgis was not found in "user data" database. Please add plpgsql, postgis functions and spatial reference table to the database.');
+                $errors['db_userdata_postgis'] = 'Postgis was not found in "user data" database. Please add plpgsql, postgis functions and spatial reference table to the database.';
             }            
             
             // Proceed to install if user ordered
@@ -191,22 +194,17 @@ class Install extends CI_Controller {
                 // Create configuration files
                 $this->saveConfigFiles($post);
                 foreach ($post as $k => $v) $this->config->set_item($k, $v);
-                // Force the Session class to recapture global settings by calling it's constructor
-                //$this->session->CI_Session();
                 
                 // Install database
-                $info[] = 'Installing database...';
                 R::selectDatabase('default');
                 $this->database_model->install();
-                $info[] = '... database and demo data were installed.';
             }
             
-            $config_ok = true;
+            if (empty($errors)) $config_ok = true;
         }
         catch(Exception $e) {
-            $errors[] = 'There was at least 1 error when checking system requirements.';
-            $errors[] = $e->getMessage();
-            $config_ok = false;
+            $errors['system'] = 'There was at least 1 error when checking system requirements.';
+            $errors['system'] = $e->getMessage();
         }
         
         // Prepare output data
