@@ -177,6 +177,13 @@ class Install extends CI_Controller {
             if (empty($tables)) $info[] = 'User data database does exists.';
             else $info[] = 'User data has '.count($tables).' tables.';
             
+            // Check postgis on data database
+            $info[] = 'Checking postgis functions...';
+            try {
+                $result = R::getRow('SELECT postgis_full_version()');
+            } catch (Exception $e) {
+                throw new Exception('Postgis was not found in "user data" database. Please add plpgsql, postgis functions and spatial reference table to the database.');
+            }            
             
             // Proceed to install if user ordered
             if ($install) {
