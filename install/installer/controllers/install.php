@@ -83,7 +83,7 @@ class Install extends CI_Controller {
             
             // Check if can be called by configured url
             $info['mapserver_cgi'] = "Detecting MapServer at url: ".$post['mapserver_cgi'];
-            $mapserver_cgi = trim(file_get_contents($post['mapserver_cgi']));
+            $mapserver_cgi = trim(@file_get_contents($post['mapserver_cgi']));
             //$info[] = $mapserver_cgi;
             if ($mapserver_cgi !== 'No query information to decode. QUERY_STRING is set, but empty.') {
                 $errors['mapserver_cgi'] = 'MapServer is not responding at url: '.$post['mapserver_cgi'];
