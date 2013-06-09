@@ -196,6 +196,10 @@ if (defined('ENVIRONMENT'))
 	// The path to the "application" folder
 	if (is_dir($application_folder))
 	{
+            if (realpath(__DIR__.DIRECTORY_SEPARATOR.$application_folder) !== false)
+            {
+                $application_folder = realpath(__DIR__.DIRECTORY_SEPARATOR.$application_folder);
+            }
 		define('APPPATH', $application_folder.'/');
 	}
 	else
