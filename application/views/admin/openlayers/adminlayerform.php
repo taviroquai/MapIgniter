@@ -50,5 +50,8 @@
     <label>Layer information website (optional)</label>
     <textarea name="informationurl" cols="60" rows="6"><?=$ollayer->informationurl?></textarea>
     
+    <label>Default Style (JSON) (optional, vector only)</label>
+    <textarea name="default_style" cols="60" rows="6"><?=$ollayer->default_style?></textarea>
+    
     <button type="submit">Save</button>
 </form>

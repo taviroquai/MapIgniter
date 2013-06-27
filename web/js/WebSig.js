@@ -61,6 +61,24 @@ WebSig.Mapblock.prototype.init = function () {
                 lcfg.vendorparams.name = lcfg.name;
                 layer = new OpenLayers.Layer.Bing(lcfg.vendorparams, lcfg.options);
                 break;
+            case 'OpenLayers.Layer.Vector':
+                layer = new OpenLayers.Layer.Vector(lcfg.name, {
+                    strategies: [new OpenLayers.Strategy.BBOX()],
+                    protocol: new OpenLayers.Protocol.WFS({
+                        url:  base_url + 'mapserver/map/' + lcfg.url,
+                        featureType: lcfg.alias,
+                        version: "1.0.0", 
+                        geometryName: "the_geom"
+                    }),
+                    styleMap: new OpenLayers.StyleMap({
+                        "default": lcfg.default_style,
+                        "select": {
+                            fillColor: "#8aeeef",
+                            strokeColor: "#32a8a9"
+                        }
+                    })
+                });
+                break;
             default:
                 if (lcfg.type.id == 4) lcfg.url = base_url + 'mapserver/map/' + lcfg.url;
                 if (lcfg.autoResolution) lcfg.maxResolution = "auto";
@@ -68,7 +86,7 @@ WebSig.Mapblock.prototype.init = function () {
         }
         this.map.addLayers([layer]);
     }
-    //this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+    this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 }
 
 /**

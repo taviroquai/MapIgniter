@@ -697,6 +697,7 @@ class Database_model extends CI_Model {
         $ollayertype[] = $this->openlayers_model->createLayerType('Bing', 'OpenLayers.Layer.Bing');
         $ollayertype[] = $this->openlayers_model->createLayerType('Internal WMS', 'OpenLayers.Layer.WMS');
         $ollayertype[] = $this->openlayers_model->createLayerType('External WMS', 'OpenLayers.Layer.WMS');
+        $ollayertype[] = $this->openlayers_model->createLayerType('Vector + WFS', 'OpenLayers.Layer.Vector');
         foreach ($ollayertype as &$item) $item->owner = $account_admin;
         R::storeAll($ollayertype);
         

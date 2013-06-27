@@ -133,7 +133,8 @@ class Adminollayer extends MY_Controller {
                 'url',
                 'options',
                 'vendorparams',
-                'informationurl'
+                'informationurl',
+                'default_style'
             );
             
             $ollayer->import($post, implode(',', $fields));

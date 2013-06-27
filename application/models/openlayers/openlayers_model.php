@@ -59,6 +59,7 @@ class Openlayers_model extends CI_Model {
         $ollayer->options = $options;
         $ollayer->vendorparams = $vendorparams;
         $ollayer->informationurl = '';
+        $ollayer->default_style = '';
         $ollayer->last_update = date('Y-m-d H:i:s');
         
         return $ollayer;
@@ -181,6 +182,7 @@ class Openlayers_model extends CI_Model {
         $export['type'] = $ollayer->ollayertype->export();
         $export['options'] = json_decode($ollayer->options, true);
         $export['vendorparams'] = json_decode($ollayer->vendorparams, true);
+        $export['default_style'] = json_decode($ollayer->default_style, true);
         return $export;
     }
     
