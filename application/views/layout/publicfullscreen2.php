@@ -30,6 +30,7 @@
             var base_url = '<?=base_url()?>';
         </script>
 
+        <script type="text/javascript" src="web/js/publicfullscreen2.js"></script>
         <? foreach ($_slot['_scripts'] as $_src) { ?>
         <script type="text/javascript" src="<?=$_src?>"></script>
         <? } ?>
@@ -42,6 +43,9 @@
         </div>
         
         <div id="column">
+            <a id="column-toggle" style="float: right">
+                <img src="web/images/icons/png/32x32/arrow-left.png" alt="Toggle column button" />
+            </a>
             <? if (!empty($_slot['slot3'])) : ?>
             <div id="slot3">
                 <div class="content-padding"><?=$_slot['slot3']?></div>
