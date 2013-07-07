@@ -90,7 +90,8 @@ class Install extends CI_Controller {
             }
             
             // Check PostgreSQL
-            $cmd = $post['psql_path'].' --version';
+            if (strstr($post['psql_path'], '.exe')) $cmd = '"'.$post['psql_path'].'" --version';
+            else $cmd = $post['psql_path'].' --version';
             $info['postgresql'] = "Detecting PostgreSQL with: $cmd";
             exec($cmd, $pgoutput);
             //$info[] = implode('<br />', $pgoutput);
@@ -98,7 +99,8 @@ class Install extends CI_Controller {
             if (!$regex) $errors['postgresql'] = 'PostgreSQL was not detected.';
             
             // Check shp2pgsql tool
-            $cmd = $post['shp2pgsql_path'];
+            if (strstr($post['shp2pgsql_path'], '.exe')) $cmd = '"'.$post['shp2pgsql_path'].'"';
+            else $cmd = $post['shp2pgsql_path'];
             $info['shp2pgsql_path'] = "Detecting shp2pgsql with: $cmd";
             exec($cmd, $shp2pgoutput);
             //$info[] = htmlentities(implode('<br />', $shp2pgoutput));
@@ -142,7 +144,8 @@ class Install extends CI_Controller {
             
             // check apache rewrite module
             $info['apache_mod_rewrite'] = 'Checking for apache rewrite module with apache_get_modules()';
-            $apache_modules = apache_get_modules();
+            if (function_exists('apache_get_modules')) $apache_modules = apache_get_modules();
+            else $apache_modules = $this->apache_get_modules();
             if (!in_array('mod_rewrite', $apache_modules)) {
                 $errors['apache_mod_rewrite'] = 'Apache module rewrite was not detected';
             }
@@ -235,6 +238,26 @@ class Install extends CI_Controller {
             $config_file = str_replace('{{'.$k.'}}', $v, $config_file);
         }
         file_put_contents($this->app_path.'/config/database.php', $config_file);
+    }
+    
+    private function apache_get_modules() {
+        // Fallback for ms4w PHP under cgi
+        // TODO: needs more work.
+        // For now consider apache config at /ms4w/Apache/conf/http.conf
+        $modules = array();
+        $apache_config = '/ms4w/Apache/conf/httpd.conf';
+        if (!file_exists($apache_config)) die('Unable to find Apache configuration at '.$apache_config);
+        if (!is_readable($apache_config)) die('Unable to read Apache configuration at '.$apache_config);
+        $fcont = file($apache_config);
+        if (!is_array($fcont)) die('Unable to parse Apache configuration file at '.$apache_config);			  
+        foreach ($fcont as $line) {
+            if (preg_match ("/^LoadModule\s*(\S*)\s*(\S*)/i", $line, $match)) {
+                $name = basename($match[2]); // remove path
+                $name = substr($name, 0, (strlen ($name)) - (strlen (strrchr($name, '.')))); // remove extension
+                $modules[] = $name;
+            }
+        }
+        return $modules;
     }
     
 }

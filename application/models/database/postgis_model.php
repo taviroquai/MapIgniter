@@ -705,8 +705,8 @@ class Postgis_model extends CI_Model {
         // Extract if shapefile was found
         if (empty($shapefile_name)) throw new Exception('The shapefile (.shp) was not found.');
 
-        $extract_path = $this->config->item('private_data_path');
-        $extract_path .= $tablename.'/';
+        $extract_path = realpath($this->config->item('private_data_path')).DIRECTORY_SEPARATOR;
+        $extract_path .= $tablename.DIRECTORY_SEPARATOR;
         $za->extractTo($extract_path);
 
         // Import to postgis
@@ -718,24 +718,28 @@ class Postgis_model extends CI_Model {
             $dbpass = $dbconfig['password'];
             $shapefile_name = $extract_path.$shapefile_name;
             chdir($extract_path);
-            $cmd = $this->config->item('shp2pgsql_path')." $options -s $srid $shapefile_name $tablename > $tablename.sql";
+            $cmd = dirname(realpath($this->config->item('shp2pgsql_path'))).
+                DIRECTORY_SEPARATOR.basename($this->config->item('shp2pgsql_path'));
+            if (strstr($cmd, '.exe')) $cmd = '"'.$cmd.'"';
+            $cmd .= " $options -s $srid $shapefile_name $tablename > $tablename.sql";
             $result['msgs']['info'][] = 'Using <em>'.$cmd.'</em>';
             $result1 = exec($cmd, $shp2pgsql_output);
             
             $sql_output = array();
             $new_sql = file_get_contents($tablename.'.sql');
             $sql_output[] = $new_sql;
-            $save_path = $this->config->item('public_data_path').$logfile;
-            $logdata = implode("\n", $shp2pgsql_output);
-            $logdata .= implode("\n", $sql_output);
+            $save_path = realpath($this->config->item('public_data_path')).
+                DIRECTORY_SEPARATOR.$logfile;
+            $logdata = implode(PHP_EOL, $shp2pgsql_output);
+            $logdata .= implode(PHP_EOL, $sql_output);
             file_put_contents($save_path, $logdata);
             $result['logfile'] = $logfile;
             
             // New strategy to run multiple SQL using PDO
             // This may need more work...
-            $import_sql = explode("BEGIN;\n", $new_sql);
+            $import_sql = explode("BEGIN;".PHP_EOL, $new_sql);
             $remove_sql = $import_sql[0];
-            $create_sql = "BEGIN;\n".$import_sql[1];
+            $create_sql = "BEGIN;".PHP_EOL.$import_sql[1];
             $pdo = $this->database_model->createPDO("pgsql:dbname=$dbname;host=$dbhost", $dbuser, $dbpass);
             try {
                 $this->database_model->pdoExec($pdo, $remove_sql);
