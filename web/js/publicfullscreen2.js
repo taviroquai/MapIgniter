@@ -21,7 +21,6 @@ jQuery(function($) {
 
 function publicfullscreen2MoveZoomLeft(css_left) {
     if (css_left === undefined) css_left = '400px !important';
-    console.log(jQuery('#mapcontainer .olControlZoom'));
     if (jQuery('#mapcontainer .olControlZoom').length > 0) {
         var css_pos = jQuery('#mapcontainer .olControlZoom').css('position');
         var css_z = jQuery('#mapcontainer .olControlZoom').css('z-index');
