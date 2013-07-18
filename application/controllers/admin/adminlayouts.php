@@ -64,6 +64,13 @@ class Adminlayouts extends MY_Controller {
             
             // Load all blocks
             $modules = $this->layout_model->loadModuleAll();
+            $slots = $layout->ownLslot;
+            foreach ($slots as &$slot) {
+                $blocks = $slot->sharedLblock;
+                foreach ($blocks as &$block) {
+                    $block->editpath = $this->getBlockEditControllerPath ($block).'/edit/';
+                }
+            }
             
             // Load main content
             $data = array(
@@ -99,45 +106,6 @@ class Adminlayouts extends MY_Controller {
             // Load main content
             $data = array('layout' => $layout, 'slot' => $slot);
             $content = $this->load->view('admin/layouts/admineditslot', $data, TRUE);
-        }
-        catch (Exception $e) {
-            $content = "<p>{$e->getMessage()}</p>";
-        }
-        
-        // Render
-        $this->render($content);
-
-    }
-    
-    /**
-     * Action editblock
-     * Opens a form for block edition
-     * @param integer $layout_id
-     * @param integer $id 
-     */
-    public function editblock($layout_id, $id)
-    {   
-        try {
-            // Load layout
-            $layout = $this->layout_model->loadById($layout_id);
-            
-            // Load layout slot
-            $block = $this->layout_model->loadBlock($id);
-            if (!$block) throw new Exception('Layout slot not found!');
-            
-            // Load module items
-            $module_items = null;
-            if ($block->module->table) {
-                $this->load->model('database/database_model');
-                $module_items = $this->database_model->find($block->module->table, ' true ');
-            }
-            
-            // Load main content
-            $data = array(
-                'layout'    => $layout,
-                'block'     => $block, 
-                'module_items' => $module_items);
-            $content = $this->load->view('admin/layouts/admineditblock', $data, TRUE);
         }
         catch (Exception $e) {
             $content = "<p>{$e->getMessage()}</p>";
@@ -233,11 +201,10 @@ class Adminlayouts extends MY_Controller {
     }
     
     /**
-     * Save block
+     * Create a new block
      * @param integer $layout_id
-     * @param integer $id 
      */
-    public function saveblock($layout_id, $id)
+    public function createblock($layout_id)
     {   
         try {
             // Load layout
@@ -249,51 +216,42 @@ class Adminlayouts extends MY_Controller {
             $module_id = $this->input->post('module_id');
             $module_item = $this->input->post('module_item');
             $slot_id = $this->input->post('slot_id');
-            $old_slot_id = $this->input->post('old_slot_id');
             $publish = $this->input->post('publish');
             $publish_order = $this->input->post('publish_order');
             
-            // Check for slot change, create new block if true
-            if (!empty($old_slot_id) && $old_slot_id != $slot_id) {
-                $this->layout_model->deleteLblock(array($id));
-                $id = 'new';
-            }
-            
             // Create layout block
-            if ($id === 'new') {
-                $slot = $this->layout_model->loadSlot($slot_id);
-                if (!$slot) throw new Exception('Slot not found!');
-                $module = $this->layout_model->loadModule($module_id);
-                if (!$module) throw new Exception('Module not found!');
-                $lblock = $this->layout_model->createBlock($name, $module, 1, $config);
-                $lblock->publish = 0;
-                $account = $this->account_model->load($this->session->userdata('username'));
-                $lblock->owner = $account;
-                $this->layout_model->slotAddBlock($slot, $lblock);
-            }
-            else {
-                $lblock = $this->layout_model->loadBlock($id);
-                if (!$lblock) throw new Exception('Block not found!');
-                $module = $this->layout_model->loadModule($module_id);
-                if (!$module) throw new Exception('Module not found!');
-            }
+            $slot = $this->layout_model->loadSlot($slot_id);
+            if (!$slot) throw new Exception('Slot not found!');
+            $module = $this->layout_model->loadModule($module_id);
+            if (!$module) throw new Exception('Module not found!');
+            $lblock = $this->layout_model->createBlock($name, $module, 1, $config);
+            $lblock->publish = 0;
+            $account = $this->account_model->load($this->session->userdata('username'));
+            $lblock->owner = $account;
+            $this->layout_model->slotAddBlock($slot, $lblock);
+            
+            // validate input
+            if (empty($name)) throw new Exception('Name cannot be null');
+            if (empty($module)) throw new Exception('Module not found');
 
             // Set new data and save
-            if (!empty($name) && !empty($module)) {
-                $lblock->name = $name;
-                $lblock->module = $module;
-                $lblock->config = $config;
-                $lblock->item = $module_item;
-                $lblock->publish = (int) $publish;
-                $lblock->publish_order = (int) $publish_order;
-                $this->layout_model->save($lblock);
-            }
+            $lblock->name = $name;
+            $lblock->module = $module;
+            $lblock->config = $config;
+            $lblock->item = $module_item;
+            $lblock->publish = (int) $publish;
+            $lblock->publish_order = (int) $publish_order;
+            $this->layout_model->save($lblock);
+            
+            // Redirect to specific module configuration controller
+            $editpath = $this->getBlockEditControllerPath ($lblock);
+            if (!$this->input->is_ajax_request())
+                redirect(base_url($$editpath.'/edit/'.$layout->id.'/'.$lblock->id));
         }
         catch (Exception $e) {
             echo "<p>{$e->getMessage()}</p>";
         }
-        if (!$this->input->is_ajax_request())
-            redirect(base_url().'admin/adminlayouts/editblock/'.$layout->id.'/'.$lblock->id);
+        redirect(base_url('admin/adminlayouts/edit/'.$layout_id));
     }
     
     /**
@@ -332,6 +290,15 @@ class Adminlayouts extends MY_Controller {
         $this->layout_model->deleteLblock($selected);
         if (!$this->input->is_ajax_request())
             redirect(base_url().'admin/adminlayouts/edit/'.$layout_id.'#editblocks');
+    }
+    
+    /**
+     * Resolves block edit controller
+     * @param Lblock $block
+     * @return string
+     */
+    private function getBlockEditControllerPath($block) {
+        return 'block/'.reset(explode('_', end(explode('/', $block->module->path))));
     }
     
 }

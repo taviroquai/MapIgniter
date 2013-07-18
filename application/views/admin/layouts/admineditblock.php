@@ -15,22 +15,12 @@
  */
 
 // ------------------------------------------------------------------------
-// Dirty way to get block slot.
-$slots = $layout->ownLslot;
-foreach ($slots as $item) {
-    $blocks = $item->sharedLblock;
-    if (!empty($blocks)) :
-        foreach ($blocks as $tblock) {
-            if ($tblock->id == $block->id) $slot_id = $item->id;
-        }
-    endif;
-}
 ?>
 <h2>Configure layout block</h2>
 <? if (empty($block)) : ?>
 <p>The block does not exists!</p>
 <? else : ?>
-    <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/<?=$block->id?>">
+    <form method="post" action="<?=base_url($saveaction)?>/<?=$layout->id?>/<?=$block->id?>">
         <label>Name</label>
         <input type="text" name="name" value="<?=$block->name?>" />
         <label>Publish</label>

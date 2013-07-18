@@ -74,8 +74,8 @@ $slots = $layout->ownLslot;
     </li>
     <? if (!empty($slots)) : ?>
     <li id="editblocks">
-        <h3>Add block to slot</h3>
-        <form method="post" action="<?=base_url()?>admin/adminlayouts/saveblock/<?=$layout->id?>/new">
+        <h3>Create a new block</h3>
+        <form method="post" action="<?=base_url()?>admin/adminlayouts/createblock/<?=$layout->id?>">
             <label>Instance name</label>
             <input type="text" name="name" value="novo" />
             
@@ -119,7 +119,7 @@ $slots = $layout->ownLslot;
                     <td>
                         <input type="checkbox" name="selected[]" value="<?=$block->id?>" />
                     </td>
-                    <td><a href="<?=base_url()?>admin/adminlayouts/editblock/<?=$layout->id?>/<?=$block->id?>"><?=$block->name?></a></td>
+                    <td><a href="<?=base_url($block->editpath)?>/<?=$layout->id?>/<?=$block->id?>"><?=$block->name?></a></td>
                     <td><?=$block->module->name?></td>
                     <td><?=$block->publish_order?></td>
                     <td>
