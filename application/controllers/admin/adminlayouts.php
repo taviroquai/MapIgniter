@@ -246,7 +246,7 @@ class Adminlayouts extends MY_Controller {
             // Redirect to specific module configuration controller
             $editpath = $this->getBlockEditControllerPath ($lblock);
             if (!$this->input->is_ajax_request())
-                redirect(base_url($$editpath.'/edit/'.$layout->id.'/'.$lblock->id));
+                redirect(base_url($editpath.'/edit/'.$layout->id.'/'.$lblock->id));
         }
         catch (Exception $e) {
             echo "<p>{$e->getMessage()}</p>";
