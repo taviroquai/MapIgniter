@@ -10,7 +10,7 @@
  * @author		Marco Afonso
  * @copyright	Copyright (c) 2012, Marco Afonso
  * @license		dual license, one of two: Apache v2 or GPL
- * @link		http://marcoafonso.com/miwiki/doku.php
+ * @link		http://mapigniter.com/
  * @since		Version 1.0
  * @filesource
  */
