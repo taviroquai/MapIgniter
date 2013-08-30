@@ -26,7 +26,7 @@ layerswitcher.prototype.config = function (mapblock) {
     // set private variables
     var me = this;
     var layer;
-    
+
     jQuery('#'+this.divEl).load(base_url+'openlayers/layerswitcher/'+mapblock.config.map.id+'/'+this.divEl, null, function() {
         
         jQuery('div[id*=layer] input:checkbox').each(function() {

@@ -115,6 +115,23 @@ WebSig.Mapblock.prototype.run = function (func) {
 }
 
 /**
+ * Block dependency manager
+ * Allows to wait for dependencies before run callback
+ * TODO: needs more works... I know its ugly!
+ */
+WebSig.after = function(block, cb) {
+    var tries = 1;
+    var wait = setInterval(function() {
+        if (window[block] !== undefined) {
+            clearInterval(wait);
+            cb();
+        }
+        tries++;
+        if (tries > 3) clearInterval(wait);
+    }, 300);
+}
+
+/**
  * WebSig.Mapblock.prototype.print
  */
 WebSig.Mapblock.prototype.print = function () {
@@ -128,6 +145,7 @@ WebSig.Mapblock.prototype.print = function () {
     var offsetY = parseInt(this.map.layerContainerDiv.style.top);
     var size  = this.map.getSize();
     var tiles = [];
+    var layername, tilerow, tilei;
     for (layername in this.map.layers) {
         // if the layer isn't visible at this range, or is turned off, skip it
         var layer = this.map.layers[layername];

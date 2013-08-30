@@ -71,7 +71,7 @@ wfsgetfeaturecontent.prototype.config = function (mapblock) {
 wfsgetfeaturecontent.prototype.show = function (e) {
     
     var feature = e.feature;
-    console.log(this.htmlurl);
+
     // Prepare html to show
     if (this.htmlurl) {
         

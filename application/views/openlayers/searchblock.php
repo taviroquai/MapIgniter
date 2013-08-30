@@ -27,5 +27,8 @@
     </div>
     <script>
         var block_<?=$_instance?> = new featuresearch('<?=$_instance?>', '#slot-content');
+        new WebSig.after('block_<?=$config['mapblock']?>', function() {
+            block_<?=$_instance?>.config(block_<?=$config['mapblock']?>);
+        });
     </script>
 </div>

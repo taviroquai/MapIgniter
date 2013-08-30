@@ -36,20 +36,12 @@ if (empty($_instance) || empty($item) || empty($config)) : ?>
     var date = new Date();
     jQuery(document).ready(function($) {
         $.getJSON(base_url+'openlayers/getconfig/<?=$item->id?>?'+date.getTime(), function(data) {
-            block_<?=$_instance?> = 
-                new WebSig.Mapblock('<?=$_instance?>', data);
+            block_<?=$_instance?> = new WebSig.Mapblock('<?=$_instance?>', data);
             block_<?=$_instance?>.init();
             <? if (empty($config['center'])) : ?>
             block_<?=$_instance?>.renderExtent();
             <? else : ?>
             block_<?=$_instance?>.render(<?=$config['center'][0]?>, <?=$config['center'][1]?>, <?=$config['zoom']?>);
-            <? endif; ?>
-            <? if (!empty($config['run'])) :
-                foreach ($config['run'] as $item) { ?>
-                if (window.block_<?=$item?>) {
-                    window.block_<?=$item?>.config(block_<?=$_instance?>);
-                }
-                <? } ?>
             <? endif; ?>
         });
     });

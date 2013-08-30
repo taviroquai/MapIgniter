@@ -17,4 +17,7 @@
 // ------------------------------------------------------------------------
 ?><script>
     var block_<?=$_instance?> = new wfsgetfeaturepopup('<?=$_instance?>', '<?=$item->alias?>', '<?=empty($config['popupfunction']) ? '' : $config['popupfunction']?>', '<?=empty($config['htmlurl']) ? '' : $config['htmlurl']?>');
+    new WebSig.after('block_<?=$config['mapblock']?>', function() {
+        block_<?=$_instance?>.config(block_<?=$config['mapblock']?>);
+    });
 </script>

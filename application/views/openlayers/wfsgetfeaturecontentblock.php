@@ -34,4 +34,7 @@
 </style>
 <script>
     var block_<?=$_instance?> = new wfsgetfeaturecontent('<?=$_instance?>', '<?=$item->alias?>', null, '<?=empty($config['htmlurl']) ? '' : $config['htmlurl']?>');
+    new WebSig.after('block_<?=$config['mapblock']?>', function() {
+        block_<?=$_instance?>.config(block_<?=$config['mapblock']?>);
+    });
 </script>
