@@ -16,8 +16,8 @@
 
 // ------------------------------------------------------------------------
 ?><script>
-    var block_<?=$_instance?> = new wfsgetfeaturepopup('<?=$_instance?>', '<?=$item->alias?>', '<?=empty($config['popupfunction']) ? '' : $config['popupfunction']?>', '<?=empty($config['htmlurl']) ? '' : $config['htmlurl']?>');
-    new WebSig.after('block_<?=$config['mapblock']?>', function() {
-        block_<?=$_instance?>.config(block_<?=$config['mapblock']?>);
+    var block_<?=$_instance?> = new wfsgetfeaturepopup('<?=$_instance?>', '<?=empty($config) ? '' : json_encode($config)?>');
+    new WebSig.after('block_<?=$item->name?>', function() {
+        block_<?=$_instance?>.setMapblock(block_<?=$item->name?>);
     });
 </script>

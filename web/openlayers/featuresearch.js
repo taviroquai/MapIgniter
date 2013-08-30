@@ -14,9 +14,10 @@
 
 /* ------------------------------------------------------------------------ */
 
-var featuresearch = function (divEl, resultsEl) {
+var featuresearch = function (divEl, resultsEl, config) {
     this.divEl = divEl;
     this.resultsEl = resultsEl;
+    this.config = JSON.parse(config);
     
     var me = this;
     jQuery('#'+this.divEl+' form').submit(function(e) {
@@ -30,7 +31,7 @@ var featuresearch = function (divEl, resultsEl) {
     })
 };
 
-featuresearch.prototype.config = function (mapblock) {
+featuresearch.prototype.setMapBlock = function (mapblock) {
     
     // set public variables
     this.mapblock = mapblock;

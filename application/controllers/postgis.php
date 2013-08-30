@@ -111,7 +111,7 @@ class Postgis extends MY_Controller {
 
             // Load main content
             $data = array(
-                'ctrlpath' => $this->ctrlpath,
+                'ctrlpath' => base_url('postgis/getfeaturejson/'.$pglayer_id.'/'.$id),
                 'record' => $record);
         }
         catch (Exception $e) {

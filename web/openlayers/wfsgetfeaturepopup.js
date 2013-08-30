@@ -14,14 +14,12 @@
 
 /* ------------------------------------------------------------------------ */
 
-var wfsgetfeaturepopup = function(instance, layeralias, popupfunction, htmlurl) {
+var wfsgetfeaturepopup = function(instance, config) {
     this.name = instance;
-    this.layeralias = layeralias;
-    this.popupfunction = popupfunction;
-    this.htmlurl = htmlurl;
+    this.config = JSON.parse(config);
 };
 
-wfsgetfeaturepopup.prototype.config = function (mapblock) {
+wfsgetfeaturepopup.prototype.setMapBlock = function (mapblock) {
 
     // Set public vars
     this.mapblock = mapblock;
@@ -31,7 +29,7 @@ wfsgetfeaturepopup.prototype.config = function (mapblock) {
     for (var i=0; i<this.mapblock.map.layers.length; i++) {
         for (var j=0; j<this.mapblock.config.layers.length; j++) {
             if (this.mapblock.map.layers[i].name == this.mapblock.config.layers[j].name) {
-                if (this.layeralias == this.mapblock.config.layers[i].alias) {
+                if (this.config.layer == this.mapblock.config.layers[i].alias) {
                     index = i;
                     break;break;
                 }
@@ -39,7 +37,7 @@ wfsgetfeaturepopup.prototype.config = function (mapblock) {
         }
     }
     if (index === null) {
-        alert('Layer ' + this.layeralias + ' for ' + this.name + ' was not found!');
+        alert('Layer ' + this.config.layer + ' for ' + this.name + ' was not found!');
         return;
     }
     this.layer = mapblock.map.layers[index];
@@ -83,11 +81,17 @@ wfsgetfeaturepopup.prototype.config = function (mapblock) {
 
 wfsgetfeaturepopup.prototype.preparePopup = function(e) {
     
+    // check for missing configuration
+    if (!this.config || !this.config.popupfunction) {
+        alert('Popup function missing in WFSGetFeature module configuration');
+        return false;
+    }
+    
     // remove all popups
     jQuery(".olPopup").remove();
-
+    
     // create function
-    var fn = window[this.popupfunction];
+    var fn = window[this.config.popupfunction];
     // call the function
     fn(e.feature, this);
 }
@@ -108,10 +112,10 @@ wfsgetfeaturepopup.prototype.popup = function(feature, html) {
 var popupfeature = function (feature, wfsgetfeature) {
     
     // Prepare html to show
-    if (wfsgetfeature.htmlurl) {
+    if (wfsgetfeature.config && wfsgetfeature.config.htmlurl) {
         
         // First make the call
-        jQuery.get(wfsgetfeature.htmlurl+'/'+feature.attributes.gid+'/'+wfsgetfeature.layeralias, null, function(response) {
+        jQuery.get(wfsgetfeature.config.htmlurl+'/'+feature.attributes.gid+'/'+wfsgetfeature.config.layer, null, function(response) {
             var centroid = feature.geometry.getCentroid();
             var popup = new OpenLayers.Popup("olpopup_"+feature.attributes.gid,
                        new OpenLayers.LonLat(centroid.x, centroid.y),
@@ -137,7 +141,7 @@ var popupfeature = function (feature, wfsgetfeature) {
                 html += "<p>"+feature.attributes[attr]+"</p>";
             }
         }
-        html = html + '<div style="float:right;"><small><a href="'+base_url+'tickets/create/'+wfsgetfeature.layeralias+'/'+feature.attributes.gid+'">Report a problem</a></small></div>';
+        html = html + '<div style="float:right;"><small><a href="'+base_url+'tickets/create/'+wfsgetfeature.config.layer+'/'+feature.attributes.gid+'">Report a problem</a></small></div>';
         wfsgetfeature.popup(feature, html);
     }
 }

@@ -27,8 +27,8 @@
     </div>
     <script>
         var block_<?=$_instance?> = new gefeaturesearch('<?=$_instance?>', '#slot-content');
-        new WebSig.after('block_<?=$config['mapblock']?>', function() {
-            block_<?=$_instance?>.config(block_<?=$config['mapblock']?>);
+        new WebSig.after('block_<?=$item->name?>', function() {
+            block_<?=$_instance?>.config(block_<?=$item->name?>);
         });
     </script>
 </div>

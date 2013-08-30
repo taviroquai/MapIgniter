@@ -288,7 +288,7 @@ class Database_model extends CI_Model {
         
         // Register layerswitcher block
         $previewimg = 'web/images/module/layerswitcher.png';
-        $layerswitcherblock = $this->layout_model->createModule('Layer Switcher', 'openlayers/layerswitcher_lblock', 'olmap', $previewimg);
+        $layerswitcherblock = $this->layout_model->createModule('Layer Switcher', 'openlayers/layerswitcher_lblock', 'lblock', $previewimg);
         $layerswitcherblock->owner = $account_admin;
         R::store($layerswitcherblock);
         
@@ -310,7 +310,7 @@ class Database_model extends CI_Model {
         
         // Register featuresearch block
         $previewimg = 'web/images/module/featuresearch.png';
-        $searchblock = $this->layout_model->createModule('Feature Search', 'openlayers/featuresearch_lblock', 'olmap', $previewimg);
+        $searchblock = $this->layout_model->createModule('Feature Search', 'openlayers/featuresearch_lblock', 'lblock', $previewimg);
         $searchblock->owner = $account_admin;
         R::store($searchblock);
         
@@ -321,7 +321,7 @@ class Database_model extends CI_Model {
         
         // Register gefeaturesearch block
         $previewimg = 'web/images/module/gefeaturesearch.png';
-        $gesearchblock = $this->layout_model->createModule('Google Earth Search', 'googleearth/gefeaturesearch_lblock', 'gemap', $previewimg);
+        $gesearchblock = $this->layout_model->createModule('Google Earth Search', 'googleearth/gefeaturesearch_lblock', 'lblock', $previewimg);
         $gesearchblock->owner = $account_admin;
         R::store($gesearchblock);
         
@@ -368,7 +368,7 @@ class Database_model extends CI_Model {
         R::storeAll(array($lblock3));
         
         // Create layerswitcher layout block
-        $lblock4 = $this->layout_model->createBlock('layerswitcher1', $layerswitcherblock, 3, '', 1);
+        $lblock4 = $this->layout_model->createBlock('layerswitcher1', $layerswitcherblock, 3, '[]', 15);
         $lblock4->owner = $account_admin;
         R::storeAll(array($lblock4));
         
@@ -430,13 +430,13 @@ class Database_model extends CI_Model {
         
         // Register WFS get feature popup module
         $previewimg = 'web/images/module/wfsgetfeature.png';
-        $wfsgetfeature1 = $this->layout_model->createModule('WFSGetFeature Popup', 'openlayers/mapwfsgetfeaturepopup_lblock', 'layer', $previewimg);
+        $wfsgetfeature1 = $this->layout_model->createModule('WFSGetFeature Popup', 'openlayers/mapwfsgetfeaturepopup_lblock', 'lblock', $previewimg);
         $wfsgetfeature1->owner = $account_admin;
         R::store($wfsgetfeature1);
         
         // Register WFS get feature module
         $previewimg = 'web/images/module/wfsgetfeature.png';
-        $wfsgetfeature2 = $this->layout_model->createModule('WFSGetFeature', 'openlayers/mapwfsgetfeaturecontent_lblock', 'layer', $previewimg);
+        $wfsgetfeature2 = $this->layout_model->createModule('WFSGetFeature', 'openlayers/mapwfsgetfeaturecontent_lblock', 'lblock', $previewimg);
         $wfsgetfeature2->owner = $account_admin;
         R::store($wfsgetfeature2);
         
@@ -588,10 +588,11 @@ class Database_model extends CI_Model {
         // Create wfsgetfeature block
         $wfsgetfeaturelblockconfig = 
 '{
+"layer":"layer1",
 "popupfunction":"popupfeature",
 "htmlurl":null
 }';
-        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature2, 1, $wfsgetfeaturelblockconfig, $layer->id);
+        $wfsgetfeaturelblock = $this->layout_model->createBlock('wfsgetfeature1', $wfsgetfeature2, 1, $wfsgetfeaturelblockconfig, 15);
         $wfsgetfeaturelblock->owner = $account_admin;
         R::storeAll(array($wfsgetfeaturelblock));
         
@@ -749,7 +750,7 @@ class Database_model extends CI_Model {
         $this->openlayers_model->save($olmap);
         
         // Create feature search block
-        $lblock6 = $this->layout_model->createBlock('searchblock', $searchblock, 1, '[]', $olmap->id);
+        $lblock6 = $this->layout_model->createBlock('searchblock', $searchblock, 1, '{"layer":"layer1"}', 15);
         $lblock6->owner = $account_admin;
         R::storeAll(array($lblock6));
         

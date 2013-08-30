@@ -14,14 +14,12 @@
 
 /* ------------------------------------------------------------------------ */
 
-var wfsgetfeaturecontent = function(instance, layeralias, showfunction, htmlurl) {
+var wfsgetfeaturecontent = function(instance, config) {
     this.name = instance;
-    this.layeralias = layeralias;
-    this.showfunction = showfunction;
-    this.htmlurl = htmlurl;
+    this.config = JSON.parse(config);
 };
 
-wfsgetfeaturecontent.prototype.config = function (mapblock) {
+wfsgetfeaturecontent.prototype.setMapBlock = function (mapblock) {
 
     // Set public vars
     this.mapblock = mapblock;
@@ -31,7 +29,7 @@ wfsgetfeaturecontent.prototype.config = function (mapblock) {
     for (var i=0; i<this.mapblock.map.layers.length; i++) {
         for (var j=0; j<this.mapblock.config.layers.length; j++) {
             if (this.mapblock.map.layers[i].name == this.mapblock.config.layers[j].name) {
-                if (this.layeralias == this.mapblock.config.layers[i].alias) {
+                if (this.config.layer == this.mapblock.config.layers[i].alias) {
                     index = i;
                     break;break;
                 }
@@ -39,7 +37,7 @@ wfsgetfeaturecontent.prototype.config = function (mapblock) {
         }
     }
     if (index === null) {
-        alert('Layer ' + this.layeralias + ' for ' + this.name + ' was not found!');
+        alert('Layer ' + this.config.layer + ' for ' + this.name + ' was not found!');
         return;
     }
     this.layer = mapblock.map.layers[index];
@@ -73,10 +71,10 @@ wfsgetfeaturecontent.prototype.show = function (e) {
     var feature = e.feature;
 
     // Prepare html to show
-    if (this.htmlurl) {
+    if (this.config && this.config.htmlurl) {
         
         // First make the call
-        jQuery.get(this.htmlurl+'/'+feature.attributes.gid+'/'+this.layeralias, null, function(html) {
+        jQuery.get(this.config.htmlurl+'/'+feature.attributes.gid+'/'+this.config.layer, null, function(html) {
             var centroid = feature.geometry.getCentroid();
             jQuery('#slot-content content-padding').html(html);
         });
@@ -96,7 +94,7 @@ wfsgetfeaturecontent.prototype.show = function (e) {
             }
         }
         html += '</table>';
-        html = html + '<div style="float:right;"><small><a href="'+base_url+'tickets/create/'+this.layeralias+'/'+feature.attributes.gid+'">Report a problem</a></small></div>';
+        html = html + '<div style="float:right;"><small><a href="'+base_url+'tickets/create/'+this.config.layer+'/'+feature.attributes.gid+'">Report a problem</a></small></div>';
         jQuery('#slot-content').html(html);
     }
 }

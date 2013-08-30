@@ -44,13 +44,14 @@ class Openlayers extends MY_Controller {
         echo json_encode($config);
     }
     
-    public function search($olmapid) {
+    public function search($blockid) {
         
         $results = array();
         $terms = $this->input->get('q');
         $jsinstance = 'block_'.$this->input->get('_instance');
         
-        $olmap = $this->openlayers_model->loadMap($olmapid);
+        $block = $this->database_model->load('lblock', $blockid);
+        $olmap = $this->openlayers_model->loadMap($block->item);
         $ollayers = $olmap->sharedOllayer;
         
         if (!empty($ollayers)) {
