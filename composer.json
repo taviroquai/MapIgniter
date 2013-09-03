@@ -1,0 +1,101 @@
+{
+    "name": "taviroquai/mapigniter",
+    "type": "project",
+    "version": "1.1.0",
+    "description": "GeoCMS based on MapServer, PostGIS, OpenLayers and CodeIgniter",
+    "keywords": ["Map","MapServer", "PostGIS", "OpenLayers", "CMS", "GIS"],
+    "homepage": "http://github.com/taviroquai/MapIgniter",
+    "license": [
+       "Apache-2.0",
+       "GPL-3.0+"
+    ],
+    "authors": [
+        {
+            "name": "Marco Afonso",
+            "email": "mafonso333@gmail.com",
+            "homepage": "http://mapigniter.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "mafonso333@gmail.com",
+        "forum": "https://groups.google.com/forum/#!forum/mapigniter",
+        "wiki": "http://mapigniter.com/wiki/"
+    },
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "rb",
+				"version": "3.3",
+				"dist": {
+					"url": "http://www.redbeanphp.com/downloadredbean.php",
+					"type": "tar"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "jpgraph",
+				"version": "3.5",
+				"dist": {
+					"url": "http://jpgraph.net/download/download.php?p=5",
+					"type": "tar"
+				}
+			}
+		},
+        {
+			"type": "package",
+			"package": {
+				"name": "ckeditor",
+				"version": "3.6.4",
+				"dist": {
+					"url": "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.4/ckeditor_3.6.4.tar.gz",
+					"type": "tar"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "fancybox",
+				"version": "2.0.6",
+				"dist": {
+					"url": "https://github.com/fancyapps/fancyBox/zipball/v2.0.6",
+					"type": "zip"
+				}
+			}
+		},
+                {
+			"type": "package",
+			"package": {
+				"name": "jqueryui",
+				"version": "1.9.0",
+				"dist": {
+					"url": "http://jqueryui.com/resources/download/jquery-ui-1.9.0.custom.zip",
+					"type": "zip"
+				}
+			}
+		},
+                {
+			"type": "package",
+			"package": {
+				"name": "ol",
+				"version": "2.12",
+				"dist": {
+					"url": "http://openlayers.org/download/OpenLayers-2.12.tar.gz",
+					"type": "tar"
+				}
+			}
+		}
+	],
+	"require": {
+		"gabordemooij/redbean": "3.4.4",
+		"jpgraph": "3.5",
+        "ckeditor": "3.6.4",
+		"fancybox": "2.0.6",
+        "jqueryui": "1.9.0",
+        "ol": "2.12"
+	}
+}

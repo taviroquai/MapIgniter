@@ -3,13 +3,12 @@
 /system/
 /.htaccess
 /index.php
-/application/third_party/vendor/
-/application/third_party/composer.lock
+/vendor/
+/composer.lock
 /web/data/
 /web/js/vendor/
-/web/js/composer.lock
+/application/cache/
 /application/config/config.php
 /application/config/database.php
-/application/cache/
 /application/config/googleearth.php
 /application/config/mapigniter.php

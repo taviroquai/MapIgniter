@@ -114,10 +114,8 @@ chown -R www-data data
 mkdir web/data
 mkdir web/data/tmp
 chown -R www-data web/data
-cd application/third_party
 composer install
-cd ../../web/js
-composer install
+ln -s /var/www/mapigniter/vendor ./web/js/vendor
 
 echo "Done! Open in the browser http://machine-ip/mapigniter/install"
 

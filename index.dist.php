@@ -16,6 +16,15 @@
 
 // ------------------------------------------------------------------------
 
+/* 
+ * 
+ * Use composer to autoload dependencies
+ * Thanks to Phil Sturgeon at 
+ * http://philsturgeon.co.uk/blog/2012/05/composer-with-codeigniter
+ * 
+ */
+require 'vendor/autoload.php';
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

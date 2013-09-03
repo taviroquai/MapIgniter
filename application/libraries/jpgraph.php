@@ -33,8 +33,9 @@ class Jpgraph {
     function __construct() {
         
         // Get JpGraph
-        include(APPPATH.'/third_party/vendor/jpgraph/src/jpgraph.php');
-        include(APPPATH.'/third_party/vendor/jpgraph/src/jpgraph_line.php');
+        // Can't get it to autoload with composer :S
+        include(APPPATH.'../vendor/jpgraph/src/jpgraph.php');
+        include(APPPATH.'../vendor/jpgraph/src/jpgraph_line.php');
     }
     
     function monthchart($xdata, $ydata, $title='Line Chart')

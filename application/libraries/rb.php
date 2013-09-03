@@ -18,6 +18,8 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+class R extends RedBean_Facade {}
+
 class Rb {
     
     private $config;
@@ -32,7 +34,7 @@ class Rb {
         include(APPPATH.'config/database.php');
 
         // Get Redbean
-        include(APPPATH.'third_party/vendor/rb/rb.php');
+        //include(APPPATH.'third_party/vendor/rb/rb.php');
         
         $this->config = $db;
         $this->default = $active_group;
