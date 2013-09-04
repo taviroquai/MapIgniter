@@ -69,14 +69,14 @@ exit 1
 fi
 
 echo "Starting..."
-apt-get update
+apt-get -qq update
 
 if [ -f /usr/bin/unzip ];
 then
     echo "Unzip was found. Skipping install unzip..."
 else
     echo "Installing unzip..."
-    apt-get install -y unzip
+    apt-get -qq -y install unzip
 fi
 
 if [ -f /usr/local/bin/composer ];
@@ -84,7 +84,7 @@ then
     echo "Composer was found. Skipping install composer..."
 else
     echo "Downloading php composer..."
-    wget --progress=dot:mega http://getcomposer.org/installer
+    wget --quiet --progress=dot:mega http://getcomposer.org/installer
     echo "Installing php composer..."
     php installer
     mv composer.phar /usr/local/bin/composer
@@ -98,8 +98,8 @@ else
     echo "Downloading CodeIgniter..."
     mkdir /tmp/mapigniter
     cd /tmp/mapigniter
-    wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
-    unzip codeigniter.zip
+    wget --quiet -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
+    unzip -q codeigniter.zip
     cd /var/www/mapigniter
     cp -R /tmp/mapigniter/system .
     rm -R /tmp/mapigniter
