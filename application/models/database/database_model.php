@@ -19,53 +19,6 @@
 
 /**
  * Description of Database_model
- *
- * Entities:
- * 
- * - account
- *  User accounts registered on the system
- * 
- * - group (tree)
- *  User groups. It can inherit permissions from parent groups
- * 
- * - permission (behaviour permission)
- *  Controller/action permission
- * 
- * - dpermission (data permission)
- *  Per table/field/record read/write permission
- * 
- * - module
- *  Codeigniter MVC pack (Model name) for extra features
- * 
- * - layout
- *  Codeigniter View name
- * 
- * - lslot
- *  Layout slot. Slots available on the layout where can load Modules
- * 
- * - lblock
- *  Layout block. Configured modules to be loaded into layout slots
- * 
- * - model
- *  User data. User defined tables. ei. user_event
- * 
- * - layer
- *  User defined layers. A layer is a configuration of models. It can use filters.
- * 
- * - map
- *  User defined maps. A map is a configuration that includes layers configuration.
- * 
- * - msmap
- *  Mapserver mapfile level configuration. Its generated using map configuration.
- * 
- * - mslayer
- *  Mapserver layer level configuration
- * 
- * - msclass
- *  Mapserver class level configuration
- * 
- * - msstyle
- *  Mapserver style level configuration
  * 
  * @author mafonso
  */
