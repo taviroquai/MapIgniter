@@ -32,6 +32,7 @@
 # psql -d mapigniterdata -f /usr/share/postgresql/9.1/contrib/postgis-2.1/postgis.sql
 # psql -d mapigniterdata -f /usr/share/postgresql/9.1/contrib/postgis-2.1/spatial_ref_sys.sql
 # psql -d mapigniterdata -f /usr/share/postgresql/9.1/contrib/postgis-2.1/topology.sql
+# exit
 # sudo apt-get install -y git
 # sudo mkdir /var/www/mapigniter
 # sudo chown miadmin /var/www/mapigniter
@@ -48,7 +49,7 @@
 # Install script for MapIgniter
 # =============================================================================
 
-CI_VERSION="2.1.3"
+CI_VERSION="2.1.4"
 
 echo "==============================================================="
 echo "Installing MapIgniter (install.sh)"
@@ -95,11 +96,13 @@ then
     echo "CodeIgniter system was found. Skipping install CodeIgniter..."
 else
     echo "Downloading CodeIgniter..."
+    mkdir /tmp/mapigniter
+    cd /tmp/mapigniter
     wget -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
     unzip codeigniter.zip
-    cp -R "CodeIgniter_$CI_VERSION/system" .
-    rm codeigniter.zip
-    rm -rf "CodeIgniter_$CI_VERSION"
+    cd /var/www/mapigniter
+    cp -R /tmp/mapigniter/system .
+    rm -R /tmp/mapigniter
 fi
 
 echo "Installing MapIgniter..."
