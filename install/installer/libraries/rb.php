@@ -7,10 +7,10 @@
  *
  * @package		MapIgniter
  * @author		Marco Afonso
- * @copyright	Copyright (c) 2012, Marco Afonso
+ * @copyright	Copyright (c) 2012-2013, Marco Afonso
  * @license		dual license, one of two: Apache v2 or GPL
  * @link		http://mapigniter.com/
- * @since		Version 1.0
+ * @since		Version 1.1
  * @filesource
  */
 
