@@ -19,7 +19,7 @@
 <h2>My Layers</h2>
 <a class="novo" href="#">New</a>
 <div class="accordion">
-    <? $this->load->view('admin/layer/adminlayerform'); ?>
+    <? $this->load->view('user/layer/ownerlayerform'); ?>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {

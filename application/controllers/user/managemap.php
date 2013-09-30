@@ -29,6 +29,8 @@ class Managemap extends Adminmap {
         $this->ctrlpath = 'user/'.$this->router->fetch_class();
         $this->msmapctrlpath = 'user/managemsmap';
         $this->olmapctrlpath = 'user/manageolmap';
+        $this->listview = 'user/map/ownermap';
+        $this->editview = 'user/map/ownereditmap';
     }
     
     /**
@@ -57,7 +59,7 @@ class Managemap extends Adminmap {
             $data['rating'] = 
             $this->rating_model->loadAll($ratingitems, 'map', $this->account, $this->input->ip_address());
         }
-        $content = $this->load->view('user/map/ownermap', $data, TRUE);
+        $content = $this->load->view($this->listview, $data, TRUE);
         
         // Render
         $this->render($content);

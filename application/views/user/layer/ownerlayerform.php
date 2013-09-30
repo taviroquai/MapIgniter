@@ -22,10 +22,6 @@
 
     <label>Alias (system name)</label>
     <input type="text" name="alias" value="<?=$layer->alias?>" />
-    
-    <label>Owner</label>
-    <? $owner = $layer->fetchAs('account')->owner; ?>
-    <input type="text" name="owner" value="<?=$owner ? $owner->username : ''?>" />
 
     <? if (!empty($parentLayers)) : ?>
     <label>Sublayer of (optional)</label>

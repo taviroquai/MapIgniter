@@ -24,6 +24,8 @@ class Adminlayer extends MY_Controller {
     protected $mslayerctrlpath;
     protected $ollayerctrlpath;
     protected $gelayerctrlpath;
+    protected $listview;
+    protected $editview;
     
     /**
      * Constructor
@@ -40,6 +42,8 @@ class Adminlayer extends MY_Controller {
         $this->mslayerctrlpath = 'admin/adminmslayer';
         $this->ollayerctrlpath = 'admin/adminollayer';
         $this->gelayerctrlpath = 'admin/admingelayer';
+        $this->listview = 'admin/layer/adminlayer';
+        $this->editview = 'admin/layer/admineditlayer';
     }
     
     /**
@@ -64,7 +68,7 @@ class Adminlayer extends MY_Controller {
                 'layer' => $layer,
                 'ctrlpath' => $this->ctrlpath,
                 'action' => '/save/new');
-            $content = $this->load->view('admin/layer/adminlayer', $data, TRUE);
+            $content = $this->load->view($this->listview, $data, TRUE);
 
             // Render
             $this->render($content);
@@ -95,7 +99,7 @@ class Adminlayer extends MY_Controller {
                 'ollayerctrlpath' => $this->ollayerctrlpath,
                 'gelayerctrlpath' => $this->gelayerctrlpath,
                 'action' => '/save/'.$bean->id);
-            $content = $this->load->view('admin/layer/admineditlayer', $data, TRUE);
+            $content = $this->load->view($this->editview, $data, TRUE);
             
             // Render
             $this->render($content);
@@ -140,6 +144,10 @@ class Adminlayer extends MY_Controller {
             // Save
             $fields = array('title', 'description', 'alias');
             $layer->import($post, implode(',', $fields));
+            if (!empty($post['owner'])) {
+                $owner = $this->database_model->findOne('account', 'username = ?', array($post['owner']));
+                if (!empty($owner)) $layer->owner = $owner;
+            }
             if (!empty($post['parent'])) {
                 $layer->parent = $this->layer_model->load($post['parent']);
             }
@@ -161,7 +169,7 @@ class Adminlayer extends MY_Controller {
             'ollayerctrlpath' => $this->ollayerctrlpath,
             'gelayerctrlpath' => $this->gelayerctrlpath,
             'action' => '/save/'.$layer->id);
-        $content = $this->load->view('admin/layer/admineditlayer', $data, TRUE);
+        $content = $this->load->view($this->editview, $data, TRUE);
         $this->render($content);
     }
     

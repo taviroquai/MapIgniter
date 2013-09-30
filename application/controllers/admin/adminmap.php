@@ -23,6 +23,8 @@ class Adminmap extends MY_Controller {
     protected $msmapctrlpath;
     protected $olmapctrlpath;
     protected $gemapctrlpath;
+    protected $listview;
+    protected $editview;
     
     public function __construct() {
         parent::__construct();
@@ -32,6 +34,8 @@ class Adminmap extends MY_Controller {
         $this->msmapctrlpath = 'admin/adminmsmap';
         $this->olmapctrlpath = 'admin/adminolmap';
         $this->gemapctrlpath = 'admin/admingemap';
+        $this->listview = 'admin/map/adminmap';
+        $this->editview = 'admin/map/admineditmap';
         
         $this->load->model('map_model');
         $this->load->model('rating/rating_model');
@@ -50,7 +54,7 @@ class Adminmap extends MY_Controller {
             'map' => $this->map_model->create(),
             'ctrlpath' => $this->ctrlpath,
             'action' => '/save/new');
-        $content = $this->load->view('admin/map/adminmap', $data, TRUE);
+        $content = $this->load->view($this->listview, $data, TRUE);
         
         // Render
         $this->render($content);
@@ -72,7 +76,7 @@ class Adminmap extends MY_Controller {
             'olmapctrlpath' => $this->olmapctrlpath,
             'gemapctrlpath' => $this->gemapctrlpath,
             'action' => '/save/'.$bean->id);
-        $content = $this->load->view('admin/map/admineditmap', $data, TRUE);
+        $content = $this->load->view($this->editview, $data, TRUE);
         
         // Render
         $this->render($content);
@@ -119,6 +123,10 @@ class Adminmap extends MY_Controller {
             // Save
             $fields = array('title', 'description', 'alias');
             $map->import($post, implode(',', $fields));
+            if (!empty($post['owner'])) {
+                $owner = $this->database_model->findOne('account', 'username = ?', array($post['owner']));
+                if (!empty($owner)) $map->owner = $owner;
+            }
             $this->map_model->save($map);
             $id = $map->id;
             $info[] = 'The map was saved';
@@ -143,7 +151,7 @@ class Adminmap extends MY_Controller {
             'gemapctrlpath' => $this->gemapctrlpath,
             'action' => '/save/'.$bean->id);
         if (!empty($pglayer)) $data['pglayer'] = $pglayer;
-        $content = $this->load->view('admin/map/admineditmap', $data, TRUE);
+        $content = $this->load->view($this->editview, $data, TRUE);
 
         // Render
         $this->render($content);

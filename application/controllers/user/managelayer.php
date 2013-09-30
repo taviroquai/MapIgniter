@@ -30,6 +30,8 @@ class Managelayer extends Adminlayer {
         $this->pglayerctrlpath = 'user/managepglayer';
         $this->mslayerctrlpath = 'user/managemslayer';
         $this->ollayerctrlpath = 'user/manageollayer';
+        $this->listview = 'user/layer/ownerlayer';
+        $this->editview = 'user/layer/ownereditlayer';
     }
     
     /**
@@ -60,7 +62,7 @@ class Managelayer extends Adminlayer {
             $data['rating'] = 
             $this->rating_model->loadAll($ratingitems, 'layer', $this->account, $this->input->ip_address());
         }
-        $content = $this->load->view('user/layer/ownerlayer', $data, TRUE);
+        $content = $this->load->view($this->listview, $data, TRUE);
         
         // Render
         $this->render($content);
