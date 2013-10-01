@@ -49,10 +49,22 @@ class Database_model extends CI_Model {
     }
     
     public function setVersion($num) {
-        $bean = R::find('application', ' key = ? ', array('version'));
+        $bean = R::findOne('application', ' key = ? ', array('version'));
         if (empty($bean)) $bean = R::dispense ('application');
+        $bean->key = 'version';
         $bean->version = $num;
         R::store($bean);
+    }
+    
+    public function getVersion() {
+        try {
+            $bean = R::findOne('application', ' key = ? ', array('version'));
+            if (empty($bean)) throw new Exception('Database version not found!');
+            return $bean->version;
+        }
+        catch(Exception $e) {
+        }
+        return false;
     }
     
     public function create($type)
@@ -804,7 +816,7 @@ class Database_model extends CI_Model {
         R::storeAll($gelayertype);
         
         // Set Application version (should be last instruction)
-        $this->database_model->setVersion($this->config->item('_version'));
+        $this->setVersion($this->config->item('_version'));
             
         // Return success
         return true;

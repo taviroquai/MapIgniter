@@ -195,12 +195,20 @@ class Install extends CI_Controller {
             if ($install) {
                 
                 // Create configuration files
-                $this->saveConfigFiles($post);
+                $exists = file_exists($this->app_path.'/config/mapigniter.php');
+                if (!$exists) $this->saveConfigFiles($post);
                 foreach ($post as $k => $v) $this->config->set_item($k, $v);
                 
                 // Install database
                 R::selectDatabase('default');
-                $this->database_model->install();
+                $current_version = $this->database_model->getVersion();
+                //var_dump($current_version); die();
+                $upgrade = 'upgrade_'.$current_version.'_'.$this->config->item('_version');
+                if (method_exists($this, $upgrade)) {
+                    $this->$upgrade();
+                }
+                if ($current_version === false) $this->database_model->install();
+                else $this->database_model->setVersion($this->config->item('_version'));
             }
             
             if (empty($errors)) $config_ok = true;
@@ -217,7 +225,8 @@ class Install extends CI_Controller {
             'defaults' => $defaults,
             'config_ok' => $config_ok,
             'install' => !empty($install),
-            'app_url' => $this->app_url
+            'app_url' => $this->app_url,
+            'current_version' => !empty($current_version) ? $current_version : false
         );
         $content = $this->load->view('install', $data, TRUE);
         $this->load->view('layout/default', array('content' => $content));
