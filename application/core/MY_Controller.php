@@ -49,7 +49,12 @@ class MY_Controller extends CI_Controller {
         $this->layout = 'public';
         $path = $this->router->fetch_class();
         $this->load->model('database/database_model');
-        $result = $this->database_model->find('controller', 'path = ?', array($path));
+        
+        try {
+            $result = $this->database_model->find('controller', 'path = ?', array($path));
+        } catch (PDOException $e) {
+            show_error($e->getMessage());
+        }
         if (!empty($result)) {
             $ctl = reset($result);
             if (!empty($ctl->layout->name)) $this->layout = $ctl->layout->name;
