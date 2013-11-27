@@ -76,7 +76,7 @@ wfsgetfeaturecontent.prototype.show = function (e) {
         // First make the call
         jQuery.get(this.config.htmlurl+'/'+feature.attributes.gid+'/'+this.config.layer, null, function(html) {
             var centroid = feature.geometry.getCentroid();
-            jQuery('#slot-content content-padding').html(html);
+            jQuery('#slot-content').html(html);
         });
     }
     else {
