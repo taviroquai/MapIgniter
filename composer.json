@@ -82,10 +82,10 @@
 			"type": "package",
 			"package": {
 				"name": "ol",
-				"version": "2.12",
+				"version": "2.13.1",
 				"dist": {
-					"url": "http://openlayers.org/download/OpenLayers-2.12.tar.gz",
-					"type": "tar"
+					"url": "http://github.com/openlayers/openlayers/releases/download/release-2.13.1/OpenLayers-2.13.1.zip",
+					"type": "zip"
 				}
 			}
 		}
@@ -96,6 +96,6 @@
         "ckeditor": "3.6.4",
 		"fancybox": "2.0.6",
         "jqueryui": "1.9.0",
-        "ol": "2.12"
+        "ol": "2.13.1"
 	}
 }
