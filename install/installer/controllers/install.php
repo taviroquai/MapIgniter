@@ -95,7 +95,7 @@ class Install extends CI_Controller {
             $info['postgresql'] = "Detecting PostgreSQL with: $cmd";
             exec($cmd, $pgoutput);
             //$info[] = implode('<br />', $pgoutput);
-            $regex = preg_match('/psql \(PostgreSQL\) \d+\.\d+\.\d+/i', implode(" ", $pgoutput), $matches);
+            $regex = preg_match('/psql \(PostgreSQL\) \d+\.\d+/i', implode(" ", $pgoutput), $matches);
             if (!$regex) $errors['postgresql'] = 'PostgreSQL was not detected.';
             
             // Check shp2pgsql tool
