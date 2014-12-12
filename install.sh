@@ -49,11 +49,13 @@
 # Install script for MapIgniter
 # =============================================================================
 
-CI_VERSION="2.1.4"
+CI_VERSION="2.2"
 
 echo "==============================================================="
 echo "Installing MapIgniter (install.sh)"
 echo "==============================================================="
+
+cwd=$(pwd)
 
 # No point going any farther if we're not running correctly...
 if [ `whoami` != 'root' ]; then
@@ -98,11 +100,11 @@ else
     echo "Downloading CodeIgniter..."
     mkdir /tmp/mapigniter
     cd /tmp/mapigniter
-    wget --quiet -O codeigniter.zip --progress=dot:mega http://codeigniter.com/download.php
-    unzip -q codeigniter.zip
-    cd /var/www/mapigniter
-    cp -R /tmp/mapigniter/system .
-    rm -R /tmp/mapigniter
+    wget --quiet -O codeigniter.zip --progress=dot:mega "https://github.com/bcit-ci/CodeIgniter/archive/$CI_VERSION-stable.zip"
+    unzip -q "codeigniter.zip"
+    cd "$cwd"
+    cp -R "/tmp/mapigniter/CodeIgniter-$CI_VERSION-stable/system" .
+    rm -R "/tmp/mapigniter/CodeIgniter-$CI_VERSION-stable"
 fi
 
 echo "Installing MapIgniter..."
@@ -118,7 +120,7 @@ mkdir web/data
 mkdir web/data/tmp
 chown -R www-data web/data
 composer install
-ln -s /var/www/mapigniter/vendor ./web/js/vendor
+ln -s "$cwd/vendor" ./web/js/vendor
 
 echo "Done! Open in the browser http://machine-ip/mapigniter/install"
 
