@@ -7,10 +7,10 @@
  *
  * @package		MapIgniter
  * @author		Marco Afonso
- * @copyright	Copyright (c) 2012, Marco Afonso
+ * @copyright	Copyright (c) 2012-2013, Marco Afonso
  * @license		dual license, one of two: Apache v2 or GPL
  * @link		http://mapigniter.com/
- * @since		Version 1.0
+ * @since		Version 1.1
  * @filesource
  */
 
@@ -28,20 +28,20 @@ MAP
     CONFIG "MS_ERRORFILE" "<?=$private_data_path?>mapserver.log"
     DEBUG <?=$mapfile->debug . PHP_EOL?>
     
-    <? if ($mapfile->debug != 'off') : ?>
+    <?php if ($mapfile->debug != 'off') : ?>
     CONFIG "CPL_DEBUG" "ON"
     CONFIG "PROJ_DEBUG" "ON"
-    <? endif; ?>
+    <?php endif; ?>
 
     EXTENT <?=$mapfile->extent . PHP_EOL?>
     FONTSET '<?=getitempath($private_data_path, $mapfile->fontset)?>'<?=PHP_EOL?>
     SYMBOLSET '<?=getitempath($private_data_path, $mapfile->symbolset)?>'<?=PHP_EOL?>
-    <? if (!empty($mapfile->projection)) : ?>PROJECTION
-    <? $params = explode(' ', $mapfile->projection); ?>
-    <? foreach ($params as $item) {?>
+    <?php if (!empty($mapfile->projection)) : ?>PROJECTION
+    <?php $params = explode(' ', $mapfile->projection); ?>
+    <?php foreach ($params as $item) {?>
         '<?=$item?>'
-    <? } ?>
-    END<? endif; ?>
+    <?php } ?>
+    END<?php endif; ?>
 
     # Background color for the map canvas -- change as desired
     IMAGECOLOR <?=$mapfile->imagecolor . PHP_EOL?>
@@ -53,7 +53,7 @@ MAP
     #  IMAGEMODE RGB
     # END
 
-    <? 
+    <?php
     $legends = $mapfile->ownMslegend;
     if (!empty($legends)) :
     $mslegend = reset($legends);
@@ -62,17 +62,17 @@ MAP
         IMAGECOLOR <?=$mslegend->imagecolor . PHP_EOL?>
         KEYSIZE <?=$mslegend->keysize . PHP_EOL?>
         KEYSPACING <?=$mslegend->keyspacing . PHP_EOL?>
-        <? if (!empty($mslegend->outlinecolor)) : ?>OUTLINECOLOR <?=$mslegend->outlinecolor . PHP_EOL?><? endif; ?>
+        <?php if (!empty($mslegend->outlinecolor)) : ?>OUTLINECOLOR <?=$mslegend->outlinecolor . PHP_EOL?><?php endif; ?>
         
         POSITION <?=$mslegend->position . PHP_EOL?>
         POSTLABELCACHE <?=$mslegend->postlabelcache . PHP_EOL?>
         STATUS <?=$mslegend->status . PHP_EOL?>
         TEMPLATE '<?=getitempath($private_data_path, $mslegend->template)?>'
 
-        <? if ($mslabel = $mslegend->mslabel) addLabel($mslabel); ?>
+        <?php if ($mslabel = $mslegend->mslabel) addLabel($mslabel); ?>
     
     END
-    <? endif; ?>
+    <?php endif; ?>
   
     # Web interface definition. Only the template parameter
     # is required to display a map. See MapServer documentation
@@ -85,15 +85,15 @@ MAP
         # as defined in your web server configuration
         IMAGEURL '/tmp/'
 
-        <? $msmapfilemd = $mapfile->ownMsmapfilemd;
+        <?php $msmapfilemd = $mapfile->ownMsmapfilemd;
         if (!empty($msmapfilemd)) : ?>
         # WMS server settings
         METADATA
-          <? foreach ( $msmapfilemd as $metadata) { ?>
+          <?php foreach ( $msmapfilemd as $metadata) { ?>
           '<?=$metadata->msmetadata->name?>' '<?=$metadata->value?>'
-          <? } ?>
+          <?php } ?>
         END
-        <? endif; ?>
+        <?php endif; ?>
 
         #Scale range at which web interface will operate
         # Template and header/footer settings
@@ -101,54 +101,54 @@ MAP
         # TEMPLATE '.'
     END
 
-    <? foreach ($mapfile->sharedMslayer as $mslayer) { ?>
+    <?php foreach ($mapfile->sharedMslayer as $mslayer) { ?>
     LAYER
         NAME '<?=$mslayer->layer->alias?>'
         STATUS <?=$mslayer->status . PHP_EOL?>
         TYPE <?=$mslayer->mslayertype->name . PHP_EOL?>
-        <? if ($mslayer->mslayerconntype->name != 'local') : ?>    CONNECTIONTYPE <?=$mslayer->mslayerconntype->name . PHP_EOL?><? endif; ?>
-        <? if (!empty($mslayer->connection)) : ?>   CONNECTION "<?=$mslayer->connection?>"<? endif; ?>
+        <?php if ($mslayer->mslayerconntype->name != 'local') : ?>    CONNECTIONTYPE <?=$mslayer->mslayerconntype->name . PHP_EOL?><?php endif; ?>
+        <?php if (!empty($mslayer->connection)) : ?>   CONNECTION "<?=$mslayer->connection?>"<?php endif; ?>
         
         DATA "<?=getitempath($private_data_path, $mslayer->data)?>"<?=PHP_EOL?>
         EXTENT <?=$mslayer->extent . PHP_EOL?>
-        <? if (!empty($mslayer->projection)) : ?>PROJECTION
-        <? $params = explode(' ', $mslayer->projection); ?>
-        <? foreach ($params as $item) {?>
+        <?php if (!empty($mslayer->projection)) : ?>PROJECTION
+        <?php $params = explode(' ', $mslayer->projection); ?>
+        <?php foreach ($params as $item) {?>
             '<?=$item?>'
-        <? } ?>
+        <?php } ?>
 
-        END<? endif; ?>
+        END<?php endif; ?>
         
-<? if (!empty($mslayer->labelitem)) : ?>        LABELITEM "<?=$mslayer->labelitem?>"<? endif; ?>
-<? if (!empty($mslayer->classitem)) : ?>        CLASSITEM "<?=$mslayer->classitem?>"<? endif; ?>
+<?php if (!empty($mslayer->labelitem)) : ?>        LABELITEM "<?=$mslayer->labelitem?>"<?php endif; ?>
+<?php if (!empty($mslayer->classitem)) : ?>        CLASSITEM "<?=$mslayer->classitem?>"<?php endif; ?>
 
         DUMP <?=$mslayer->dump . PHP_EOL?>
         OPACITY <?=$mslayer->opacity . PHP_EOL?>
         TEMPLATE "<?=getitempath($private_data_path, $mslayer->template)?>"
         METADATA
-          <? foreach ($mslayer->ownMslayermd as $metadata) { ?>
+          <?php foreach ($mslayer->ownMslayermd as $metadata) { ?>
           '<?=$metadata->msmetadata->name?>' '<?=$metadata->value?>'
-          <? } ?>
+          <?php } ?>
         END
         # PROCESSING "LABEL_NO_CLIP=1"
 
-        <? foreach ($mslayer->ownMsclass as $msclass) { ?>
+        <?php foreach ($mslayer->ownMsclass as $msclass) { ?>
 
         CLASS
            NAME '<?=$msclass->name?>'
            STATUS <?=$msclass->status . PHP_EOL?>
            DEBUG <?=$msclass->debug . PHP_EOL?>
-<? if (!empty($msclass->expression)) : ?>           EXPRESSION <?=$msclass->expression . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->maxscaledenom)) : ?>           MAXSCALEDENOM <?=$msclass->maxscaledenom . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->minscaledenom)) : ?>           MINSCALEDENOM <?=$msclass->minscaledenom . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->text)) : ?>           TEXT <?=$msclass->text . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->symbol)) : ?>           SYMBOL '<?=getitempath($private_data_path, $msclass->symbol)?>'<? endif; ?>
-<? if (!empty($msclass->color)) : ?>           COLOR <?=$msclass->color . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->bgcolor)) : ?>           BACKGROUNDCOLOR <?=$msclass->bgcolor . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->outlinecolor)) : ?>           OUTLINECOLOR <?=$msclass->outlinecolor . PHP_EOL?><? endif; ?>
-<? if (!empty($msclass->size)) : ?>           SIZE <?=$msclass->size . PHP_EOL?><? endif; ?>
+<?php if (!empty($msclass->expression)) : ?>           EXPRESSION <?=$msclass->expression . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->maxscaledenom)) : ?>           MAXSCALEDENOM <?=$msclass->maxscaledenom . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->minscaledenom)) : ?>           MINSCALEDENOM <?=$msclass->minscaledenom . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->text)) : ?>           TEXT <?=$msclass->text . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->symbol)) : ?>           SYMBOL '<?=getitempath($private_data_path, $msclass->symbol)?>'<?php endif; ?>
+<?php if (!empty($msclass->color)) : ?>           COLOR <?=$msclass->color . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->bgcolor)) : ?>           BACKGROUNDCOLOR <?=$msclass->bgcolor . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->outlinecolor)) : ?>           OUTLINECOLOR <?=$msclass->outlinecolor . PHP_EOL?><?php endif; ?>
+<?php if (!empty($msclass->size)) : ?>           SIZE <?=$msclass->size . PHP_EOL?><?php endif; ?>
            
-           <? foreach ($msclass->sharedMsstyle as $msstyle) addStyle($private_data_path, $msstyle); ?>
+           <?php foreach ($msclass->sharedMsstyle as $msstyle) addStyle($private_data_path, $msstyle); ?>
 
            <?
            $labels = $msclass->sharedMslabel;
@@ -159,14 +159,14 @@ MAP
            ?>
 
         END
-    <? } ?>
+    <?php } ?>
 
     END
-<? } ?>
+<?php } ?>
 
 END
 
-<? function addLabel($mslabel) { ?>
+<?php function addLabel($mslabel) { ?>
     
             LABEL
                 ALIGN <?=$mslabel->align . PHP_EOL?>
@@ -186,24 +186,24 @@ END
                 MINFEATURESIZE <?=$mslabel->minfeaturesize . PHP_EOL?>
                 MINSIZE <?=$mslabel->minsize . PHP_EOL?>
                 OFFSET <?=$mslabel->offset . PHP_EOL?>
-                <? if (!empty($mslabel->outlinecolor)) :?>OUTLINECOLOR <?=$mslabel->outlinecolor . PHP_EOL?>
-                OUTLINEWIDTH <?=$mslabel->outlinewidth . PHP_EOL?><? endif; ?>
+                <?php if (!empty($mslabel->outlinecolor)) :?>OUTLINECOLOR <?=$mslabel->outlinecolor . PHP_EOL?>
+                OUTLINEWIDTH <?=$mslabel->outlinewidth . PHP_EOL?><?php endif; ?>
                 
                 PARTIALS <?=$mslabel->partials . PHP_EOL?>
                 POSITION <?=$mslabel->position . PHP_EOL?>
                 PRIORITY <?=$mslabel->priority . PHP_EOL?>
-                <? if ($mslabel->repeatdistance) :?>REPEATDISTANCE <?=$mslabel->repeatdistance?><? endif; ?><?=PHP_EOL?>
-                <? if ($mslabel->shadowcolor) :?>SHADOWCOLOR '<?=$mslabel->shadowcolor?>'<? endif; ?>
-                <? if ($mslabel->shadowsize) :?>SHADOWSIZE <?=$mslabel->shadowsize?><? endif; ?><?=PHP_EOL?>
+                <?php if ($mslabel->repeatdistance) :?>REPEATDISTANCE <?=$mslabel->repeatdistance?><?php endif; ?><?=PHP_EOL?>
+                <?php if ($mslabel->shadowcolor) :?>SHADOWCOLOR '<?=$mslabel->shadowcolor?>'<?php endif; ?>
+                <?php if ($mslabel->shadowsize) :?>SHADOWSIZE <?=$mslabel->shadowsize?><?php endif; ?><?=PHP_EOL?>
                 SIZE <?=$mslabel->size . PHP_EOL?>
                 TYPE <?=$mslabel->type . PHP_EOL?>
-                <? if ($mslabel->wrap) :?>WRAP '<?=$mslabel->wrap?>'<? endif; ?>
+                <?php if ($mslabel->wrap) :?>WRAP '<?=$mslabel->wrap?>'<?php endif; ?>
 
-                <? if ($msstyle = $mslabel->style) addStyle($private_data_path, $msstyle);?>
+                <?php if ($msstyle = $mslabel->style) addStyle($private_data_path, $msstyle);?>
 
             END
-<? } ?>
-<? function addStyle($private_data_path, $msstyle) { ?>
+<?php } ?>
+<?php function addStyle($private_data_path, $msstyle) { ?>
 
             STYLE
                 ANGLE <?=$msstyle->angle . PHP_EOL?>
@@ -211,7 +211,7 @@ END
                 BACKGROUNDCOLOR <?=$msstyle->bgcolor . PHP_EOL?>
                 COLOR <?=$msstyle->color . PHP_EOL?>
                 GAP <?=$msstyle->gap . PHP_EOL?>
-                <? if ($msstyle->geomtransform) :?>GEOMTRANSFORM <?=$msstyle->geomtransform . PHP_EOL?><? endif; ?>
+                <?php if ($msstyle->geomtransform) :?>GEOMTRANSFORM <?=$msstyle->geomtransform . PHP_EOL?><?php endif; ?>
                 LINECAP <?=$msstyle->linecap . PHP_EOL?>
                 LINEJOIN <?=$msstyle->linejoin . PHP_EOL?>
                 LINEJOINMAXSIZE <?=$msstyle->linejoinmaxsize . PHP_EOL?>
@@ -224,14 +224,14 @@ END
                 OUTLINECOLOR <?=$msstyle->outlinecolor . PHP_EOL?>
                 PATTERN <?=$msstyle->pattern?> END
                 SIZE <?=$msstyle->size . PHP_EOL?>
-                <? if (!empty($msstyle->symbol)) : ?>SYMBOL '<?=getitempath($private_data_path, $msstyle->symbol)?>'<? endif; ?>
+                <?php if (!empty($msstyle->symbol)) : ?>SYMBOL '<?=getitempath($private_data_path, $msstyle->symbol)?>'<?php endif; ?>
                 
                 WIDTH <?=$msstyle->width . PHP_EOL?>
             END  
-<? } ?>
-<?
+<?php } ?>
+<?php
 function getitempath($private_data_path, $item) {
     $fullpath = realpath($private_data_path.$item);
     if (file_exists($fullpath)) return $fullpath;
     else return $item;
-}
+} ?>
