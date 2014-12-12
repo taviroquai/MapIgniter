@@ -105,52 +105,52 @@
     <div class="eight columns omega">
         <h2>Checked Configuration</h2>
         
-        <? if (empty($msgs['errors'])) : ?>
-            <? if ($install) : ?>
+        <?php if (empty($msgs['errors'])) : ?>
+            <?php if ($install) : ?>
                 <p><strong>MapIgniter was installed successfully</strong></p>
-                <? if ($current_version) : ?>
+                <?php if ($current_version) : ?>
                 <p>A previous database was detected. Please use current admin credentials.</p>
-                <? else: ?>
+                <?php else: ?>
                 <p>Administrator login: admin<br />Password: admin</p>
-                <? endif; ?>
+                <?php endif; ?>
                 <p>IMPORTANT: delete this directory (mapigniter/install) now</p>
                 <p>Click <a href="<?=base_url('../')?>">here</a> to go to the homepage.</p>
-            <? else: ?>
+            <?php else: ?>
                 <p><strong>No errors found</strong></p>
                 <p>You can now proceed to install. If current database version is detected, it will be upgraded as needed.</p>
                 <input type="hidden" name="install" value="1" />
                 
                 <label>&nbsp;</label>
                 <button type="submit">Install MapIgniter</button>
-            <? endif; ?>
-        <? else: ?>
+            <?php endif; ?>
+        <?php else: ?>
             <label>&nbsp;</label>
             <button type="submit">Check Configuration</button>
-        <? endif; ?>
-        <? if (!empty($msgs)) { ?>
+        <?php endif; ?>
+        <?php if (!empty($msgs)) { ?>
             <table class="blocklist" id="requirements">
                 <tr>
                     <th>Requirement</th><th>Result</th>
                 </tr>
-                <? foreach ($msgs['info'] as $msg_key => $msg) { ?>
+                <?php foreach ($msgs['info'] as $msg_key => $msg) { ?>
                 <tr>
                     <td<?=empty($msgs['errors'][$msg_key]) ? ' class="ok"' : ' class="failed"'?>>
                         <?=$msg?>
                     </td>
                     <td<?=empty($msgs['errors'][$msg_key]) ? ' class="ok"' : ' class="failed"'?>>
-                        <? if (empty($msgs['errors'][$msg_key])) { ?>
+                        <?php if (empty($msgs['errors'][$msg_key])) { ?>
                             <img src="../web/images/icons/png/16x16/check.png" atl="Checked Ok" />
-                        <? }
+                        <?php }
                         else { ?>
                             <img src="../web/images/icons/png/16x16/no.png" atl="Error" />
-                        <? } ?>
+                        <?php } ?>
                     </td>
                 </tr>
-                    <? if (!empty($msgs['errors'][$msg_key])) { ?>
+                    <?php if (!empty($msgs['errors'][$msg_key])) { ?>
                     <tr><td colspan="2" class="failed"><?=$msgs['errors'][$msg_key]?></td>
-                    <? } ?>
-                <? } ?>
+                    <?php } ?>
+                <?php } ?>
             </table>
-        <? } ?>
+        <?php } ?>
     </div>
 </form>
