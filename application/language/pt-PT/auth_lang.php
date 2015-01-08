@@ -1,4 +1,4 @@
-<?
+<?php
 $lang['title'] = "Sessão";
 $lang['auth.account.info'] = "Olá %s";
 $lang['auth.menu.logout'] = "Sair";
