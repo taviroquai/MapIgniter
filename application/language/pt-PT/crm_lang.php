@@ -1,4 +1,4 @@
-<?
+<?php
 
 $lang['ticket.page.title'] = "Problemas Reportados";
 $lang['ticket.menu.read'] = "Consultar Ticket";
