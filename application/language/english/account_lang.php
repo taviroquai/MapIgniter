@@ -1,4 +1,4 @@
-<?
+<?php
 
 $lang['error.account.load'] =       "User account %s does not exists! <a href=\"%s\">Back</a>";
 $lang['error.email.invalid'] =      "Invalid email address";
