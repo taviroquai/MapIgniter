@@ -1,4 +1,4 @@
-<?
+<?php
 
 $lang['ticket.page.title'] = "Tickets";
 $lang['ticket.menu.read'] = "Consult Ticket";
