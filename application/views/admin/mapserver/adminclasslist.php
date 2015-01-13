@@ -18,14 +18,14 @@
 ?><h4>Classes list</h4>
 <form method="post" action="<?=base_url().$msclassctrlpath?>/delete/<?=$mslayer->id?>">
     <ul>
-        <? foreach ($items as $item) {
+        <?php foreach ($items as $item) {
         ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$msclassctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->name?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>

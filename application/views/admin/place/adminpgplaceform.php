@@ -19,12 +19,12 @@
     
     <label>GID / Geometry type</label>
     <p>
-    <? if (empty($record['gid'])) : ?>
+    <?php if (empty($record['gid'])) : ?>
     <input type="hidden" name="gid" value="" />
     <span>new</span>
-    <? else : ?>
+    <?php else : ?>
         <span><?=$record['gid']?></span>
-        <?
+        <?php
         $item = $record;
         switch($item['geomtype']) {
             case 'ST_MultiPolygon':
@@ -41,21 +41,21 @@
             default: echo '<img src="'.base_url().'/web/images/icons/geom.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
         }
         ?><span><?=$record['geomtype']?></span>
-    <? endif; ?>
+    <?php endif; ?>
     </p>
     
-    <? foreach ($table->attributes as $field => $type) { 
+    <?php foreach ($table->attributes as $field => $type) { 
         if (in_array($field, $sysfields)) continue;
         ?>
         <label><?=$field?>
             <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=pgplace_<?=$field?>"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>        
         </label>
-        <? if ($table->attributes[$field] == 'text') : ?>
+        <?php if ($table->attributes[$field] == 'text') : ?>
         <textarea id="pgplace_<?=$field?>" class="wysiwyg" name="<?=$field?>" style="width: 98%" rows="6"><?=$record[$field]?></textarea>
-        <? else : ?>
+        <?php else : ?>
         <input id="pgplace_<?=$field?>" type="text" name="<?=$field?>" value="<?=$record[$field]?>" />
-        <? endif; ?>
-    <? } ?>
+        <?php endif; ?>
+    <?php } ?>
     <button type="submit">Save</button>
 </form>
 <script type="text/javascript">

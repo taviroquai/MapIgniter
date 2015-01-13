@@ -19,7 +19,7 @@
 <h2>My Maps</h2>
 <a class="novo" href="#">Create a new map</a>
 <div class="accordion">
-    <? $this->load->view('user/map/ownermapform'); ?>
+    <?php $this->load->view('user/map/ownermapform'); ?>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -29,27 +29,27 @@
 	});
     });
 </script>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no maps</p>
-<? else : ?>
+<?php else : ?>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->title?></span>
-            <? $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
-            <?
+            <?php $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
+            <?php
             $msmapfiles = $item->ownMsmapfile;
             if (!empty($msmapfiles)) {
                 $msmapfile = reset($msmapfiles);
                 $items = $msmapfile->sharedMslayer;
                 if (empty($items)) : ?>
                 <p>It is not possible to view the map. There are no layers on this map.</p>
-                <? else : reset ($items); ?>
+                <?php else : reset ($items); ?>
                 <ul id="maplist">
-                <? foreach ($items as $item) { 
+                <?php foreach ($items as $item) { 
                     $img_link = base_url().'mapserver/map/'.$msmapfile->map->alias.'?mode=map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS='.$item->layer->alias.'&no-cache='.rand(1,9999);
                     ?>
                     <li><a href="<?=$img_link?>">
@@ -57,15 +57,15 @@
                         </a>
                     </li>
                 
-                <? } ?>
+                <?php } ?>
                 </ul>
                 <br style="clear: both;" />
-              <? endif;
+              <?php endif;
             }
             ?>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

@@ -17,22 +17,22 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>User Accounts</h2>
-<? $this->load->view('admin/accounts/adminaccountform', 
+<?php $this->load->view('admin/accounts/adminaccountform', 
         array('ctrlpath' => $ctrlpath, 'account' => $account)); ?>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no user accounts yet.</p>
-<? else : ?>
+<?php else : ?>
 <h3>User accounts list</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->username?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

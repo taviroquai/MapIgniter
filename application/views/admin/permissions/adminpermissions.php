@@ -29,23 +29,23 @@
             <input type="text" name="pattern" value="" />
             <button type="submit">Save</button>
         </form>
-        <? if (empty($items)) : ?>
+        <?php if (empty($items)) : ?>
         <p>There are no URI resources yet.</p>
-        <? else : ?>
+        <?php else : ?>
         <h3>List of URI resources</h3>
         <form method="post" action="<?=base_url()?>admin/adminpermissions/delete">
             <ul>
-                <? foreach ($items as $item) { ?>
+                <?php foreach ($items as $item) { ?>
                 <li>
                     <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
                     <a href="<?=base_url()?>admin/adminpermissions/edit/<?=$item->id?>">Configure</a>
                     <span><?=$item->pattern?></span>
                 </li>
-                <? } ?>
+                <?php } ?>
             </ul>
             <button type="submit">Remove selected</button>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
     <li id="accountgroups">
         <h3>New User Role</h3>
@@ -54,22 +54,22 @@
             <input type="text" name="name" value="" />
             <button type="submit">Save</button>
         </form>
-        <? if (empty($groups)) : ?>
+        <?php if (empty($groups)) : ?>
         <p>There are no user roles yet.</p>
-        <? else : ?>
+        <?php else : ?>
         <h3>List of Roles</h3>
         <form method="post" action="<?=base_url()?>admin/adminpermissions/deletegroup">
             <ul>
-                <? foreach ($groups as $item) { ?>
+                <?php foreach ($groups as $item) { ?>
                 <li>
                     <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
                     <a href="<?=base_url()?>admin/adminpermissions/editgroup/<?=$item->id?>">Configure</a>
                     <span><?=$item->name?></span>
                 </li>
-                <? } ?>
+                <?php } ?>
             </ul>
             <button type="submit">Remove selected</button>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
 </ul>

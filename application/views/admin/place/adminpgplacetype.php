@@ -17,22 +17,22 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Place Type</h2>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are place types</p>
-<? else : ?>
+<?php else : ?>
 <h3>Create a new place type</h3>
-<? $this->load->view('admin/place/adminpgplacetypeform'); ?>
+<?php //$this->load->view('admin/place/adminpgplacetypeform'); ?>
 <h3>List of place types</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->name?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->name?>">Configure</a>
             <span><?=$item->name?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

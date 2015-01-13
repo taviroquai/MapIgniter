@@ -24,12 +24,12 @@
     <label>Debug</label>
     <label for="debug_opt1">
         <input type="radio" name="debug" id="debug_opt1"
-            <? if ($msmapfile->debug == '3') :?>checked="checked"<? endif; ?> value="3" />
+            <?php if ($msmapfile->debug == '3') :?>checked="checked"<?php endif; ?> value="3" />
         <span>On</span>
     </label>
     <label for="debug_opt2">
         <input type="radio" name="debug" id="debug_opt2" 
-            <? if ($msmapfile->debug == 'off') :?>checked="checked"<? endif; ?> value="off" />
+            <?php if ($msmapfile->debug == 'off') :?>checked="checked"<?php endif; ?> value="off" />
         <span>Off</span>
     </label>
     
@@ -38,9 +38,9 @@
         <div class="accordion">
             <label>Units</label>
             <select name="msunits_id">
-            <? foreach ($msunits as $item) { ?>
+            <?php foreach ($msunits as $item) { ?>
                 <option value="<?=$item->id?>" <?=$item->id == $msmapfile->msunits->id ? 'selected="selected"' : ''?>><?=$item->name?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
             
             <label>Projection</label>

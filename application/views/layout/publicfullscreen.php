@@ -19,9 +19,9 @@
         <link rel="stylesheet" href="<?=base_url()?>web/js/vendor/jqueryui/css/smoothness/jquery-ui-1.9.0.custom.css">
         
         <!-- Modules CSS -->
-        <? foreach ($_slot['_links'] as $_href) { ?>
+        <?php foreach ($_slot['_links'] as $_href) { ?>
         <link rel="stylesheet" href="<?=$_href?>" />
-        <? } ?>
+        <?php } ?>
 
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,9 +36,9 @@
             var base_url = '<?=base_url()?>';
         </script>
 
-        <? foreach ($_slot['_scripts'] as $_src) { ?>
+        <?php foreach ($_slot['_scripts'] as $_src) { ?>
         <script type="text/javascript" src="<?=$_src?>"></script>
-        <? } ?>
+        <?php } ?>
 
     </head>
     <body>
@@ -47,7 +47,7 @@
             <img src="<?=base_url()?>web/images/milogo_white_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
         </div>
 
-        <? if (!empty($content)) : ?>
+        <?php if (!empty($content)) : ?>
         <div id="slot-content" class="miwindow">
             <div class="miwindow_mouse_handler">
                 <div class="miwindow_title"></div>
@@ -55,19 +55,19 @@
             <div class="miwindow_clear_float"></div>
             <div class="content-padding"><?=$content?></div>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
         <div id="slot1">
             <?=$_slot['slot1']?>
         </div>
         
-        <? if (!empty($_slot['slot2'])) : ?>
+        <?php if (!empty($_slot['slot2'])) : ?>
         <div id="slot2">
             <?=$_slot['slot2']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot3'])) : ?>
+        <?php if (!empty($_slot['slot3'])) : ?>
         <div id="slot3" class="miwindow">
             <div class="miwindow_mouse_handler">
                 <div class="miwindow_title"> </div>
@@ -75,25 +75,25 @@
             <div class="miwindow_clear_float"></div>
             <div class="content-padding"><?=$_slot['slot3']?></div>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot4'])) : ?>
+        <?php if (!empty($_slot['slot4'])) : ?>
         <div id="slot4">
             <?=$_slot['slot4']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot5'])) : ?>
+        <?php if (!empty($_slot['slot5'])) : ?>
         <div id="slot5">
             <?=$_slot['slot5']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot6'])) : ?>
+        <?php if (!empty($_slot['slot6'])) : ?>
         <div id="slot6" class="miwindow">
             <div class="content-padding"><?=$_slot['slot6']?></div>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
           
     </body>
 </html>

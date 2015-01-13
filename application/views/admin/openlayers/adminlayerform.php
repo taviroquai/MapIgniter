@@ -23,23 +23,23 @@
     
     <label>Layer type</label>
     <select name="ollayertype_id">
-    <? foreach ($ollayertypes as $item) { ?>
+    <?php foreach ($ollayertypes as $item) { ?>
         <option value="<?=$item->id?>" <?=$item->id == $ollayer->ollayertype->id ? 'selected="selected"' : ''?>><?=$item->type?></option>
-    <? } ?>    
+    <?php } ?>    
     </select>
     
-    <? if ($ollayer->ollayertype->id == 4) : ?>
+    <?php if ($ollayer->ollayertype->id == 4) : ?>
     <label>MapServer Map</label>
     <select name="url">
         <option value="">Choose...</option>
-        <? foreach ($maps as $item) { ?>
+        <?php foreach ($maps as $item) { ?>
         <option value="<?=$item->alias?>" <?=$item->alias == $ollayer->url ? 'selected="selected"' : ''?>><?=$item->title?></option>
-        <? } ?>
+        <?php } ?>
     </select>
-    <? else : ?>
+    <?php else : ?>
     <label>URL</label>
     <input type="text" name="url" value="<?=$ollayer->url?>" />
-    <? endif; ?>
+    <?php endif; ?>
     
     <label>OpenLayers options (JSON)</label>
     <textarea name="options" cols="60" rows="6"><?=$ollayer->options?></textarea>

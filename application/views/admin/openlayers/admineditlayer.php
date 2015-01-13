@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure layer on OpenLayers</h2>
-<? if (empty($ollayer)) : ?>
+<?php if (empty($ollayer)) : ?>
 <p>The layer does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/openlayers/adminlayerform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/openlayers/adminlayerform'); ?>
+<?php endif; ?>

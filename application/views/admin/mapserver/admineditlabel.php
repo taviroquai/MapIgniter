@@ -17,11 +17,11 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure label</h2>
-<? if (empty($mslabel)) : ?>
+<?php if (empty($mslabel)) : ?>
 <p>The label does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/mapserver/adminlabelform'); ?>    
-<?    
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/mapserver/adminlabelform'); ?>    
+<?php    
 endif;
 ?>

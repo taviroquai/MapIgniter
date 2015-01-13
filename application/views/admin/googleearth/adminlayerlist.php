@@ -17,20 +17,20 @@
 // ------------------------------------------------------------------------
 ?><form method="post" action="<?=$action?>">
     <ul>
-        <? foreach ($items as $item) {
+        <?php foreach ($items as $item) {
         ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$gelayerctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span>
-            <? if (!empty($item->informationurl)) : ?>
+            <?php if (!empty($item->informationurl)) : ?>
                 <a href="<?=$item->informationurl?>" target="_blank"><?=$item->layer->title?></a>
-            <? else : ?>
+            <?php else : ?>
                 <?=$item->layer->title?>
-            <? endif; ?>
+            <?php endif; ?>
             </span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit"><?=$action_btn?></button>
 </form>

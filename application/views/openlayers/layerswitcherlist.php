@@ -16,18 +16,18 @@
 
 // ------------------------------------------------------------------------
 ?><ul class="milayerswitcher">
-    <? if (!empty($root['categories'])) : ?>
-        <? foreach ($root['categories'] as $item) { ?>
+    <?php if (!empty($root['categories'])) : ?>
+        <?php foreach ($root['categories'] as $item) { ?>
         <li class="micategory">
             <span class="milayercategorylabel"><?=$item['category']->title?></span>
             <div class="milayer_description"><?=$item['category']->description?></div>
             <ul class="accordion">
-            <? if (!empty($item['layers'])) $this->load->view('openlayers/layerswitcherlayerlist', array('layers' => $item['layers'])); ?>
+            <?php if (!empty($item['layers'])) $this->load->view('openlayers/layerswitcherlayerlist', array('layers' => $item['layers'])); ?>
             </ul>
         </li>
-        <? } ?>
-    <? endif; ?>
-    <? if (!empty($root['layers'])) $this->load->view('openlayers/layerswitcherlayerlist', array('layers' => $root['layers'])); ?>
+        <?php } ?>
+    <?php endif; ?>
+    <?php if (!empty($root['layers'])) $this->load->view('openlayers/layerswitcherlayerlist', array('layers' => $root['layers'])); ?>
 </ul>
 <script type="text/javascript">
 jQuery(document).ready(function($) {

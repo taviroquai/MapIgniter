@@ -31,9 +31,9 @@ $action = base_url().$ctrlpath;
 <ul class="tabs-content">
   <li class="active" id="currentdir">
 <h3>Current Directory</h3>
-<? if (!empty($error)) : ?>
+<?php if (!empty($error)) : ?>
     <p class="error"><?=$error?></p>
-<? endif; ?>
+<?php endif; ?>
 <a href="<?=$action?>?security=private"><img src="<?=base_url()?>web/images/icons/png/24x24/home_locked.png" alt="Private data directory" title="Private data directory" /></a>
 <a href="<?=$action?>?security=public"><img src="<?=base_url()?>web/images/icons/png/24x24/home.png" alt="Public data directory" title="Public data directory" /></a>
 <form method="post" action="<?=$action?>/selected?list=<?=$dir?>">
@@ -44,7 +44,7 @@ $action = base_url().$ctrlpath;
     <col class="dxowner"></col>
     <tr><th colspan="4"><?=$total-2?> items</th></tr>
     <tr><th>File</th><th class="dxtype">Type</th><th class="dxsize">Size</th><th class="dxowner">Owner</th></tr>
-    <? if (!empty($dir)) : ?>
+    <?php if (!empty($dir)) : ?>
     <tr>
         <td colspan="4">
             <a href="<?=$action?>?list=<?=$back?>">
@@ -53,54 +53,54 @@ $action = base_url().$ctrlpath;
             </a>
         </td>
     </tr>
-    <? endif; ?>
-    <?
+    <?php endif; ?>
+    <?php
     for($index=0; $index < $total; $index++) {
         if (substr($list[$index]['name'], 0, 1) == ".") continue;
         ?>
         <tr>
             <td>
                 <input type="checkbox" name="selected[]" <?=in_array($dir.$list[$index]['name'], $selected) ? 'checked="checked"' : ''?> value="<?=$dir.$list[$index]['name']?>" />
-                <? if (filetype($base.$dir.$list[$index]['name']) == 'dir') : ?>
+                <?php if (filetype($base.$dir.$list[$index]['name']) == 'dir') : ?>
                 <a href="<?=$action?>?list=<?=$dir.$list[$index]['name']?>/&back=<?=$dir?>">
                     <img src="<?=base_url()?>web/images/icons/png/16x16/documents.png" alt="enter" title="Enter" />
                     <span><?=$list[$index]['name']?>/</span>
                 </a>
-                <? else :?>
-                <? if ($security == 'public') : ?>
+                <?php else :?>
+                <?php if ($security == 'public') : ?>
                     <a href="<?=base_url().'web/data/'.$dir.$list[$index]['name']?>">
                         <img src="<?=base_url()?>web/images/icons/png/16x16/document.png" alt="download" title="Download" />
                         <span><?=$list[$index]['name']?></span>
                     </a>
-                    <? else : ?>
+                    <?php else : ?>
                     <a href="<?=$action?>/dl?dir=<?=$dir?>&file=<?=$list[$index]['name']?>">
                         <img src="<?=base_url()?>web/images/icons/png/16x16/document.png" alt="download" title="Download" />
                         <span><?=$list[$index]['name']?></span>
                     </a>
-                    <? endif; ?>
-                <? endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
                 
-                <? if (!empty($return)) : ?>
-                <? if ($security == 'public') : ?>
+                <?php if (!empty($return)) : ?>
+                <?php if ($security == 'public') : ?>
                 <a href="javascript: devolver('<?=base_url().'web/data/'.$dir.$list[$index]['name']?>', '<?=$return?>', '<?=$replace?>')">
-                <? else: ?>
+                <?php else: ?>
                 <a href="javascript: devolver('<?=$dir.$list[$index]['name']?>', '<?=$return?>', '<?=$replace?>')">
-                <? endif; ?>
+                <?php endif; ?>
                     <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
                 </a>
                 <!-- Check CKEditor call -->
-                <? elseif (!empty($CKEditor)) : ?>
-                <? if ($security == 'public') : ?>
+                <?php elseif (!empty($CKEditor)) : ?>
+                <?php if ($security == 'public') : ?>
                 <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=base_url().'web/data/'.$dir.$list[$index]['name']?>')">
-                <? else: ?>
+                <?php else: ?>
                 <a href="javascript: returnCKEditor(<?=$CKEditorFuncNum?>, '<?=$dir.$list[$index]['name']?>')">
-                <? endif; ?>
+                <?php endif; ?>
                     <img src="<?=base_url()?>web/images/icons/png/16x16/arrow-right.png" alt="return" title="Return" />
                 </a>
-                <? endif; ?>
+                <?php endif; ?>
                 
             </td>
-            <td><? switch(filetype($base.$dir.$list[$index]['name'])) {
+            <td><?php switch(filetype($base.$dir.$list[$index]['name'])) {
                     case 'file':
                         $mime = exec("file -i -b ".$base.$dir.$list[$index]['name']);
                         $type_info = substr($mime, 0, stripos($mime, ';'));
@@ -118,11 +118,11 @@ $action = base_url().$ctrlpath;
                 <?=$type_info?>
             </td>
             <td><?=filesize($base.$dir.$list[$index]['name'])?></td>
-            <td><? $sys = $list[$index]['sys'] ?>
+            <td><?php $sys = $list[$index]['sys'] ?>
                 <?=!empty($sys) ? $sys->fetchAs('account')->owner->username : ''?>
             </td>
         </tr>
-    <? } ?>
+    <?php } ?>
 </table>
     <label>Selection</label>
     <select name="action">
@@ -134,9 +134,9 @@ $action = base_url().$ctrlpath;
   </li>
   <li id="newdir">
 <h3>New Directory</h3>
-<? if (!empty($error)) : ?>
+<?php if (!empty($error)) : ?>
     <p class="error"><?=$error?></p>
-<? endif; ?>
+<?php endif; ?>
 <form action="<?=$action?>/createdir?list=<?=$dir?>" method="post">
     <label>Name</label>
     <input type="text" name="name" value="<?=$dir?>" />
@@ -145,12 +145,12 @@ $action = base_url().$ctrlpath;
   </li>
   <li id="newfile">
 <h3>File Upload</h3>
-<? if (!empty($error)) : ?>
+<?php if (!empty($error)) : ?>
     <p class="error"><?=$error?></p>
-<? endif; ?>
-<? if (!empty($upload_data)) : ?>
+<?php endif; ?>
+<?php if (!empty($upload_data)) : ?>
     <p class="error"><?=$upload_data['file_name']?></p>
-<? endif; ?>
+<?php endif; ?>
 <?php echo form_open_multipart($action.'/upload?list='.$dir);?>
     <label>Choose</label>
     <input type="file" name="userfile" size="20" />
@@ -169,14 +169,14 @@ $action = base_url().$ctrlpath;
   </li>
     <li id="selected">
 <h3>Selection</h3>
-<? if (empty($selected)) : ?>
+<?php if (empty($selected)) : ?>
     <p>There are no selected items.</p>
-<? else :
+<?php else :
 $total = count($selected);    
 $list = $selected;
 if (!empty($error)) : ?>
     <p class="error"><?=$error?></p>
-<? endif; ?>
+<?php endif; ?>
 <form method="post" action="<?=$action?>/selected?list=<?=$dir?>">
 <table id="dataexplorer2" class="dataexplorer">
     <col class="dxname"></col>
@@ -184,23 +184,23 @@ if (!empty($error)) : ?>
     <col class="dxsize"></col>  
     <tr><th colspan="3"><?=$total?> itens</th></tr>
     <tr><th>File</th><th class="dxtype">Type</th><th class="dxsize">Size</th></tr>
-    <? for($index=0; $index < $total; $index++) { ?>
+    <?php for($index=0; $index < $total; $index++) { ?>
         <tr>
             <td>
                 <input type="checkbox" name="selected[]" value="<?=$list[$index]?>" />
-                <? if (filetype($base.$list[$index]) == 'dir') : ?>
+                <?php if (filetype($base.$list[$index]) == 'dir') : ?>
                 <img src="<?=base_url()?>web/images/icons/png/16x16/documents.png" alt="enter" title="Enter" /><span><?=$list[$index]?></span>
-                <? else :?>
+                <?php else :?>
                 <img src="<?=base_url()?>web/images/icons/png/16x16/document.png" alt="download" title="Download" /><span><?=$list[$index]?></span>
-                <? endif; ?>
+                <?php endif; ?>
             </td>
-            <td><? switch(filetype($base.$list[$index])) {
+            <td><?php switch(filetype($base.$list[$index])) {
                     case 'file': echo 'File'; break;
                     default: echo 'Directory';
                 }?></td>
             <td><?=filesize($base.$list[$index])?></td>
         </tr>
-    <? } ?>
+    <?php } ?>
 </table>
     <label>Seleção</label>
     <select name="action">
@@ -208,7 +208,7 @@ if (!empty($error)) : ?>
     </select>
     <button type="submit">Execute</button>
 </form>
-    <? endif; ?>
+    <?php endif; ?>
     </li>
 </ul>
 </div>

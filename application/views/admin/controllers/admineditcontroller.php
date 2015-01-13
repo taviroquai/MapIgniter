@@ -18,18 +18,18 @@
 ?>
 <h2>Controller</h2>
 <h3>Configure</h3>
-<? if (empty($controller)) : ?>
+<?php if (empty($controller)) : ?>
 <p>The controller does not exists!</p>
-<? else : ?>
+<?php else : ?>
 <form method="post" action="<?=base_url()?>admin/admincontrollers/save/<?=$controller->id?>">
     <label>Path</label>
     <input type="text" name="path" value="<?=$controller->path?>" />
     <label>Layout</label>
     <select name="layout_id">
-        <? foreach ($layouts as $item) { ?>
+        <?php foreach ($layouts as $item) { ?>
         <option value="<?=$item->id?>" <?=$item->id == $controller->layout_id ? 'selected="selected"' : ''?>><?=$item->name?></option>
-        <? } ?>
+        <?php } ?>
     </select>
     <button type="submit">Save</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

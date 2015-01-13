@@ -170,4 +170,17 @@ class Adminmap extends MY_Controller {
             redirect(base_url().$this->ctrlpath);
     }
     
+    /**
+     * Action delete
+     * Deleted the selected mapfile
+     */
+    public function delmsmap($id)
+    {
+        $this->load->model('mapserver/mapserver_model');
+        $selected = array($id);
+        if (!empty($selected)) $this->mapserver_model->deleteMap($selected);
+        if (!$this->input->is_ajax_request())
+            redirect(base_url().$this->ctrlpath);
+    }
+    
 }

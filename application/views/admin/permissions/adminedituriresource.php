@@ -17,14 +17,12 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure URI Resource</h2>
-<? if (empty($uriresource)) : ?>
+<?php if (empty($uriresource)) : ?>
 <p>The URI resource does not exists!</p>
-<? else : ?>
+<?php else : ?>
     <form method="post" action="<?=base_url()?>admin/adminpermissions/save/<?=$uriresource->id?>">
         <label>Regular expression (regex)</label>
         <input type="text" name="pattern" value="<?=$uriresource->pattern?>" />
         <button type="submit">Save</button>
     </form>
-    <?
-endif;
-?>
+<?php endif; ?>

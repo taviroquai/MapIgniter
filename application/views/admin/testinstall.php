@@ -16,5 +16,5 @@
 
 // ------------------------------------------------------------------------
 ?><h1>Testing install</h1>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
 <p>Click <a href="<?=base_url()?>admin/testinstall">here</a> to repeat database install</p>

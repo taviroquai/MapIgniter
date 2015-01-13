@@ -18,7 +18,7 @@
 ?>
 <h2 class="map_title"><?=$item->map->title?></h2>
 <div class="map_description"><?=$item->map->description?></div>
-<?
+<?php
 if (empty($_instance) || empty($item)) : ?>
 <p>There are missing parameters for this map:</p>
 <ul>
@@ -27,7 +27,7 @@ if (empty($_instance) || empty($item)) : ?>
     <li>Map center (x, y)</li>
     <li>Zoom level</li>
 </ul>
-<? else : ?>
+<?php else : ?>
 <div id="gemap_<?=$_instance?>" style="width: 100%; height: 100%;"></div>
 <script type="text/javascript">
     var block_<?=$_instance?>;
@@ -45,13 +45,13 @@ if (empty($_instance) || empty($item)) : ?>
         block_<?=$_instance?> = instance;
         block_<?=$_instance?>.getWindow().setVisibility(true);
         
-        <? if (!empty($config['run'])) :
+        <?php if (!empty($config['run'])) :
             foreach ($config['run'] as $item) { ?>
             if (window.block_<?=$item?>) {
                 window.block_<?=$item?>.config(block_<?=$_instance?>);
             }
-            <? } ?>
-        <? endif; ?>
+            <?php } ?>
+        <?php endif; ?>
       
         var href = base_url + '/googleearth/kml/' + 1;
 
@@ -84,4 +84,4 @@ if (empty($_instance) || empty($item)) : ?>
     fixGoogleEarthViewport();
     jQuery(window).resize(fixGoogleEarthViewport);
 </script>
-<? endif; ?>
+<?php endif; ?>

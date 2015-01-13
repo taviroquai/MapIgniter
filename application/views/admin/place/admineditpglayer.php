@@ -19,25 +19,25 @@
 <h2>Postgis Layer</h2>
 <ul class="tabs">
     <li><a class="active" href="#editpglayer">Configure</a></li>
-    <? if (!empty($table)) : ?>
+    <?php if (!empty($table)) : ?>
     <li><a href="#editattributes">Attributes</a></li>
-    <? endif; ?>
+    <?php endif; ?>
 </ul>
 <ul class="tabs-content">
     <li class="active" id="editpglayer">
         <h3>Configure</h3>
-        <? if (empty($pglayer)) : ?>
+        <?php if (empty($pglayer)) : ?>
         <p>The Postgis layer does not exists!</p>
-        <? else : ?>
-        <? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-        <? $this->load->view('admin/place/adminpglayerform'); ?>
-        <? endif; ?>
+        <?php else : ?>
+        <?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+        <?php $this->load->view('admin/place/adminpglayerform'); ?>
+        <?php endif; ?>
     </li>
-    <? if (!empty($table)) : ?>
+    <?php if (!empty($table)) : ?>
     <li id="editattributes">
         <h3>Attributes</h3>
-        <? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-        <? $this->load->view('admin/place/adminpglayerattributesform'); ?>
+        <?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+        <?php $this->load->view('admin/place/adminpglayerattributesform'); ?>
     </li>
-    <? endif; ?>
+    <?php endif; ?>
 </ul>

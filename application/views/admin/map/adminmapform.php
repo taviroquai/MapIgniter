@@ -24,7 +24,7 @@
     <input type="text" name="alias" value="<?=$map->alias?>" />
     
     <label>Owner</label>
-    <? $owner = $map->fetchAs('account')->owner; ?>
+    <?php $owner = $map->fetchAs('account')->owner; ?>
     <input type="text" name="owner" value="<?=$owner ? $owner->username : ''?>" />
 
     <label>Description</label>

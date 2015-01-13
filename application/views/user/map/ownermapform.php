@@ -26,7 +26,7 @@
     <label>Description</label>
     <textarea name="description" class="wysiwyg"><?=$map->description?></textarea>
     
-    <? if (empty($map->id)) : ?>
+    <?php if (empty($map->id)) : ?>
     <label>
         <input type="checkbox" name="auto" value="1" checked="checked" />
         <span>Auto (creates all Postgis, MapServer, OpenLayers and Google Earth default items)</span>
@@ -35,27 +35,27 @@
     <label>Postgis table</label>
     <select name="pgplacetype">
         <option value="new_pgplacetype">New table...</option>
-        <? if (!empty($tables)) : ?>
-            <? foreach ($tables as $item) { ?>
+        <?php if (!empty($tables)) : ?>
+            <?php foreach ($tables as $item) { ?>
             <option value="<?=$item->name?>"><?=$item->name?></option>
-            <? } ?>
-        <? endif; ?>
+            <?php } ?>
+        <?php endif; ?>
     </select>
     
     <label>SRID</label>
     <select name="srid">
-    <? foreach ($srid_list as $item) { ?>
+    <?php foreach ($srid_list as $item) { ?>
         <option value="<?=$item['srid']?>" <?=$item['srid'] == '3857' ? 'selected="selected"': ''?>><?=$item['auth_name'].':'.$item['srid']?></option>
-    <? } ?>    
+    <?php } ?>    
     </select>
     
     <label>Geometry type</label>
     <select name="type">
-    <? foreach ($geom_types as $item) { ?>
+    <?php foreach ($geom_types as $item) { ?>
         <option value="<?=$item?>"><?=$item?></option>
-    <? } ?>
+    <?php } ?>
     </select>
-    <? endif; ?>
+    <?php endif; ?>
 
     <button type="submit">Save</button>
 </form>

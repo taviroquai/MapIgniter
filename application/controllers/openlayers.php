@@ -112,14 +112,14 @@ class Openlayers extends MY_Controller {
         <li id="layer_<?=$item->layer->alias?>">
             <input type="checkbox" value="<?=$item->id?>" onclick="block_<?=$instance?>.toggle('<?=$item->layer->alias?>')" />
             <span class="milayer"><?=$item->layer->title?></span>
-            <? $this->load->view('rate', array('rate' => $rating[$item->layer->id])); ?>
+            <?php $this->load->view('rate', array('rate' => $rating[$item->layer->id])); ?>
             <div>
-                <? if ($item->ollayertype_id == 4) : ?>
+                <?php if ($item->ollayertype_id == 4) : ?>
                 <img src="<?=base_url().'mapserver/map/'.$item->url?>?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&LAYER=<?=$item->layer->alias?>&FORMAT=image/png" />
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </li>
-        <? }
+        <?php }
     }
 
     public function printmap()

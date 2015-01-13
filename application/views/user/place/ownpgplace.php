@@ -17,16 +17,16 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>List of Places</h2>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no Postgis layers</p>
-<? else : ?>
+<?php else : ?>
 <ul>
-    <? foreach ($items as $item) { ?>
+    <?php foreach ($items as $item) { ?>
     <li>
         <a href="<?=base_url().$ctrlpath?>/listitems/<?=$item->id?>"><?=$item->layer->title?></a>
-        <? $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
+        <?php $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
     </li>
-    <? } ?>
+    <?php } ?>
 </ul>
 
-<? endif; ?>
+<?php endif; ?>

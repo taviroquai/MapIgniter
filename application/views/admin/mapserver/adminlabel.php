@@ -17,21 +17,21 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>MapServer - Labels</h2>
-<? $this->load->view('admin/mapserver/adminlabelform'); ?>
-<? if (empty($items)) : ?>
+<?php $this->load->view('admin/mapserver/adminlabelform'); ?>
+<?php if (empty($items)) : ?>
 <p>There are no labels</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of labels</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->description?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

@@ -17,14 +17,14 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure metadata item</h2>
-<? if (empty($msmetadata)) : ?>
+<?php if (empty($msmetadata)) : ?>
 <p>The metadata item does not exists!</p>
-<? else : ?>
+<?php else : ?>
 <form method="post" action="<?=base_url()?>admin/adminmsmetadata/save/<?=$msmetadata->id?>">
     <label>System name</label>
     <input type="text" name="name" value="<?=$msmetadata->name?>" />
     <button type="submit">Save</button>
 </form>
-<?    
+<?php    
 endif;
 ?>

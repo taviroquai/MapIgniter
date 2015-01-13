@@ -43,12 +43,12 @@
         <label>Automatic resolution</label>
         <label for="autoresolution_opt1">
             <input type="radio" name="autoresolution" id="autoresolution_opt1"
-                <? if ($olmap->autoresolution == 'true') :?>checked="checked"<? endif; ?> value="true" />
+                <?php if ($olmap->autoresolution == 'true') :?>checked="checked"<?php endif; ?> value="true" />
             <span>Yes</span>
         </label>
         <label for="autoresolution_opt2">
             <input type="radio" name="autoresolution" id="autoresolution_opt2" 
-                <? if ($olmap->autoresolution == 'false') :?>checked="checked"<? endif; ?> value="false" />
+                <?php if ($olmap->autoresolution == 'false') :?>checked="checked"<?php endif; ?> value="false" />
             <span>No</span>
         </label>
 

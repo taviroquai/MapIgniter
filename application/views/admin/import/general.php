@@ -17,5 +17,5 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Import</h2>
-<? $this->load->view('messages'); ?>
-<? $this->load->view('admin/import/shapeform'); ?>
+<?php $this->load->view('messages'); ?>
+<?php $this->load->view('admin/import/shapeform'); ?>

@@ -19,7 +19,7 @@
 <h2>My Layers</h2>
 <a class="novo" href="#">New</a>
 <div class="accordion">
-    <? $this->load->view('user/layer/ownerlayerform'); ?>
+    <?php $this->load->view('user/layer/ownerlayerform'); ?>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -29,21 +29,21 @@
 	});
     });
 </script>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no layers</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of layers</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->title?></span>
-            <? $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
+            <?php $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

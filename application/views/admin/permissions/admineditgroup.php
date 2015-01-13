@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure user role</h2>
-<? if (empty($group)) : ?>
+<?php if (empty($group)) : ?>
 <p>The user role does not exists!</p>
-<? else : ?>
+<?php else : ?>
     <form method="post" action="<?=base_url()?>admin/adminpermissions/savegroup/<?=$group->id?>">
         <label>Name</label>
         <input type="text" name="name" value="<?=$group->name?>" />
@@ -29,9 +29,9 @@
     <form method="post" action="<?=base_url()?>admin/adminpermissions/saveitem/new">
         <label>URI Resource</label>
         <select name="uriresource_id">
-            <? foreach ($uriresources as $uriresource) { ?>
+            <?php foreach ($uriresources as $uriresource) { ?>
             <option value="<?=$uriresource->id?>"><?=$uriresource->pattern?></option>
-            <? } ?>
+            <?php } ?>
         </select><br />
         <label>Action</label>
         <select name="action">
@@ -44,25 +44,25 @@
         <button type="submit">Save</button>
     </form>
     <h3>List of Registered Permissions</h3>
-    <?
+    <?php
     $items = $group->sharedPermission;
     if (empty($items)) : ?>
     <p>Ther are no permissions registered on this user role</p>
-    <? else : ?>
+    <?php else : ?>
     <form method="post" action="<?=base_url()?>admin/adminpermissions/deleteitem">
         <ul>
-            <? foreach ($items as $item) { ?>
+            <?php foreach ($items as $item) { ?>
             <li>
                 <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
                 <a href="<?=base_url()?>admin/adminpermissions/edititem/<?=$item->id?>">Configure</a>
-                <? $expire_str = empty($item->expire) ? '' : ' (expira a '.date('Y-m-d', $item->expire).')'; ?>
+                <?php $expire_str = empty($item->expire) ? '' : ' (expira a '.date('Y-m-d', $item->expire).')'; ?>
                 <span><?=empty($item->action) ? 'NEGAR' : 'PERMITIR'?>: <?=$item->uriresource->pattern?><?=$expire_str?></span>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
         <input type="hidden" name="group_id" value="<?=$group->id?>" />
         <button type="submit">Remove selected</button>
     </form>
-    <? endif;
+    <?php endif;
 endif;
 ?>

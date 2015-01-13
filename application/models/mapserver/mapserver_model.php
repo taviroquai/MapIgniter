@@ -59,8 +59,8 @@ class Mapserver_model extends CI_Model {
             $maps_path = $this->config->item('private_data_path').'mapfile/';
 
             if (empty($id)) throw new Exception('Empty map name');
-            $mapfile = $this->mapserver_model->loadMapfile($id);
-            $this->mapserver_model->save($mapfile);
+            $mapfile = $this->loadMapfile($id);
+            $this->save($mapfile);
             if (empty($mapfile)) throw new Exception('No such map on database');
             $mapfile_path = $maps_path.$mapfile->map->alias.'.map';
             //echo "<p>Generating mapfile $mapfile_path ...</p>";
@@ -72,7 +72,7 @@ class Mapserver_model extends CI_Model {
             //echo "<p>Done!</p>";
         }
         catch (Exception $e) {
-            echo $e->getMessage();
+            show_error($e->getMessage());
         }
     }
     
@@ -160,6 +160,10 @@ class Mapserver_model extends CI_Model {
     public function save(&$bean)
     {
         return $this->database_model->save($bean);
+    }
+    
+    public function deleteMap($ids) {
+        return $this->database_model->delete('msmapfile', $ids);
     }
     
     public function deleteMapfileMetadata($ids) {

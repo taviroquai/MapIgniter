@@ -16,16 +16,16 @@
 
 // ------------------------------------------------------------------------
 ?><h1>System Requirements</h1>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
 
-<? if (empty($msgs['errors'])) : ?>
-    <? if ($installdb) : ?>
+<?php if (empty($msgs['errors'])) : ?>
+    <?php if ($installdb) : ?>
         <p>Click <a href="<?=base_url()?>">here</a> to go to the homepage.</p>
-    <? else: ?>
+    <?php else: ?>
     <form action="<?=base_url()?>admin/install" method="post">
         <p>NOTE: You can now install the database. This operation will destroy current application database and cannot be undone.</p>
         <input type="hidden" name="installdb" value="1" />
         <button type="submit">Install</button>
     </form>
-    <? endif; ?>
-<? endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

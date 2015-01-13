@@ -17,10 +17,10 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure menu item</h2>
-<? if (!$menu = $menuitem->modmenu) : ?>
+<?php if (!$menu = $menuitem->modmenu) : ?>
 <p>The menu item dows not exists!</p>
-<? else : ?>
-<? if (empty($menuitem->id)) $itemid = 'new';
+<?php else : ?>
+<?php if (empty($menuitem->id)) $itemid = 'new';
     else $itemid = $menuitem->id;
 ?>
 <h3>New menu item</h3>
@@ -36,4 +36,4 @@
     <input type="hidden" name="modmenu_id" value="<?=$menuitem->modmenu->id?>" />
     <button type="submit">Save</button>
 </form>
-<? endif;
+<?php endif;

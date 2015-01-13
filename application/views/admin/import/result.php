@@ -17,11 +17,11 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Import Result</h2>
-<? $this->load->view('messages'); ?>
-<? if ($ok) : ?>
+<?php $this->load->view('messages'); ?>
+<?php if ($ok) : ?>
 <p>Import was successful!</p>
-<? else : ?>
+<?php else : ?>
 <p>Import has failed.</p>
-<? endif; ?>
+<?php endif; ?>
 <p>You can see import logs at <a target="_blank" href="<?=base_url().'web/data/'.$logfile?>"><?=$logfile?></a></p>
 

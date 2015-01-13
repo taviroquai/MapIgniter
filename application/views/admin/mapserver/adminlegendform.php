@@ -24,12 +24,12 @@
     <label>Status</label>
     <label for="status_opt1">
         <input type="radio" name="status" id="status_opt1"
-            <? if ($mslegend->status == 'on') :?>checked="checked"<? endif; ?> value="on" />
+            <?php if ($mslegend->status == 'on') :?>checked="checked"<?php endif; ?> value="on" />
         <span>On</span>
     </label>
     <label for="status_opt2">
         <input type="radio" name="status" id="status_opt2" 
-            <? if ($mslegend->status == 'off') :?>checked="checked"<? endif; ?> value="off" />
+            <?php if ($mslegend->status == 'off') :?>checked="checked"<?php endif; ?> value="off" />
         <span>Off</span>
     </label>
     
@@ -39,9 +39,9 @@
             
             <label for="mslabel">Label</label>
             <select name="mslabel_id">
-                <? foreach ($mslabels as $item) {?>
+                <?php foreach ($mslabels as $item) {?>
                 <option value="<?=$item->id?>"><?=substr($item->description, 0, 40)?></option>
-                <? } ?>
+                <?php } ?>
             </select>
 
             <label for="position">Text position</label>
@@ -94,12 +94,12 @@
             <label>Render only after cache</label>
             <label for="postlabelcache_opt1">
                 <input type="radio" name="postlabelcache" id="postlabelcache_opt1"
-                    <? if ($mslegend->postlabelcache == 'true') :?>checked="checked"<? endif; ?> value="true" />
+                    <?php if ($mslegend->postlabelcache == 'true') :?>checked="checked"<?php endif; ?> value="true" />
                 <span>Yes</span>
             </label>
             <label for="postlabelcache_opt2">
                 <input type="radio" name="postlabelcache" id="postlabelcache_opt2" 
-                    <? if ($mslegend->postlabelcache == 'false') :?>checked="checked"<? endif; ?> value="false" />
+                    <?php if ($mslegend->postlabelcache == 'false') :?>checked="checked"<?php endif; ?> value="false" />
                 <span>No</span>
             </label>
         </div>

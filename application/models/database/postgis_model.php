@@ -37,7 +37,7 @@ class Postgis_model extends CI_Model {
         $this->exclude_field[] = 'wkt';
     }
     
-    public function createLayer($layer, $pgplacetype = 'novatabela', $srid = 4326, $type = 'POINT') {
+    public function createLayer($layer, $pgplacetype = 'public.novatabela', $srid = 4326, $type = 'POINT') {
         
         // check for unique $pglayer using $layer
         $exists = $this->database_model->find('pglayer', ' layer_id = ? ', array($layer->id));
@@ -71,12 +71,17 @@ class Postgis_model extends CI_Model {
         $this->database_model->delete('pglayer', $ids);
     }
     
-    public function createTable($name = 'newtable', $srid = 4326, $type = 'POINT', 
+    public function createTable($name = 'public.newtable', $srid = 4326, $type = 'POINT', 
             $attributes = array('title' => 'varchar (80)', 'alias' => 'varchar (32)', 'description' => 'text'))
     {
+        $schema = 'public';
+        if (strpos($name, '.')) {
+            list($schema, $name) = explode('.', $name);
+        }
         $table = array();
         $table['oid'] = null;
         $table['name'] = $name;
+        $table['schema'] = $schema;
         $table['srid'] = $srid;
         $table['type'] = $type;
         $table['attributes'] = array();
@@ -130,7 +135,7 @@ class Postgis_model extends CI_Model {
         $this->database_model->selectDatabase('userdata');
 
         // Check if table exists
-        $sql = "SELECT * FROM geometry_columns WHERE f_table_schema = 'public' and f_table_name = '{$table->name}' LIMIT 1";
+        $sql = "SELECT * FROM geometry_columns WHERE f_table_schema = '{$table->schema}' and f_table_name = '{$table->name}' LIMIT 1";
         $exists = $this->database_model->getRow($sql);
 
         if (empty($exists)) {
@@ -140,20 +145,20 @@ class Postgis_model extends CI_Model {
             $attr_str = implode (',', $attr_str);
             
             // Create table
-            $sql = "CREATE TABLE public.{$table->name} ($attr_str)";
+            $sql = "CREATE TABLE {$table->schema}.{$table->name} ($attr_str)";
             $result = $this->database_model->exec($sql);
             
             // Add Geometry Column
-            $sql = "SELECT AddGeometryColumn ('public', '{$table->name}', 'the_geom', {$table->srid}, '{$table->type}', 2)";
+            $sql = "SELECT AddGeometryColumn ('{$table->schema}', '{$table->name}', 'the_geom', {$table->srid}, '{$table->type}', 2)";
             $result = $this->database_model->exec($sql);
             
         }
         else {
             // Drop Geometry Column
-            $sql = "SELECT DropGeometryColumn ('public', '{$table->name}', 'the_geom')";
+            $sql = "SELECT DropGeometryColumn ('{$table->schema}', '{$table->name}', 'the_geom')";
             $result = $this->database_model->exec($sql);
             // Add Geometry Column
-            $sql = "SELECT AddGeometryColumn ('public', '{$table->name}', 'the_geom', {$table->srid}, '{$table->type}', 2)";
+            $sql = "SELECT AddGeometryColumn ('{$table->schema}', '{$table->name}', 'the_geom', {$table->srid}, '{$table->type}', 2)";
             $result = $this->database_model->exec($sql);
         }
         
@@ -174,10 +179,14 @@ class Postgis_model extends CI_Model {
         foreach ($selected as $tablename) {
             $results[$tablename] = '';
             try {
-                $sql = "SELECT DropGeometryColumn ('public', '$tablename', 'the_geom')";
+                $schema = 'public';
+                if (strpos($tablename, '.')) {
+                    list($schema, $tablename) = explode('.', $tablename);
+                }
+                $sql = "SELECT DropGeometryColumn ('$schema', '$tablename', 'the_geom')";
                 $result = $this->database_model->exec($sql);
                 if ($result) {
-                    $sql = "DROP TABLE public.".$tablename;
+                    $sql = "DROP TABLE $schema.".$tablename;
                     $result = $this->database_model->exec($sql);
                     $results[$tablename] = 'OK';
                 }
@@ -199,11 +208,11 @@ class Postgis_model extends CI_Model {
         
         // Create table
         $sql = "
-            SELECT c.oid, c.relname 
+            SELECT c.oid, c.relname, n.nspname
             FROM pg_catalog.pg_class c
             LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
             WHERE c.relkind IN ('r','') AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
-            AND pg_catalog.pg_table_is_visible(c.oid);";
+            AND nspname <> 'information_schema';";
         $result = $this->database_model->getAll($sql);
         $list = array();
         if (!empty($result)) {
@@ -211,10 +220,11 @@ class Postgis_model extends CI_Model {
                 if (in_array($item['relname'], $this->exclude_table)) continue;
                 $table = $this->createTable($item['relname']);
                 $table->oid = $item['oid'];
-                $sql = "SELECT Find_SRID('public', '{$table->name}', 'the_geom')";
+                $table->schema = $item['nspname'];
+                $sql = "SELECT Find_SRID('{$table->schema}', '{$table->name}', 'the_geom')";
                 $result_srid = $this->database_model->getRow($sql);
                 $table->srid = $result_srid['find_srid'];
-                $sql = "SELECT type as geomtype FROM geometry_columns WHERE f_table_schema = 'public' and f_table_name = '{$table->name}' LIMIT 1";
+                $sql = "SELECT type as geomtype FROM geometry_columns WHERE f_table_schema = '{$table->schema}' and f_table_name = '{$table->name}' LIMIT 1";
                 $result_type = $this->database_model->getRow($sql);
                 $table->type = $result_type['geomtype'];
                 $list[] = $table;
@@ -232,14 +242,14 @@ class Postgis_model extends CI_Model {
         
         // Create table
         $table = $this->createTable($name);
-        $sql = "SELECT Find_SRID('public', '{$table->name}', 'the_geom')";
+        $sql = "SELECT Find_SRID('{$table->schema}', '{$table->name}', 'the_geom')";
         $result_srid = $this->database_model->getRow($sql);
         $table->srid = $result_srid['find_srid'];
         $sql = "
             SELECT type as geomtype 
             FROM geometry_columns 
             WHERE 
-                f_table_schema = 'public' 
+                f_table_schema = '{$table->schema}' 
                 and f_table_name = '{$table->name}'
             LIMIT 1";
         $result_type = $this->database_model->getRow($sql);
@@ -249,7 +259,8 @@ class Postgis_model extends CI_Model {
         $sql = "
             SELECT column_name, data_type
             FROM information_schema.columns
-            WHERE table_name = '{$table->name}'";
+            WHERE table_name = '{$table->name}'"
+            . "AND table_schema = '{$table->schema}'";
         $result_fields = $this->database_model->getAll($sql);
         $table->attributes = array();
         foreach ($result_fields as $item) {
@@ -274,7 +285,7 @@ class Postgis_model extends CI_Model {
             SELECT *, 
                 ST_GeometryType(the_geom) as geomtype,
                 ST_AsText(ST_Transform(the_geom, $geom_srid)) as wkt
-            FROM public.{$table->name} 
+            FROM {$table->schema}.{$table->name} 
             WHERE $where 
             LIMIT $limit OFFSET 0";
         $result = $this->database_model->getAll($sql, $values);
@@ -295,6 +306,11 @@ class Postgis_model extends CI_Model {
             $attrs = explode('.', $item);
             $table = reset($attrs);
             
+            $schema = 'public';
+            if (strpos($table, '.')) {
+                list($schema, $table) = explode('.', $table);
+            }
+            
             // Get id
             $id = end($attrs);
             $where = ' gid = ? ';
@@ -305,7 +321,7 @@ class Postgis_model extends CI_Model {
                 SELECT *, 
                     ST_GeometryType(the_geom) as geomtype,
                     ST_AsText(the_geom) as wkt
-                FROM public.{$table} 
+                FROM {$schema}.{$table} 
                 WHERE $where 
                 LIMIT 1 OFFSET 0";
             $record = $this->database_model->getAll($sql, $values);
@@ -351,7 +367,7 @@ class Postgis_model extends CI_Model {
                 ST_GeometryType(the_geom) as geomtype,
                 ST_AsText(the_geom) as wkt,
                 ts_rank_cd($vector, $query, 32) AS rank
-            FROM public.{$table->name} 
+            FROM {$table->schema}.{$table->name} 
             WHERE $vector @@ $query
             ORDER BY rank DESC
             LIMIT 10 OFFSET 0";
@@ -410,7 +426,7 @@ class Postgis_model extends CI_Model {
             $value_str = implode (',', $value_str);
             
             // Insert Record
-            $sql = "INSERT INTO public.{$table->name} ($attr_str) VALUES ($value_str) RETURNING gid";
+            $sql = "INSERT INTO {$table->schema}.{$table->name} ($attr_str) VALUES ($value_str) RETURNING gid";
             $result = $this->database_model->getRow($sql, $values);
             if (!empty($result)) $record['gid'] = $result['gid'];
             
@@ -438,7 +454,7 @@ class Postgis_model extends CI_Model {
             $values[] = $record['gid'];
             
             // Update Record
-            $sql = "UPDATE public.{$table->name} SET $attr_str WHERE gid = ?";
+            $sql = "UPDATE {$table->schema}.{$table->name} SET $attr_str WHERE gid = ?";
             $this->database_model->exec($sql, $values);
         }
         
@@ -453,7 +469,7 @@ class Postgis_model extends CI_Model {
         $this->database_model->selectDatabase('userdata');
         
         // Check if table exists
-        $sql = "SELECT * FROM public.{$table->name} WHERE gid = {$record['gid']}";
+        $sql = "SELECT * FROM {$table->schema}.{$table->name} WHERE gid = {$record['gid']}";
         $exists = $this->database_model->getRow($sql);
         
         // Prepare values and fields
@@ -461,9 +477,9 @@ class Postgis_model extends CI_Model {
         
         // Update Record
         // ISSUE trying to use PDO. Exception returned.
-        //$sql = "UPDATE public.{$table->name} SET $attr_str WHERE gid = ?";
+        //$sql = "UPDATE {$table->schema}.{$table->name} SET $attr_str WHERE gid = ?";
         $sql = "
-            UPDATE public.{$table->name} 
+            UPDATE {$table->schema}.{$table->name} 
             SET the_geom = ST_Transform(ST_GeomFromText('$geom', $proj), {$table->srid}) 
             WHERE gid = ?";
         $this->database_model->exec($sql, $values);
@@ -524,7 +540,7 @@ class Postgis_model extends CI_Model {
         $this->database_model->selectDatabase('userdata');
         
         // Create table
-        $sql = "ALTER TABLE public.{$table->name} ADD COLUMN $name $type";
+        $sql = "ALTER TABLE {$table->schema}.{$table->name} ADD COLUMN $name $type";
         $result = $this->database_model->getAll($sql);
         
         // Select application database
@@ -539,7 +555,7 @@ class Postgis_model extends CI_Model {
         $this->database_model->selectDatabase('userdata');
         
         // Create table
-        $sql = "ALTER TABLE {$table->name} RENAME COLUMN $column TO $newname";
+        $sql = "ALTER TABLE {$table->schema}.{$table->name} RENAME COLUMN $column TO $newname";
         $result = $this->database_model->getAll($sql);
         
         // Select application database
@@ -554,7 +570,7 @@ class Postgis_model extends CI_Model {
         $this->database_model->selectDatabase('userdata');
 
         foreach ($selected as $fieldname) {
-            $sql = "ALTER TABLE public.{$table->name} DROP COLUMN $fieldname CASCADE";
+            $sql = "ALTER TABLE {$table->schema}.{$table->name} DROP COLUMN $fieldname CASCADE";
             $result = $this->database_model->exec($sql);
         }
 
@@ -668,7 +684,7 @@ class Postgis_model extends CI_Model {
                 ST_X(ST_Centroid(ST_Transform(the_geom, 4326))) as x,
                 ST_Y(ST_Centroid(ST_Transform(the_geom, 4326))) as y,
                 ST_AsKML(the_geom) as kml 
-            FROM public.{$table->name}";
+            FROM {$table->schema}.{$table->name}";
         $results = $this->database_model->getAll($sql);
 
         // Select application database

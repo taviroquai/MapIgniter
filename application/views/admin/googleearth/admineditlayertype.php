@@ -17,8 +17,8 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure Google Earth Layer Type</h2>
-<? if (empty($gelayertype)) : ?>
+<?php if (empty($gelayertype)) : ?>
 <p>The layer type does not exists!</p>
-<? else : ?>
-<? $this->load->view('admin/googleearth/adminlayertypeform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/googleearth/adminlayertypeform'); ?>
+<?php endif; ?>

@@ -23,12 +23,12 @@
     <label>Status</label>
     <label for="status_opt1">
         <input type="radio" name="status" id="status_opt1"
-            <? if ($msclass->status == 'on') :?>checked="checked"<? endif; ?> value="on" />
+            <?php if ($msclass->status == 'on') :?>checked="checked"<?php endif; ?> value="on" />
         <span>On</span>
     </label>
     <label for="status_opt2">
         <input type="radio" name="status" id="status_opt2" 
-            <? if ($msclass->status == 'off') :?>checked="checked"<? endif; ?> value="off" />
+            <?php if ($msclass->status == 'off') :?>checked="checked"<?php endif; ?> value="off" />
         <span>Off</span>
     </label>
 

@@ -17,15 +17,15 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Postgis Layers</h2>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no layers</p>
-<? else : ?>
+<?php else : ?>
 <ul>
-    <? foreach ($items as $item) { ?>
+    <?php foreach ($items as $item) { ?>
     <li>
         <a href="<?=base_url().$ctrlpath?>/listitems/<?=$item->id?>"><?=$item->layer->title?></a>
     </li>
-    <? } ?>
+    <?php } ?>
 </ul>
 
-<? endif; ?>
+<?php endif; ?>

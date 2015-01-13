@@ -17,21 +17,21 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Search Results</h2>
-<? if (empty($results)) : ?>
+<?php if (empty($results)) : ?>
 <p>No features found.</p>
-<? else : ?>
+<?php else : ?>
 <ul>
-    <? foreach ($results as $pglayername => $pglayer) { ?>
+    <?php foreach ($results as $pglayername => $pglayer) { ?>
     <li><span><?=$pglayer['pglayer']->layer->title?></span>
-        <? if (!empty($pglayer['records'])) : ?>
+        <?php if (!empty($pglayer['records'])) : ?>
         <ul>
-            <? foreach ($pglayer['records'] as $item) { ?>
+            <?php foreach ($pglayer['records'] as $item) { ?>
             <li>
                 <h3>
                     <a href="javascript: <?=$_instance?>.lookAt(<?=$item['lon']?>, <?=$item['lat']?>);">
                         <?=empty($item['title']) ? empty($item['name']) ? '' : $item['name'] : $item['title']?>
                     </a>
-                    <span><? 
+                    <span><?php 
                         switch($item['geomtype']) {
                             case 'ST_MultiPolygon':
                             case 'ST_Polygon':
@@ -51,12 +51,12 @@
                 </h3>
                 <p><?=empty($item['description']) ? '' : substr(strip_tags($item['description']), 0, 110).'...'?></p>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? } ?>
+    <?php } ?>
 </ul>
-<? endif; ?>
+<?php endif; ?>
 
 

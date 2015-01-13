@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure Permission</h2>
-<? if (empty($permission)) : ?>
+<?php if (empty($permission)) : ?>
 <p>The permission does not exists!</p>
-<? else : ?>
+<?php else : ?>
     <form method="post" action="<?=base_url()?>admin/adminpermissions/saveitem/<?=$permission->id?>">
         <label>Action</label>
         <select name="action">
@@ -30,6 +30,4 @@
         <input type="text" name="expire" value="<?=empty($permission->expire) ? 0 : date('Y-m-d', $permission->expire)?>" /><br />
         <button type="submit">Save</button>
     </form>
-    <?
-endif;
-?>
+<?php endif; ?>

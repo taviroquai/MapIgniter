@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure layout module</h2>
-<? if (empty($mod)) : ?>
+<?php if (empty($mod)) : ?>
 <p>The module does not exists!</p>
-<? else : ?>
+<?php else : ?>
 <form method="post" action="<?=base_url()?>admin/adminmodules/save/<?=$mod->id?>">
     <label>Name</label>
     <input type="text" name="name" value="<?=$mod->name?>" />
@@ -29,6 +29,6 @@
     <input type="text" name="table" value="<?=$mod->table?>" />
     <button type="submit">Save</button>
 </form>
-<?    
+<?php    
 endif;
 ?>

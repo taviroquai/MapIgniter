@@ -16,12 +16,12 @@
 
 // ------------------------------------------------------------------------
 ?><h3>OpenLayers layer types</h3>
-<? $this->load->view('admin/openlayers/adminlayertypeform'); ?>
-<? if (empty($items)) : ?>
+<?php $this->load->view('admin/openlayers/adminlayertypeform'); ?>
+<?php if (empty($items)) : ?>
 <p>There are no layer types.</p>
-<? else : ?>
-<? $this->load->view('admin/openlayers/adminlayertypelist'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/openlayers/adminlayertypelist'); ?>
+<?php endif; ?>
 <script type="text/javascript">
     $(document).ready(function() {
         $('div.accordion').hide();

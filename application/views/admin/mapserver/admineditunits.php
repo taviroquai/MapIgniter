@@ -17,14 +17,14 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure coordinates units</h2>
-<? if (empty($msunits)) : ?>
+<?php if (empty($msunits)) : ?>
 <p>The units does not exists!</p>
-<? else : ?>
+<?php else : ?>
 <form method="post" action="<?=base_url()?>admin/adminmsunits/save/<?=$msunits->id?>">
     <label>System name</label>
     <input type="text" name="name" value="<?=$msunits->name?>" />
     <button type="submit">Save</button>
 </form>
-<?    
+<?php    
 endif;
 ?>

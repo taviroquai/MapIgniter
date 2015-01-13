@@ -16,12 +16,12 @@
 
 // ------------------------------------------------------------------------
 ?><div class="msgs">
-    <? foreach ($msgs['errors'] as $error) { ?>
+    <?php foreach ($msgs['errors'] as $error) { ?>
     <p class="error"><?=$error?></p>
-    <? } ?>
-    <? foreach ($msgs['info'] as $msg) { ?>
+    <?php } ?>
+    <?php foreach ($msgs['info'] as $msg) { ?>
     <p class="info"><?=$msg?></p>
-    <? } ?>
+    <?php } ?>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function($) {

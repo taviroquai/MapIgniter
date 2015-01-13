@@ -26,13 +26,13 @@
     <input type="text" name="table" value="" />
     <button type="submit">Save</button>
 </form>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no modules</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of modules</h3>
 <form method="post" action="<?=base_url()?>admin/adminmodules/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <table>
                 <tr>
@@ -49,8 +49,8 @@
                 </tr>
             </table>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

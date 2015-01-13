@@ -16,12 +16,12 @@
 
 // ------------------------------------------------------------------------
 ?><h3>Google Earth layer types</h3>
-<? $this->load->view('admin/googleearth/adminlayertypeform'); ?>
-<? if (empty($items)) : ?>
+<?php $this->load->view('admin/googleearth/adminlayertypeform'); ?>
+<?php if (empty($items)) : ?>
 <p>There are no layer types.</p>
-<? else : ?>
-<? $this->load->view('admin/googleearth/adminlayertypelist'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/googleearth/adminlayertypelist'); ?>
+<?php endif; ?>
 <script type="text/javascript">
     $(document).ready(function() {
         $('div.accordion').hide();

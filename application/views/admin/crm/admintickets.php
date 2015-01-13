@@ -23,24 +23,24 @@
 </ul>
 <ul class="tabs-content">
   <li class="active" id="ticket-list">
-    <? if (empty($items)) : ?>
+    <?php if (empty($items)) : ?>
     <p>There are no tickets</p>
-    <? else : ?>
+    <?php else : ?>
     <form method="post" action="<?=base_url().$ctrlpath?>/delete">
         <ul>
-            <? foreach ($items as $item) { ?>
+            <?php foreach ($items as $item) { ?>
             <li>
                 <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
                 <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Follow up</a>
                 <span><?=$item->subject?></span>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
         <button type="submit">Remove selected</button>
     </form>
-    <? endif; ?>
+    <?php endif; ?>
   </li>
   <li id="ticket-create">
-      <? $this->load->view('admin/crm/adminticketform', 
+      <?php $this->load->view('admin/crm/adminticketform', 
             array('ctrlpath' => $ctrlpath, 'action', 'ticket' => $ticket)); ?>
   </li>

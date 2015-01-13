@@ -17,14 +17,14 @@
 // ------------------------------------------------------------------------
 ?><form method="post" action="<?=$action?>">
     <ul>
-        <? foreach ($items as $item) {
+        <?php foreach ($items as $item) {
         ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$mslayerctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->layer->title?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit"><?=$action_btn?></button>
 </form>

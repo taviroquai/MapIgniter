@@ -18,7 +18,7 @@
 ?>
 <h2 class="map_title"><?=$item->map->title?></h2>
 <div class="map_description"><?=$item->map->description?></div>
-<?
+<?php
 if (empty($_instance) || empty($item) || empty($config)) : ?>
 <p>There are missing parameters for this map:</p>
 <ul>
@@ -27,7 +27,7 @@ if (empty($_instance) || empty($item) || empty($config)) : ?>
     <li>Map center (x, y)</li>
     <li>Zoom level</li>
 </ul>
-<? else : ?>
+<?php else : ?>
 <div id="mapcontainer" style="width: 100%; height: 100%;">
     <div id="map_<?=$_instance?>" class="divmap"></div>
 </div>
@@ -38,13 +38,13 @@ if (empty($_instance) || empty($item) || empty($config)) : ?>
         $.getJSON(base_url+'openlayers/getconfig/<?=$item->id?>?'+date.getTime(), function(data) {
             block_<?=$_instance?> = new WebSig.Mapblock('<?=$_instance?>', data);
             block_<?=$_instance?>.init();
-            <? if (empty($config['center'])) : ?>
+            <?php if (empty($config['center'])) : ?>
             block_<?=$_instance?>.renderExtent();
-            <? else : ?>
+            <?php else : ?>
             block_<?=$_instance?>.render(<?=$config['center'][0]?>, <?=$config['center'][1]?>, <?=$config['zoom']?>);
-            <? endif; ?>
+            <?php endif; ?>
         });
     });
     
 </script>
-<? endif; ?>
+<?php endif; ?>

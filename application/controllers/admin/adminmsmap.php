@@ -173,7 +173,7 @@ class Adminmsmap extends MY_Controller {
             $msmapfile->msunits = $this->mapserver_model->loadUnits($post['msunits_id']);
             $this->mapserver_model->save($msmapfile);
             $info[] = 'The map was saved';
-            $this->mapserver_model->updateMapfile($id);
+            $this->mapserver_model->updateMapfile($msmapfile->id);
             
         }
         catch(Exception $e) {

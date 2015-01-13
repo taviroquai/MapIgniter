@@ -26,9 +26,9 @@
                 <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol&list=<?=dirname($msstyle->symbol)?>/"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>
             </label>
             <input id="msstylesymbol"type="text" name="symbol" value="<?=$msstyle->symbol?>" />
-            <? if (!empty($sym_preview)) : ?>
+            <?php if (!empty($sym_preview)) : ?>
             <img src="<?=$sym_preview?>" style="width: <?=$msstyle->size?>px" alt="Symbol Preview" />
-            <? endif; ?>
+            <?php endif; ?>
             
             <label>Pattern</label>
             <input type="text" name="pattern" value="<?=$msstyle->pattern?>" />
@@ -86,33 +86,33 @@
             <label>Line cap</label>
             <label for="linecap_opt1">
                 <input type="radio" name="linecap" id="linecap_opt1" 
-                       <? if ($msstyle->linecap == 'round') :?>checked="checked"<? endif; ?> value="round" />
+                       <?php if ($msstyle->linecap == 'round') :?>checked="checked"<?php endif; ?> value="round" />
                 <span>Round</span>
             </label>
             <label for="linecap_opt2">
                 <input type="radio" name="linecap" id="linecap_opt2"
-                       <? if ($msstyle->linecap == 'butt') :?>checked="checked"<? endif; ?> value="butt" />
+                       <?php if ($msstyle->linecap == 'butt') :?>checked="checked"<?php endif; ?> value="butt" />
                 <span>Butt</span>
             </label>
             <label for="linecap_opt3">
                 <input type="radio" name="linecap" id="linecap_opt3"
-                       <? if ($msstyle->linecap == 'square') :?>checked="checked"<? endif; ?> value="square" />
+                       <?php if ($msstyle->linecap == 'square') :?>checked="checked"<?php endif; ?> value="square" />
                 <span>Square</span>
             </label>
             <label>Line join</label>
             <label for="linejoin_opt1">
                 <input type="radio" name="linejoin" id="linejoin_opt1"
-                       <? if ($msstyle->linejoin == 'round') :?>checked="checked"<? endif; ?> value="round" />
+                       <?php if ($msstyle->linejoin == 'round') :?>checked="checked"<?php endif; ?> value="round" />
                 <span>Round</span>
             </label>
             <label for="linejoin_opt2">
                 <input type="radio" name="linejoin" id="linejoin_opt2"
-                       <? if ($msstyle->linejoin == 'miter') :?>checked="checked"<? endif; ?> value="miter" />
+                       <?php if ($msstyle->linejoin == 'miter') :?>checked="checked"<?php endif; ?> value="miter" />
                 <span>Miter</span>
             </label>
             <label for="linejoin_opt3">
                 <input type="radio" name="linejoin" id="linejoin_opt3"
-                       <? if ($msstyle->linejoin == 'bevel') :?>checked="checked"<? endif; ?> value="bevel" />
+                       <?php if ($msstyle->linejoin == 'bevel') :?>checked="checked"<?php endif; ?> value="bevel" />
                 <span>Bevel</span>
             </label>
             <label>Line join max. size</label>
@@ -127,12 +127,12 @@
             <label>Anti-alias (gif)</label>
             <label for="antialias_opt1">
                 <input type="radio" name="antialias" id="antialias_opt1"
-                    <? if ($msstyle->antialias == 'true') :?>checked="checked"<? endif; ?> value="true" />
+                    <?php if ($msstyle->antialias == 'true') :?>checked="checked"<?php endif; ?> value="true" />
                 <span>Yes</span>
             </label>
             <label for="antialias_opt2">
                 <input type="radio" name="antialias" id="antialias_opt2" 
-                    <? if ($msstyle->antialias == 'false') :?>checked="checked"<? endif; ?> value="false" />
+                    <?php if ($msstyle->antialias == 'false') :?>checked="checked"<?php endif; ?> value="false" />
                 <span>No</span>
             </label>
         </div>

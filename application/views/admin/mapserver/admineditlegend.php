@@ -18,9 +18,9 @@
 ?>
 <h2>MapServer - Legend</h2>
 <h3>Configure</h3>
-<? if (empty($mslegend)) : ?>
+<?php if (empty($mslegend)) : ?>
 <p>The legend does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/mapserver/adminlegendform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/mapserver/adminlegendform'); ?>
+<?php endif; ?>

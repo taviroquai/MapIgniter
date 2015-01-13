@@ -24,27 +24,27 @@
     <label>Postgis table</label>
     <select name="pgplacetype">
         <option value="new_pgplacetype">New table...</option>
-        <? if (!empty($tables)) : ?>
-            <? foreach ($tables as $item) { ?>
-            <option value="<?=$item->name?>"<?=$item->name == $pglayer->pgplacetype ? ' selected="selected"' : ''?>><?=$item->name?></option>
-            <? } ?>
-        <? endif; ?>
+        <?php if (!empty($tables)) : ?>
+            <?php foreach ($tables as $item) { ?>
+            <option value="<?=$item->schema.'.'.$item->name?>"<?=$item->schema.'.'.$item->name == $pglayer->pgplacetype ? ' selected="selected"' : ''?>><?=$item->schema.'.'.$item->name?></option>
+            <?php } ?>
+        <?php endif; ?>
     </select>
     <label>New table name (optional)</label>
     <input type="text" name="new_pgplacetype" value="<?=$pglayer->layer->alias?>" />
     
     <label>SRID</label>
     <select name="srid">
-    <? foreach ($srid_list as $item) { ?>
+    <?php foreach ($srid_list as $item) { ?>
         <option value="<?=$item['srid']?>" <?=$item['srid'] == $pglayer->srid ? 'selected="selected"' : ''?>><?=$item['auth_name'].':'.$item['srid']?></option>
-    <? } ?>    
+    <?php } ?>    
     </select>
     
     <label>Geometry type</label>
     <select name="type">
-    <? foreach ($geom_types as $item) { ?>
+    <?php foreach ($geom_types as $item) { ?>
         <option value="<?=$item?>" <?=$item == $pglayer->type ? 'selected="selected"' : ''?>><?=$item?></option>
-    <? } ?>
+    <?php } ?>
     </select>
     
     <button type="submit">Save</button>

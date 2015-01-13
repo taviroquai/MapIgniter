@@ -19,26 +19,26 @@
 <h2>Map on Google Earth</h2>
 <ul class="tabs">
   <li><a class="active" href="#editgemap">Configure</a></li>
-  <? if (!empty($gemap->id)) : ?>
+  <?php if (!empty($gemap->id)) : ?>
   <li><a href="#gemap-gelayers">Layers</a></li>
   <li><a href="#gemap-preview">Preview</a></li>
-  <? endif; ?>
+  <?php endif; ?>
 </ul>
 <ul class="tabs-content">
 <li class="active" id="editgemap">
 <h3>Configure</h3>
-<? if (empty($gemap)) : ?>
+<?php if (empty($gemap)) : ?>
 <p>The map does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/googleearth/adminmapform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/googleearth/adminmapform'); ?>
+<?php endif; ?>
 </li>
-<? if (!empty($gemap->id)) : ?>
+<?php if (!empty($gemap->id)) : ?>
 <li id="gemap-gelayers">
 <h3>Layers</h3>
 <p><strong>Available layers</strong></p>
-<?
+<?php
 $action = base_url().$ctrlpath.'/addlayer/'.$gemap->id;
 $action_btn = 'Add selected';
 $this->load->view('admin/googleearth/adminlayerlist', array('items' => $gelayers, 'action_btn' => $action_btn, 'action' => $action));
@@ -46,13 +46,13 @@ $this->load->view('admin/googleearth/adminlayerlist', array('items' => $gelayers
 $items = $gemap->sharedGelayer;
 if (empty($items)) : ?>
 <p>There are no layers on this map</p>
-<? else : ?>
+<?php else : ?>
 <p><strong>Layers on this map</strong></p>
-<?
+<?php
     $action = base_url().$ctrlpath.'/dellayer/'.$gemap->id;
     $action_btn = 'Remove selected';
     $this->load->view('admin/googleearth/adminlayerlist', array('items' => $items, 'action_btn' => $action_btn, 'action' => $action)); ?>
-<? endif; ?>
+<?php endif; ?>
 </li>
   <li class="active" id="gemap-preview">
       <h3>Preview</h3>
@@ -92,5 +92,5 @@ if (empty($items)) : ?>
         });
       </script>
   </li>
-<? endif; ?>
+<?php endif; ?>
 </ul>

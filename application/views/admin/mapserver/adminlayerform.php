@@ -21,7 +21,7 @@
     <p><?=$mslayer->layer->title?></p>
     <input type="hidden" name="layer_id" value="<?=$mslayer->layer->id?>" />
     
-    <? 
+    <?php 
     $pglayers = $mslayer->layer->ownPglayer;
     if (empty($mslayer->id) && !empty($pglayers)) : 
         $pglayer = reset($pglayers); ?>
@@ -32,24 +32,24 @@
             <span>Create from Postgis layer (<?=$pglayer->pgplacetype?> table)</span>
         </label>
     </fieldset>
-    <? elseif (!empty($pglayers)) : ?>
-    <? $pglayer = reset($pglayers); ?>
+    <?php elseif (!empty($pglayers)) : ?>
+    <?php $pglayer = reset($pglayers); ?>
     <fieldset>
         <legend>Created from Postgis layer (<?=$pglayer->pgplacetype?> table)</legend>
         <input name="pgplacetype" id="pgplacetype" type="hidden" value="<?=$pglayer->pgplacetype?>" />
     </fieldset>
-    <? endif; ?>
+    <?php endif; ?>
     
     <fieldset>
         <legend>Status</legend>
     <label for="status_opt1">
         <input type="radio" name="status" id="status_opt1"
-            <? if ($mslayer->status == 'on') :?>checked="checked"<? endif; ?> value="on" />
+            <?php if ($mslayer->status == 'on') :?>checked="checked"<?php endif; ?> value="on" />
         <span>On</span>
     </label>
     <label for="status_opt2">
         <input type="radio" name="status" id="status_opt2" 
-            <? if ($mslayer->status == 'off') :?>checked="checked"<? endif; ?> value="off" />
+            <?php if ($mslayer->status == 'off') :?>checked="checked"<?php endif; ?> value="off" />
         <span>Off</span>
     </label>
     </fieldset>
@@ -58,17 +58,17 @@
         <legend>Connection Type</legend>
         <div class="accordion">
             
-            <? if (!empty($mslayer->id)) : ?>
+            <?php if (!empty($mslayer->id)) : ?>
                 <label>Place type (defined when creating layer)</label>
                 <p><?=$mslayer->pgplacetype?></p>
                 <input type="hidden" name="pgplacetype" value="<?=$mslayer->pgplacetype?>" />
-            <? endif; ?>
+            <?php endif; ?>
             
             <label>Connection Type</label>
             <select name="mslayerconntype_id">
-            <? foreach ($mslayerconntypes as $item) { ?>
+            <?php foreach ($mslayerconntypes as $item) { ?>
             <option value="<?=$item->id?>" <?=$item->id == $mslayer->mslayerconntype->id ? 'selected="selected"' : ''?>><?=$item->name?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
 
             <label>Connection</label>
@@ -82,12 +82,12 @@
             <label>Dump</label>
             <label for="dump_opt1">
                 <input type="radio" name="dump" id="dump_opt1"
-                    <? if ($mslayer->dump == 'true') :?>checked="checked"<? endif; ?> value="true" />
+                    <?php if ($mslayer->dump == 'true') :?>checked="checked"<?php endif; ?> value="true" />
                 <span>Yes</span>
             </label>
             <label for="dump_opt2">
                 <input type="radio" name="dump" id="dump_opt2" 
-                    <? if ($mslayer->dump == 'false') :?>checked="checked"<? endif; ?> value="false" />
+                    <?php if ($mslayer->dump == 'false') :?>checked="checked"<?php endif; ?> value="false" />
                 <span>No</span>
             </label>
         </div>
@@ -97,9 +97,9 @@
         <div class="accordion">
             <label>Units</label>
             <select name="msunits_id">
-            <? foreach ($msunits as $item) { ?>
+            <?php foreach ($msunits as $item) { ?>
                 <option value="<?=$item->id?>" <?=$item->id == $mslayer->msunits->id ? 'selected="selected"' : ''?>><?=$item->name?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
             
             <label>Projection</label>
@@ -127,37 +127,37 @@
 
             <label>Feature type</label>
             <select name="mslayertype_id">
-            <? 
+            <?php 
             if (empty($mslayer->mslayertype->id)) $mslayertype_id = 5;
             else $mslayertype_id = $mslayer->mslayertype->id;
             foreach ($mslayertypes as $item) { ?>
                 <option value="<?=$item->id?>" <?=$item->id == $mslayertype_id ? 'selected="selected"' : ''?>><?=$item->name?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
 
             <label>Class for features (classitem)</label>
-            <? if (!empty($datatable)) : ?>
+            <?php if (!empty($datatable)) : ?>
             <select name="classitem">
                 <option value=""<?='' == $mslayer->classitem ? ' selected="selected"' : ''?>></option>
-            <? foreach ($datatable['fields'] as $item) { ?>
+            <?php foreach ($datatable['fields'] as $item) { ?>
                 <option value="<?=$item?>"<?=$item == $mslayer->classitem ? ' selected="selected"' : ''?>><?=$item?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
-            <? else : ?>
+            <?php else : ?>
             <input type="text" name="classitem" value="<?=$mslayer->classitem?>" />
-            <? endif; ?>
+            <?php endif; ?>
             
             <label>Label for features (labelitem)</label>
-            <? if (!empty($datatable)) : ?>
+            <?php if (!empty($datatable)) : ?>
             <select name="labelitem">
                 <option value=""<?='' == $mslayer->labelitem ? ' selected="selected"' : ''?>></option>
-            <? foreach ($datatable['fields'] as $item) { ?>
+            <?php foreach ($datatable['fields'] as $item) { ?>
                 <option value="<?=$item?>"<?=$item == $mslayer->labelitem ? ' selected="selected"' : ''?>><?=$item?></option>
-            <? } ?>    
+            <?php } ?>    
             </select>
-            <? else : ?>
+            <?php else : ?>
             <input type="text" name="labelitem" value="<?=$mslayer->labelitem?>" />
-            <? endif; ?>
+            <?php endif; ?>
 
             <label>Template&nbsp;
                 <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url().$dataexplorerctrlpath?>?return=msstylesymbol"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" /></a>

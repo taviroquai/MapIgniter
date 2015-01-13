@@ -16,11 +16,11 @@
 
 // ------------------------------------------------------------------------
 ?><h3>Feature Classes</h3>
-<? $this->load->view('admin/mapserver/adminclassform'); ?>
-<?
+<?php $this->load->view('admin/mapserver/adminclassform'); ?>
+<?php
 $items = $mslayer->ownMsclass;
 if (empty($items)) : ?>
 <p>There are no classes on this layer</p>
-<? else : ?>
-<? $this->load->view('admin/mapserver/adminclasslist'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/mapserver/adminclasslist'); ?>
+<?php endif; ?>

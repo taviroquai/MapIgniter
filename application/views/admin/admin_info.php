@@ -17,8 +17,8 @@
 // ------------------------------------------------------------------------
 ?><h2>Administration</h2>
 <h3>Activity</h3>
-<? foreach ($graphs as $entity => &$attributes) { ?>
+<?php foreach ($graphs as $entity => &$attributes) { ?>
 <p>
     <img src="<?=$attributes['image_url']?>" />
 </p>
-<? } ?>
+<?php } ?>

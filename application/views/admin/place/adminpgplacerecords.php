@@ -21,9 +21,9 @@ $total = count($items);
 <h2>Places in <?=$pglayer->layer->title?></h2>
 <ul class="tabs">
     <li><a class="active" href="#placelist">List of places</a></li>
-    <? if ($olmap) : ?>
+    <?php if ($olmap) : ?>
     <li><a href="#editplacemap">Edition Map</a></li>
-    <? endif; ?>
+    <?php endif; ?>
 </ul>
 <ul class="tabs-content">
     <li class="active" id="placelist">
@@ -37,42 +37,42 @@ $total = count($items);
 
             <label>Máx. number of results</label>
             <select name="limit">
-                <? foreach ($limitopts as $opt) { ?>
+                <?php foreach ($limitopts as $opt) { ?>
                 <option value="<?=$opt?>" <?=$opt == $limit ? 'selected="selected"' : ''?>><?=$opt?></option>
-                <? } ?>
+                <?php } ?>
             </select>
             <button type="submit">Filter</button>
         </form>
-        <? if (empty($items)) : ?>
+        <?php if (empty($items)) : ?>
         <p>No results.</p>
-        <? else : ?>
+        <?php else : ?>
         <p><?=$total?> loca<?=$total>1?'is':'l'?></p>
         <form method="post" action="<?=base_url().$ctrlpath?>/delete/<?=$pglayer->id?>">
             <button type="submit">Remove selected</button>
             <table class="placelist">
                 <tr>
                     <th style="width: 50px;"></th>
-                    <? foreach ($items[0] as $k => $v) {
+                    <?php foreach ($items[0] as $k => $v) {
                         if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
                         ?>
                     <th class="placegid"><?=$k?></th>
-                    <? } ?>
+                    <?php } ?>
                     <th>Type</th>
                     <th>Rating</th>
                 </tr>
-                <? foreach ($items as $item) { ?>
+                <?php foreach ($items as $item) { ?>
                 <tr>
                     <td>
                         <input type="checkbox" name="selected[]" value="<?=$item['gid']?>" />
                         <a href="<?=base_url().$ctrlpath?>/edit/<?=$pglayer->id?>/<?=$item['gid']?>">
                             <img src="<?=base_url()?>/web/images/icons/png/24x24/pencil.png" alt="Modify" title="Modify" />
                         </a></td>
-                    <? foreach ($item as $k => $v) {
+                    <?php foreach ($item as $k => $v) {
                         if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
                         ?>
                         <td><div class="rh"><?=strip_tags($v)?></div></td>
-                    <? } ?>
-                    <td><? 
+                    <?php } ?>
+                    <td><?php 
                         switch($item['geomtype']) {
                             case 'ST_MultiPolygon':
                             case 'ST_Polygon':
@@ -88,27 +88,27 @@ $total = count($items);
                             default: echo '<img src="'.base_url().'/web/images/icons/geom.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
                         }
                     ?></td>
-                    <td style="width: 90px;"><? if (!empty($rating)) $this->load->view('rate', array('rate' => $rating[$pglayer->layer->alias.'.'.$item['gid']], 'nolabel' => true)); ?></td>
+                    <td style="width: 90px;"><?php if (!empty($rating)) $this->load->view('rate', array('rate' => $rating[$pglayer->layer->alias.'.'.$item['gid']], 'nolabel' => true)); ?></td>
                 </tr>
-                <? } ?>
+                <?php } ?>
             </table>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? if ($olmap) : ?>
+    <?php if ($olmap) : ?>
     <li id="editplacemap">
         <h3><?=$olmap->map->title?></h3>
-        <?
+        <?php
         $items = $olmap->sharedOllayer;
         if (empty($items)) : ?>
             <p>It is not possible to view the map. There are no layers on this map.</p>
-        <? else : ?>
+        <?php else : ?>
             <p>
                 <a href="<?=base_url().$fullscreenctrl?>/listitems/<?=$pglayer->id?>">
                     <img style="vertical-align: middle;" src="<?=base_url()?>web/images/icons/png/24x24/full-screen.png" alt="Enter fullscreen mode" title="Enter fullscreen mode" /><span>Enter fullscreen mode</span>
                 </a>
             </p>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? endif; ?>
+    <?php endif; ?>
 </ul>

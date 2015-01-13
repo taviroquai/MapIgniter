@@ -17,20 +17,20 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>MapServer - Layer</h2>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no layers on MapServer</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of layers</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->layer->title?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

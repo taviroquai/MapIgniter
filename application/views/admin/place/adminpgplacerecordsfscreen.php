@@ -39,32 +39,32 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
                 <span>Draw a new place</span>
             </label>
         </div>
-        <? if (empty($items)) : ?>
+        <?php if (empty($items)) : ?>
         <p>No places found.</p>
-        <? else : ?>
+        <?php else : ?>
         
         <p><?=$total?> loca<?=$total>1?'is':'l'?></p>
         <table class="placelist">
             <tr>
                 <th></th>
-                <? foreach ($items[0] as $k => $v) {
+                <?php foreach ($items[0] as $k => $v) {
                     if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
                     ?>
                 <th class="placegid"><?=$k?></th>
-                <? } ?>
+                <?php } ?>
                 <th>Type</th>
             </tr>
-            <? foreach ($items as $item) { ?>
+            <?php foreach ($items as $item) { ?>
             <tr>
                 <td><a href="javascript: editfeaturecontrol.loadFeature('<?=$item['gid']?>','<?=$srid?>');">
                         <img src="<?=base_url()?>/web/images/icons/png/24x24/pencil.png" alt="Modificar" title="Modificar" />
                     </a></td>
-                <? foreach ($item as $k => $v) {
+                <?php foreach ($item as $k => $v) {
                     if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
                     ?>
                     <td><div class="rh"><?=strip_tags($v)?></div></td>
-                <? } ?>
-                <td><? 
+                <?php } ?>
+                <td><?php 
                     switch($item['geomtype']) {
                         case 'ST_MultiPolygon':
                         case 'ST_Polygon':
@@ -81,15 +81,15 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
                     }
                 ?></td>
             </tr>
-            <? } ?>
+            <?php } ?>
         </table>
 
-        <? endif; ?>
-        <?
+        <?php endif; ?>
+        <?php
         $items = $olmap->sharedOllayer;
         if (empty($items)) : ?>
             <p>It is not possible to view the map. There are no layers on this map.</p>
-        <? else :
+        <?php else :
           $links[] = base_url()."web/js/vendor/ol/theme/default/style.css";
           $links[] = base_url()."web/openlayers/mapblock.css";
           $scripts[] = base_url()."web/js/vendor/ol/OpenLayers.js";
@@ -101,22 +101,22 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
         var base_url = '<?=base_url()?>';
         var ctrlpath = '<?=$ctrlpath?>';
         $.noConflict();
-        <?
+        <?php
         $i = 1;
         foreach ($links as $link) { ?>
         var link<?=$i?> = document.createElement('link');
         link<?=$i?>.rel = 'stylesheet';
         link<?=$i?>.href = '<?=$link?>';
         jQuery("head").append(link<?=$i?>);
-        <? $i++; } ?>
-        <? 
+        <?php $i++; } ?>
+        <?php 
         $i = 1;
         foreach ($scripts as $script) { ?>
         var script<?=$i?> = document.createElement('script');
         script<?=$i?>.type = 'text/javascript';
         script<?=$i?>.src = '<?=$script?>';
         jQuery("head").append(script<?=$i?>);
-        <? $i++; } ?>
+        <?php $i++; } ?>
 
         var block_editplacemap, editfeaturecontrol;
         jQuery(document).ready(function($) {
@@ -141,7 +141,7 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
             $('#map_editplacemap').width($('body').width() - $('#content').width() - 15);
         }
         </script>
-    <? endif; ?>
+    <?php endif; ?>
     </li>
     <li id="listfilter">
         <form action="<?=base_url().$ctrlpath?>/listitems/<?=$pglayer->id?>" method="post">
@@ -154,9 +154,9 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
 
             <label>Máx. number of results</label>
             <select name="limit">
-                <? foreach ($limitopts as $opt) { ?>
+                <?php foreach ($limitopts as $opt) { ?>
                 <option value="<?=$opt?>" <?=$opt == $limit ? 'selected="selected"' : ''?>><?=$opt?></option>
-                <? } ?>
+                <?php } ?>
             </select>
             <button type="submit">Filter</button>
         </form>

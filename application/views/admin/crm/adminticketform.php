@@ -17,16 +17,16 @@
 // ------------------------------------------------------------------------
 ?><form method="post" action="<?=base_url().$ctrlpath.$action?>">
 
-    <? if ($owner == 'guest') : ?>
+    <?php if ($owner == 'guest') : ?>
     <label>Email</label>
     <input type="text" name="email" value="<?=$ticket->email?>" />
-    <? else : ?>
+    <?php else : ?>
     <label>User account</label>
     <p><?=$owner?></p>
-    <? endif; ?>
+    <?php endif; ?>
     <input type="hidden" name="owner" value="<?=$owner?>" />
 
-    <? if (empty($ticket->id)) : ?>
+    <?php if (empty($ticket->id)) : ?>
     <label>Subject</label>
     <input type="text" name="subject" value="<?=$ticket->subject?>" />
 
@@ -35,7 +35,7 @@
 
     <label>Reference</label>
     <input type="text" name="externalref" value="<?=$ticket->externalref?>" />
-    <? else : ?>
+    <?php else : ?>
 
     <label>Subject</label>
     <input type="hidden" name="subject" value="<?=$ticket->subject?>" />
@@ -49,30 +49,30 @@
     <input type="hidden" name="externalref" value="<?=$ticket->externalref?>" />
     <p><?=$ticket->externalref?></p>
     
-        <? if (!empty($ticket->layer_id)) : ?>
+        <?php if (!empty($ticket->layer_id)) : ?>
         <label>Layer</label>
         <p><a href="<?=base_url()?>user/managelayer/edit/<?=$ticket->layer->id?>"><?=$ticket->layer->title?></a></p>
         <label>Place identification</label>
         <p><?=$ticket->featureid?></p>
-        <? endif; ?>
-        <? if (!empty($ticket->pgplacetype)) : ?>
+        <?php endif; ?>
+        <?php if (!empty($ticket->pgplacetype)) : ?>
         <label>Place</label>
         <p><a href="<?=base_url()?>user/managefullscreenpgplace/listitems/<?=$ticket->pgplacetype?>">go to place</a></p>
-        <? endif; ?>
-    <? endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <label>Delegated to</label>
     <select name="assigned">
-        <? foreach ($accounts as $account) { ?>
+        <?php foreach ($accounts as $account) { ?>
         <option value="<?=$account->id?>" <?=$ticket->account->id == $account->id ? 'selected="selected"' : ''?>><?=$account->username?></option>
-        <? } ?>
+        <?php } ?>
     </select>
 
     <label>Status</label>
     <select name="status">
-        <? foreach ($statusopts as $key => $label) { ?>
+        <?php foreach ($statusopts as $key => $label) { ?>
         <option value="<?=$key?>" <?=$ticket->status == $key ? 'selected="selected"' : ''?>><?=$label?></option>
-        <? } ?>
+        <?php } ?>
     </select>
 
     <label>Comments</label>

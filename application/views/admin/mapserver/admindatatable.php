@@ -21,15 +21,15 @@
  */
 ?>
 <h3>Information</h3>
-<? if (!empty($datatable['error'])) : ?>
+<?php if (!empty($datatable['error'])) : ?>
 <div class="msgs"><p class="error"><?=$datatable['error']?></p></div>
-<? else: ?>
+<?php else: ?>
 <p><strong>SRS:</strong> <?=$datatable['srs']?></p>
 <p><strong>EXTENT:</strong> <?=$datatable['extent']?></p>
 <h4>Attributes</h4>
 <ul>
-<? foreach ($datatable['fields'] as $field) { ?>
+<?php foreach ($datatable['fields'] as $field) { ?>
     <li><?=$field?></li>
-<? } ?>
+<?php } ?>
 </ul>
-<? endif; ?>
+<?php endif; ?>

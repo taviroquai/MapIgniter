@@ -17,8 +17,8 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure OpenLayers Layer Type</h2>
-<? if (empty($ollayertype)) : ?>
+<?php if (empty($ollayertype)) : ?>
 <p>The layer type does not exists!</p>
-<? else : ?>
-<? $this->load->view('admin/openlayers/adminlayertypeform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/openlayers/adminlayertypeform'); ?>
+<?php endif; ?>

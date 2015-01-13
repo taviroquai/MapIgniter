@@ -18,34 +18,34 @@
 ?><h3>Dashboard</h3>
 
 <h4>Top 10 Layers</h4>
-<? if (!empty($layers)) { ?>
+<?php if (!empty($layers)) { ?>
     <ul>
-    <?  foreach ($layers as $item) { ?>
+    <?php  foreach ($layers as $item) { ?>
     <li id="layer_<?=$item->alias?>">
         <span class="milayer"><?=$item->title?></span>
-        <? $this->load->view('rate', array('rate' => $layers_rating[$item->id])); ?>
+        <?php $this->load->view('rate', array('rate' => $layers_rating[$item->id])); ?>
     </li>
-    <? } ?>
+    <?php } ?>
     </ul>
-<? } else { ?>
+<?php } else { ?>
 <p>There are no layers rated yet.</p>
-<? } ?>
+<?php } ?>
 
 <h4>Top 10 Places</h4>
-<? if (!empty($locals)) { ?>
+<?php if (!empty($locals)) { ?>
 <ul>
-    <? foreach ($locals as $layer) { ?>
+    <?php foreach ($locals as $layer) { ?>
     <li>Locais em <?=$layer['pglayer']->layer->title?><br />
         <ul>
-            <?  foreach ($layer['records'] as $item) { ?>
+            <?php  foreach ($layer['records'] as $item) { ?>
             <li id="pgrecord_<?=$item['gid']?>">
                 <span class="mipgrecord"><?=empty($item['title']) ? $item['gid'] : $item['title']?></span>
-                <? $this->load->view('rate', array('rate' => $locals_rating[$layer['pglayer']->layer->alias.'.'.$item['gid']])); ?>
+                <?php $this->load->view('rate', array('rate' => $locals_rating[$layer['pglayer']->layer->alias.'.'.$item['gid']])); ?>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
-    <? } ?>
+    <?php } ?>
     </ul>
-<? } else { ?>
+<?php } else { ?>
 <p>There are no rated places yet.</p>
-<? } ?>
+<?php } ?>

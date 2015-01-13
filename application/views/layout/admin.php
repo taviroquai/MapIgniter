@@ -43,9 +43,9 @@
     <link rel="stylesheet" href="<?=base_url()?>web/admin/admin.css" />
     <link rel="stylesheet" href="<?=base_url()?>web/admin/dataexplorer.css" />
     
-    <? foreach ($_slot['_links'] as $_href) { ?>
+    <?php foreach ($_slot['_links'] as $_href) { ?>
     <link rel="stylesheet" href="<?=$_href?>" />
-    <? } ?>
+    <?php } ?>
     
     <script type="text/javascript">
         var base_url = '<?=base_url()?>';
@@ -58,9 +58,9 @@
     <script type="text/javascript" src="<?=base_url()?>web/js/sgbeal-colorpicker.jquery.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/admin/Utils.js"></script>
     
-    <? foreach ($_slot['_scripts'] as $_src) { ?>
+    <?php foreach ($_slot['_scripts'] as $_src) { ?>
     <script type="text/javascript" src="<?=$_src?>"></script>
-    <? } ?>
+    <?php } ?>
 
 </head>
 <body>

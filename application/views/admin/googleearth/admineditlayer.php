@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure layer on Google Earth</h2>
-<? if (empty($gelayer)) : ?>
+<?php if (empty($gelayer)) : ?>
 <p>The layer does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/googleearth/adminlayerform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/googleearth/adminlayerform'); ?>
+<?php endif; ?>

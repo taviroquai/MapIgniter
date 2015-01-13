@@ -18,15 +18,15 @@
 
 if (empty($item)) : ?>
 <p>Invalid menu!</p>
-<? else : ?>
+<?php else : ?>
 <ul>
-    <?
+    <?php
     if (!empty($items)) :
         foreach ($items as $item) { 
         $base = empty($item->internal) ? '' : base_url();
         ?>
     <li><a href="<?=$base.$item->href?>"><?=$item->label?></a></li>
-    <? }
+    <?php }
     endif; ?>
 </ul>
-<? endif;
+<?php endif;

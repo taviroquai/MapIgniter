@@ -19,7 +19,7 @@
 <h2>Maps</h2>
 <a class="novo" href="#">New</a>
 <div class="accordion">
-    <? $this->load->view('admin/map/adminmapform'); ?>
+    <?php $this->load->view('admin/map/adminmapform'); ?>
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -29,20 +29,20 @@
 	});
     });
 </script>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no maps yet.</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of maps</h3>
 <form method="post" action="<?=base_url().$ctrlpath?>/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->title?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="<?=base_url()?>web/css/publicfullscreen2.css">
         
         <!-- Modules CSS -->
-        <? foreach ($_slot['_links'] as $_href) { ?>
+        <?php foreach ($_slot['_links'] as $_href) { ?>
         <link rel="stylesheet" href="<?=$_href?>" />
-        <? } ?>
+        <?php } ?>
 
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,9 +31,9 @@
         </script>
 
         <script type="text/javascript" src="web/js/publicfullscreen2.js"></script>
-        <? foreach ($_slot['_scripts'] as $_src) { ?>
+        <?php foreach ($_slot['_scripts'] as $_src) { ?>
         <script type="text/javascript" src="<?=$_src?>"></script>
-        <? } ?>
+        <?php } ?>
 
     </head>
     <body>
@@ -46,44 +46,44 @@
             <a id="column-toggle" style="float: right">
                 <img src="web/images/icons/png/32x32/arrow-left.png" alt="Toggle column button" />
             </a>
-            <? if (!empty($_slot['slot3'])) : ?>
+            <?php if (!empty($_slot['slot3'])) : ?>
             <div id="slot3">
                 <div class="content-padding"><?=$_slot['slot3']?></div>
             </div>
-            <? endif; ?>
-            <? if (!empty($content)) : ?>
+            <?php endif; ?>
+            <?php if (!empty($content)) : ?>
             <div id="slot-content" class="content-padding">
                 <?=$content?>
             </div>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
 
         <div id="slot1">
             <?=$_slot['slot1']?>
         </div>
         
-        <? if (!empty($_slot['slot2'])) : ?>
+        <?php if (!empty($_slot['slot2'])) : ?>
         <div id="slot2">
             <div class="home"><a href="<?=base_url()?>" title="Home">Home</a></div>
             <?=$_slot['slot2']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
                 
-        <? if (!empty($_slot['slot4'])) : ?>
+        <?php if (!empty($_slot['slot4'])) : ?>
         <div id="slot4">
             <?=$_slot['slot4']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot5'])) : ?>
+        <?php if (!empty($_slot['slot5'])) : ?>
         <div id="slot5">
             <?=$_slot['slot5']?>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
         
-        <? if (!empty($_slot['slot6'])) : ?>
+        <?php if (!empty($_slot['slot6'])) : ?>
         <div id="slot6"><?=$_slot['slot6']?></div>
-        <? endif; ?>
+        <?php endif; ?>
           
     </body>
 </html>

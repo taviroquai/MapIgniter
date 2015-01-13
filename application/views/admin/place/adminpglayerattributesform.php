@@ -23,9 +23,9 @@
     
     <label>Type</label>
     <select name="type">
-        <? foreach ($attrtypes as $k => $v) { ?>
+        <?php foreach ($attrtypes as $k => $v) { ?>
         <option value="<?=$k?>"><?=$v?></option>
-        <? } ?>
+        <?php } ?>
     </select>
     
     <button type="submit">Save</button>
@@ -34,12 +34,12 @@
 <div class="msgs"><p style="background-color: red; color: white;">WARNING: REMOVING ATTRIBUTES MAY CORRUPT APPLICATION</p></div>
 <form method="post" action="<?=base_url().$ctrlpath?>/delattribute/<?=$pglayer->id?>">
     <ul>
-        <? foreach ($table->attributes as $item => $type) { ?>
+        <?php foreach ($table->attributes as $item => $type) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item?>" />
             <span><?=$item?>: </span><span><?=$type?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>

@@ -22,20 +22,20 @@
     <input type="text" name="name" value="" />
     <button type="submit">Save</button>
 </form>
-<? if (empty($items)) : ?>
+<?php if (empty($items)) : ?>
 <p>There are no metadata items</p>
-<? else : ?>
+<?php else : ?>
 <h3>List of metadata items</h3>
 <form method="post" action="<?=base_url()?>admin/adminmsmetadata/delete">
     <ul>
-        <? foreach ($items as $item) { ?>
+        <?php foreach ($items as $item) { ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
             <a href="<?=base_url()?>admin/adminmsmetadata/edit/<?=$item->id?>">Configure</a>
             <span><?=$item->name?></span>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
     <button type="submit">Remove selected</button>
 </form>
-<? endif; ?>
+<?php endif; ?>

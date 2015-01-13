@@ -20,19 +20,19 @@ $slots = $layout->ownLslot;
 <h2>Layout</h2>
 <ul class="tabs">
   <li><a class="active" href="#editlayout">Configure</a></li>
-  <? if (!empty($layout->id)) : ?>
+  <?php if (!empty($layout->id)) : ?>
   <li><a href="#editslots">Slots</a></li>
-  <? if (!empty($slots)) : ?>
+  <?php if (!empty($slots)) : ?>
   <li><a href="#editblocks">Blocks</a></li>
-  <? endif; ?>
-  <? endif; ?>
+  <?php endif; ?>
+  <?php endif; ?>
 </ul>
 <ul class="tabs-content">
     <li class="active" id="editlayout">
         <h3>Configure</h3>
-        <? if (empty($layout)) : ?>
+        <?php if (empty($layout)) : ?>
         <p>The layout does not exists!</p>
-        <? else : ?>
+        <?php else : ?>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/save/<?=$layout->id?>">
             <label>System name</label>
             <input type="text" name="name" value="<?=$layout->name?>" />
@@ -42,9 +42,9 @@ $slots = $layout->ownLslot;
             <textarea name="content" class="wysiwyg"><?=empty($layout->content) ? '' : $layout->content?></textarea>
             <button type="submit">Save</button>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? if (!empty($layout->id)) : ?>
+    <?php if (!empty($layout->id)) : ?>
     <li id="editslots">
         <h3>Create layout slot</h3>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/saveslot/<?=$layout->id?>/new">
@@ -54,25 +54,25 @@ $slots = $layout->ownLslot;
             <button type="submit">Save</button>
         </form>
         <h3>Layout slots list</h3>
-        <? if (empty($slots)) : ?>
+        <?php if (empty($slots)) : ?>
         <p>There are no slots registered on this layout</p>
-        <? else : ?>
+        <?php else : ?>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/deleteslot">
             <ul>
-                <? foreach ($slots as $item) { ?>
+                <?php foreach ($slots as $item) { ?>
                 <li>
                     <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
                     <a href="<?=base_url()?>admin/adminlayouts/editslot/<?=$layout->id?>/<?=$item->id?>">Configurar</a>
                     <span><?=$item->name?></span>
                 </li>
-                <? } ?>
+                <?php } ?>
             </ul>
             <input type="hidden" name="layout_id" value="<?=$layout->id?>" />
             <button type="submit">Remove selected</button>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? if (!empty($slots)) : ?>
+    <?php if (!empty($slots)) : ?>
     <li id="editblocks">
         <h3>Create a new block</h3>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/createblock/<?=$layout->id?>">
@@ -81,24 +81,24 @@ $slots = $layout->ownLslot;
             
             <label>Slot</label>
             <select name="slot_id">
-                <? foreach ($slots as $item) { ?>
+                <?php foreach ($slots as $item) { ?>
                 <option value="<?=$item->id?>"><?=$item->name?></option>
-                <? } ?>
+                <?php } ?>
             </select>
             
             <label>Module</label>
             <select name="module_id">
-                <? foreach ($modules as $module) { ?>
+                <?php foreach ($modules as $module) { ?>
                 <option value="<?=$module->id?>"><?=$module->name?></option>
-                <? } ?>
+                <?php } ?>
             </select>
             <button type="submit">Save</button>
         </form>
         <h3>List of blocks on this layout </h3>
-        <? $total_blocks = 0 ?>
-        <? if (!empty($slots)) : ?>
+        <?php $total_blocks = 0 ?>
+        <?php if (!empty($slots)) : ?>
         <form method="post" action="<?=base_url()?>admin/adminlayouts/deleteblock">
-            <? foreach ($slots as $slot) {
+            <?php foreach ($slots as $slot) {
             $blocks = $slot->sharedLblock;
             $total_blocks += count($blocks);
             if (!empty($blocks)) : ?>
@@ -114,7 +114,7 @@ $slots = $layout->ownLslot;
                     </tr>
                 </thead>
                 <tbody>
-                <? foreach ($blocks as $block) { ?>
+                <?php foreach ($blocks as $block) { ?>
                 <tr>
                     <td>
                         <input type="checkbox" name="selected[]" value="<?=$block->id?>" />
@@ -123,27 +123,27 @@ $slots = $layout->ownLslot;
                     <td><?=$block->module->name?></td>
                     <td><?=$block->publish_order?></td>
                     <td>
-                        <? if ($block->publish) : ?>
+                        <?php if ($block->publish) : ?>
                         <img src="<?=base_url()?>web/images/icons/png/16x16/check.png" title="published" alt="published" />
-                        <? else: ?>
+                        <?php else: ?>
                         <img src="<?=base_url()?>web/images/icons/png/16x16/no.png" title="not published" alt="not published" />
-                        <? endif; ?>
+                        <?php endif; ?>
                     </td>
                 </tr>
-                <? } ?>
+                <?php } ?>
                 </tbody>
                 </table>
-            <? endif;
+            <?php endif;
             } ?>
             <input type="hidden" name="layout_id" value="<?=$layout->id?>" />
-            <? if (!empty($total_blocks)) : ?>
+            <?php if (!empty($total_blocks)) : ?>
             <button type="submit">Remove selected</button>
-            <? else: ?>
+            <?php else: ?>
             <p>There are no blocks on this layout</p>
-            <? endif; ?>
+            <?php endif; ?>
         </form>
-        <? endif; ?>
+        <?php endif; ?>
     </li>
-    <? endif; ?>
-    <? endif; ?>
+    <?php endif; ?>
+    <?php endif; ?>
 </ul>

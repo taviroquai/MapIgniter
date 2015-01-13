@@ -31,12 +31,12 @@
             <label>Type of Font</label>
             <label for="type_opt1">
                 <input type="radio" name="type" id="type_opt1"
-                    <? if ($mslabel->type == 'bitmap') :?>checked="checked"<? endif; ?> value="bitmap" />
+                    <?php if ($mslabel->type == 'bitmap') :?>checked="checked"<?php endif; ?> value="bitmap" />
                 <span>Bitmap</span>
             </label>
             <label for="type_opt2">
                 <input type="radio" name="type" id="type_opt2" 
-                    <? if ($mslabel->type == 'truetype') :?>checked="checked"<? endif; ?> value="truetype" />
+                    <?php if ($mslabel->type == 'truetype') :?>checked="checked"<?php endif; ?> value="truetype" />
                 <span>TrueType</span>
             </label>
         </div>
@@ -110,17 +110,17 @@
             <label>Alignment</label>
             <label for="align_opt1">
                 <input type="radio" name="align" id="align_opt1" 
-                       <? if ($mslabel->align == 'left') :?>checked="checked"<? endif; ?> value="left" />
+                       <?php if ($mslabel->align == 'left') :?>checked="checked"<?php endif; ?> value="left" />
                 <span>Left</span>
             </label>
             <label for="align_opt2">
                 <input type="radio" name="align" id="align_opt2"
-                       <? if ($mslabel->align == 'center') :?>checked="checked"<? endif; ?> value="center" />
+                       <?php if ($mslabel->align == 'center') :?>checked="checked"<?php endif; ?> value="center" />
                 <span>Center</span>
             </label>
             <label for="align_opt3">
                 <input type="radio" name="align" id="align_opt3"
-                       <? if ($mslabel->align == 'right') :?>checked="checked"<? endif; ?> value="right" />
+                       <?php if ($mslabel->align == 'right') :?>checked="checked"<?php endif; ?> value="right" />
                 <span>Right</span>
             </label>
 
@@ -150,12 +150,12 @@
             <label>Anti-alias (gif)</label>
             <label for="antialias_opt1">
                 <input type="radio" name="antialias" id="antialias_opt1"
-                    <? if ($mslabel->antialias == 'true') :?>checked="checked"<? endif; ?> value="true" />
+                    <?php if ($mslabel->antialias == 'true') :?>checked="checked"<?php endif; ?> value="true" />
                 <span>Yes</span>
             </label>
             <label for="antialias_opt2">
                 <input type="radio" name="antialias" id="antialias_opt2" 
-                    <? if ($mslabel->antialias == 'false') :?>checked="checked"<? endif; ?> value="false" />
+                    <?php if ($mslabel->antialias == 'false') :?>checked="checked"<?php endif; ?> value="false" />
                 <span>No</span>
             </label>
             

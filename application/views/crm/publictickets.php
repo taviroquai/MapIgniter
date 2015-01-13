@@ -16,8 +16,8 @@
 
 // ------------------------------------------------------------------------
 ?>
-<? if (!empty($read)) : ?>
-    <? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php if (!empty($read)) : ?>
+    <?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
     <form action="<?=base_url().$ctrlpath?>/read?" method="get">
         <label><?=$this->lang->line('ticket.email.label')?></label>
         <input type="text" name="email" value="<?=$form['email']?>" />
@@ -25,11 +25,11 @@
         <input type="text" name="ref" value="<?=$form['ref']?>" />
         <button type="submit"><?=$this->lang->line('ticket.read.submit')?></button>
     </form>
-    <? if (!empty($ticket)) : ?>
+    <?php if (!empty($ticket)) : ?>
     <ul>
-        <? if (!empty($ticketlog)) : ?>
-        <? $i = 0; ?>
-        <? foreach ($ticketlog as $log) { ?>
+        <?php if (!empty($ticketlog)) : ?>
+        <?php $i = 0; ?>
+        <?php foreach ($ticketlog as $log) { ?>
         <li>
             <span><strong><?=$log->last_update?></strong> <?=$log->subject?></span>
             <table class="ticketlog">
@@ -45,19 +45,19 @@
                     <td><?=$log->account->username?></td>
                     <td><?=$log->status?></td>
                 </tr>
-                <? if ($i == 0) : ?>
+                <?php if ($i == 0) : ?>
                 <tr>
                     <td colspan="4"><?=$log->message?></td>
                 </tr>
-                <? endif; ?>
+                <?php endif; ?>
                 <tr>
                     <td colspan="4"><?=$log->comments?></td>
                 </tr>
             </table>
         </li>
-        <? $i++; ?>
-        <? } ?>
-        <? endif; ?>
+        <?php $i++; ?>
+        <?php } ?>
+        <?php endif; ?>
         <li>
             <span><strong><?=$ticket->last_update?></strong> <?=$ticket->subject?></span>
             <table class="ticketlog">
@@ -82,15 +82,15 @@
             </table>
         </li>
     </ul>
-    <? endif; ?>
-<? else :?>
-    <? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-    <? if (empty($success)) : ?>
-    <? $this->load->view('crm/publicticketform', 
+    <?php endif; ?>
+<?php else :?>
+    <?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+    <?php if (empty($success)) : ?>
+    <?php $this->load->view('crm/publicticketform', 
         array('ctrlpath' => $ctrlpath, 'ticket' => $newticket)); ?>
-    <? else : ?>
-        <? $this->load->view('crm/publiccreateticketsuccess',
+    <?php else : ?>
+        <?php $this->load->view('crm/publiccreateticketsuccess',
         array('ctrlpath' => $ctrlpath, 'ticket' => $ticket)); ?>
-    <? endif; ?>
-<? endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
 <p><?=sprintf($this->lang->line('ticket.page.backlink'), base_url())?></p>

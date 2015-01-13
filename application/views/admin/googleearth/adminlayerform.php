@@ -23,9 +23,9 @@
     
     <label>Layer type</label>
     <select name="gelayertype_id">
-    <? foreach ($gelayertypes as $item) { ?>
+    <?php foreach ($gelayertypes as $item) { ?>
         <option value="<?=$item->id?>" <?=$item->id == $gelayer->gelayertype->id ? 'selected="selected"' : ''?>><?=$item->type?></option>
-    <? } ?>    
+    <?php } ?>    
     </select>
     
     <button type="submit">Save</button>

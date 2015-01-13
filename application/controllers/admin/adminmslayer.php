@@ -228,7 +228,7 @@ class Adminmslayer extends MY_Controller {
             }
         }
         catch(Exception $e) {
-            $errors[] = $e->getMessage();
+            show_error($e->getMessage());
         }
         
         // Load types of connection
@@ -316,7 +316,7 @@ class Adminmslayer extends MY_Controller {
             }
         }
         catch (Exception $e) {
-            //
+            show_error($e->getMessage());
         }
         if (!$this->input->is_ajax_request())
             redirect(base_url().$this->ctrlpath.'/edit/'.$mslayer->id);

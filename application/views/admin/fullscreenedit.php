@@ -85,9 +85,9 @@
         }
     </style>
     
-    <? foreach ($_slot['_links'] as $_href) { ?>
+    <?php foreach ($_slot['_links'] as $_href) { ?>
     <link rel="stylesheet" href="<?=$_href?>" />
-    <? } ?>
+    <?php } ?>
     
     <script type="text/javascript" src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="<?=base_url()?>web/js/vendor/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -98,9 +98,9 @@
     
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.6&sensor=false"></script>
     
-    <? foreach ($_slot['_scripts'] as $_src) { ?>
+    <?php foreach ($_slot['_scripts'] as $_src) { ?>
     <script type="text/javascript" src="<?=$_src?>"></script>
-    <? } ?>
+    <?php } ?>
 
 </head>
 <body>

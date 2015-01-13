@@ -17,9 +17,9 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Edit Place</h2>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? if (empty($record)) : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php if (empty($record)) : ?>
 <p>The place does not exists!</p>
-<? else : ?>
-<? $this->load->view('admin/place/adminpgplaceform'); ?>
-<? endif; ?>
+<?php else : ?>
+<?php $this->load->view('admin/place/adminpgplaceform'); ?>
+<?php endif; ?>

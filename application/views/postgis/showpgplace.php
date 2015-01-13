@@ -29,9 +29,9 @@
         <a href="<?=base_url()?>postgis/getfeature/<?=$record['gid']?>/<?=$layeralias?>">Full page</a>
     </small>
 </div>
-<? foreach ($table->attributes as $field => $type) { 
+<?php foreach ($table->attributes as $field => $type) { 
     if (in_array($field, $sysfields)) continue;
     ?>
     <p><strong><?=$field?>:</strong>&nbsp;<?=$record[$field]?></p>
-<? } ?>
-<? $this->load->view('rate', array('rate' => $rating[$layeralias.'.'.$record['gid']])); ?>
+<?php } ?>
+<?php $this->load->view('rate', array('rate' => $rating[$layeralias.'.'.$record['gid']])); ?>

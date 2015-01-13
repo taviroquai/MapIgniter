@@ -17,19 +17,19 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Ticket - Follow up</h2>
-<? if (empty($ticket)) : ?>
+<?php if (empty($ticket)) : ?>
 <p>Ticket not found!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/crm/adminticketform', 
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/crm/adminticketform', 
         array('ctrlpath' => $ctrlpath, 'ticket' => $ticket)); ?>
-<? endif; ?>
+<?php endif; ?>
 
 <h3>Tracking</h3>
 <ul>
-    <? if (!empty($ticketlog)) : ?>
-    <? $i = 0; ?>
-    <? foreach ($ticketlog as $log) { ?>
+    <?php if (!empty($ticketlog)) : ?>
+    <?php $i = 0; ?>
+    <?php foreach ($ticketlog as $log) { ?>
     <li>
         <span><strong><?=$log->last_update?></strong> <?=$log->subject?></span>
         <table class="ticketlog">
@@ -45,19 +45,19 @@
                 <td><?=$log->account->username?></td>
                 <td><?=$log->status?></td>
             </tr>
-            <? if ($i == 0) : ?>
+            <?php if ($i == 0) : ?>
             <tr>
                 <td colspan="4"><?=$log->message?></td>
             </tr>
-            <? endif; ?>
+            <?php endif; ?>
             <tr>
                 <td colspan="4"><?=$log->comments?></td>
             </tr>
         </table>
     </li>
-    <? $i++; ?>
-    <? } ?>
-    <? endif; ?>
+    <?php $i++; ?>
+    <?php } ?>
+    <?php endif; ?>
     <li>
         <span><strong><?=$ticket->last_update?></strong> <?=$ticket->subject?></span>
         <table class="ticketlog">

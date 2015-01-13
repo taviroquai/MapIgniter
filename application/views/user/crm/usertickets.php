@@ -23,21 +23,21 @@
 </ul>
 <ul class="tabs-content">
   <li class="active" id="ticket-list">
-    <? if (empty($items)) : ?>
+    <?php if (empty($items)) : ?>
     <p>There are no tickets</p>
-    <? else : ?>
+    <?php else : ?>
         <ul>
-            <? foreach ($items as $item) { ?>
+            <?php foreach ($items as $item) { ?>
             <li>
                 <span><?=$item->subject?></span>
                 <a href="<?=base_url().$ctrlpath?>/edit/<?=$item->id?>">Follow up</a>
-                <? $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
+                <?php $this->load->view('rate', array('rate' => $rating[$item->id])); ?>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
-    <? endif; ?>
+    <?php endif; ?>
   </li>
   <li id="ticket-create">
-      <? $this->load->view('admin/crm/adminticketform', 
+      <?php $this->load->view('admin/crm/adminticketform', 
             array('ctrlpath' => $ctrlpath, 'action', 'ticket' => $ticket)); ?>
   </li>

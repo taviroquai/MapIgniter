@@ -17,11 +17,11 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure style</h2>
-<? if (empty($msstyle)) : ?>
+<?php if (empty($msstyle)) : ?>
 <p>The style does not exists!</p>
-<? else : ?>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
-<? $this->load->view('admin/mapserver/adminstyleform'); ?>
-<?    
+<?php else : ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php $this->load->view('admin/mapserver/adminstyleform'); ?>
+<?php    
 endif;
 ?>

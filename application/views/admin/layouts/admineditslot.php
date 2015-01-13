@@ -17,13 +17,13 @@
 // ------------------------------------------------------------------------
 ?>
 <h2>Configure layout slot</h2>
-<? if (empty($slot)) : ?>
+<?php if (empty($slot)) : ?>
 <p>The layout slot does not exists!</p>
-<? else : ?>
+<?php else : ?>
     <form method="post" action="<?=base_url()?>admin/adminlayouts/saveslot/<?=$layout->id?>/<?=$slot->id?>">
         <label>System name</label>
         <input type="text" name="name" value="<?=$slot->name?>" />
         <button type="submit">Save</button>
     </form>
-<? endif; ?>
+<?php endif; ?>
 <a href="<?=base_url()?>admin/adminlayouts/edit/<?=$layout->id?>#editslots">Back to layout</a>

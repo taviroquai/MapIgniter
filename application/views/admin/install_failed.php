@@ -16,5 +16,5 @@
 
 // ------------------------------------------------------------------------
 ?><h1>System Requirements</h1>
-<? if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
+<?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
 <p>Click <a href="<?=base_url()?>admin/install">here</a> to repeat system requirements verification.</p>
