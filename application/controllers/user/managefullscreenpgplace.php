@@ -35,4 +35,14 @@ class Managefullscreenpgplace extends Managepgplace {
         $this->pgplacectrl = 'user/managepgplace';
     }
     
+    /**
+     * Action index    
+     * Display a list of all table records
+     */
+    public function listitemstable($id)
+    {
+        $this->listpgplaceview = 'admin/place/adminpgplacetablefscreen';
+        parent::listitems($id);
+    }
+    
 }

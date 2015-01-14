@@ -30,6 +30,7 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
     <li><a class="active" href="#placelist">List of places</a></li>
     <li><a href="#listfilter">Filter</a></li>
     <li><a href="#editoptions">Options</a></li>
+    <li><a href="#editrecord">Edit</a></li>
 </ul>
 <ul class="tabs-content">
     <li class="active" id="placelist">
@@ -39,52 +40,9 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
                 <span>Draw a new place</span>
             </label>
         </div>
-        <?php if (empty($items)) : ?>
-        <p>No places found.</p>
-        <?php else : ?>
         
-        <p><?=$total?> loca<?=$total>1?'is':'l'?></p>
-        <table class="placelist">
-            <tr>
-                <th></th>
-                <?php foreach ($items[0] as $k => $v) {
-                    if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
-                    ?>
-                <th class="placegid"><?=$k?></th>
-                <?php } ?>
-                <th>Type</th>
-            </tr>
-            <?php foreach ($items as $item) { ?>
-            <tr>
-                <td><a href="javascript: editfeaturecontrol.loadFeature('<?=$item['gid']?>','<?=$srid?>');">
-                        <img src="<?=base_url()?>/web/images/icons/png/24x24/pencil.png" alt="Modificar" title="Modificar" />
-                    </a></td>
-                <?php foreach ($item as $k => $v) {
-                    if ($k === 'the_geom' || $k === 'geomtype' || $k === 'wkt') continue;
-                    ?>
-                    <td><div class="rh"><?=strip_tags($v)?></div></td>
-                <?php } ?>
-                <td><?php 
-                    switch($item['geomtype']) {
-                        case 'ST_MultiPolygon':
-                        case 'ST_Polygon':
-                            echo '<img src="'.base_url().'/web/images/icons/polygon.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
-                            break;
-                        case 'ST_MultiLineString':
-                        case 'ST_LineString':
-                            echo '<img src="'.base_url().'/web/images/icons/linestring.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
-                            break;
-                        case 'ST_Point':
-                            echo '<img src="'.base_url().'/web/images/icons/point.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
-                            break;
-                        default: echo '<img src="'.base_url().'/web/images/icons/geom.png" alt="'.$item['geomtype'].'" title="'.$item['geomtype'].'" />';
-                    }
-                ?></td>
-            </tr>
-            <?php } ?>
-        </table>
+        <div id="ajaxtable"></div>
 
-        <?php endif; ?>
         <?php
         $items = $olmap->sharedOllayer;
         if (empty($items)) : ?>
@@ -132,6 +90,8 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
                 block_editplacemap.map.zoomTo(1);
                 editfeaturecontrol = new wfseditfeature(block_editplacemap, '<?=$pglayer->id?>', <?=$editlayerindex?>, '<?=$table->type?>');
             });
+            
+            $('#ajaxtable').load('<?=base_url().$ctrlpath?>/listitemstable/<?=$pglayer->id?>');
         });
         
         function fixLayout($) {
@@ -165,4 +125,5 @@ $srid = str_replace('EPSG:', '', $olmap->projection);
         <input type="checkbox" id="autosave" name="autosave" checked="checked" value="1" />
         <span>Save geometry changes</span>
     </li>
+    <li id="editrecord"></li>
 </ul>

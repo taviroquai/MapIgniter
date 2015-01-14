@@ -36,25 +36,6 @@ var wfseditfeature = function (mapblock, pglayerid, layerindex, geomtype) {
 
     var me = this;
     
-    this.mapblock.controls.wfscontrol.events.register("featureselected", this, function(e) {
-        this.vectorLayer.addFeatures([e.feature]);
-        me.message('The place was found');
-        jQuery.get(base_url+ctrlpath+'/edit/'+pglayerid+'/'+e.feature.attributes.gid, 
-            function(response) {
-                //var centroid = e.feature.geometry.getCentroid();
-                //me.mapblock.map.panTo(new OpenLayers.LonLat(centroid.x - 0.5*centroid.x, centroid.y-0.5*centroid.y));
-                me.editPlacePopup(e.feature, response);
-            }
-        );
-    });
-    
-    mapblock.controls.wfscontrol.events.register("featureunselected", this, function(e) {
-        me.resetMap();
-    });
-    
-    mapblock.map.addControl(mapblock.controls.wfscontrol);
-    mapblock.controls.wfscontrol.activate();
-    
     mapblock.controls.modify = new OpenLayers.Control.ModifyFeature(this.vectorLayer);
     this.vectorLayer.events.register("featuremodified", this, function(e) {
         var autosave = jQuery('#autosave').attr('checked');
@@ -78,105 +59,14 @@ var wfseditfeature = function (mapblock, pglayerid, layerindex, geomtype) {
     
     mapblock.map.addControl(new OpenLayers.Control.MousePosition());
     mapblock.map.addControl(new OpenLayers.Control.LayerSwitcher());
-}
-
-wfseditfeature.prototype.handleCreate = function (feature) {
-    var me = this;
-    jQuery.get(base_url+ctrlpath+'/edit/'+this.pglayerid+'/new', 
-        function(response) {
-            me.editPlacePopup(feature, response, true);
-            jQuery('#create').attr('checked', false);
-            me.toggleCreate();
-        }
-    );
-}
-
-wfseditfeature.prototype.toggleCreate = function () {
-    var me = this;
-    if (jQuery('#create').attr('checked') == 'checked') {
-        jQuery('#editbutton').addClass('checked');
-        jQuery('#editbutton span').html('Drawing new ...');
-        this.mapblock.controls.wfscontrol.deactivate();
-        this.resetMap();
-        this.mapblock.controls.create.activate();
-        me.message('Edition mode. Click on the map to start drawing.', 10000);
-    }
-    else {
-        jQuery('#editbutton').removeClass('checked');
-        jQuery('#editbutton span').html('Draw new place');
-        this.mapblock.controls.create.deactivate();
-        this.mapblock.controls.wfscontrol.activate();
-        me.message('Selection mode.', 10000);
-    }
-}
-
-wfseditfeature.prototype.loadFeature = function(id, srid) {
-
-    // set private variables
-    var postgeomformat = new OpenLayers.Format.WKT();
-    var me = this;
     
-    me.resetMap();
-    
-    jQuery.getJSON(base_url+ctrlpath+'/ajaxloadplace/'+this.pglayerid+'/'+id+'/'+srid,
-        null, function(response) {
-            var feature = postgeomformat.read(response.record.wkt);
-            feature.attributes = response.record;
-            me.vectorLayer.addFeatures([feature]);
-            jQuery.get(base_url+ctrlpath+'/edit/'+me.pglayerid+'/'+id, 
-                function(response) {
-                    //var centroid = feature.geometry.getCentroid();
-                    //me.mapblock.map.panTo(new OpenLayers.LonLat(centroid.x - 0.5*centroid.x, centroid.y-0.5*centroid.y));
-                    me.editPlacePopup(feature, response);
-                }
-            );
-        }
-    );
-}
-
-wfseditfeature.prototype.editPlacePopup = function(feature, form, create) {
-    
-    var centroid = feature.geometry.getCentroid();
-    var str = form;
-    var me = this;
-    var popup = new OpenLayers.Popup("chicken",
-               new OpenLayers.LonLat(centroid.x, centroid.y),
-               new OpenLayers.Size(450,450),
-               str,
-               true);
-    popup.minSize = new OpenLayers.Size(450,450);
-    popup.panMapIfOutOfView = true;
-    this.mapblock.map.addPopup(popup);
-    popup.updateSize();
-    jQuery(popup.contentDiv).css('overflow', 'auto');
-    jQuery('#chicken').css('border', '4px solid #e0e0e0');
-    this.mapblock.controls.modify.selectFeature(feature);
-    
-    jQuery('#pgplaceform').each(function() {
-        jQuery(this).submit(function(e) {
-            e.preventDefault();
-            jQuery(this).ajaxSubmit(function(response) {
-                jQuery(popup.contentDiv).html(response);
-                while( me.mapblock.map.popups.length ) {
-                    me.mapblock.map.removePopup(me.mapblock.map.popups[0]);
-                }
-                var autosave = jQuery('#autosave').attr('checked');
-                if (create && response.record.gid) {
-                    feature.attributes.gid = response.record.gid;
-                    me.saveGeometry(feature, true);
-                }
-                else {
-                    if (autosave) me.saveGeometry(feature);
-                    jQuery('#content').load(base_url+ctrlpath+'/listitems/'+me.pglayerid);
-                }
-
-            });
-            return false;
-        });
+    jQuery('#ajaxtable').on('click', '.edit', function(e) {
+        var id = jQuery(this).attr('data-feature-id');
+        var srid = jQuery(this).attr('data-srid');
+        me.loadFeature(id, srid);
     });
-
     // Attach open file explorer event
-    jQuery("#pgplaceform a.linkexplorer").click(function(e){
+    jQuery("#pgplaceform").on('click', "a.linkexplorer", function(e){
         e.preventDefault();
         var me = this;
         jQuery.fancybox.open(
@@ -186,13 +76,101 @@ wfseditfeature.prototype.editPlacePopup = function(feature, form, create) {
             'width': 800
         });
     });
-}
+};
+
+wfseditfeature.prototype.handleCreate = function (feature) {
+    var me = this;
+    jQuery.get(base_url+ctrlpath+'/edit/'+this.pglayerid+'/new', 
+        function(response) {
+            me.editPlace(feature, response, true);
+            jQuery('#create').attr('checked', false);
+            me.toggleCreate();
+        }
+    );
+};
+
+wfseditfeature.prototype.toggleCreate = function () {
+    var me = this;
+    if (jQuery('#create').attr('checked') == 'checked') {
+        jQuery('#editbutton').addClass('checked');
+        jQuery('#editbutton span').html('Drawing new ...');
+        this.resetMap();
+        this.mapblock.controls.create.activate();
+        me.message('Edition mode. Click on the map to start drawing.', 10000);
+    }
+    else {
+        jQuery('#editbutton').removeClass('checked');
+        jQuery('#editbutton span').html('Draw new place');
+        this.mapblock.controls.create.deactivate();
+        me.message('Selection mode.', 10000);
+    }
+};
+
+wfseditfeature.prototype.loadFeature = function(id, srid) {
+
+    // set private variables
+    var postgeomformat = new OpenLayers.Format.WKT();
+    var me = this;
+    
+    jQuery.getJSON(base_url+ctrlpath+'/ajaxloadplace/'+this.pglayerid+'/'+id+'/'+srid,
+        null, function(response) {
+            var feature = postgeomformat.read(response.record.wkt);
+            feature.attributes = response.record;
+            jQuery.get(base_url+ctrlpath+'/edit/'+me.pglayerid+'/'+id, 
+                function(response) {
+                    var centroid = feature.geometry.getCentroid();
+                    me.mapblock.map.panTo(new OpenLayers.LonLat(centroid.x, centroid.y));
+                    me.editPlace(feature, response);
+                }
+            );
+        }
+    );
+};
+
+wfseditfeature.prototype.editPlace = function(feature, form, create) {
+    
+    var me = this;
+    
+    jQuery('#editrecord').html(form);
+    window.location.hash = '#editrecord';
+    
+    me.mapblock.controls.create.deactivate();
+    me.mapblock.controls.modify.deactivate();
+    me.resetMap();
+    me.vectorLayer.addFeatures([feature]);
+    me.mapblock.controls.modify.activate();
+    me.mapblock.controls.modify.selectFeature(feature);
+    me.vectorLayer.refresh();
+    
+    jQuery('#pgplaceform').each(function() {
+        jQuery(this).submit(function(e) {
+            e.preventDefault();
+            jQuery(this).ajaxSubmit(function(response) {
+                jQuery('#editrecord').html(response);
+                
+                var autosave = jQuery('#autosave').attr('checked');
+                if (create && response.record.gid) {
+                    feature.attributes.gid = response.record.gid;
+                    me.saveGeometry(feature, true);
+                    window.location.hash = '#placelist';
+                }
+                else {
+                    if (autosave) me.saveGeometry(feature);
+                    jQuery('#ajaxtable').load(base_url+ctrlpath+'/listitemstable/'+me.pglayerid, function() {
+                        window.location.hash = '#placelist';
+                    });
+                }
+            });
+            return false;
+        });
+    });
+};
 
 wfseditfeature.prototype.saveGeometry = function(feature, refresh) {
     var me = this;
     var postgeomformat = new OpenLayers.Format.WKT();
     if (feature.attributes.gid === undefined) {
-        alert('Error: can only save existing geometries');
+        alert('Notice: please save feature first.');
         return;
     }
     jQuery.ajax({
@@ -211,24 +189,14 @@ wfseditfeature.prototype.saveGeometry = function(feature, refresh) {
                 me.message(data.msgs.info.join("\n"));
                 me.layer.mergeNewParams({'random':Math.random()});
                 me.layer.redraw();
-                if (refresh) {
-                    jQuery('#content').load(base_url+ctrlpath+'/listitems/'+me.pglayerid);
-                }
             }
         }
     });
-
-    me.resetMap();
-    this.mapblock.controls.modify.deactivate();
-    this.mapblock.controls.modify.activate();
-}
+};
 
 wfseditfeature.prototype.resetMap = function() {
     this.vectorLayer.removeAllFeatures();
-    while( this.mapblock.map.popups.length ) {
-        this.mapblock.map.removePopup(this.mapblock.map.popups[0]);
-    }
-}
+};
 
 wfseditfeature.prototype.message = function(message, delay) {
     if (!delay) delay = 5000;
@@ -239,4 +207,4 @@ wfseditfeature.prototype.message = function(message, delay) {
             jQuery(this).fadeOut(delay);
         });
     });
-}
+};

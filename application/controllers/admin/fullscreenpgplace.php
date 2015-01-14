@@ -32,7 +32,17 @@ class Fullscreenpgplace extends Adminpgplace {
         $this->layout = 'fullscreenedit';
         $this->ctrlpath = 'admin/'.$this->router->fetch_class();
         $this->listpgplaceview = 'admin/place/adminpgplacerecordsfscreen';
-        $this->pgplacectrl = 'admin/adminpgplace';
+        $this->pgplacectrl = 'admin/fullscreenpgplace';
+    }
+    
+    /**
+     * Action index    
+     * Display a list of all table records
+     */
+    public function listitemstable($id)
+    {
+        $this->listpgplaceview = 'admin/place/adminpgplacetablefscreen';
+        parent::listitems($id);
     }
     
 }

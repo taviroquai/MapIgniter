@@ -59,6 +59,7 @@
     <button type="submit">Save</button>
 </form>
 <script type="text/javascript">
+    var $ = jQuery;
     $(document).ready(function() {
         //$("a.linkexplorer").fancybox();
         
