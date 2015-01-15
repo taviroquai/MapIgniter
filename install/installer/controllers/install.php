@@ -119,6 +119,10 @@ class Install extends CI_Controller {
             $info['php5_gd'] = "Detecting php5-gd with extension_loaded()";
             if (!extension_loaded('gd')) $errors['php5_gd'] = 'php5-gd extension was not detected.';
             
+            // Check php5-mcrypt
+            $info['php5_mcrypt'] = "Detecting php5-mcrypt with extension_loaded()";
+            if (!extension_loaded('mcrypt')) $errors['php5_mcrypt'] = 'php5-mcrypt extension was not detected.';
+            
             // Check if private data folder is writeable
             $private_data_path = $post['private_data_path'];
             $info['private_data_path'] = "Checking private data folder: $private_data_path ...";
@@ -209,6 +213,9 @@ class Install extends CI_Controller {
                 }
                 if ($current_version === false) $this->database_model->install();
                 else $this->database_model->setVersion($this->config->item('_version'));
+                
+                $this->load->model('mapserver/mapserver_model');
+                $this->mapserver_model->updateMapfile(1);
             }
             
             if (empty($errors)) $config_ok = true;
