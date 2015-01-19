@@ -48,7 +48,8 @@ class Managepgplace extends Adminpgplace {
         // Load main content
         $data = array(
             'items' => $items,
-            'ctrlpath' => $this->ctrlpath);
+            'ctrlpath' => $this->ctrlpath
+        );
         
         // Add rating items
         if (!empty($items)) {
@@ -173,6 +174,7 @@ class Managepgplace extends Adminpgplace {
             
             foreach ($table->attributes as $field => $type) {
                 if (in_array($field, $sysfields)) continue;
+                if ($field == 'alias') $post[$field] = url_title($post[$field], 'dash', true);
                 $record[$field] = $post[$field];
             }
             

@@ -67,7 +67,7 @@ class Mapserver_model extends CI_Model {
             
             $private_data_path = $this->config->item('private_data_path');
             ob_start();
-            include_once 'template.php';
+            include_once dirname(__FILE__) . '/template.php';
             file_put_contents($mapfile_path, ob_get_clean());
             //echo "<p>Done!</p>";
         }

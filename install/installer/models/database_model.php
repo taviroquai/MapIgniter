@@ -579,19 +579,19 @@ class Database_model extends CI_Model {
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[0], 'UTF8');
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[1], 'Cities');
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[2], 'No info');
-        $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[3], 'EPSG:20790 EPSG:3857 EPSG:4326');
+        $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[3], 'EPSG:3857 EPSG:4326');
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[4], 'mapserver?map='.$map->alias.'.map');
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[8], '*');
         $this->mapserver_model->addMapfileMetadata($mapfile, $msmetadata[9], 'text/html');
         
         // Create Mapserver Layer
-        $extent = '-13207.017577 49518.222243 452964.525460 291327.263653';
-        $projection = "proj=tmerc lat_0=39.66666666666666 lon_0=1 k=1 x_0=200000 y_0=300000 ellps=intl towgs84=-304.046,-60.576,103.64,0,0,0,0 pm=lisbon units=m no_defs";
+        $extent = '-20037508.34 -20037508.34 20037508.34 20037508.34';
+        $projection = "init=epsg:3857";
         $mslayer = $this->mapserver_model->createLayer($layer, $extent, $projection);
         $mslayer->mslayertype = $mslayertype[4];
         $mslayer->template = './mapfile/template/shape_feature_body.html';
         $mslayer->data = './mapfile/shapefile/map1.shp';
-        $mslayer->labelitem = 'concelho';
+        $mslayer->labelitem = 'title';
         $mslayer->owner = $account_admin;
         
         // Add Layer Metadata
@@ -702,7 +702,7 @@ class Database_model extends CI_Model {
         $this->openlayers_model->save($olbinglayer);
         // Create WMS Mapserver Layer defined above
         $opts = "{\n\"isBaseLayer\": false,\n\"gutter\": 15\n}";
-        $vendoropts = "{\n\"layers\":\"".$layer->alias."\",\n\"transparent\": true,\n\"projection\":\"EPSG:20790\"\n}";
+        $vendoropts = "{\n\"layers\":\"".$layer->alias."\",\n\"transparent\": true,\n\"projection\":\"EPSG:3857\"\n}";
         $url = $map->alias;
         $olwmslayer = $this->openlayers_model->createLayer($layer, $ollayertype[3], $url, $opts, $vendoropts);
         $olwmslayer->owner = $account_admin;

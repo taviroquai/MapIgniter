@@ -31,7 +31,7 @@ class Managefullscreenpgplace extends Managepgplace {
         
         $this->layout = 'fullscreenedit';
         $this->ctrlpath = 'user/'.$this->router->fetch_class();
-        $this->listpgplaceview = 'admin/place/adminpgplacerecordsfscreen';
+        $this->listpgplaceview = 'user/place/userpgplacerecordsfscreen';
         $this->pgplacectrl = 'user/managepgplace';
     }
     

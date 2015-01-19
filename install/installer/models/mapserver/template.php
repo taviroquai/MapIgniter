@@ -150,7 +150,7 @@ MAP
            
            <?php foreach ($msclass->sharedMsstyle as $msstyle) addStyle($private_data_path, $msstyle); ?>
 
-           <?
+           <?php
            $labels = $msclass->sharedMslabel;
            if (!empty($labels)) :
            $mslabel = reset($labels);

@@ -14,7 +14,7 @@ MAP
     FONTSET '/var/www/mapigniter/data/mapfile/fonts/fonts.list'
     SYMBOLSET '/var/www/mapigniter/data/mapfile/symbols/symbols.txt'
     PROJECTION
-                'init=epsg:900913'
+                'init=epsg:3857'
         END
     # Background color for the map canvas -- change as desired
     IMAGECOLOR 255 255 255
@@ -54,9 +54,9 @@ MAP
                 # WMS server settings
         METADATA
                     'wms_encoding' 'UTF8'
-                    'wms_title' 'Concelhos'
+                    'wms_title' 'Cidades'
                     'wms_abstract' 'No info'
-                    'wms_srs' 'EPSG:20790 EPSG:900913 EPSG:4326'
+                    'wms_srs' 'EPSG:3857 EPSG:4326'
                     'wms_onlineresource' 'mapserver?map=demo.map'
                     'ows_enable_request' '*'
                     'wms_feature_info_mime_type' 'text/html'
@@ -89,7 +89,7 @@ MAP
                     'no_defs'
         
         END        
-        LABELITEM "concelho"
+        LABELITEM "title"
         DUMP true
         OPACITY 100
         TEMPLATE "/var/www/mapigniter/data/mapfile/template/shape_feature_body.html"
@@ -100,7 +100,7 @@ MAP
 
         
         CLASS
-           NAME 'Concelhos'
+           NAME 'Cities'
            STATUS on
            DEBUG off
            

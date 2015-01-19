@@ -152,14 +152,13 @@ wfseditfeature.prototype.editPlace = function(feature, form, create) {
                 if (create && response.record.gid) {
                     feature.attributes.gid = response.record.gid;
                     me.saveGeometry(feature, true);
-                    window.location.hash = '#placelist';
                 }
                 else {
                     if (autosave) me.saveGeometry(feature);
-                    jQuery('#ajaxtable').load(base_url+ctrlpath+'/listitemstable/'+me.pglayerid, function() {
-                        window.location.hash = '#placelist';
-                    });
                 }
+                jQuery('#ajaxtable').load(base_url+ctrlpath+'/listitemstable/'+me.pglayerid, function() {
+                    window.location.hash = '#placelist';
+                });
             });
             return false;
         });

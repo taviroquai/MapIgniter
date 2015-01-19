@@ -66,23 +66,34 @@ class Adminpgplace extends MY_Controller {
     {   
         // Load all records
         // TODO: Pagination
-        $where = ' true = ?';
-        $values = array('true');
-        $limit = 10;
+        $_SESSION['list']['pgplacewhere'] = 
+            empty($_SESSION['list']['pgplacewhere']) ? ' true = ?' : $_SESSION['list']['pgplacewhere'];
+        $_SESSION['list']['pgplacevalues'] = 
+            empty($_SESSION['list']['pgplacevalues']) ? array('true') : $_SESSION['list']['pgplacevalues'];
+        $_SESSION['list']['pgplacelimit'] = 
+            empty($_SESSION['list']['pgplacelimit']) ? 10 : $_SESSION['list']['pgplacelimit'];
         $olmap = null;
         
         $post = $this->input->post();
-        if (!empty($post['filter'])) $where = $post['filter'];
+        if (!empty($post['filter'])) $_SESSION['list']['pgplacewhere'] = $post['filter'];
         if (!empty($post['values'])) {
             $values = explode(';',$post['values']);
             foreach ($values as &$value) $value = trim($value);
+            $_SESSION['list']['pgplacevalues'] = $values;
         }
-        if (!empty($post['limit'])) $limit = $post['limit'];
+        if (!empty($post['limit'])) {
+            $_SESSION['list']['pgplacelimit'] = $post['limit'];
+        }
         try {
             $pglayer = $this->postgis_model->loadLayer($id);
             $tablename = $pglayer->pgplacetype;
             $table = $this->postgis_model->loadTable($tablename);
-            $items = $this->postgis_model->loadRecords($table, $where, $values, $limit);
+            $items = $this->postgis_model->loadRecords(
+                $table,
+                $_SESSION['list']['pgplacewhere'],
+                $_SESSION['list']['pgplacevalues'],
+                $_SESSION['list']['pgplacelimit']
+            );
             
             // Load OpenLayers Map
             $this->load->model('openlayers/openlayers_model');
@@ -101,9 +112,9 @@ class Adminpgplace extends MY_Controller {
             'pglayer' => $pglayer,
             'table' => $table,
             'items' => $items,
-            'filter' => $where,
-            'values' => implode(';', $values),
-            'limit' => $limit,
+            'filter' => $_SESSION['list']['pgplacewhere'],
+            'values' => implode(';', $_SESSION['list']['pgplacevalues']),
+            'limit' => $_SESSION['list']['pgplacelimit'],
             'limitopts' => $this->postgis_model->optsRecordsPerPage(),
             'olmap' => $olmap,
             'editlayerindex' => $editlayerindex,
@@ -201,6 +212,7 @@ class Adminpgplace extends MY_Controller {
             $sysfields = $this->postgis_model->getExcludeFields();
             foreach ($table->attributes as $field => $type) {
                 if (in_array($field, $sysfields)) continue;
+                if ($field == 'alias') $post[$field] = url_title($post[$field], 'dash', true);
                 $record[$field] = $post[$field];
             }
             

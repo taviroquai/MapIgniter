@@ -22,7 +22,7 @@ $total = count($items);
 $srid = str_replace('EPSG:', '', $olmap->projection);
 ?>
 <h2>Edit - <?=$table->name?></h2>
-<p><a href="<?=base_url($ctrlpath)?>/listitems/<?=$pglayer->id?>">
+<p><a href="<?=base_url('user/managepgplace')?>/listitems/<?=$pglayer->id?>">
     <img style="vertical-align: middle;" src="<?=base_url()?>web/images/icons/png/24x24/arrow-left.png" alt="Sair do modo ecrã inteiro" title="Exit fullscreen mode" />Exit fullscreen mode.
 </a></p>
 
