@@ -42,7 +42,7 @@
 #
 # Running:
 # =======
-# sudo ./install.sh
+# ./install.sh
 #
 
 # =============================================================================
@@ -57,28 +57,14 @@ echo "==============================================================="
 
 cwd=$(pwd)
 
-# No point going any farther if we're not running correctly...
-if [ `whoami` != 'root' ]; then
-echo "Mapigniter installer requires super-user privileges to work."
-echo "Quit."
-exit 1
-fi
-
-if [ $SUDO_USER = "root" ]; then
-/bin/echo "You must start this under your regular user account (not root) using sudo."
-/bin/echo "Rerun using: sudo $0"
-exit 1
-fi
-
 echo "Starting..."
-apt-get -qq update
 
 if [ -f /usr/bin/unzip ];
 then
     echo "Unzip was found. Skipping install unzip..."
 else
-    echo "Installing unzip..."
-    apt-get -qq -y install unzip
+    echo "FATAL ERROR: unzip was not found at /usr/bin/unzip"
+    exit 1
 fi
 
 if [ -f /usr/local/bin/composer ];
@@ -98,13 +84,14 @@ then
     echo "CodeIgniter system was found. Skipping install CodeIgniter..."
 else
     echo "Downloading CodeIgniter..."
-    mkdir /tmp/mapigniter
-    cd /tmp/mapigniter
+    mkdir tmp
+    mkdir tmp/mapigniter
+    cd tmp/mapigniter
     wget --quiet -O codeigniter.zip --progress=dot:mega "https://github.com/bcit-ci/CodeIgniter/archive/$CI_VERSION-stable.zip"
     unzip -q "codeigniter.zip"
     cd "$cwd"
-    cp -R "/tmp/mapigniter/CodeIgniter-$CI_VERSION-stable/system" .
-    rm -R "/tmp/mapigniter/CodeIgniter-$CI_VERSION-stable"
+    cp -R "tmp/mapigniter/CodeIgniter-$CI_VERSION-stable/system" .
+    rm -Rf tmp
 fi
 
 echo "Installing MapIgniter..."
@@ -113,12 +100,9 @@ cp htaccess.dist .htaccess
 cp application/config/config.dist.php application/config/config.php
 cp application/config/googleearth.dist.php application/config/googleearth.php
 cp -R data.dist data
-chown -R www-data application/config
 mkdir data/cache
-chown -R www-data data
 mkdir web/data
 mkdir web/data/tmp
-chown -R www-data web/data
 composer install
 ln -s "$cwd/vendor" ./web/js/vendor
 
