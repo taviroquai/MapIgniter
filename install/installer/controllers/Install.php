@@ -206,7 +206,6 @@ class Install extends CI_Controller {
                 // Install database
                 R::selectDatabase('default');
                 $current_version = $this->database_model->getVersion();
-                //var_dump($current_version); die();
                 $upgrade = 'upgrade_'.$current_version.'_'.$this->config->item('_version');
                 if (method_exists($this, $upgrade)) {
                     $this->$upgrade();

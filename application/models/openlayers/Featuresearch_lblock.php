@@ -16,20 +16,20 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Layerswitcher_lblock extends Lblock_model {
+class Featuresearch_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
         // Load language
-        $this->lang->load('layerswitcher', $this->session->userdata('lang'));
+        $this->lang->load('featuresearch', $this->session->userdata('lang'));
         
-        $this->view = 'openlayers/layerswitcherblock';
+        $this->view = 'openlayers/searchblock';
         
         $this->scripts = array(
-            base_url()."web/openlayers/layerswitcher.js"
+            base_url()."web/openlayers/featuresearch.js"
         );
         
     }

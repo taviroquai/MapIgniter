@@ -17,17 +17,17 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Mapwfsgetfeaturecontent_lblock extends Lblock_model {
+class Mapwfsgetfeaturepopup_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
-        $this->view = 'openlayers/wfsgetfeaturecontentblock';
+        $this->view = 'openlayers/wfsgetfeaturepopupblock';
         
         $this->scripts = array(
-            base_url()."web/openlayers/wfsgetfeaturecontent.js"
+            base_url()."web/openlayers/wfsgetfeaturepopup.js"
         );
     }
 }

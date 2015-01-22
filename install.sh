@@ -67,7 +67,7 @@ else
     exit 1
 fi
 
-if [ -f /usr/local/bin/composer ];
+if [ -f composer.phar ];
 then
     echo "Composer was found. Skipping install composer..."
 else
@@ -75,23 +75,7 @@ else
     wget --quiet --progress=dot:mega http://getcomposer.org/installer
     echo "Installing php composer..."
     php installer
-    mv composer.phar /usr/local/bin/composer
     rm -f installer
-fi
-
-if [ -f system ];
-then
-    echo "CodeIgniter system was found. Skipping install CodeIgniter..."
-else
-    echo "Downloading CodeIgniter..."
-    mkdir tmp
-    mkdir tmp/mapigniter
-    cd tmp/mapigniter
-    wget --quiet -O codeigniter.zip --progress=dot:mega "https://github.com/bcit-ci/CodeIgniter/archive/$CI_VERSION-stable.zip"
-    unzip -q "codeigniter.zip"
-    cd "$cwd"
-    cp -R "tmp/mapigniter/CodeIgniter-$CI_VERSION-stable/system" .
-    rm -Rf tmp
 fi
 
 echo "Installing MapIgniter..."
@@ -103,7 +87,7 @@ cp -R data.dist data
 mkdir data/cache
 mkdir web/data
 mkdir web/data/tmp
-composer install
+./composer.phar install
 ln -s "$cwd/vendor" ./web/js/vendor
 
 echo "Done! Open in the browser http://machine-ip/mapigniter/install"

@@ -17,25 +17,21 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Modgemap_lblock extends Lblock_model {
+class Footer_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
-        // Load language
-        $this->lang->load('map', $this->session->userdata('lang'));
+        // Set view
+        $this->view = 'admin/footer';
         
-        $this->view = 'googleearth/gemapblock';
-        
-        $this->load->config('googleearth');
-        $this->scripts = array(
-            "http://www.google.com/jsapi?key=".$this->config->item('geapi_key')
+        $this->links = array(
+            base_url().'web/admin/footer.css'
         );
         
     }
     
 }
-
 ?>

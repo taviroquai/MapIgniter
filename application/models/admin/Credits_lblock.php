@@ -17,18 +17,18 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Footer_lblock extends Lblock_model {
+class Credits_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
         // Set view
-        $this->view = 'admin/footer';
+        $this->view = 'admin/credits';
         
         $this->links = array(
-            base_url().'web/admin/footer.css'
+            base_url().'web/admin/credits.css'
         );
         
     }

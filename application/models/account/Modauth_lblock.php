@@ -17,7 +17,7 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
 class Modauth_lblock extends Lblock_model {
     

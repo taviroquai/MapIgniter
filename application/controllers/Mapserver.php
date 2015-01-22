@@ -72,7 +72,8 @@ class Mapserver extends CI_Controller {
         
         // Only use cache for image requests
         if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {
-            $format = end(explode('/', $is_image));
+            $filenameparts = explode('/', $is_image);
+            $format = end($filenameparts);
             // clean expired cached images
             $this->filecache->prob_clear();
             $this->filecache->outputItem($url, $format);
@@ -87,11 +88,12 @@ class Mapserver extends CI_Controller {
         $this->output->set_header("Last-Modified: $tsstring");
         $this->output->set_header("Expires: ".$tsstring);
         $this->output->set_header("MICache: original");
-        $format = end(explode('/', $is_image));
+        $imgnameparts = explode('/', $is_image);
+        $format = end($imgnameparts);
         //$this->output->set_content_type('image/'.$format);
         
         // Save into cache; only for images
-        if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {
+        if ($use_cache && $is_image && reset($imgnameparts) == 'image') {
             $this->filecache->saveItem($url, $response['content'], $format);
         }
 

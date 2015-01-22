@@ -17,21 +17,25 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Credits_lblock extends Lblock_model {
+class Modgemap_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
-        // Set view
-        $this->view = 'admin/credits';
+        // Load language
+        $this->lang->load('map', $this->session->userdata('lang'));
         
-        $this->links = array(
-            base_url().'web/admin/credits.css'
+        $this->view = 'googleearth/gemapblock';
+        
+        $this->load->config('googleearth');
+        $this->scripts = array(
+            "http://www.google.com/jsapi?key=".$this->config->item('geapi_key')
         );
         
     }
     
 }
+
 ?>

@@ -96,6 +96,7 @@
         "ckeditor": "3.6.4",
 		"fancybox": "2.0.6",
         "jqueryui": "1.9.0",
-        "ol": "2.13.1"
+        "ol": "2.13.1",
+        "codeigniter/framework": "dev-develop"
 	}
 }

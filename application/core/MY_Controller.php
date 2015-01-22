@@ -147,7 +147,8 @@ class MY_Controller extends CI_Controller {
                 foreach($blocks as $block) {
                     if (empty($block->module->path)) continue;
                     $blockpath = $block->module->path;
-                    $modname = end(explode('/', $blockpath));
+                    $nameparts = explode('/', $blockpath);
+                    $modname = end($nameparts);
                     $this->load->model($blockpath, $block->name);
                     $lblock  = $this->{$block->name};
                     $lblock->addData('_instance', strtolower($block->name));

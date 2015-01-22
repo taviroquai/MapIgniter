@@ -17,18 +17,26 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Ckeditor_lblock extends Lblock_model {
+class Modmap_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
-        $this->view = 'user/ckeditor';
+        // Load language
+        $this->lang->load('map', $this->session->userdata('lang'));
+        
+        $this->view = 'openlayers/mapblock';
+        
+        $this->links = array(
+            base_url()."web/js/vendor/ol/theme/default/style.css",
+            base_url()."web/openlayers/mapblock.css"
+        );
         
         $this->scripts = array(
-            base_url()."web/js/vendor/ckeditor/ckeditor.js",
-            base_url()."web/js/vendor/ckeditor/adapters/jquery.js"
+            base_url()."web/js/vendor/ol/OpenLayers.js", // OpenLayers 2.12
+            base_url()."web/js/WebSig.js"
         );
         
     }

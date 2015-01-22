@@ -17,24 +17,18 @@
 
 // ------------------------------------------------------------------------
 
-require_once APPPATH.'models/layout/lblock_model.php';
+require_once APPPATH.'models/layout/Lblock_model.php';
 
-class Tickets_lblock extends Lblock_model {
+class Modprojepsg20790_lblock extends Lblock_model {
     
     public function __construct() {
         parent::__construct();
         
-        // Load language
-        $this->lang->load('crm', $this->session->userdata('lang'));
-        
-        // Set view
-        $this->view = 'crm/publicmenu';
-        
-        // Set links
-        $this->links = array(base_url().'web/auth/auth.css');
-        
-        // Set data
-        $this->addData('ctrlpath', 'tickets');
+        $this->scripts = array(
+            base_url()."web/js/proj4js/proj4js-compressed.js",
+            base_url()."web/js/proj4js/epsg20790.js"
+        );
     }
 }
+
 ?>
