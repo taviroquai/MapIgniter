@@ -298,7 +298,9 @@ class Adminlayouts extends MY_Controller {
      * @return string
      */
     private function getBlockEditControllerPath($block) {
-        return 'block/'.reset(explode('_', end(explode('/', $block->module->path))));
+        $t1 = explode('/', $block->module->path);
+        $t2 = explode('_', end($t1));
+        return 'block/'.reset($t2);
     }
     
 }

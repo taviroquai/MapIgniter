@@ -16,17 +16,16 @@
 
 // ------------------------------------------------------------------------
 ?>
-<div id="langmenu" class="lblock">
-    <h2>Select Idiom</h2>
-    <a href="<?=base_url().$ctrlpath?>/sessionset/english">
-        <img src="<?=base_url()?>web/images/icons/flags/United_Kingdom.png" alt="UK Flag" title="English Language" />
+
+<li>
+	<a href="<?=base_url($ctrlpath.'/sessionset/english')?>">
+        <img src="<?=base_url('web/images/icons/flags/United_Kingdom.png')?>" alt="UK Flag" title="English Language" />
         <span>English</span>
     </a>
-    <a href="<?=base_url().$ctrlpath?>/sessionset/pt-PT">
-        <img src="<?=base_url()?>web/images/icons/flags/Portugal.png" alt="Bandeira Portuguesa" title="Língua Portuguesa" />
+</li>
+<li>
+    <a href="<?=base_url($ctrlpath.'/sessionset/pt-PT')?>">
+        <img src="<?=base_url('web/images/icons/flags/Portugal.png')?>" alt="Bandeira Portuguesa" title="Língua Portuguesa" />
         <span>Português</span>
     </a>
-    
-</div>
-
-
+</li>

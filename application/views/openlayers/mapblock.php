@@ -16,8 +16,6 @@
 
 // ------------------------------------------------------------------------
 ?>
-<h2 class="map_title"><?=$item->map->title?></h2>
-<div class="map_description"><?=$item->map->description?></div>
 <?php
 if (empty($_instance) || empty($item) || empty($config)) : ?>
 <p>There are missing parameters for this map:</p>
@@ -28,7 +26,7 @@ if (empty($_instance) || empty($item) || empty($config)) : ?>
     <li>Zoom level</li>
 </ul>
 <?php else : ?>
-<div id="mapcontainer" style="width: 100%; height: 100%;">
+<div id="mapcontainer" class="fill">
     <div id="map_<?=$_instance?>" class="divmap"></div>
 </div>
 <script type="text/javascript">

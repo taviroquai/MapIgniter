@@ -15,18 +15,11 @@
  */
 
 // ------------------------------------------------------------------------
-?><div id="auth_menu" class="lblock">
-<h2><?=$this->lang->line('title')?></h2>
+?>
 <?php if (!empty($account)) : ?>
-<p>
-    <span><?=sprintf($this->lang->line('auth.account.info'), $account['username'])?></span>
-    <a href="<?=base_url()?>user/user"><?=$this->lang->line('auth.menu.userlink')?></a>
-    <a href="<?=base_url()?>auth/logout"><?=$this->lang->line('auth.menu.logout')?></a>
-</p>
-
+    <li><a href="#"><?=sprintf($this->lang->line('auth.account.info'), $account['username'])?></a></li>
+    <li><a href="<?=base_url()?>user/user"><?=$this->lang->line('auth.menu.userlink')?></a></li>
+    <li><a href="<?=base_url()?>auth/logout"><?=$this->lang->line('auth.menu.logout')?></a></li>
 <?php else : ?>
-<p>
-    <a href="<?=base_url()?>auth"><?=$this->lang->line('auth.menu.login')?></a>
-</p>
+    <li><a href="<?=base_url()?>auth"><?=$this->lang->line('auth.menu.login')?></a></li>
 <?php endif; ?>
-</div>

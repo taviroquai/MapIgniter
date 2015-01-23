@@ -291,7 +291,7 @@ class Database_model extends CI_Model {
         R::store($gesearchblock);
         
         // Create layout
-        $layout_public = $this->layout_model->create('public', 'layout/publicfullscreen2');
+        $layout_public = $this->layout_model->create('public', 'layout/bootstrap');
         $layout_public->owner = $account_admin;
         R::store($layout_public);
         

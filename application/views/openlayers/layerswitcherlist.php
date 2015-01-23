@@ -15,7 +15,7 @@
  */
 
 // ------------------------------------------------------------------------
-?><ul class="milayerswitcher">
+?><ul class="milayerswitcher nav nav-sidebar">
     <?php if (!empty($root['categories'])) : ?>
         <?php foreach ($root['categories'] as $item) { ?>
         <li class="micategory">

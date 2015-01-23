@@ -33,7 +33,7 @@ class Modauth_lblock extends Lblock_model {
         $this->view = 'auth/menu';
         
         // Set links
-        $this->links = array(base_url().'web/auth/auth.css');
+        $this->links = array(base_url('web/auth/auth.css'));
         
         // Set scripts
         $this->scripts = array();

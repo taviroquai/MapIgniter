@@ -19,7 +19,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'/controllers/admin/adminblock.php';
+require_once APPPATH.'/controllers/admin/Adminblock.php';
 
 class Modgemap extends Adminblock {
 

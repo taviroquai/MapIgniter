@@ -16,7 +16,7 @@
  */
 
 // ------------------------------------------------------------------------
-require_once 'account_model.php';
+require_once 'Account_model.php';
 
 class Gaccount_model extends Account_model {
     

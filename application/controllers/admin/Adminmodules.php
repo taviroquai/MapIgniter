@@ -129,7 +129,7 @@ class Adminmodules extends MY_Controller {
      * @param string $content
      * @return null
      */
-    protected function render($content) {
+    protected function render($content, $data = array(), $ajax = false) {
         if ($this->input->is_ajax_request()) {
             echo $content;
             return;

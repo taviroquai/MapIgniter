@@ -16,10 +16,5 @@
 
 // ------------------------------------------------------------------------
 ?>
-<div id="ticketsmenu" class="lblock">
-    <h2><?=$this->lang->line('ticket.page.title')?></h2>
-    <a href="<?=base_url().$ctrlpath?>/read"><?=$this->lang->line('ticket.menu.read')?></a>
-    <a href="<?=base_url().$ctrlpath?>/create"><?=$this->lang->line('ticket.menu.create')?></a>
-</div>
-
-
+<li><a href="<?=base_url($ctrlpath.'/read')?>"><?=$this->lang->line('ticket.menu.read')?></a></li>
+<li><a href="<?=base_url($ctrlpath.'/create')?>"><?=$this->lang->line('ticket.menu.create')?></a></li>
