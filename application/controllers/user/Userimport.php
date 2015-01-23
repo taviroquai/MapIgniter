@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/import.php';
+require_once APPPATH.'controllers/admin/Import.php';
 
 class Userimport extends Import {
 

@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminpgplace.php';
+require_once APPPATH.'controllers/admin/Adminpgplace.php';
 
 class Fullscreenpgplace extends Adminpgplace {
 

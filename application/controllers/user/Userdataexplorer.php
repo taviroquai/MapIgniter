@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/dataexplorer.php';
+require_once APPPATH.'controllers/admin/Dataexplorer.php';
 
 class Userdataexplorer extends Dataexplorer {
     

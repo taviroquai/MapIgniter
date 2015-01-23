@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmslegend.php';
+require_once APPPATH.'controllers/admin/Adminmslegend.php';
 
 class Managemslegend extends Adminmslegend {
     

@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmslayer.php';
+require_once APPPATH.'controllers/admin/Adminmslayer.php';
 
 class Managemslayer extends Adminmslayer {
 

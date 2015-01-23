@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmsmap.php';
+require_once APPPATH.'controllers/admin/Adminmsmap.php';
 
 class Managemsmap extends Adminmsmap {
 

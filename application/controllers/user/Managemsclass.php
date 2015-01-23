@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmsclass.php';
+require_once APPPATH.'controllers/admin/Adminmsclass.php';
 
 class Managemsclass extends Adminmsclass {
     

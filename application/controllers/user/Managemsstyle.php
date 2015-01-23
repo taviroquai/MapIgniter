@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmsstyle.php';
+require_once APPPATH.'controllers/admin/Adminmsstyle.php';
 
 class Managemsstyle extends Adminmsstyle {
 

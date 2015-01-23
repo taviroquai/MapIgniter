@@ -18,7 +18,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH.'controllers/admin/adminmslabel.php';
+require_once APPPATH.'controllers/admin/Adminmslabel.php';
 
 class Managemslabel extends Adminmslabel {
 

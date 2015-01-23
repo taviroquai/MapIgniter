@@ -353,7 +353,7 @@ class Database_model extends CI_Model {
         $this->layout_model->slotAddBlock($pslot2, $lblock3);
         $this->layout_model->slotAddBlock($pslot2, $lblock2);
         $this->layout_model->slotAddBlock($pslot4, $footerblock);
-        $this->layout_model->slotAddBlock($pslot5, $creditsblock);
+        $this->layout_model->slotAddBlock($pslot4, $creditsblock);
         $this->layout_model->slotAddBlock($pslot2, $lblock5);
         
         // Create registered layout
