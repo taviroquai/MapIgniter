@@ -87,7 +87,7 @@
                 
         <div class="sixteen columns">
             <?=$_slot['slot5']?>
-            <span><img style="vertical-align: middle;" src="<?=base_url()?>web/images/milogo_168x35.png" alt="MapIgniter Logo" />&copy; 2012 by Marco Afonso</span>
+            <span><img style="vertical-align: middle;" src="<?=base_url()?>web/images/milogo_168x35.png" alt="MapIgniter Logo" />&copy; 2012 - <?=date('Y')?> by Marco Afonso</span>
             This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> is licensed under a dual license: <a rel="license" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache v2</a> or <a rel="license" href="http://www.gnu.org/licenses/gpl.txt">GPL</a>
         </div>
     </div><!-- container -->
