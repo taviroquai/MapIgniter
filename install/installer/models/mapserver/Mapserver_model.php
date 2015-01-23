@@ -37,7 +37,7 @@ class Mapserver_model extends CI_Model {
     /**
      * Translates mapfile to correct base path
      * Server path should be invisible for security
-     * @param array $request
+     * @param array $alias
      * @param array $query
      * @return string 
      */
@@ -63,13 +63,11 @@ class Mapserver_model extends CI_Model {
             $this->mapserver_model->save($mapfile);
             if (empty($mapfile)) throw new Exception('No such map on database');
             $mapfile_path = $maps_path.$mapfile->map->alias.'.map';
-            //echo "<p>Generating mapfile $mapfile_path ...</p>";
-            
             $private_data_path = $this->config->item('private_data_path');
-            ob_start();
-            include_once dirname(__FILE__) . '/template.php';
-            file_put_contents($mapfile_path, ob_get_clean());
-            //echo "<p>Done!</p>";
+            
+            $this->load->helper('mapfile');
+            $out = mapfile_map($mapfile, $private_data_path);
+            file_put_contents($mapfile_path, $out);
         }
         catch (Exception $e) {
             echo $e->getMessage();

@@ -148,13 +148,13 @@ MAP
 <?php if (!empty($msclass->outlinecolor)) : ?>           OUTLINECOLOR <?=$msclass->outlinecolor . PHP_EOL?><?php endif; ?>
 <?php if (!empty($msclass->size)) : ?>           SIZE <?=$msclass->size . PHP_EOL?><?php endif; ?>
            
-           <?php foreach ($msclass->sharedMsstyle as $msstyle) addStyle($private_data_path, $msstyle); ?>
+           <?php foreach ($msclass->sharedMsstyle as $msstyle) mapfile_style($private_data_path, $msstyle); ?>
 
            <?php
            $labels = $msclass->sharedMslabel;
            if (!empty($labels)) :
            $mslabel = reset($labels);
-           addLabel($mslabel);
+           mapfile_label($mslabel);
            endif;
            ?>
 
@@ -165,73 +165,3 @@ MAP
 <?php } ?>
 
 END
-
-<?php function addLabel($mslabel) { ?>
-    
-            LABEL
-                ALIGN <?=$mslabel->align . PHP_EOL?>
-                ANGLE <?=$mslabel->angle . PHP_EOL?>
-                ANTIALIAS <?=$mslabel->antialias . PHP_EOL?>
-                BUFFER <?=$mslabel->buffer . PHP_EOL?>
-                COLOR <?=$mslabel->color . PHP_EOL?>
-                ENCODING '<?=$mslabel->encoding?>'
-                FONT '<?=$mslabel->font?>'
-                FORCE <?=$mslabel->force . PHP_EOL?>
-                MAXLENGTH <?=$mslabel->maxlength . PHP_EOL?>
-                
-                # Incompatible with 
-                # MAXOVERLAPANGLE <?=$mslabel->maxoverlapangle . PHP_EOL?>
-                MAXSIZE <?=$mslabel->maxsize . PHP_EOL?>
-                MINDISTANCE <?=$mslabel->mindistance . PHP_EOL?>
-                MINFEATURESIZE <?=$mslabel->minfeaturesize . PHP_EOL?>
-                MINSIZE <?=$mslabel->minsize . PHP_EOL?>
-                OFFSET <?=$mslabel->offset . PHP_EOL?>
-                <?php if (!empty($mslabel->outlinecolor)) :?>OUTLINECOLOR <?=$mslabel->outlinecolor . PHP_EOL?>
-                OUTLINEWIDTH <?=$mslabel->outlinewidth . PHP_EOL?><?php endif; ?>
-                
-                PARTIALS <?=$mslabel->partials . PHP_EOL?>
-                POSITION <?=$mslabel->position . PHP_EOL?>
-                PRIORITY <?=$mslabel->priority . PHP_EOL?>
-                <?php if ($mslabel->repeatdistance) :?>REPEATDISTANCE <?=$mslabel->repeatdistance?><?php endif; ?><?=PHP_EOL?>
-                <?php if ($mslabel->shadowcolor) :?>SHADOWCOLOR '<?=$mslabel->shadowcolor?>'<?php endif; ?>
-                <?php if ($mslabel->shadowsize) :?>SHADOWSIZE <?=$mslabel->shadowsize?><?php endif; ?><?=PHP_EOL?>
-                SIZE <?=$mslabel->size . PHP_EOL?>
-                TYPE <?=$mslabel->type . PHP_EOL?>
-                <?php if ($mslabel->wrap) :?>WRAP '<?=$mslabel->wrap?>'<?php endif; ?>
-
-                <?php if ($msstyle = $mslabel->style) addStyle($private_data_path, $msstyle);?>
-
-            END
-<?php } ?>
-<?php function addStyle($private_data_path, $msstyle) { ?>
-
-            STYLE
-                ANGLE <?=$msstyle->angle . PHP_EOL?>
-                ANTIALIAS <?=$msstyle->antialias . PHP_EOL?>
-                BACKGROUNDCOLOR <?=$msstyle->bgcolor . PHP_EOL?>
-                COLOR <?=$msstyle->color . PHP_EOL?>
-                GAP <?=$msstyle->gap . PHP_EOL?>
-                <?php if ($msstyle->geomtransform) :?>GEOMTRANSFORM <?=$msstyle->geomtransform . PHP_EOL?><?php endif; ?>
-                LINECAP <?=$msstyle->linecap . PHP_EOL?>
-                LINEJOIN <?=$msstyle->linejoin . PHP_EOL?>
-                LINEJOINMAXSIZE <?=$msstyle->linejoinmaxsize . PHP_EOL?>
-                MAXSIZE <?=$msstyle->maxsize . PHP_EOL?>
-                MAXWIDTH <?=$msstyle->maxwidth . PHP_EOL?>
-                MINSIZE <?=$msstyle->minsize . PHP_EOL?>
-                MINWIDTH <?=$msstyle->minwidth . PHP_EOL?>
-                OFFSET <?=$msstyle->offset . PHP_EOL?>
-                OPACITY <?=$msstyle->opacity . PHP_EOL?>
-                OUTLINECOLOR <?=$msstyle->outlinecolor . PHP_EOL?>
-                PATTERN <?=$msstyle->pattern?> END
-                SIZE <?=$msstyle->size . PHP_EOL?>
-                <?php if (!empty($msstyle->symbol)) : ?>SYMBOL '<?=getitempath($private_data_path, $msstyle->symbol)?>'<?php endif; ?>
-                
-                WIDTH <?=$msstyle->width . PHP_EOL?>
-            END  
-<?php } ?>
-<?php
-function getitempath($private_data_path, $item) {
-    $fullpath = realpath($private_data_path.$item);
-    if (file_exists($fullpath)) return $fullpath;
-    else return $item;
-} ?>

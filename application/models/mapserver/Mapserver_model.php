@@ -63,13 +63,11 @@ class Mapserver_model extends CI_Model {
             $this->save($mapfile);
             if (empty($mapfile)) throw new Exception('No such map on database');
             $mapfile_path = $maps_path.$mapfile->map->alias.'.map';
-            //echo "<p>Generating mapfile $mapfile_path ...</p>";
             
             $private_data_path = $this->config->item('private_data_path');
-            ob_start();
-            include_once dirname(__FILE__) . '/template.php';
-            file_put_contents($mapfile_path, ob_get_clean());
-            //echo "<p>Done!</p>";
+            $this->load->helper('mapfile');
+            $out = mapfile_map($mapfile, $private_data_path);
+            file_put_contents($mapfile_path, $out);
         }
         catch (Exception $e) {
             show_error($e->getMessage());
