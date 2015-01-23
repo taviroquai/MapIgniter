@@ -38,7 +38,7 @@ class Filecache_model extends CI_Model {
     
     public function getKey($name) {
         if (is_array($name)) $name = implode('_', $name);
-        return 'mi_'.sha1($name);
+        return 'mi_'.md5($name);
     }
     
     public function getItemPath($key, $format) {

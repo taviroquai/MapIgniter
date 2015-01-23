@@ -97,7 +97,7 @@ class Account_model extends CI_Model {
      */
     public function secure($password) {
         $this->load->library('encrypt');
-        return $this->encrypt->sha1($password);
+        return $this->encrypt->hash($password);
     }
     
     /**
