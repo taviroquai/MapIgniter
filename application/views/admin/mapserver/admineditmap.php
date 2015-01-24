@@ -88,7 +88,7 @@ if (empty($items)) : ?>
 <p>There are no layers on this map</p>
 <?php else : ?>
 <p><strong>Layers on this map</strong></p>
-<?
+<?php
     $action = base_url().$ctrlpath.'/dellayer/'.$msmapfile->id;
     $action_btn = 'Remove selected';
     $this->load->view('admin/mapserver/adminlayerlist', array('items' => $items, 'action_btn' => $action_btn, 'action' => $action)); ?>
