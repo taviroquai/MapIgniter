@@ -20,8 +20,12 @@
     <div id="<?=$_instance?>">
         <form action="<?=base_url()?>openlayers/search/<?=$item->id?>" method="GET">
             <input name="_instance" type="hidden" value="<?=$_instance?>" />
-            <input name="q" type="text" />
-            <button type="submit" class="btn btn-default"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="search" /></button>
+            <div class="input-group">
+                <input name="q" type="text" class="form-control" />
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="search" /></button>
+                </span>
+            </div>
         </form>
         <div style="clear: both"></div>
     </div>
