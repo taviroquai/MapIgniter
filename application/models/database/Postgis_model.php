@@ -221,12 +221,14 @@ class Postgis_model extends CI_Model {
                 $table = $this->createTable($item['relname']);
                 $table->oid = $item['oid'];
                 $table->schema = $item['nspname'];
+                $sql = "SELECT type as geomtype FROM geometry_columns WHERE f_table_schema = '{$table->schema}' and f_table_name = '{$table->name}' LIMIT 1";
+                $result_type = $this->database_model->getRow($sql);
+                if (empty($result_type)) continue;
+                $table->type = $result_type['geomtype'];
                 $sql = "SELECT Find_SRID('{$table->schema}', '{$table->name}', 'the_geom')";
                 $result_srid = $this->database_model->getRow($sql);
                 $table->srid = $result_srid['find_srid'];
-                $sql = "SELECT type as geomtype FROM geometry_columns WHERE f_table_schema = '{$table->schema}' and f_table_name = '{$table->name}' LIMIT 1";
-                $result_type = $this->database_model->getRow($sql);
-                $table->type = $result_type['geomtype'];
+                
                 $list[] = $table;
             }
         }
