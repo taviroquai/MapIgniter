@@ -161,6 +161,11 @@ class Adminmslayer extends MY_Controller {
                             case 4326: $post['extent'] = '-180 -90 180 90'; break;
                             case 900913:
                             case 3857: $post['extent'] = '-20037508.34 -20037508.34 20037508.34 20037508.34'; break;
+                            default: 
+                                $textent = $this->postgis_model->getTableExtent($post['pgplacetype']);
+                                if (empty($textent['error'])) {
+                                    $post['extent'] = $textent['extent'];
+                                }
                         }
                         $post['status'] = 'on';
                         $post['dump'] = 'true';

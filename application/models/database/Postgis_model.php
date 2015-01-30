@@ -605,13 +605,17 @@ class Postgis_model extends CI_Model {
                         $table['fields'][] = $item['attname'];
                     }
                 }
-                $sql = "SELECT Find_SRID('public', '$tablename', 'the_geom')";
+                $schema = 'public';
+                if (strpos($mslayer->pgplacetype, '.')) {
+                    list($schema, $tablename) = explode('.', $mslayer->pgplacetype);
+                }
+                $sql = "SELECT Find_SRID('$schema', '$tablename', 'the_geom')";
                 $result = R::getRow($sql);
                 if (!empty($result)) $table['srs'] = 'EPSG:'.$result['find_srid'];
                 else {
                     $table['error'] = 'Could not get SRID from the_geom field';
                 }
-                $sql = "SELECT ST_extent(the_geom) from $tablename";
+                $sql = "SELECT ST_extent(the_geom) from $schema.$tablename";
                 $result = R::getRow($sql);
                 if (!empty($result)) {
                     if (empty($result['st_extent'])) $table['error'] = 'Could not get table EXTENT. Is the table empty?';

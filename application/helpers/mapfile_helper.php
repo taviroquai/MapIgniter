@@ -170,7 +170,11 @@ if ( ! function_exists('mapfile_layer'))
         <?php if (!empty($mslayer->connection)) : ?>    CONNECTION "<?=$mslayer->connection?>"<?php endif; ?>
         
         DATA "<?=mapfile_getitempath($mslayer->data, $private_data_path)?>"<?=PHP_EOL?>
+
+        <?php if (!empty($mslayer->extent)) : ?>
         EXTENT <?=$mslayer->extent . PHP_EOL?>
+        <?php endif; ?>
+
         <?php if (!empty($mslayer->projection)) : ?>PROJECTION
         <?php $params = explode(' ', $mslayer->projection); ?>
         <?php foreach ($params as $item) {?>

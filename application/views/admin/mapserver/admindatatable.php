@@ -26,10 +26,13 @@
 <?php else: ?>
 <p><strong>SRS:</strong> <?=$datatable['srs']?></p>
 <p><strong>EXTENT:</strong> <?=$datatable['extent']?></p>
+
+<?php if (!empty($datatable['fields'])) : ?>
 <h4>Attributes</h4>
 <ul>
 <?php foreach ($datatable['fields'] as $field) { ?>
     <li><?=$field?></li>
 <?php } ?>
 </ul>
+<?php endif; ?>
 <?php endif; ?>
