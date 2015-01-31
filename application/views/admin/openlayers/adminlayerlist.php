@@ -17,11 +17,14 @@
 // ------------------------------------------------------------------------
 ?><form method="post" action="<?=$action?>">
     <ul>
-        <?php foreach ($items as $item) {
+        <?php
+        $order = 0;
+        $last = count($items)-1;
+        foreach ($items as $item) {
         ?>
         <li>
             <input type="checkbox" name="selected[]" value="<?=$item->id?>" />
-            <a href="<?=base_url().$ollayerctrlpath?>/edit/<?=$item->id?>">Configure</a>
+            <a href="<?=base_url($ollayerctrlpath.'/edit/'.$item->id)?>">Configure</a>
             <span>
             <?php if (!empty($item->informationurl)) : ?>
                 <a href="<?=$item->informationurl?>" target="_blank"><?=$item->layer->title?></a>
@@ -29,8 +32,20 @@
                 <?=$item->layer->title?>
             <?php endif; ?>
             </span>
+            <?php if (!empty($displayorder)) : ?>
+            <span>
+                <?php if ($order > 0) : ?>
+                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order-1))?>">up</a> 
+                <?php endif; ?>
+                <?php if ($order < $last) : ?>
+                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order+1))?>">down</a>
+                <?php endif; ?>
+            </span>
+            <?php endif; ?>
         </li>
-        <?php } ?>
+        <?php 
+            $order++;
+        } ?>
     </ul>
     <button type="submit"><?=$action_btn?></button>
 </form>

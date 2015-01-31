@@ -211,6 +211,41 @@ class Openlayers_model extends CI_Model {
         $this->save($olmap);
     }
     
+    public function changeLayersDisplayOrder(&$olmap, $oldOrder, $newOrder) {
+        
+        // Load layers
+        $items =& $olmap->sharedOllayer;
+        
+        // Create new order
+        $order = array();
+        $i = 0;
+        foreach ($items as $item) {
+            $order[$i] = (int) $item->id;
+            $i++;
+        }
+        
+        // Apply order change
+        $order[$newOrder] = $order[$newOrder] + $order[$oldOrder];
+        $order[$oldOrder] = $order[$newOrder] - $order[$oldOrder];
+        $order[$newOrder] = $order[$newOrder] - $order[$oldOrder];
+        
+        // Create new list ordered
+        $t = array();
+        foreach ($order as $id) {
+            foreach ($items as &$item) {
+                if ($id == $item->id) {
+                    $t[] = $item;
+                }
+            }
+        }
+        
+        // Save new display order
+        $olmap->sharedOllayer = array();
+        $this->save($olmap);
+        $olmap->sharedOllayer = $t;
+        $this->save($olmap);
+    }
+    
     public function save(&$bean)
     {
         return $this->database_model->save($bean);

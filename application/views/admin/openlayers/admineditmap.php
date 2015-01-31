@@ -42,7 +42,7 @@
 <?php
 $action = base_url().$ctrlpath.'/addlayer/'.$olmap->id;
 $action_btn = 'Add selected';
-$this->load->view('admin/openlayers/adminlayerlist', array('items' => $ollayers, 'action_btn' => $action_btn, 'action' => $action));
+$this->load->view('admin/openlayers/adminlayerlist', array('items' => $ollayers, 'action_btn' => $action_btn, 'action' => $action, 'displayorder' => false));
 
 $items = $olmap->sharedOllayer;
 if (empty($items)) : ?>
@@ -52,7 +52,7 @@ if (empty($items)) : ?>
 <?php
     $action = base_url().$ctrlpath.'/dellayer/'.$olmap->id;
     $action_btn = 'Remove selected';
-    $this->load->view('admin/openlayers/adminlayerlist', array('items' => $items, 'action_btn' => $action_btn, 'action' => $action)); ?>
+    $this->load->view('admin/openlayers/adminlayerlist', array('items' => $items, 'action_btn' => $action_btn, 'action' => $action, 'displayorder' => true)); ?>
 <?php endif; ?>
 </li>
   <li class="active" id="olmap-preview">

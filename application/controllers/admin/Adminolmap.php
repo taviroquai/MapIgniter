@@ -202,5 +202,16 @@ class Adminolmap extends MY_Controller {
             redirect(base_url().$this->ctrlpath.'/edit/'.$olmap_id);
     }
     
+    /**
+     * Action set layer display order
+     * Removes selected layers from map
+     */
+    public function setLayerDisplayOrder($olmap_id, $oldOrder, $newOrder)
+    {
+        $olmap = $this->openlayers_model->loadMap($olmap_id);
+        $this->openlayers_model->changeLayersDisplayOrder($olmap, $oldOrder, $newOrder);
+        if (!$this->input->is_ajax_request())
+            redirect(base_url().$this->ctrlpath.'/edit/'.$olmap_id.'#olmap-ollayers');
+    }
     
 }
