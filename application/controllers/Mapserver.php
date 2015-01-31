@@ -71,7 +71,8 @@ class Mapserver extends CI_Controller {
         $expired = $this->filecache->getExpireTime();
         
         // Only use cache for image requests
-        if ($use_cache && $is_image && reset(explode('/', $is_image)) == 'image') {
+        $ext_parts = explode('/', $is_image);
+        if ($use_cache && $is_image && reset($ext_parts) == 'image') {
             $filenameparts = explode('/', $is_image);
             $format = end($filenameparts);
             // clean expired cached images
