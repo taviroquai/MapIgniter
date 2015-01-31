@@ -35,10 +35,13 @@
             <?php if (!empty($displayorder)) : ?>
             <span>
                 <?php if ($order > 0) : ?>
-                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order-1))?>">up</a> 
-                <?php endif; ?>
+                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order-1))?>">
+                    <img src="http://localhost/apfsc/mapigniter/web/images/icons/png/16x16/arrow-up.png" alt="enter" title="Up">
+                </a><?php endif; ?>
                 <?php if ($order < $last) : ?>
-                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order+1))?>">down</a>
+                <a href="<?=base_url($ctrlpath.'/setLayerDisplayOrder/'.$olmap->id.'/'.$order.'/'.($order+1))?>">
+                    <img src="http://localhost/apfsc/mapigniter/web/images/icons/png/16x16/arrow-down.png" alt="enter" title="Down">
+                </a>
                 <?php endif; ?>
             </span>
             <?php endif; ?>
