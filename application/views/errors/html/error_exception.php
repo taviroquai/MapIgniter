@@ -50,8 +50,7 @@
     </div>
     <div class="container">
         <div class="sixteen columns">
-            <h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+            <?php echo $message; ?>
         </div>
         <div class="sixteen columns">
             <span><img style="vertical-align: middle;" src="<?=base_url()?>web/images/milogo_168x35.png" alt="MapIgniter Logo" />&copy; 2012 by Marco Afonso</span>

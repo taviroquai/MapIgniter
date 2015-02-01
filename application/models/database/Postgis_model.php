@@ -351,7 +351,7 @@ class Postgis_model extends CI_Model {
             if (in_array($k, $this->exclude_field)) continue;
             if (strstr($v, 'character') || strstr($v, 'text')) {
                 foreach ($terms as $term) {
-                    $fields[] = $k;
+                    $fields[] = "coalesce($k,'')";
                 }
             }
         }
@@ -364,8 +364,8 @@ class Postgis_model extends CI_Model {
         // Load records
         $sql = "
             SELECT *, 
-                ST_X(ST_Transform(the_geom, 4326)) as lat,
-                ST_Y(ST_Transform(the_geom, 4326)) as lon,
+                ST_X(ST_Centroid(ST_Transform(the_geom, 4326))) as lat,
+                ST_Y(ST_Centroid(ST_Transform(the_geom, 4326))) as lon,
                 ST_GeometryType(the_geom) as geomtype,
                 ST_AsText(the_geom) as wkt,
                 ts_rank_cd($vector, $query, 32) AS rank
