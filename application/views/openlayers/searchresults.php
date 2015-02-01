@@ -29,10 +29,10 @@
             <li>
                 <h3>
                     <a href="javascript: <?=$_instance?>.loadFeature('<?=$pglayer['pglayer']->id?>', <?=$item['gid']?>, <?=$srid?>);">
-                        <?php if (isset($config->config->display) && isset($config->config->display->$pglayername)) : ?>
+                        <?php if (isset($item[$config->config->display->$pglayername])) : ?>
                         <?=$item[$config->config->display->$pglayername]?>
                         <?php else: ?>
-                        <?=empty($item['title']) ? empty($item['name']) ? '' : $item['name'] : $item['title']?>
+                        <?=empty($item['title']) ? empty($item['name']) ? '<i>unknown</i>' : $item['name'] : $item['title']?>
                         <?php endif; ?>
                     </a>
                     <span><?php 
