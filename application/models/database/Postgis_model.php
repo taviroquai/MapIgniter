@@ -275,7 +275,7 @@ class Postgis_model extends CI_Model {
         return $table;
     }
     
-    public function loadRecords($table, $where = ' true ', $values = array(), $limit = 20, $geom_srid = null) {
+    public function loadRecords($table, $where = ' true ', $values = array(), $limit = 20, $geom_srid = 4326) {
         // Select user database
         $this->database_model->selectDatabase('userdata');
         
@@ -337,7 +337,7 @@ class Postgis_model extends CI_Model {
         return $result;
     }
     
-    public function findRecordsByTerms($table, $terms) {
+    public function findRecordsByTerms($table, $terms, $srid = '4326') {
         // Select user database
         $this->database_model->selectDatabase('userdata');
         
@@ -364,8 +364,8 @@ class Postgis_model extends CI_Model {
         // Load records
         $sql = "
             SELECT *, 
-                ST_X(ST_Centroid(ST_Transform(the_geom, 4326))) as lat,
-                ST_Y(ST_Centroid(ST_Transform(the_geom, 4326))) as lon,
+                ST_X(ST_Centroid(ST_Transform(the_geom, $srid))) as lat,
+                ST_Y(ST_Centroid(ST_Transform(the_geom, $srid))) as lon,
                 ST_GeometryType(the_geom) as geomtype,
                 ST_AsText(the_geom) as wkt,
                 ts_rank_cd($vector, $query, 32) AS rank

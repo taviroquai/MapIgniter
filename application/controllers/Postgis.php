@@ -92,8 +92,9 @@ class Postgis extends MY_Controller {
      * Loas a postgis record and outputs
      * @param string $pglayer_id Postgis layer ID
      * @param string $id Feature ID
+     * @param string $srid Geometry projection
      */
-    public function getfeaturejson($pglayer_id, $id)
+    public function getfeaturejson($pglayer_id, $id, $srid = 4326)
     {   
         try {
             // Load postgis layer
@@ -104,7 +105,7 @@ class Postgis extends MY_Controller {
             $table = $this->postgis_model->loadTable($tablename);
             if (!$table) throw new Exception('Postgis table not found!');
             
-            $record = $this->postgis_model->loadRecords($table, ' gid = ? ', array($id), 1);
+            $record = $this->postgis_model->loadRecords($table, ' gid = ? ', array($id), 1, $srid);
             if (empty($record)) throw new Exception('Place not found!');
             $record = reset($record);
             unset($record['the_geom']);
@@ -112,7 +113,8 @@ class Postgis extends MY_Controller {
             // Load main content
             $data = array(
                 'ctrlpath' => base_url('postgis/getfeaturejson/'.$pglayer_id.'/'.$id),
-                'record' => $record);
+                'record' => $record
+            );
         }
         catch (Exception $e) {
             $content = "<p>{$e->getMessage()}</p>";

@@ -50,10 +50,12 @@ class Openlayers extends MY_Controller {
         $terms = $this->input->get('q');
         $jsinstance = 'block_'.$this->input->get('_instance');
         
+        $config = $this->database_model->findOne('lblock', 'name = ?', array($this->input->get('_instance')));
+        $config->config = json_decode($config->config);
         $block = $this->database_model->load('lblock', $blockid);
         $olmap = $this->openlayers_model->loadMap($block->item);
         $ollayers = $olmap->sharedOllayer;
-        
+        $srid = empty($olmap->projection) ? 4326 : (int) str_replace('EPSG:', '', $olmap->projection);
         if (!empty($ollayers)) {
             $this->load->model('database/postgis_model');
             foreach ($ollayers as &$ollayer) {
@@ -61,7 +63,7 @@ class Openlayers extends MY_Controller {
                 if (!empty($pglayers)) {
                     $pglayer = reset($pglayers);
                     $table = $this->postgis_model->loadTable($pglayer->pgplacetype);
-                    $records = $this->postgis_model->findRecordsByTerms($table, $terms);
+                    $records = $this->postgis_model->findRecordsByTerms($table, $terms, $srid);
                     if (!empty($records)) $results[$ollayer->layer->alias] = 
                         array('pglayer' => $pglayer, 'records' => $records);
                 }
@@ -69,7 +71,12 @@ class Openlayers extends MY_Controller {
         }
         
         // Prepare data
-        $data = array('results' => $results, '_instance' => $jsinstance);
+        $data = array(
+            'results' => $results,
+            '_instance' => $jsinstance,
+            'config' => $config,
+            'srid' => $srid
+        );
         $content = $this->load->view('openlayers/searchresults', $data, TRUE);
         $this->render($content);
     }

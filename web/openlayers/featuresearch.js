@@ -37,18 +37,18 @@ featuresearch.prototype.setMapBlock = function (mapblock) {
     this.mapblock = mapblock;
 }
 
-featuresearch.prototype.loadFeature = function (pglayerid, id) {
+featuresearch.prototype.loadFeature = function (pglayerid, id, srid) {
     
     // set private variables
     var postgeomformat = new OpenLayers.Format.WKT();
     var me = this;
     
-    jQuery.getJSON(base_url+'postgis/getfeaturejson/'+pglayerid+'/'+id,
+    jQuery.getJSON(base_url+'postgis/getfeaturejson/'+pglayerid+'/'+id+'/'+srid,
         null, function(response) {
             var feature = postgeomformat.read(response.record.wkt);
             var centroid = feature.geometry.getCentroid();
             me.mapblock.map.panTo(new OpenLayers.LonLat(centroid.x, centroid.y));
-            me.mapblock.map.zoomTo(12);
+            //me.mapblock.map.zoomTo(12);
         }
     );
 }
