@@ -351,7 +351,7 @@ class Postgis_model extends CI_Model {
             if (in_array($k, $this->exclude_field)) continue;
             if (strstr($v, 'character') || strstr($v, 'text')) {
                 foreach ($terms as $term) {
-                    $fields[] = "coalesce($k,'')";
+                    $fields[] = "coalesce(\"$k\",'')";
                 }
             }
         }
