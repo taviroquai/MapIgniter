@@ -20,6 +20,8 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Adminlayouts extends MY_Controller {
+    
+    protected $dataexplorerctrlpath;
 
     public function __construct() {
         parent::__construct();
@@ -27,6 +29,8 @@ class Adminlayouts extends MY_Controller {
         // Set layout
         $this->layout = 'admin';
         $this->load->model('layout/layout_model');
+        
+        $this->dataexplorerctrlpath = 'admin/dataexplorer';
     }
     
     /**
@@ -76,6 +80,7 @@ class Adminlayouts extends MY_Controller {
             $data = array(
                 'layout'    => $layout, 
                 'slot'      => $slot,
+                'dataexplorerctrlpath' => $this->dataexplorerctrlpath,
                 'modules'   => $modules);
             $content = $this->load->view('admin/layouts/admineditlayout', $data, TRUE);
         }
@@ -126,6 +131,11 @@ class Adminlayouts extends MY_Controller {
         try {
             // load post data
             $name = $this->input->post('name');
+            $pagetitle = $this->input->post('pagetitle');
+            $pagedescription = $this->input->post('pagedescription');
+            $pagekeywords = $this->input->post('pagekeywords');
+            $pageauthor = $this->input->post('pageauthor');
+            $pagelogo = $this->input->post('pagelogo');
             $view = $this->input->post('view');
             $content = $this->input->post('content');
             
@@ -144,6 +154,11 @@ class Adminlayouts extends MY_Controller {
             // Set new data and save
             if (!empty($name) && !empty($view)) {
                 $layout->name = $name;
+                $layout->pagetitle = $pagetitle;
+                $layout->pagedescription = $pagedescription;
+                $layout->pagekeywords = $pagekeywords;
+                $layout->pageauthor = $pageauthor;
+                $layout->pagelogo = $pagelogo;
                 $layout->view = $view;
                 $layout->content = $content;
                 $this->layout_model->save($layout);    

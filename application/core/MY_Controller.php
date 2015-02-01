@@ -172,6 +172,7 @@ class MY_Controller extends CI_Controller {
         
         // Load layout
         $data['content'] = $content;
+        $data['layout'] = $config;
         $this->load->view($config['view'], $data);
     }
     

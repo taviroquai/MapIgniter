@@ -19,11 +19,15 @@
 <?php if (!empty($read)) : ?>
     <?php if (!empty($msgs)) $this->load->view('messages', array('msgs' => $msgs)); ?>
     <form action="<?=base_url().$ctrlpath?>/read?" method="get">
-        <label><?=$this->lang->line('ticket.email.label')?></label>
-        <input type="text" name="email" value="<?=$form['email']?>" />
-        <label><?=$this->lang->line('ticket.ref.label')?></label>
-        <input type="text" name="ref" value="<?=$form['ref']?>" />
-        <button type="submit"><?=$this->lang->line('ticket.read.submit')?></button>
+        <div class="form-group">
+            <label><?=$this->lang->line('ticket.email.label')?></label>
+            <input class="form-control" type="text" name="email" value="<?=$form['email']?>" />
+        </div>
+        <div class="form-group">
+            <label><?=$this->lang->line('ticket.ref.label')?></label>
+            <input class="form-control" type="text" name="ref" value="<?=$form['ref']?>" />
+        </div>
+        <button class="btn btn-primary" type="submit"><?=$this->lang->line('ticket.read.submit')?></button>
     </form>
     <?php if (!empty($ticket)) : ?>
     <ul>
@@ -32,7 +36,7 @@
         <?php foreach ($ticketlog as $log) { ?>
         <li>
             <span><strong><?=$log->last_update?></strong> <?=$log->subject?></span>
-            <table class="ticketlog">
+            <table class="table ticketlog">
                 <tr>
                     <th><?=$this->lang->line('ticket.created.label')?></th>
                     <th><?=$this->lang->line('ticket.ref.label')?></th>
@@ -60,7 +64,7 @@
         <?php endif; ?>
         <li>
             <span><strong><?=$ticket->last_update?></strong> <?=$ticket->subject?></span>
-            <table class="ticketlog">
+            <table class="table ticketlog">
                 <tr>
                     <th><?=$this->lang->line('ticket.created.label')?></th>
                     <th><?=$this->lang->line('ticket.ref.label')?></th>
@@ -93,4 +97,5 @@
         array('ctrlpath' => $ctrlpath, 'ticket' => $ticket)); ?>
     <?php endif; ?>
 <?php endif; ?>
+<br />
 <p><?=sprintf($this->lang->line('ticket.page.backlink'), base_url())?></p>

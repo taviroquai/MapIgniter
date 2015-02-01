@@ -1,54 +1,35 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
-<head>
-
-    <!-- Basic Page Needs
-================================================== -->
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <title><?=empty($pagetitle) ? 'MapIgniter' : $pagetitle?></title>
-    <meta name="description" content="<?=empty($pagedescription) ? 'MapIgniter' : $pagedescription?>">
-    <meta name="author" content="<?=empty($pageauthor) ? 'MapIgniter' : $pageauthor?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<?=$layout->pagedescription?>">
+    <meta name="author" content="<?=$layout->pageauthor?>">
 
-    <!-- Mobile Specific Metas
-================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title><?=$layout->pagetitle?></title>
 
-    <!-- CSS
-================================================== -->
-    <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/base.css">
-    <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/skeleton.css">
-    <link rel="stylesheet" href="<?=base_url()?>web/css/skeleton/layout.css">
-    
-    <!-- General CSS -->
-    <link rel="stylesheet" href="<?=base_url()?>web/css/general.css">
-    
-    <!-- Public layout CSS -->
-    <link rel="stylesheet" href="<?=base_url()?>web/css/public.css">
-    
-    <!-- CSS helpers -->
-    <link rel="stylesheet" href="<?=base_url()?>web/admin/dataexplorer.css" />
+    <!-- Bootstrap core CSS -->
+    <link href="<?=base_url('web/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <!-- Custom styles for this template -->
+    <link href="<?=base_url('web/bootstrap/css/dashboard.css')?>" rel="stylesheet">
+    <link href="<?=base_url('web/css/general.css')?>" rel="stylesheet">
 
-    <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="<?=base_url()?>web/images/skeleton/favicon.ico">
-    <link rel="apple-touch-icon" href="<?=base_url()?>web/images/skeleton/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?=base_url()?>web/skeleton/images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?=base_url()?>web/skeleton/images/apple-touch-icon-114x114.png">
-    
+    <!-- Modules CSS -->
     <?php foreach ($_slot['_links'] as $_href) { ?>
     <link rel="stylesheet" href="<?=$_href?>" />
     <?php } ?>
-    
-    <script src="<?=base_url()?>web/js/vendor/jqueryui/js/jquery-1.8.2.js"></script>
-    <script src="<?=base_url()?>web/js/skeleton/tabs.js"></script>
-    <script src="<?=base_url()?>web/js/jquery.form.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="<?=base_url('web/js/jquery.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url('web/js/jquery.form.js')?>"></script>
+
     <script type="text/javascript">
         $.noConflict();
         var base_url = '<?=base_url()?>';
@@ -58,40 +39,65 @@
     <script type="text/javascript" src="<?=$_src?>"></script>
     <?php } ?>
 
-</head>
-<body>
-    <div class="header">
-        <div class="container">
-            <div class="sixteen columns">
-                <img src="<?=base_url()?>web/images/milogo_white_131x70.png" alt="MapIgniter Logo" title="MapIgniter" />
-            </div>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<?=base_url()?>">
+              <?php if (!empty($layout->pagelogo)) : ?>
+                <img src="<?=$layout->pagelogo?>" alt="<?=$layout->pagetitle?>" title="<?=$layout->pagetitle?>" />
+              <?php else: ?>
+                <?=$layout->pagetitle?>
+              <?php endif; ?>
+          </a>
         </div>
-    </div>
-    <div class="container">
-        <div class="sixteen columns">
-            <?php if (!empty($pagetitle)) : ?>
-            <h1 style="margin-top: 20px"><?=$pagetitle?></h1>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <?php if (!empty($_slot['slot2'])) : ?>
+                <?=$_slot['slot2']?>
             <?php endif; ?>
+          </ul>
         </div>
-        <div class="eight columns">
-            <?=$_slot['slot1']?>
+        <?php if (!empty($_slot['slot5'])) : ?>
+            <?=$_slot['slot5']?>
+        <?php endif; ?>
+      </div>
+    </nav>
+
+    <div class="container-fluid fill">
+      <div class="row fill">
+        <div class="col-sm-12 col-md-12 main fill">
+            
+            <div><?=$layout->content?></div>
+            <hr />
+            <div><?=$content?></div>
+          
         </div>
-        <div class="eight columns">
-            <?=$_slot['slot2']?>
-        </div>
-        <div class="sixteen columns">
-            <?=$content?>
-        </div>
-        <div class="sixteen columns">
-            <?=$_slot['slot3']?>
-            <span><img style="vertical-align: middle;" src="<?=base_url()?>web/images/milogo_168x35.png" alt="MapIgniter Logo" />&copy; 2012 - <?=date('Y')?> by Marco Afonso</span>
-            This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> is licensed under a dual license: <a rel="license" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache v2</a> or <a rel="license" href="http://www.gnu.org/licenses/gpl.txt">GPL</a>
-        </div>
-    </div><!-- container -->
-    <!-- JS
+      </div>
+    </div>
+
+    <?php if (!empty($_slot['slot4'])) : ?>
+    <div id="slot4" style="position: absolute; bottom: 0; width: 100%; z-index: 1000">
+        <?=$_slot['slot4']?>
+    </div>
+    <?php endif; ?>
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-    
-<!-- End Document
-================================================== -->
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<?=base_url('web/bootstrap/js/bootstrap.min.js')?>"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="<?=base_url('web/bootstrap/js/ie10-viewport-bug-workaround.js')?>"></script>
+  </body>
 </html>

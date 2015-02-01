@@ -18,6 +18,20 @@
 ?><form method="post" action="<?=base_url()?>admin/adminlayouts/edit/<?=empty($layout->id) ? 'new' : $layout->id?>">
     <label>System name</label>
     <input type="text" name="name" value="<?=$layout->name?>" />
+    <label>Page Title</label>
+    <input type="text" name="pagetitle" value="<?=$layout->pagetitle?>" />
+    <label>Page Description</label>
+    <input type="text" name="pagedescription" value="<?=$layout->pagedescription?>" />
+    <label>Page Keywords</label>
+    <input type="text" name="pagekeywords" value="<?=$layout->pagekeywords?>" />
+    <label>Page Author</label>
+    <input type="text" name="pageauthor" value="<?=$layout->pageauthor?>" />
+    <label>Page Logo
+        <a class="linkexplorer fancybox.ajax" title="Explorer" href="<?=base_url($dataexplorerctrlpath)?>?return=pagelogo">
+            <img src="<?=base_url()?>web/images/icons/png/16x16/search.png" alt="explorador" title="Explorer" />
+        </a>
+    </label>
+    <input type="text" id="pagelogo" name="pagelogo" value="<?=$layout->pagelogo?>" />
     <label>PHP View</label>
     <input type="text" name="view" value="<?=$layout->view?>" />
     <label>Content</label>

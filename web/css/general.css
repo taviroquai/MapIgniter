@@ -36,6 +36,13 @@ h1, h2 {
     margin-top: 20px;
 }
 
+.navbar-brand img {
+    width: inherit;
+    height: inherit;
+    position: relative;
+    top: -15px;
+}
+
 .milayerswitcher {
     
 }
