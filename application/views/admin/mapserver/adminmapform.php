@@ -74,6 +74,12 @@
             <label>Image type</label>
             <select name="mslayertype_id">
                 <option value="PNG" <?='PNG' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>PNG</option>
+                <option value="GIF" <?='GIF' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>GIF</option>
+                <option value="PNG8" <?='PNG8' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>PNG8</option>
+                <option value="JPEG" <?='JPEG' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>JPEG</option>
+                <option value="SVG" <?='SVG' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>SVG</option>
+                <option value="GTIFF" <?='GTIFF' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>GTIFF</option>
+                <option value="CAIROPNG" <?='CAIROPNG' == $msmapfile->imagetype ? 'selected="selected"' : ''?>>CAIROPNG</option>
             </select>
             
             <label>Background color</label>
