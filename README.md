@@ -1,6 +1,9 @@
 MapIgniter
 ==========
 
+## DISCONTINUED
+###This project was discontinued. Please see [MapIgniter 2](https://github.com/taviroquai/mapigniter2) 
+
 MapIgniter is a GeoCMS based on MapServer, PostGIS, OpenLayers and CodeIgniter.
 
 The content management is done in a graphical interface, like any other CMS (Content Management System), creating a new concept: GeoCMS.
